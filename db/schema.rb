@@ -11,10 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105164905) do
+ActiveRecord::Schema.define(version: 20151105174632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "competitions", force: :cascade do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "start_location"
+    t.string   "end_location"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "ranks", force: :cascade do |t|
+    t.integer  "track_id"
+    t.integer  "user_id"
+    t.integer  "result"
+    t.integer  "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ranks", ["track_id"], name: "index_ranks_on_track_id", using: :btree
+  add_index "ranks", ["user_id"], name: "index_ranks_on_user_id", using: :btree
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "competition_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "subscriptions", ["competition_id"], name: "index_subscriptions_on_competition_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+
+  create_table "tracks", force: :cascade do |t|
+    t.integer  "competition_id"
+    t.datetime "start_time"
+    t.string   "start_location"
+    t.string   "end_location"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "tracks", ["competition_id"], name: "index_tracks_on_competition_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,4 +77,9 @@ ActiveRecord::Schema.define(version: 20151105164905) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "ranks", "tracks"
+  add_foreign_key "ranks", "users"
+  add_foreign_key "subscriptions", "competitions"
+  add_foreign_key "subscriptions", "users"
+  add_foreign_key "tracks", "competitions"
 end
