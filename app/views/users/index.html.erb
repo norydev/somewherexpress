@@ -1,5 +1,16 @@
-<h1>HitchHikers</h1>
+<h1>Hall of Fame</h1>
 
-<% @users.each do |user| %>
-  <%= user.email %>
-<% end %>
+<table class="table">
+  <tbody>
+    <% @users.each_with_index do |user, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= image_tag user.avatar, height: "30px", class: "img-circle" %></td>
+        <td><%= user.name %></td>
+        <td><i class="fa fa-trophy"></i></td>
+        <td><i class="fa fa-certificate"></i></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
