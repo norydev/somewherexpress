@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106203651) do
+ActiveRecord::Schema.define(version: 20151107191743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,12 @@ ActiveRecord::Schema.define(version: 20151106203651) do
     t.date     "end_date"
     t.string   "start_location"
     t.string   "end_location"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.float    "start_location_lat"
+    t.float    "start_location_lng"
+    t.float    "end_location_lat"
+    t.float    "end_location_lng"
   end
 
   create_table "ranks", force: :cascade do |t|
@@ -54,8 +58,12 @@ ActiveRecord::Schema.define(version: 20151106203651) do
     t.datetime "start_time"
     t.string   "start_location"
     t.string   "end_location"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.float    "start_location_lat"
+    t.float    "start_location_lng"
+    t.float    "end_location_lat"
+    t.float    "end_location_lng"
   end
 
   add_index "tracks", ["competition_id"], name: "index_tracks_on_competition_id", using: :btree
