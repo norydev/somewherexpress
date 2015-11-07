@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :track do
-    competition nil
-start_time "2015-11-05 19:42:11"
-start_location "MyString"
-end_location "MyString"
+    association     :competition
+    start_time      DateTime.parse("18 april 2015 14:00")
+    start_location  Faker::Address.city
+    end_location    Faker::Address.city
   end
 
 end

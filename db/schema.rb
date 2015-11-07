@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106150246) do
+ActiveRecord::Schema.define(version: 20151106203651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,15 +27,16 @@ ActiveRecord::Schema.define(version: 20151106150246) do
   end
 
   create_table "ranks", force: :cascade do |t|
-    t.integer  "track_id"
     t.integer  "user_id"
     t.integer  "result"
-    t.integer  "points"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "points",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "race_id"
+    t.string   "race_type"
   end
 
-  add_index "ranks", ["track_id"], name: "index_ranks_on_track_id", using: :btree
+  add_index "ranks", ["race_type", "race_id"], name: "index_ranks_on_race_type_and_race_id", using: :btree
   add_index "ranks", ["user_id"], name: "index_ranks_on_user_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
@@ -82,7 +83,6 @@ ActiveRecord::Schema.define(version: 20151106150246) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "ranks", "tracks"
   add_foreign_key "ranks", "users"
   add_foreign_key "subscriptions", "competitions"
   add_foreign_key "subscriptions", "users"

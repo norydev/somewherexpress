@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :rank do
-    track nil
-user nil
-result 1
-points 1
+    association   :user
+    association   :race
+    result        1
+    points        5
   end
-
 end

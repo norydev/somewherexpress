@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :subscriptions, dependent: :destroy
   has_many :competitions, through: :subscriptions
-  has_many :ranks
+  has_many :ranks, dependent: :destroy
 
   def name
     [first_name, last_name].reject(&:blank?).join(' ')

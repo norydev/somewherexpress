@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :competition do
-    name ""
-start_date ""
-end_date ""
-start_location ""
-end_location "MyString"
+    name = "#{Faker::Address.city} #{Faker::Number.between(12, 15)}"
+    start_date = Date.parse("10 april 2015")
+    end_date = Date.parse("15 april 2015")
+    start_location = Faker::Address.city
+    end_location = Faker::Address.city
   end
 
 end

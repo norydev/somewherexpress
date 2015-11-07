@@ -2,13 +2,20 @@
 
 <table class="table">
   <tbody>
-    <% @users.each_with_index do |user, index| %>
+    <% @users.sort_by{ |u| -u.subscriptions.map{ |s| s.result }.select{ |r| r == 1 }.count }.each_with_index do |user, index| %>
       <tr>
-        <td><%= index + 1 %></td>
         <td><%= image_tag user.avatar, height: "30px", class: "img-circle" %></td>
         <td><%= user.name %></td>
-        <td><i class="fa fa-trophy"></i></td>
-        <td><i class="fa fa-certificate"></i></td>
+        <td>
+          <% user.subscriptions.each do |s| %>
+            <% if s.result == 1 %>
+              <i class="fa fa-trophy"></i>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= '<i class="fa fa-certificate"></i>'.html_safe if user.se_committee %>
+        </td>
       </tr>
     <% end %>
   </tbody>
