@@ -1,0 +1,13 @@
+<h1><%= @user %></h1>
+
+<table class="table">
+  <tbody>
+    <% @user.competitions.each do |competition| %>
+      <tr>
+        <td><%= link_to competition, competition %></td>
+        <td><%= date_format(competition.start_date) %> - <%= date_format(competition.end_date) %></td>
+        <td>Result: <%= competition.ranks.find_by(user: @user).result %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

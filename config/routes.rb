@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'users/index'
+  resources :users, only: [:index, :show]
+  resources :competitions, only: [:show]
 
   devise_for :users
 

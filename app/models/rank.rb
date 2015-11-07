@@ -18,7 +18,11 @@ class Rank < ActiveRecord::Base
         ranks = a.map{ |e| a.index(e) + 1 }
 
         results.each_with_index do |r, i|
-          r.result = ranks[i]
+          if c.tracks.size > 1
+            r.result = ranks[i]
+          else
+            r.result = ranks[i]/2 + 1
+          end
           r.save
         end
       end

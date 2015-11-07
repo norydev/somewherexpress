@@ -5,6 +5,10 @@ class Competition < ActiveRecord::Base
 
   has_many :ranks, as: :race, dependent: :destroy
 
+  def to_s
+    name
+  end
+
   def t_ranks
     tracks.map{ |t| t.ranks }.flatten
   end

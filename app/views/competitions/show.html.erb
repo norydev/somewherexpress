@@ -1,0 +1,45 @@
+<h1><%= @competition %></h1>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <td><%= date_format(@competition.start_date) %> - <%= date_format(@competition.end_date) %></td>
+      <td><%= @competition.start_location %> - <%= @competition.end_location %></td>
+      <td>
+        <% @competition.users.each do |user| %>
+          <%= image_tag user.avatar, height: "30px", class: "img-circle" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Final Ranking</h2>
+<table class="table">
+  <tbody>
+    <% @competition.ranks.order(:result).each do |rank| %>
+      <tr>
+        <td><%= rank.result %></td>
+        <td><%= rank.user %></td>
+        <td><%= rank.points %> points</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @competition.tracks.size > 1 %>
+  <% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
+    <h3><%= i + 1 %>. <%= track.start_location %> - <%= track.end_location%></h3>
+    <table class="table">
+      <tbody>
+        <% track.ranks.order(:result).each do |rank| %>
+          <tr>
+            <td><%= rank.result %></td>
+            <td><%= rank.user %></td>
+            <td><%= rank.points %> points</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

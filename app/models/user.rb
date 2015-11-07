@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   has_many :competitions, through: :subscriptions
   has_many :ranks, dependent: :destroy
 
+  def to_s
+    name
+  end
+
   def name
     [first_name, last_name].reject(&:blank?).join(' ')
   end
