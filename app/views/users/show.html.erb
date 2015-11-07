@@ -1,13 +1,44 @@
-<h1><%= @user %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
-<table class="table">
-  <tbody>
-    <% @user.competitions.each do |competition| %>
-      <tr>
-        <td><%= link_to competition, competition %></td>
-        <td><%= date_format(competition.start_date) %> - <%= date_format(competition.end_date) %></td>
-        <td>Result: <%= competition.ranks.find_by(user: @user).result %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="padded-mini-bottom">
+        <div class="profile-pic">
+          <%= image_tag @user.avatar, class: "avatar-ultra" %>
+          <% if @user.se_committee %>
+            <%= image_tag "badge_committee.svg", class: "avatar-badge", data: {toggle: "tooltip", placement: "bottom"}, title: "Membre du Comité Central de SomwherExpress", style: "margin-top: 3px;" %>
+          <% end %>
+        </div>
+
+        <h1><%= @user %></h1>
+        <div class="text-center">
+          <% @user.subscriptions.each do |s| %>
+            <% if s.result == 1 %>
+              <%= link_to s.competition do %>
+                <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <table class="table">
+        <tbody>
+          <% @user.competitions.each do |competition| %>
+            <% result = competition.ranks.find_by(user: @user).result %>
+            <tr>
+              <td><%= link_to competition, competition %></td>
+              <td><%= date_format(competition.start_date) %> - <%= date_format(competition.end_date) %></td>
+              <td><%= result %><sup><%= result.ordinal %></sup> place</td>
+              <td>
+                <% if result == 1 %>
+                  <span class="trophies-small"><i class="fa fa-trophy"></i></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

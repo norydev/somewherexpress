@@ -1,0 +1,36 @@
+h1 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 3em;
+  margin-bottom: 0.3em;
+  color: $gray-dark;
+  // letter-spacing: 2px;
+}
+
+table {
+  border: 1px solid #DDDDDD;
+  text-transform: uppercase;
+}
+
+.trophies {
+  color: $yellow;
+  font-size: 26px;
+  &-small {
+    color: $yellow;
+  }
+}
+
+.avatar-badge {
+  border-radius: 50%;
+  width: 30px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.profile-pic {
+  position: relative;
+  width: 120px;
+  display: block;
+  margin: 20px auto;
+}

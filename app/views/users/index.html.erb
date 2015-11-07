@@ -1,23 +1,34 @@
-<h1>Hall of Fame</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+      <!-- START HALL OF FAME -->
+      <h1>Hall of Fame</h1>
 
-<table class="table">
-  <tbody>
-    <% @users.sort_by{ |u| -u.subscriptions.map{ |s| s.result }.select{ |r| r == 1 }.count }.each_with_index do |user, index| %>
-      <tr>
-        <td><%= image_tag user.avatar, height: "30px", class: "img-circle" %></td>
-        <td><%= link_to user, user %></td>
-        <td>
-          <% user.subscriptions.each do |s| %>
-            <% if s.result == 1 %>
-              <i class="fa fa-trophy"></i>
-            <% end %>
+      <table class="table">
+        <tbody>
+          <% @users.sort_by{ |u| -u.subscriptions.map{ |s| s.result }.select{ |r| r == 1 }.count }.each_with_index do |user, index| %>
+            <tr>
+              <td><%= image_tag user.avatar, class: "img-circle avatar-medium" %></td>
+              <td><span style="line-height: 40px;"><%= link_to user, user %></span></td>
+              <td>
+                <% user.subscriptions.each do |s| %>
+                  <% if s.result == 1 %>
+                    <%= link_to s.competition do %>
+                      <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if user.se_committee %>
+                  <%= image_tag "badge_committee.svg", class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "Membre du Comité Central de SomwherExpress", style: "margin-top: 3px;" %>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
-        </td>
-        <td>
-          <%= '<i class="fa fa-certificate"></i>'.html_safe if user.se_committee %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+        </tbody>
+      </table>
+      <!-- END HALL OF FAME -->
+    </div>
+  </div>
+</div>

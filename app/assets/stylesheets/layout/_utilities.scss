@@ -8,6 +8,13 @@
 .padded {
   padding-top: 5em;
   padding-bottom: 5em;
+  &-mini {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    &-bottom {
+      padding-bottom: 1em;
+    }
+  }
 }
 
 // Backgrounds

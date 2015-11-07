@@ -1,45 +1,69 @@
-<h1><%= @competition %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <!-- START DESCRIPTION -->
+      <h1><%= @competition %></h1>
 
-<table class="table">
-  <tbody>
-    <tr>
-      <td><%= date_format(@competition.start_date) %> - <%= date_format(@competition.end_date) %></td>
-      <td><%= @competition.start_location %> - <%= @competition.end_location %></td>
-      <td>
-        <% @competition.users.each do |user| %>
-          <%= image_tag user.avatar, height: "30px", class: "img-circle" %>
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h2>Final Ranking</h2>
-<table class="table">
-  <tbody>
-    <% @competition.ranks.order(:result).each do |rank| %>
-      <tr>
-        <td><%= rank.result %></td>
-        <td><%= rank.user %></td>
-        <td><%= rank.points %> points</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% if @competition.tracks.size > 1 %>
-  <% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
-    <h3><%= i + 1 %>. <%= track.start_location %> - <%= track.end_location%></h3>
-    <table class="table">
-      <tbody>
-        <% track.ranks.order(:result).each do |rank| %>
+      <table class="table">
+        <tbody>
           <tr>
-            <td><%= rank.result %></td>
-            <td><%= rank.user %></td>
-            <td><%= rank.points %> points</td>
+            <td><%= date_format(@competition.start_date) %> - <%= date_format(@competition.end_date) %></td>
+            <td><%= @competition.start_location %> - <%= @competition.end_location %></td>
+            <td>
+              <% @competition.users.each do |user| %>
+                <%= link_to user do %>
+                  <%= image_tag user.avatar, class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user}" %>
+                <% end %>
+              <% end %>
+            </td>
           </tr>
+        </tbody>
+      </table>
+      <!-- END DESCRIPTION -->
+
+      <!-- START FINAL RANKING -->
+      <h2>Final Ranking</h2>
+      <table class="table">
+        <tbody>
+          <% @competition.ranks.order(:result).each do |rank| %>
+            <tr>
+              <td><%= rank.result %></td>
+              <td>
+                <%= link_to rank.user do %>
+                  <%= image_tag rank.user.avatar, class: "avatar" %>
+                <% end %>
+              </td>
+              <td><%= link_to rank.user, rank.user %></td>
+              <td><%= rank.points %> points</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <!-- END FINAL RANKING -->
+
+      <!-- START STAGE RANKING -->
+      <% if @competition.tracks.size > 1 %>
+        <% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
+          <h3><%= i + 1 %>. <%= track.start_location %> - <%= track.end_location%></h3>
+          <table class="table">
+            <tbody>
+              <% track.ranks.order(:result).each do |rank| %>
+                <tr>
+                  <td><%= rank.result %></td>
+                  <td>
+                    <%= link_to rank.user do %>
+                      <%= image_tag rank.user.avatar, class: "avatar" %>
+                    <% end %>
+                  </td>
+                  <td><%= link_to rank.user, rank.user %></td>
+                  <td><%= rank.points %> points</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         <% end %>
-      </tbody>
-    </table>
-  <% end %>
-<% end %>
+      <% end %>
+      <!-- END STAGE RANKING -->
+    </div>
+  </div>
+</div>
