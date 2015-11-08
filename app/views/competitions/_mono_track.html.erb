@@ -1,0 +1,26 @@
+<!-- START FINAL RANKING -->
+<div id="track-<%= @competition.tracks.first.id %>-result">
+  <h2>Final Ranking</h2>
+  <table class="table">
+    <tbody>
+      <% @competition.ranks.order(:result).each_slice(2).to_a.each do |rank1, rank2| %>
+        <tr>
+          <td>
+            <%= link_to rank1.user do %>
+              <%= image_tag rank1.user.avatar, class: "avatar", alt: "#{rank1.user.first_name}" %>
+            <% end %>
+          </td>
+          <td class="text-uppercase"><%= link_to rank1.user, rank1.user %></td>
+          <td class="text-center"><%= result(rank1) %></td>
+          <td class="text-right text-uppercase"><%= link_to rank2.user, rank2.user %></td>
+          <td class="text-right">
+            <%= link_to rank2.user do %>
+              <%= image_tag rank2.user.avatar, class: "avatar", alt: "#{rank2.user.first_name}" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<!-- END FINAL RANKING -->

@@ -1,0 +1,19 @@
+<%= simple_form_for competition do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :start_location %>
+  <%= f.input :end_location %>
+
+  <h4>Tracks</h4>
+
+  <%= f.simple_fields_for :tracks do |t| %>
+    <%= t.input :start_location %>
+    <%= t.input :end_location %>
+    <%= t.input :start_time %>
+    <%= t.link_to_remove "Remove this track" %>
+  <% end %>
+
+  <%= f.button :submit, class: "btn" %>
+<% end %>

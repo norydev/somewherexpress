@@ -13,7 +13,7 @@
                   <%= image_tag user.avatar, class: "img-circle avatar-medium", alt: "#{user.first_name}" %>
                 <% end %>
               </td>
-              <td><%= link_to user, user %></td>
+              <td class="text-uppercase"><%= link_to user, user %></td>
               <td>
                 <% user.subscriptions.each do |s| %>
                   <% if s.result == 1 %>

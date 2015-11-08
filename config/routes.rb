@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:index, :show]
-  resources :competitions, only: [:show]
-
   devise_for :users
+
+  resources :users, only: [:index, :show]
+  resources :competitions, only: [:show, :new, :create, :edit, :update]
 
   root 'users#index'
   # The priority is based upon order of creation: first created -> highest priority.

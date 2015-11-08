@@ -1,0 +1,45 @@
+<!-- START FINAL RANKING -->
+<div id="competition-<%= @competition.id %>-result">
+  <h2>Final Ranking</h2>
+  <table class="table">
+    <tbody>
+      <% @competition.ranks.order(:result).each do |rank| %>
+        <tr>
+          <td class="text-center"><%= result(rank) %></td>
+          <td class="text-center">
+            <%= link_to rank.user do %>
+              <%= image_tag rank.user.avatar, class: "avatar", alt: "#{rank.user.first_name}" %>
+            <% end %>
+          </td>
+          <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
+          <td class="text-right text-uppercase"><%= rank.points %> points</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<!-- END FINAL RANKING -->
+
+<!-- START STAGE RANKING -->
+<% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
+  <div id="track-<%= track.id %>-result">
+    <h3><%= i + 1 %>. <%= track.start_location %> - <%= track.end_location%></h3>
+    <table class="table">
+      <tbody>
+        <% track.ranks.order(:result).each do |rank| %>
+          <tr>
+            <td class="text-center"><%= track_result(rank) %></td>
+            <td class="text-center">
+              <%= link_to rank.user do %>
+                <%= image_tag rank.user.avatar, class: "avatar", alt: "#{rank.user.first_name}" %>
+              <% end %>
+            </td>
+            <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
+            <td class="text-right text-uppercase"><%= rank.points %> points</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+<!-- END STAGE RANKING -->
