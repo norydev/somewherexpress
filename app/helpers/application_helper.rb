@@ -1,5 +1,5 @@
 module ApplicationHelper
   def date_format(date)
-    date.strftime("%d %b %Y") if date
+    l(date, format: "%d %B %Y") if date
   end
 end

@@ -1,15 +1,19 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <!-- START HALL OF FAME -->
       <h1>Hall of Fame</h1>
 
       <table class="table">
         <tbody>
-          <% @users.sort_by{ |u| -u.subscriptions.map{ |s| s.result }.select{ |r| r == 1 }.count }.each_with_index do |user, index| %>
+          <% @users.sort_by{ |u| [-u.subscriptions.map{ |s| s.result }.select{ |r| r == 1 }.count, -u.ranks.where(race_type: "Track", result: 1).size, u.se_committee ? 0 : 1] }.each_with_index do |user, index| %>
             <tr>
-              <td><%= image_tag user.avatar, class: "img-circle avatar-medium" %></td>
-              <td><span style="line-height: 40px;"><%= link_to user, user %></span></td>
+              <td>
+                <%= link_to user do %>
+                  <%= image_tag user.avatar, class: "img-circle avatar-medium", alt: "#{user.first_name}" %>
+                <% end %>
+              </td>
+              <td><%= link_to user, user %></td>
               <td>
                 <% user.subscriptions.each do |s| %>
                   <% if s.result == 1 %>
@@ -20,8 +24,15 @@
                 <% end %>
               </td>
               <td>
+                <% user.ranks.where(race_type: "Track", result: 1).each do |r| %>
+                  <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
+                    <%= image_tag "medal.svg", class: "medal", data: {toggle: "tooltip", placement: "bottom"}, title: "#{r.race}" %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
                 <% if user.se_committee %>
-                  <%= image_tag "badge_committee.svg", class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "Membre Fondateur du Comité Central de SomwherExpress", style: "margin-top: 3px;" %>
+                  <%= image_tag "badge_committee.svg", class: "award", data: {toggle: "tooltip", placement: "bottom"}, title: "Membre Fondateur du Comité Central de SomewherExpress" %>
                 <% end %>
               </td>
             </tr>

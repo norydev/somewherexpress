@@ -7,9 +7,12 @@ h1 {
   // letter-spacing: 2px;
 }
 
+h2,h3 {
+  text-align: center;
+}
+
 table {
   border: 1px solid #DDDDDD;
-  text-transform: uppercase;
 }
 
 .trophies {
@@ -33,4 +36,21 @@ table {
   width: 120px;
   display: block;
   margin: 20px auto;
+}
+
+.text-lightweight {
+  font-weight: 300;
+}
+
+.medal {
+  width: 20px;
+}
+
+.award {
+  width: 30px;
+  border-radius: 50%;
+}
+
+table tbody tr td {
+  vertical-align: middle !important;
 }
