@@ -4,6 +4,7 @@
   <%= f.input :start_date %>
   <%= f.input :end_date %>
   <%= f.input :start_location %>
+  <input id="competition_start_location_locality" type="text">
   <%= f.input :end_location %>
 
   <h4>Tracks</h4>
@@ -12,7 +13,6 @@
     <%= t.input :start_location %>
     <%= t.input :end_location %>
     <%= t.input :start_time %>
-    <%= t.link_to_remove "Remove this track" %>
   <% end %>
 
   <%= f.button :submit, class: "btn" %>
