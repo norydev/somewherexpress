@@ -53,7 +53,7 @@ RSpec.describe CompetitionsController, type: :controller do
       it "redirects to the created competition" do
         sign_in @user
         post :create, { competition: valid_attributes }, valid_session
-        expect(response).to redirect_to(competition_path(competition))
+        expect(response).to redirect_to(competition_path(Competition.last))
       end
     end
 
