@@ -29,14 +29,16 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 
 # other
-gem "figaro"
+gem 'figaro'
 gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 gem 'gravatarify'
-gem "geocoder"
-gem "gmaps4rails"
+gem 'geocoder'
+gem 'gmaps4rails'
 
 source 'https://rails-assets.org' do
-  gem "rails-assets-underscore"
+  gem 'rails-assets-underscore'
 end
 
 # Use ActiveModel has_secure_password
@@ -49,26 +51,26 @@ end
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem "spring"
-  gem "annotate"
-  gem "binding_of_caller"
-  gem "better_errors"
-  gem "quiet_assets"
-  gem "pry-byebug"
-  gem "pry-rails"
-  gem "letter_opener"
-  gem "faker"
-  gem "rspec-rails"
-  gem "factory_girl_rails"
+  gem 'spring'
+  gem 'annotate'
+  gem 'binding_of_caller'
+  gem 'better_errors'
+  gem 'quiet_assets'
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'letter_opener'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
-  gem "shoulda-matchers"
+  gem 'shoulda-matchers'
 end
 
 group :production do
-  gem "rails_12factor"
-  gem "puma"
-  gem "rack-timeout"
+  gem 'rails_12factor'
+  gem 'puma'
+  gem 'rack-timeout'
 end
 
