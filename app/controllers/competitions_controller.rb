@@ -11,6 +11,7 @@ class CompetitionsController < ApplicationController
   end
 
   def edit
+    @competition.tracks.build
   end
 
   def create
@@ -37,6 +38,6 @@ class CompetitionsController < ApplicationController
     end
 
     def competition_params
-      params.require(:competition).permit(:name, :start_date, :end_date, :start_location, :end_location)
+      params.require(:competition).permit(:name, :start_date, :end_date, :start_location, :end_location, tracks_attributes: [:id, :start_location, :end_location, :start_time])
     end
 end

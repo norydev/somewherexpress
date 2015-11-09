@@ -21,9 +21,4 @@ function initializeAutocomplete(id) {
 google.maps.event.addDomListener(window, 'load', function() {
   initializeAutocomplete('competition_start_location');
   initializeAutocomplete('competition_end_location');
-
-  for (i=0; i<10; i++) {
-    initializeAutocomplete('competition_tracks_attributes_'+i+'_start_location');
-    initializeAutocomplete('competition_tracks_attributes_'+i+'_end_location');
-  }
 });

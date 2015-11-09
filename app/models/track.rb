@@ -11,12 +11,16 @@ class Track < ActiveRecord::Base
   private
 
     def geocoding
-      start_geo = Geocoder.search(start_location)
-      end_geo = Geocoder.search(end_location)
-      self.start_location_lat = start_geo.first.data["geometry"]["location"]["lat"]
-      self.start_location_lng = start_geo.first.data["geometry"]["location"]["lng"]
-      self.end_location_lat = end_geo.first.data["geometry"]["location"]["lat"]
-      self.end_location_lng = end_geo.first.data["geometry"]["location"]["lng"]
+      if start_location.present?
+        start_geo = Geocoder.search(start_location)
+        self.start_location_lat = start_geo.first.data["geometry"]["location"]["lat"]
+        self.start_location_lng = start_geo.first.data["geometry"]["location"]["lng"]
+      end
+      if end_location.present?
+        end_geo = Geocoder.search(end_location)
+        self.end_location_lat = end_geo.first.data["geometry"]["location"]["lat"]
+        self.end_location_lng = end_geo.first.data["geometry"]["location"]["lng"]
+      end
     end
 
     def location_changed?
