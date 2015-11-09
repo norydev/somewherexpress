@@ -1,0 +1,65 @@
+<%= simple_form_for competition do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <div class="row">
+    <div class="col-xs-6">
+      <%= f.input :start_location %>
+      <!-- <input id="competition_start_location_locality" type="text"> -->
+    </div>
+    <div class="col-xs-6">
+      <%= f.input :end_location %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <%= f.input :start_date, as: :string  %>
+    </div>
+    <div class="col-xs-6">
+      <%= f.input :end_date, as: :string %>
+    </div>
+  </div>
+
+  <h4>Tracks</h4>
+
+  <ul class="list-group">
+    <%= f.simple_fields_for :tracks do |t| %>
+      <li class="tracks_form list-group-item bg-light-grey">
+        <div class="row">
+            <% if t.object.new_record? %>
+              <%= link_to '#', remote: true, class: 'destroy_track' do %>
+                <div class="corner-danger" title="<%= t('remove_track') %>">
+                  <i class="fa fa-trash"></i>
+                </div>
+              <% end %>
+            <% else %>
+              <%= link_to competition_track_path(competition, t.object), method: :delete, remote: true, class: 'destroy_track' do %>
+                <div class="corner-danger" title="<%= t('remove_track') %>">
+                  <i class="fa fa-trash"></i>
+                </div>
+              <% end %>
+              <%= t.input :id, as: :hidden %>
+            <% end %>
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-6">
+                <%= t.input :start_location %>
+                <!-- <input id="competition_start_location_locality" type="text"> -->
+              </div>
+              <div class="col-xs-6">
+                <%= t.input :end_location %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <%= t.input :start_time, as: :string %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    <%= link_to "#{t('add_track')}", '#', remote: true, class: "add_track text-center list-group-item active" %>
+  </ul>
+
+  <%= f.button :submit, class: "btn" %>
+<% end %>

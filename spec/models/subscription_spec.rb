@@ -6,7 +6,7 @@ RSpec.describe Subscription, type: :model do
   it { should belong_to(:competition) }
 
   it 'returns the correct nb of points' do
-    u = FactoryGirl.create :user
+    u = FactoryGirl.create :user, email: "u1@yopmail.com"
     c = FactoryGirl.create :competition
     s = FactoryGirl.create :subscription, user: u, competition: c
 
@@ -20,7 +20,7 @@ RSpec.describe Subscription, type: :model do
   end
 
   it 'returns the correct result' do
-    u1 = FactoryGirl.create :user
+    u1 = FactoryGirl.create :user, email: "u1@yopmail.com"
     u2 = FactoryGirl.create :user, email: "u2@yopmail.com"
     u3 = FactoryGirl.create :user, email: "u3@yopmail.com"
     c = FactoryGirl.create :competition
