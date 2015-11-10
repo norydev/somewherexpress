@@ -5,8 +5,8 @@
       <h1><%= @competition %></h1>
 
       <div class="text-center">
-        <p class="lead"><%= @competition.start_location %> - <%= @competition.end_location %></p>
-        <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> - <%= date_format(@competition.end_date) %>
+        <p class="lead"><%= @competition.start_location %> – <%= @competition.end_location %></p>
+        <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
         </p>
         <p>
           <% @competition.users.each do |user| %>
@@ -25,6 +25,8 @@
       <% else %>
         <%= render 'mono_track', competition: @competition %>
       <% end %>
+
+      <%= link_to "#{t('.edit.title')}", edit_competition_path(@competition) %>
 
     </div>
   </div>

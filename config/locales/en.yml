@@ -23,3 +23,4 @@ en:
   hello: "Hello world"
   remove_track: "Remove this track"
   add_track: "Add a track"
+  track_question: "This competition has multiple tracks"

@@ -55,23 +55,27 @@ table tbody tr td {
   vertical-align: middle !important;
 }
 
-.corner-danger {
+.corner {
   position: absolute;
   top: 0;
   right: 0;
   z-index: 2;
   padding-top: 4px;
   padding-right: 5px;
-  color: white;
 
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: -1;
-    border: 20px solid transparent;
-    border-top: 20px solid $red;
-    border-right: 20px solid $red;
+  &-danger {
+    @extend .corner;
+    color: white;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -1;
+      border: 20px solid transparent;
+      border-top: 20px solid $red;
+      border-right: 20px solid $red;
+    }
   }
 }

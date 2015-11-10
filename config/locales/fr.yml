@@ -2,6 +2,13 @@
 fr:
   remove_track: "Supprimer cette étape"
   add_track: "Ajouter une étape"
+  track_question: "Cette competition comporte plusieurs étapes"
+  competitions:
+    show:
+      edit:
+        title: "Modifier"
+
+  # Rails + Devise strings
   date:
     abbr_day_names:
     - dim
