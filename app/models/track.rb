@@ -5,7 +5,7 @@ class Track < ActiveRecord::Base
   before_validation :geocoding, if: :location_changed?
 
   def to_s
-    "#{start_location} – #{end_location}"
+    "#{start_location_locality} – #{end_location_locality}"
   end
 
   private

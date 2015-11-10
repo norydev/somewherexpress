@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110110658) do
+ActiveRecord::Schema.define(version: 20151110123207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,30 @@ ActiveRecord::Schema.define(version: 20151110110658) do
     t.date     "end_date"
     t.string   "start_location"
     t.string   "end_location"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.float    "start_location_lat"
     t.float    "start_location_lng"
     t.float    "end_location_lat"
     t.float    "end_location_lng"
+    t.string   "start_location_street_number"
+    t.string   "start_location_route"
+    t.string   "start_location_locality"
+    t.string   "start_location_administrative_area_level_2"
+    t.string   "start_location_administrative_area_level_1"
+    t.string   "start_location_administrative_area_level_1_short"
+    t.string   "start_location_country"
+    t.string   "start_location_country_short"
+    t.string   "start_location_postal_code"
+    t.string   "end_location_street_number"
+    t.string   "end_location_route"
+    t.string   "end_location_locality"
+    t.string   "end_location_administrative_area_level_2"
+    t.string   "end_location_administrative_area_level_1"
+    t.string   "end_location_administrative_area_level_1_short"
+    t.string   "end_location_country"
+    t.string   "end_location_country_short"
+    t.string   "end_location_postal_code"
   end
 
   create_table "ranks", force: :cascade do |t|
@@ -59,12 +77,30 @@ ActiveRecord::Schema.define(version: 20151110110658) do
     t.datetime "start_time"
     t.string   "start_location"
     t.string   "end_location"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.float    "start_location_lat"
     t.float    "start_location_lng"
     t.float    "end_location_lat"
     t.float    "end_location_lng"
+    t.string   "start_location_street_number"
+    t.string   "start_location_route"
+    t.string   "start_location_locality"
+    t.string   "start_location_administrative_area_level_2"
+    t.string   "start_location_administrative_area_level_1"
+    t.string   "start_location_administrative_area_level_1_short"
+    t.string   "start_location_country"
+    t.string   "start_location_country_short"
+    t.string   "start_location_postal_code"
+    t.string   "end_location_street_number"
+    t.string   "end_location_route"
+    t.string   "end_location_locality"
+    t.string   "end_location_administrative_area_level_2"
+    t.string   "end_location_administrative_area_level_1"
+    t.string   "end_location_administrative_area_level_1_short"
+    t.string   "end_location_country"
+    t.string   "end_location_country_short"
+    t.string   "end_location_postal_code"
   end
 
   add_index "tracks", ["competition_id"], name: "index_tracks_on_competition_id", using: :btree

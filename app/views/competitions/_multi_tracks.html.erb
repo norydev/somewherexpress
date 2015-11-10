@@ -23,10 +23,10 @@
 <!-- START STAGE RANKING -->
 <% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
   <div id="track-<%= track.id %>-result">
-    <h3><%= i + 1 %>. <%= track.start_location %> - <%= track.end_location%></h3>
+    <h3><%= i + 1 %>. <%= track %></h3>
     <table class="table">
       <tbody>
-        <% track.ranks.order(:result).each do |rank| %>
+        <% track.ranks.order(:dsq, :result).each do |rank| %>
           <tr>
             <td class="text-center"><%= track_result(rank) %></td>
             <td class="text-center">
@@ -52,7 +52,7 @@
       var directionsService = new google.maps.DirectionsService();
 
       var waypts = [];
-      <% @competition.tracks.each do |t| %>
+      <% @competition.tracks.order(:start_time).each do |t| %>
         <% unless t.end_location == @competition.end_location %>
           waypts.push({
             location: '<%= t.end_location %>',

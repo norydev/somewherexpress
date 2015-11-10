@@ -3,7 +3,7 @@
   <h2>Final Ranking</h2>
   <table class="table">
     <tbody>
-      <% @competition.ranks.order(:result).each_slice(2).to_a.each do |rank1, rank2| %>
+      <% @competition.ranks.order(:dsq, :result).each_slice(2).to_a.each do |rank1, rank2| %>
         <tr>
           <td>
             <%= link_to rank1.user do %>

@@ -38,6 +38,23 @@ class CompetitionsController < ApplicationController
     end
 
     def competition_params
-      params.require(:competition).permit(:name, :start_date, :end_date, :start_location, :end_location, tracks_attributes: [:id, :start_location, :end_location, :start_time])
+      params.require(:competition).permit(
+        :name, :start_date, :end_date, :start_location, :end_location,
+        :start_location_street_number, :start_location_route, :start_location_locality,
+        :start_location_administrative_area_level_2, :start_location_administrative_area_level_1,
+        :start_location_administrative_area_level_1_short, :start_location_country,
+        :start_location_country_short, :start_location_postal_code,
+        :end_location_street_number, :end_location_route, :end_location_locality,
+        :end_location_administrative_area_level_2, :end_location_administrative_area_level_1,
+        :end_location_administrative_area_level_1_short, :end_location_country,
+        :end_location_country_short, :end_location_postal_code,
+        tracks_attributes: [:id, :start_location, :end_location, :start_time, :start_location_street_number, :start_location_route, :start_location_locality,
+        :start_location_administrative_area_level_2, :start_location_administrative_area_level_1,
+        :start_location_administrative_area_level_1_short, :start_location_country,
+        :start_location_country_short, :start_location_postal_code,
+        :end_location_street_number, :end_location_route, :end_location_locality,
+        :end_location_administrative_area_level_2, :end_location_administrative_area_level_1,
+        :end_location_administrative_area_level_1_short, :end_location_country,
+        :end_location_country_short, :end_location_postal_code])
     end
 end

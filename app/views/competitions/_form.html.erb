@@ -4,10 +4,27 @@
   <div class="row">
     <div class="col-xs-6">
       <%= f.input :start_location %>
-      <!-- <input id="competition_start_location_locality" type="text"> -->
+      <%= f.input :start_location_street_number, as: :hidden %>
+      <%= f.input :start_location_route, as: :hidden %>
+      <%= f.input :start_location_locality, as: :hidden %>
+      <%= f.input :start_location_administrative_area_level_2, as: :hidden %>
+      <%= f.input :start_location_administrative_area_level_1, as: :hidden %>
+      <%= f.input :start_location_administrative_area_level_1_short, as: :hidden %>
+      <%= f.input :start_location_country, as: :hidden %>
+      <%= f.input :start_location_country_short, as: :hidden %>
+      <%= f.input :start_location_postal_code, as: :hidden %>
     </div>
     <div class="col-xs-6">
       <%= f.input :end_location %>
+      <%= f.input :end_location_street_number, as: :hidden %>
+      <%= f.input :end_location_route, as: :hidden %>
+      <%= f.input :end_location_locality, as: :hidden %>
+      <%= f.input :end_location_administrative_area_level_2, as: :hidden %>
+      <%= f.input :end_location_administrative_area_level_1, as: :hidden %>
+      <%= f.input :end_location_administrative_area_level_1_short, as: :hidden %>
+      <%= f.input :end_location_country, as: :hidden %>
+      <%= f.input :end_location_country_short, as: :hidden %>
+      <%= f.input :end_location_postal_code, as: :hidden %>
     </div>
   </div>
   <div class="row">
@@ -53,10 +70,27 @@
             <div class="row">
               <div class="col-xs-6">
                 <%= t.input :start_location %>
-                <!-- <input id="competition_start_location_locality" type="text"> -->
+                <%= t.input :start_location_street_number, as: :hidden %>
+                <%= t.input :start_location_route, as: :hidden %>
+                <%= t.input :start_location_locality, as: :hidden %>
+                <%= t.input :start_location_administrative_area_level_2, as: :hidden %>
+                <%= t.input :start_location_administrative_area_level_1, as: :hidden %>
+                <%= t.input :start_location_administrative_area_level_1_short, as: :hidden %>
+                <%= t.input :start_location_country, as: :hidden %>
+                <%= t.input :start_location_country_short, as: :hidden %>
+                <%= t.input :start_location_postal_code, as: :hidden %>
               </div>
               <div class="col-xs-6">
                 <%= t.input :end_location %>
+                <%= t.input :end_location_street_number, as: :hidden %>
+                <%= t.input :end_location_route, as: :hidden %>
+                <%= t.input :end_location_locality, as: :hidden %>
+                <%= t.input :end_location_administrative_area_level_2, as: :hidden %>
+                <%= t.input :end_location_administrative_area_level_1, as: :hidden %>
+                <%= t.input :end_location_administrative_area_level_1_short, as: :hidden %>
+                <%= t.input :end_location_country, as: :hidden %>
+                <%= t.input :end_location_country_short, as: :hidden %>
+                <%= t.input :end_location_postal_code, as: :hidden %>
               </div>
             </div>
             <div class="row">

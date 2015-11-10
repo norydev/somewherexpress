@@ -5,7 +5,7 @@
       <h1><%= @competition %></h1>
 
       <div class="text-center">
-        <p class="lead"><%= @competition.start_location %> – <%= @competition.end_location %></p>
+        <p class="lead"><%= @competition.start_location_locality %> – <%= @competition.end_location_locality %></p>
         <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
         </p>
         <p>
