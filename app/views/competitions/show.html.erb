@@ -20,7 +20,7 @@
 
       <div id="map" style="width: 100%; height: 400px;"></div>
 
-      <% if @competition.tracks.size > 1 %>
+      <% if @competition.multiple_tracks? %>
         <%= render 'multi_tracks', competition: @competition %>
       <% else %>
         <%= render 'mono_track', competition: @competition %>

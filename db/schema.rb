@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107191743) do
+ActiveRecord::Schema.define(version: 20151110110658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,10 +34,11 @@ ActiveRecord::Schema.define(version: 20151107191743) do
     t.integer  "user_id"
     t.integer  "result"
     t.integer  "points",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "race_id"
     t.string   "race_type"
+    t.boolean  "dsq",        default: false, null: false
   end
 
   add_index "ranks", ["race_type", "race_id"], name: "index_ranks_on_race_type_and_race_id", using: :btree

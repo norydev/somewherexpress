@@ -2,7 +2,7 @@ module CompetitionsHelper
   def result(rank)
     if rank.result == 1
       '<span class="trophies"><i class="fa fa-trophy"></i></span>'.html_safe
-    elsif rank.points == 0
+    elsif rank.dsq
       'DSQ'
     else
       rank.result
@@ -18,7 +18,7 @@ module CompetitionsHelper
   end
 
   def place(rank)
-    if rank.points == 0
+    if rank.dsq
       'DSQ'
     else
       "#{rank.result}<sup>#{rank.result.ordinal}</sup> place".html_safe

@@ -9,21 +9,25 @@ class Rank < ActiveRecord::Base
     def set_competition_ranks
       if self.race.is_a? Track
         c = self.race.competition
-        r = Rank.where(race: c, user: self.user).first_or_create
-        r.points += self.points
-        r.save
+        c_r = Rank.where(race: c, user: self.user).first_or_create
+        c_r.points += self.points
+        c_r.save
 
-        results = Rank.where(race: c).order(points: :desc)
-        a = results.map(&:points)
-        ranks = a.map{ |e| a.index(e) + 1 }
+        if c.multiple_tracks?
+          # multi track competition: result according to nb of points
+          results = Rank.where(race: c).order(points: :desc)
+          a = results.map(&:points)
+          ranks = a.map{ |e| a.index(e) + 1 } # ranks with ex-aequo
 
-        results.each_with_index do |r, i|
-          if c.tracks.size > 1
+          results.each_with_index do |r, i|
             r.result = ranks[i]
-          else
-            r.result = ranks[i]/2 + 1
+            r.save
           end
-          r.save
+        else
+          # mono track competition: result = track result, dsq if dsq in track
+          c_r.result = self.result
+          c_r.dsq = self.dsq
+          c_r.save
         end
       end
     end

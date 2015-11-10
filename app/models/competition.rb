@@ -12,6 +12,10 @@ class Competition < ActiveRecord::Base
     name
   end
 
+  def multiple_tracks?
+    self.tracks.size > 1
+  end
+
   def t_ranks
     tracks.map{ |t| t.ranks }.flatten
   end
