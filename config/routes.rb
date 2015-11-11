@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:index, :show]
-  resources :competitions, only: [:show, :new, :create, :edit, :update] do
+  resources :competitions, only: [:index, :show, :new, :create, :edit, :update] do
     resources :tracks, only: [:destroy]
   end
 

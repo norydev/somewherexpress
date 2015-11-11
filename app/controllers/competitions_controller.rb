@@ -2,6 +2,10 @@ class CompetitionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
   before_action :set_competition, only: [:show, :edit, :update]
 
+  def index
+    @competitions = Competition.all
+  end
+
   def show
   end
 
