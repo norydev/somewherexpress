@@ -1,27 +1,29 @@
 module CompetitionsHelper
   def result(rank)
-    if rank.result == 1
+    if rank.try(:result) == 1
       '<span class="trophies"><i class="fa fa-trophy"></i></span>'.html_safe
-    elsif rank.dsq
+    elsif rank.try(:dsq)
       'DSQ'
     else
-      rank.result
+      rank.try(:result)
     end
   end
 
   def track_result(rank)
-    if rank.result == 1
+    if rank.try(:result) == 1
       image_tag 'medal.svg', class: 'medal'
     else
-      rank.result
+      rank.try(:result)
     end
   end
 
   def place(rank)
-    if rank.dsq
+    if rank && rank.dsq
       'DSQ'
-    else
+    elsif rank
       "#{rank.result}<sup>#{rank.result.ordinal}</sup> place".html_safe
+    else
+      ""
     end
   end
 end

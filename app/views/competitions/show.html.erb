@@ -27,6 +27,11 @@
       <% end %>
 
       <%= link_to "#{t('.edit.title')}", edit_competition_path(@competition) %>
+      <%= simple_form_for Subscription.new do |f| %>
+        <%= f.error_notification %>
+        <%= f.association :competition, as: :hidden, input_html: { value: @competition.id } %>
+        <%= f.submit "Apply" %>
+      <% end %>
 
     </div>
   </div>

@@ -17,7 +17,7 @@ class Competition < ActiveRecord::Base
   end
 
   def t_ranks
-    tracks.map{ |t| t.ranks }.flatten
+    Rank.where(race_id: self.tracks.map(&:id), race_type: "Track")
   end
 
   private

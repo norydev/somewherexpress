@@ -37,12 +37,12 @@
               <td><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %></td>
               <td><%= place(competition.ranks.find_by(user: @user)) %></td>
               <td>
-                <% if competition.ranks.find_by(user: @user).result == 1 %>
+                <% if competition.ranks.find_by(user: @user).try(:result) == 1 %>
                   <span class="trophies-small"><i class="fa fa-trophy"></i></span>
                 <% end %>
               </td>
               <td>
-                <% competition.t_ranks.select{ |t| t.user == @user && t.result == 1}.each do |r| %>
+                <% competition.t_ranks.where(user: @user, result: 1).each do |r| %>
                   <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
                     <%= image_tag "medal.svg", class: "medal", data: {toggle: "tooltip", placement: "bottom"}, title: "#{r.race}" %>
                   <% end %>
