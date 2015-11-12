@@ -6,7 +6,7 @@
 
       <table class="table">
         <tbody>
-          <% @users.sort_by{ |u| [-u.ranks.where(race_type: "Competition", result: 1).count, -u.ranks.where(race_type: "Track", result: 1).count, u.se_committee ? 0 : 1] }.each_with_index do |user, index| %>
+          <% @users.sort_by{ |u| [(-Competition.includes(:ranks).where(finished: true).where('ranks.result = ? AND ranks.user_id = ?', 1, u.id).references(:ranks).count), -u.ranks.where(race_type: "Track", result: 1).count, u.se_committee ? 0 : 1] }.each_with_index do |user, index| %>
             <tr>
               <td>
                 <%= link_to user do %>
@@ -16,7 +16,7 @@
               <td class="text-uppercase"><%= link_to user, user %></td>
               <td>
                 <% user.subscriptions.each do |s| %>
-                  <% if s.result == 1 %>
+                  <% if s.result == 1 && s.competition.finished %>
                     <%= link_to s.competition do %>
                       <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
                     <% end %>

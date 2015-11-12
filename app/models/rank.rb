@@ -7,7 +7,7 @@ class Rank < ActiveRecord::Base
   private
 
     def set_competition_ranks
-      if self.race.is_a? Track
+      if self.race.is_a?(Track) && self.result != 0
         c = self.race.competition
         c_r = Rank.where(race: c, user: self.user).first_or_create
         c_r.points += self.points

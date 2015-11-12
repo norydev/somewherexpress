@@ -79,3 +79,34 @@ table tbody tr td {
     }
   }
 }
+
+.add_track {
+  color: #ddd;
+  font-size: 1.5em;
+  height: 2.5em;
+
+  & i, & span {
+    vertical-align: middle;
+  }
+
+  & .fa {
+    font-size: 2em;
+  }
+
+  &:hover, &:focus {
+    outline: none;
+    color: $purple;
+  }
+}
+
+.destroy_track {
+  color: #ddd;
+  font-size: 3em;
+  padding-left: 10px;
+
+  &:hover, &:focus {
+    outline: none;
+    color: $red;
+  }
+
+}

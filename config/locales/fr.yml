@@ -7,6 +7,9 @@ fr:
     show:
       edit:
         title: "Modifier"
+    form:
+      delete:
+        message: "Êtes-vous sûr? Cette action ne peut être annulée."
     apply: "S'inscrire"
     cancel: "Annuler mon inscription"
 
@@ -153,9 +156,9 @@ fr:
     select:
       prompt: Veuillez sélectionner
     submit:
-      create: Créer un(e) %{model}
-      submit: Enregistrer ce(tte) %{model}
-      update: Modifier ce(tte) %{model}
+      create: Créer une %{model}
+      submit: Enregistrer cette %{model}
+      update: Mettre cette %{model} à jour
   number:
     currency:
       format:

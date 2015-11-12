@@ -13,7 +13,7 @@
         <h1><%= @user %></h1>
         <div class="text-center">
           <% @user.subscriptions.each do |s| %>
-            <% if s.result == 1 %>
+            <% if s.result == 1 && s.competition.finished %>
               <%= link_to s.competition do %>
                 <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
               <% end %>
@@ -37,7 +37,7 @@
               <td><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %></td>
               <td><%= place(competition.ranks.find_by(user: @user)) %></td>
               <td>
-                <% if competition.ranks.find_by(user: @user).try(:result) == 1 %>
+                <% if competition.ranks.find_by(user: @user).try(:result) == 1 && competition.finished %>
                   <span class="trophies-small"><i class="fa fa-trophy"></i></span>
                 <% end %>
               </td>

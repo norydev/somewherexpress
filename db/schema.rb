@@ -46,9 +46,10 @@ ActiveRecord::Schema.define(version: 20151112112318) do
     t.string   "end_location_country"
     t.string   "end_location_country_short"
     t.string   "end_location_postal_code"
+    t.boolean  "finished",                                         default: false, null: false
     t.boolean  "published",                                        default: false, null: false
     t.datetime "start_registration"
-    t.datetime "stop_registration"
+    t.datetime "end_registration"
   end
 
   create_table "ranks", force: :cascade do |t|
