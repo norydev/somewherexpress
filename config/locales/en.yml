@@ -24,3 +24,9 @@ en:
   remove_track: "Remove this track"
   add_track: "Add a track"
   track_question: "This competition has multiple tracks"
+  competitions:
+    show:
+      edit:
+        title: "Modifier"
+    apply: "Apply"
+    cancel: "Cancel my registration"

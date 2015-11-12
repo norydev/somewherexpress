@@ -10,34 +10,36 @@
     <div class="navbar-wagon-pusher"></div>
 
     <%= link_to 'Hall of fame', users_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <hr>
     <%= link_to 'Competitions', competitions_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <hr>
 
-    <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
+    <!-- <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
       <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
       <button type="submit" class="navbar-wagon-search-btn">
         <i class="fa fa-search"></i>
       </button>
-    </form>
-    <hr class="hidden-xs hidden-sm">
+    </form> -->
+    <!-- <hr class="hidden-xs hidden-sm"> -->
     <% if user_signed_in? %>
-      <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
-        <div class="icon-badge-container">
+      <%#= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
+        <!-- <div class="icon-badge-container">
           <i class="fa fa-envelope-o"></i>
           <div class="icon-badge icon-badge-blue">3</div>
-        </div>
-      <% end %>
-      <hr>
+        </div> -->
+      <%# end %>
+      <!-- <hr> -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <%= image_tag current_user.avatar, alt: "#{current_user.first_name}", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to "#" do %>
+              <%= link_to current_user do %>
                 <i class="fa fa-user"></i> <%= t ".profile", default: "Profile" %>
               <% end %>
             </li>
             <li>
-              <%= link_to "#" do %>
+              <%= link_to root_path do %>
                 <i class="fa fa-home"></i>  <%= t ".profile", default: "Home" %>
               <% end %>
             </li>
@@ -52,7 +54,7 @@
     <% else %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
-    <hr>
-    <%= link_to t(".top_call_to_action", default: "New competition"), new_competition_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <!-- <hr> -->
+    <%#= link_to t(".top_call_to_action", default: "New competition"), new_competition_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 </nav>

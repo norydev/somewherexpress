@@ -16,14 +16,14 @@
           <% end %>
         </p>
 
-        <% if Subscription.where(user: current_user, competition: @competition ).present? %>
-          <%= link_to 'Cancel my registration', subscription_path(Subscription.where(user: current_user, competition: @competition).take), method: :delete %>
+        <% if @competition.users.include?(current_user) %>
+          <%= link_to "#{t('competitions.cancel')}", subscription_path(Subscription.where(user: current_user, competition: @competition).take), method: :delete %>
         <% else %>
           <!-- APPLY -->
           <%= simple_form_for Subscription.new do |f| %>
             <%= f.error_notification %>
             <%= f.association :competition, as: :hidden, input_html: { value: @competition.id } %>
-            <%= f.button :submit, "Apply", class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
+            <%= f.button :submit, "#{t('competitions.apply')}", class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
           <% end %>
         <% end %>
 
@@ -41,14 +41,14 @@
       <% end %>
 
       <div class="text-center">
-        <% if Subscription.where(user: current_user, competition: @competition ).present? %>
-          <%= link_to 'Cancel my registration', subscription_path(Subscription.where(user: current_user, competition: @competition).take), method: :delete %>
+        <% if @competition.users.include?(current_user) %>
+          <%= link_to "#{t('competitions.cancel')}", subscription_path(Subscription.where(user: current_user, competition: @competition).take), method: :delete %>
         <% else %>
           <!-- APPLY -->
           <%= simple_form_for Subscription.new do |f| %>
             <%= f.error_notification %>
             <%= f.association :competition, as: :hidden, input_html: { value: @competition.id } %>
-            <%= f.button :submit, "Apply", class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
+            <%= f.button :submit, "#{t('competitions.apply')}", class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
           <% end %>
         <% end %>
       </div>

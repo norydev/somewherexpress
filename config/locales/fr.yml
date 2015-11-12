@@ -7,6 +7,8 @@ fr:
     show:
       edit:
         title: "Modifier"
+    apply: "S'inscrire"
+    cancel: "Annuler mon inscription"
 
   # Rails + Devise strings
   date:
