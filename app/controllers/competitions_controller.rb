@@ -3,7 +3,7 @@ class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update]
 
   def index
-    @competitions = Competition.all
+    @competitions = Competition.where(published: true)
   end
 
   def show

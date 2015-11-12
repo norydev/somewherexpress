@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111141517) do
+ActiveRecord::Schema.define(version: 20151112112318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20151111141517) do
     t.date     "end_date"
     t.string   "start_location"
     t.string   "end_location"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
     t.float    "start_location_lat"
     t.float    "start_location_lng"
     t.float    "end_location_lat"
@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(version: 20151111141517) do
     t.string   "end_location_country"
     t.string   "end_location_country_short"
     t.string   "end_location_postal_code"
+    t.boolean  "published",                                        default: false, null: false
+    t.datetime "start_registration"
+    t.datetime "stop_registration"
   end
 
   create_table "ranks", force: :cascade do |t|
