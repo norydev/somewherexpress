@@ -4,7 +4,7 @@ class Subscription < ActiveRecord::Base
 
   validates_uniqueness_of :user_id, scope: :competition_id, message: "You already applied to this competition"
 
-  after_save :make_track_ranks
+  after_create :make_track_ranks
   before_destroy :destroy_ranks
 
   def points
@@ -19,7 +19,7 @@ class Subscription < ActiveRecord::Base
 
     def make_track_ranks
       competition.tracks.each do |track|
-        Rank.where(user: user, race: track).first_or_create!
+        Rank.create!(user: user, race: track)
       end
     end
 

@@ -4,7 +4,7 @@ class Track < ActiveRecord::Base
 
   before_validation :geocoding, if: :location_changed?
 
-  after_save :make_track_ranks
+  after_create :make_track_ranks
 
   def to_s
     "#{start_location_locality} – #{end_location_locality}"
@@ -31,7 +31,7 @@ class Track < ActiveRecord::Base
 
     def make_track_ranks
       competition.users.each do |user|
-        Rank.where(user: user, race: self).first_or_create!
+        Rank.create!(user: user, race: self)
       end
     end
 end

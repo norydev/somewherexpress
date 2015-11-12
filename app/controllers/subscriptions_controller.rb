@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+
   def create
     @subscription = Subscription.new(subscription_params)
     @subscription.user = current_user
@@ -11,6 +12,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
+    @subscription = Subscription.find(params[:id])
+    competition = @subscription.competition
+    @subscription.destroy
+
+    redirect_to competition, notice: 'Your registration has been cancelled.'
   end
 
   private
