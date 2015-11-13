@@ -8,6 +8,20 @@
         <p class="lead"><%= @competition.locations %></p>
         <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
         </p>
+
+        <!-- EDIT -->
+        <% if policy(@competition).update? %>
+          <div class="btn-group far-right">
+            <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-cog"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "#{t('.edit.title')}", edit_competition_path(@competition) %></li>
+            </ul>
+          </div>
+        <% end %>
+        <!-- END EDIT -->
+
         <p>
           <% @competition.users.each do |user| %>
             <%= link_to user do %>
@@ -15,7 +29,6 @@
             <% end %>
           <% end %>
         </p>
-
 
         <% if policy(@competition).apply? %>
           <% if @competition.users.include?(current_user) %>
@@ -29,9 +42,6 @@
             <% end %>
           <% end %>
         <% end %>
-
-        <!-- EDIT -->
-        <%= link_to "#{t('.edit.title')}", edit_competition_path(@competition) if policy(@competition).update? %>
       </div>
       <!-- END DESCRIPTION -->
 

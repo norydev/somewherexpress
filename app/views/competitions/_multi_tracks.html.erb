@@ -23,8 +23,19 @@
 <!-- START STAGE RANKING -->
 <% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
   <div id="track-<%= track.id %>-result">
+    <!-- EDIT RESULTS -->
+    <% if policy(@competition).update? %>
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cog"></i> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to "#{t('competitions.edit_results')}", edit_competition_track_path(@competition, track) %></li>
+        </ul>
+      </div>
+    <% end %>
+    <!-- END EDIT RESULTS -->
     <h3><%= i + 1 %>. <%= track %></h3>
-    <%= link_to "Edit result", edit_competition_track_path(@competition, track) if policy(@competition).update? %>
     <table class="table">
       <tbody>
         <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>

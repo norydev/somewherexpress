@@ -8,6 +8,7 @@
   position: relative;
   cursor: pointer;
   outline: none;
+  margin: 0 auto;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -70,4 +71,7 @@ input.cmn-toggle-round:checked + label:before {
 }
 input.cmn-toggle-round:checked + label:after {
   margin-left: 30px;
+}
+input.cmn-toggle-red:checked + label:before {
+  background-color: $red;
 }

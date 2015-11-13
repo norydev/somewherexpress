@@ -1,7 +1,19 @@
 <!-- START FINAL RANKING -->
 <div id="track-<%= @competition.tracks.first.id %>-result">
+  <!-- EDIT RESULTS -->
+  <% if policy(@competition).update? %>
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-cog"></i> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= link_to "#{t('competitions.edit_results')}", edit_competition_track_path(@competition, @competition.tracks.first) %></li>
+      </ul>
+    </div>
+  <% end %>
+  <!-- END EDIT RESULTS -->
   <h2>Final Ranking</h2>
-  <%= link_to "Edit result", edit_competition_track_path(@competition, @competition.tracks.first) if policy(@competition).update? %>
+
   <table class="table">
     <tbody>
       <% (@competition.ranks.where.not(result: 0).order(:dsq, :result) + @competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>

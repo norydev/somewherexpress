@@ -53,8 +53,7 @@
       </div>
     <% else %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to t(".sign_up", default: "Join"), new_user_registration_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
     <% end %>
-    <!-- <hr> -->
-    <%#= link_to t(".top_call_to_action", default: "New competition"), new_competition_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 </nav>

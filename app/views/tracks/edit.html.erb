@@ -6,25 +6,36 @@
       <%= simple_form_for([@track.competition, @track]) do |f| %>
         <%= f.error_notification %>
 
-        <table class="table">
+        <table class="table edit_result_table">
+          <thead>
+            <tr class="active">
+              <th colspan="2" class="text-center">Hitchhiker</th>
+              <th class="text-center">Result</th>
+              <th class="text-center">Points</th>
+              <th class="text-center">Disq.</th>
+            </tr>
+          </thead>
           <tbody>
             <%= f.simple_fields_for :ranks do |t| %>
               <tr>
                 <td>
                   <%= link_to t.object.user do %>
-                    <%= image_tag t.object.user.avatar, class: "avatar", alt: "#{t.object.user.first_name}" %>
+                    <%= image_tag t.object.user.avatar, class: "avatar hidden-xs", alt: "#{t.object.user.first_name}" %>
                   <% end %>
                 </td>
-                <td><%= t.object.user.name %></td>
-                <td><%= t.input :points %></td>
-                <td><%= t.input :result %></td>
-                <td><%= t.input :dsq %></td>
+                <td class="text-uppercase"><%= link_to t.object.user.name, t.object.user %></td>
+                <td><%= t.input :points, label: false %></td>
+                <td><%= t.input :result, label: false %></td>
+                <td class="text-center">
+                  <%= t.input_field :dsq, as: :boolean, boolean_style: :inline, class: "cmn-toggle cmn-toggle-round cmn-toggle-red" %>
+                  <label for="track_ranks_attributes_<%= t.index %>_dsq"></label>
+                </td>
               </tr>
             <% end %>
           </tbody>
         </table>
 
-        <%= f.button :submit, "Save results" %>
+        <%= f.button :submit, "Save results", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

@@ -111,4 +111,34 @@ table tbody tr td {
 
 }
 
-.panel {position: relative;}
+.panel {
+  position: relative;
+}
+
+.edit_result_table {
+
+  & .form-group {
+    margin-bottom: 0;
+  }
+
+  & input[type='number'] {
+    width: 50px;
+    -moz-appearance:textfield;
+  }
+
+  &input::-webkit-outer-spin-button,
+  &input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.btn-grey {
+  @extend .btn-default;
+  background-color: $gray-lighter;
+  color: $gray-light;
+}
+
+.far-right {
+  @extend .pull-right;
+  position: relative;
+}
