@@ -2,9 +2,11 @@ class TracksController < ApplicationController
   before_action :set_track, only: [:edit, :update, :destroy]
 
   def edit
+    authorize @track, :update?
   end
 
   def update
+    authorize @track
     if @track.update(track_params)
       redirect_to @track.competition, notice: 'Result was successfully updated.'
     else
@@ -13,6 +15,8 @@ class TracksController < ApplicationController
   end
 
   def destroy
+    authorize @track
+
     competition = @track.competition
     @track.destroy
 

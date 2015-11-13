@@ -3,24 +3,30 @@ class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update]
 
   def index
-    @competitions = Competition.where(published: true)
+    @competitions = policy_scope(Competition)
   end
 
   def show
+    authorize @competition
   end
 
   def new
-    @competition = Competition.new
+    @competition = current_user.creations.new
+    authorize @competition, :create?
+
     @competition.tracks.build
   end
 
   def edit
+    authorize @competition, :update?
+
     @tracks = @competition.tracks.order(:start_time, :created_at)
     @tracks << @competition.tracks.build
   end
 
   def create
-    @competition = Competition.new(competition_params)
+    @competition = current_user.creations.new(competition_params)
+    authorize @competition
 
     if @competition.save
       redirect_to @competition, notice: 'Competition was successfully created.'
@@ -30,6 +36,8 @@ class CompetitionsController < ApplicationController
   end
 
   def update
+    authorize @competition
+
     if @competition.update(competition_params)
       redirect_to @competition, notice: 'Competition was successfully updated.'
     else

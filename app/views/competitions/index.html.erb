@@ -3,16 +3,16 @@
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <div class="text-center padded-mini">
-        <%= link_to "Create a competition", new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" %>
+        <%= link_to "Create a competition", new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" if policy(Competition).create? %>
       </div>
 
-      <% @competitions.where(finished: false).order(:start_date).select{ |c| c.start_registration <= Date.today && (c.end_registration.nil? || c.end_registration > Date.today) }.each do |competition| %>
+      <% @competitions.where(finished: false).order(:start_date).select{ |c| c.registrations_open? }.each do |competition| %>
 
         <%= render 'card', competition: competition, status: "open" %>
 
       <% end %>
 
-      <% @competitions.where(finished: false).order(:start_date).select{ |c| c.start_registration > Time.now || c.start_date < Date.today || (c.end_registration && c.end_registration < Time.now) }.each do |competition| %>
+      <% @competitions.where(finished: false).order(:start_date).select{ |c| !c.registrations_open? }.each do |competition| %>
 
         <%= render 'card', competition: competition, status: "closed" %>
 

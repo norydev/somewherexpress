@@ -1,7 +1,7 @@
 <!-- START FINAL RANKING -->
 <div id="track-<%= @competition.tracks.first.id %>-result">
   <h2>Final Ranking</h2>
-  <%= link_to "Edit result", edit_competition_track_path(@competition, @competition.tracks.first) %>
+  <%= link_to "Edit result", edit_competition_track_path(@competition, @competition.tracks.first) if policy(@competition).update? %>
   <table class="table">
     <tbody>
       <% (@competition.ranks.where.not(result: 0).order(:dsq, :result) + @competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>
@@ -13,12 +13,17 @@
           </td>
           <td class="text-uppercase"><%= link_to rank1.user, rank1.user %></td>
           <td class="text-center"><%= result(rank1) %></td>
-          <td class="text-right text-uppercase"><%= link_to rank2.user, rank2.user %></td>
-          <td class="text-right">
-            <%= link_to rank2.user do %>
-              <%= image_tag rank2.user.avatar, class: "avatar", alt: "#{rank2.user.first_name}" %>
-            <% end %>
-          </td>
+          <% if rank2 %>
+            <td class="text-right text-uppercase"><%= link_to rank2.user, rank2.user %></td>
+            <td class="text-right">
+              <%= link_to rank2.user do %>
+                <%= image_tag rank2.user.avatar, class: "avatar", alt: "#{rank2.user.first_name}" %>
+              <% end %>
+            </td>
+          <% else %>
+            <td></td>
+            <td></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

@@ -24,7 +24,7 @@
 <% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
   <div id="track-<%= track.id %>-result">
     <h3><%= i + 1 %>. <%= track %></h3>
-    <%= link_to "Edit result", edit_competition_track_path(@competition, track) %>
+    <%= link_to "Edit result", edit_competition_track_path(@competition, track) if policy(@competition).update? %>
     <table class="table">
       <tbody>
         <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>

@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :competitions, through: :subscriptions
   has_many :ranks, dependent: :destroy
 
+  has_many :creations, foreign_key: "author_id", class_name: "Competition"
+
   def to_s
     name
   end

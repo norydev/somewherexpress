@@ -6,6 +6,8 @@ class Competition < ActiveRecord::Base
 
   has_many :ranks, as: :race, dependent: :destroy
 
+  belongs_to :author, class_name: "User"
+
   before_validation :geocoding, if: :location_changed?
 
   def to_s
@@ -22,6 +24,16 @@ class Competition < ActiveRecord::Base
 
   def t_ranks
     Rank.where(race_id: self.tracks.map(&:id), race_type: "Track")
+  end
+
+  def registrations_open?
+    if !finished && start_registration && end_registration
+      Time.now.between?(start_registration, end_registration)
+    elsif !finished && start_registration
+      Time.now.between?(start_registration, end_date)
+    else
+      false
+    end
   end
 
   private

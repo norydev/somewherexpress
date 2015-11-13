@@ -1,8 +1,8 @@
 class SubscriptionsController < ApplicationController
 
   def create
-    @subscription = Subscription.new(subscription_params)
-    @subscription.user = current_user
+    @subscription = current_user.subscriptions.new(subscription_params)
+    authorize @subscription
 
     if @subscription.save
       redirect_to @subscription.competition, notice: 'Your application has been sent.'
@@ -13,6 +13,8 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     @subscription = Subscription.find(params[:id])
+    authorize @subscription
+
     competition = @subscription.competition
     @subscription.destroy
 
