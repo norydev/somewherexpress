@@ -1,39 +1,27 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center padded-mini">
+        <%= link_to "Create a competition", new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" %>
+      </div>
 
-      <%= link_to "Create a competition", new_competition_path, class: "navbar-wagon-button btn" %>
+      <% @competitions.where(finished: false).order(:start_date).select{ |c| c.start_registration <= Date.today && (c.end_registration.nil? || c.end_registration > Date.today) }.each do |competition| %>
 
-      <% @competitions.order(start_date: :desc).each do |competition| %>
+        <%= render 'card', competition: competition, status: "open" %>
 
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h3><%= link_to competition, competition %></h3>
-            <div class="text-center">
-              <p class="lead"><%= competition.start_location_locality %> – <%= competition.end_location_locality %></p>
-              <p class="text-uppercase text-muted small"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %>
-              </p>
-              <p>
-                <% competition.users.each do |user| %>
-                  <%= link_to user do %>
-                    <%= image_tag user.avatar, class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user}", alt: "#{user.first_name}" %>
-                  <% end %>
-                <% end %>
-              </p>
+      <% end %>
 
-              <% if competition.users.include?(current_user) %>
-                <%= link_to "#{t('competitions.cancel')}", subscription_path(Subscription.where(user: current_user, competition: competition).take), method: :delete %>
-              <% else %>
-                <!-- APPLY -->
-                <%= simple_form_for Subscription.new do |f| %>
-                  <%= f.error_notification %>
-                  <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
-                  <%= f.button :submit, "#{t('competitions.apply')}", class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+      <% @competitions.where(finished: false).order(:start_date).select{ |c| c.start_registration > Time.now || c.start_date < Date.today || (c.end_registration && c.end_registration < Time.now) }.each do |competition| %>
+
+        <%= render 'card', competition: competition, status: "closed" %>
+
+      <% end %>
+
+      <% @competitions.where(finished: true).order(start_date: :desc).each do |competition| %>
+
+        <%= render 'card', competition: competition, status: "finished" %>
+
       <% end %>
     </div>
   </div>

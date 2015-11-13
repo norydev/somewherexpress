@@ -1,5 +1,5 @@
 class CompetitionsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_competition, only: [:show, :edit, :update]
 
   def index

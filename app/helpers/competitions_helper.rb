@@ -26,4 +26,15 @@ module CompetitionsHelper
       ""
     end
   end
+
+  def ribon(status)
+    case status
+    when "open"
+      "<div class='ribbon-green'>#{t('open')}</div>".html_safe
+    when "finished"
+      "<div class='ribbon-gray'>#{t('finished')}</div>".html_safe
+    when "closed"
+      "<div class='ribbon-blue'>#{t('closed')}</div>".html_safe
+    end
+  end
 end

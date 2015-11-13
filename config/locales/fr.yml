@@ -12,6 +12,12 @@ fr:
         message: "Êtes-vous sûr? Cette action ne peut être annulée."
     apply: "S'inscrire"
     cancel: "Annuler mon inscription"
+  track:
+    one: 'Une seule étape'
+    other: '%{count} étapes'
+  open: 'ouverte'
+  finished: 'terminée'
+  closed: 'close'
 
   # Rails + Devise strings
   date:

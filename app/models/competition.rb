@@ -12,6 +12,10 @@ class Competition < ActiveRecord::Base
     name
   end
 
+  def locations
+    "#{start_location_locality} (#{start_location_country_short}) – #{end_location_locality} (#{end_location_country_short})"
+  end
+
   def multiple_tracks?
     self.tracks.size > 1
   end

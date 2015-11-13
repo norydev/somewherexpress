@@ -8,7 +8,7 @@ class Track < ActiveRecord::Base
   after_create :make_track_ranks
 
   def to_s
-    "#{start_location_locality} – #{end_location_locality}"
+    "#{start_location_locality} (#{start_location_country_short}) – #{end_location_locality} (#{end_location_country_short})"
   end
 
   private

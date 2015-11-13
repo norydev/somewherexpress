@@ -30,3 +30,6 @@ en:
         title: "Modifier"
     apply: "Apply"
     cancel: "Cancel my registration"
+  track:
+    one: 'Single stage'
+    other: '%{count} stage'
