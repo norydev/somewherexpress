@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
+      <h3>Results for <%= @track %></h3>
+
+      <%= simple_form_for([@track.competition, @track]) do |f| %>
+        <%= f.error_notification %>
+
+        <table class="table">
+          <tbody>
+            <%= f.simple_fields_for :ranks do |t| %>
+              <tr>
+                <td>
+                  <%= link_to t.object.user do %>
+                    <%= image_tag t.object.user.avatar, class: "avatar", alt: "#{t.object.user.first_name}" %>
+                  <% end %>
+                </td>
+                <td><%= t.object.user.name %></td>
+                <td><%= t.input :points %></td>
+                <td><%= t.input :result %></td>
+                <td><%= t.input :dsq %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <%= f.button :submit, "Save results" %>
+      <% end %>
+    </div>
+  </div>
+</div>

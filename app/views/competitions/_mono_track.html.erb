@@ -1,9 +1,10 @@
 <!-- START FINAL RANKING -->
 <div id="track-<%= @competition.tracks.first.id %>-result">
   <h2>Final Ranking</h2>
+  <%= link_to "Edit result", edit_competition_track_path(@competition, @competition.tracks.first) %>
   <table class="table">
     <tbody>
-      <% @competition.ranks.order(:dsq, :result).each_slice(2).to_a.each do |rank1, rank2| %>
+      <% (@competition.ranks.where.not(result: 0).order(:dsq, :result) + @competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>
         <tr>
           <td>
             <%= link_to rank1.user do %>

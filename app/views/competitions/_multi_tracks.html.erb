@@ -3,7 +3,7 @@
   <h2>Final Ranking</h2>
   <table class="table">
     <tbody>
-      <% @competition.ranks.order(:result).each do |rank| %>
+      <% (@competition.ranks.where.not(result: 0).order(:dsq, :result) + @competition.ranks.where(result: 0)).each do |rank| %>
         <tr>
           <td class="text-center"><%= result(rank) %></td>
           <td class="text-center">
@@ -24,9 +24,10 @@
 <% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
   <div id="track-<%= track.id %>-result">
     <h3><%= i + 1 %>. <%= track %></h3>
+    <%= link_to "Edit result", edit_competition_track_path(@competition, track) %>
     <table class="table">
       <tbody>
-        <% track.ranks.order(:dsq, :result).each do |rank| %>
+        <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
           <tr>
             <td class="text-center"><%= track_result(rank) %></td>
             <td class="text-center">

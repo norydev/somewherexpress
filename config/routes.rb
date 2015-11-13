@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
   resources :competitions, only: [:index, :show, :new, :create, :edit, :update] do
-    resources :tracks, only: [:destroy]
+    resources :tracks, only: [:destroy, :edit, :update]
   end
 
   resources :subscriptions, only: [:create, :destroy]
