@@ -4,7 +4,7 @@
   <% if policy(@competition).update? %>
     <div class="btn-group pull-right">
       <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-cog"></i> <span class="caret"></span>
+        <i class="fa fa-cogs"></i> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
         <li><%= link_to "#{t('competitions.edit_results')}", edit_competition_track_path(@competition, @competition.tracks.first) %></li>
@@ -12,31 +12,35 @@
     </div>
   <% end %>
   <!-- END EDIT RESULTS -->
-  <h2>Final Ranking</h2>
+  <h2><%= t('competitions.show.final_ranking') %></h2>
 
   <table class="table">
     <tbody>
-      <% (@competition.ranks.where.not(result: 0).order(:dsq, :result) + @competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>
-        <tr>
-          <td>
-            <%= link_to rank1.user do %>
-              <%= image_tag rank1.user.avatar, class: "avatar", alt: "#{rank1.user.first_name}" %>
-            <% end %>
-          </td>
-          <td class="text-uppercase"><%= link_to rank1.user, rank1.user %></td>
-          <td class="text-center"><%= result(rank1) %></td>
-          <% if rank2 %>
-            <td class="text-right text-uppercase"><%= link_to rank2.user, rank2.user %></td>
-            <td class="text-right">
-              <%= link_to rank2.user do %>
-                <%= image_tag rank2.user.avatar, class: "avatar", alt: "#{rank2.user.first_name}" %>
+      <% if @competition.ranks.where.not(result: 0).any? %>
+        <% (@competition.ranks.where.not(result: 0).order(:dsq, :result) + @competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>
+          <tr>
+            <td>
+              <%= link_to rank1.user do %>
+                <%= image_tag rank1.user.avatar, class: "avatar", alt: "#{rank1.user.first_name}" %>
               <% end %>
             </td>
-          <% else %>
-            <td></td>
-            <td></td>
-          <% end %>
-        </tr>
+            <td class="text-uppercase"><%= link_to rank1.user, rank1.user %></td>
+            <td class="text-center"><%= result(rank1) %></td>
+            <% if rank2 %>
+              <td class="text-right text-uppercase"><%= link_to rank2.user, rank2.user %></td>
+              <td class="text-right">
+                <%= link_to rank2.user do %>
+                  <%= image_tag rank2.user.avatar, class: "avatar", alt: "#{rank2.user.first_name}" %>
+                <% end %>
+              </td>
+            <% else %>
+              <td></td>
+              <td></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% else %>
+        <%= render 'final_ranks', competition: @competition %>
       <% end %>
     </tbody>
   </table>

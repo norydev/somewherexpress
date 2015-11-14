@@ -1,20 +1,9 @@
 <!-- START FINAL RANKING -->
 <div id="competition-<%= @competition.id %>-result">
-  <h2>Final Ranking</h2>
+  <h2><%= t('competitions.show.final_ranking') %></h2>
   <table class="table">
     <tbody>
-      <% (@competition.ranks.where.not(result: 0).order(:dsq, :result) + @competition.ranks.where(result: 0)).each do |rank| %>
-        <tr>
-          <td class="text-center"><%= result(rank) %></td>
-          <td class="text-center">
-            <%= link_to rank.user do %>
-              <%= image_tag rank.user.avatar, class: "avatar", alt: "#{rank.user.first_name}" %>
-            <% end %>
-          </td>
-          <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
-          <td class="text-right text-uppercase"><%= rank.points %> points</td>
-        </tr>
-      <% end %>
+      <%= render 'final_ranks', competition: @competition %>
     </tbody>
   </table>
 </div>
@@ -27,7 +16,7 @@
     <% if policy(@competition).update? %>
       <div class="btn-group pull-right">
         <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-cog"></i> <span class="caret"></span>
+          <i class="fa fa-cogs"></i> <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
           <li><%= link_to "#{t('competitions.edit_results')}", edit_competition_track_path(@competition, track) %></li>
@@ -47,7 +36,7 @@
               <% end %>
             </td>
             <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
-            <td class="text-right text-uppercase"><%= rank.points %> points</td>
+            <td class="text-right text-uppercase"><%= rank.points %> <%= t('ranks.params.points') %></td>
           </tr>
         <% end %>
       </tbody>

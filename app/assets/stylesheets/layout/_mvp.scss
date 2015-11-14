@@ -123,6 +123,7 @@ table tbody tr td {
 
   & input[type='number'] {
     width: 50px;
+    margin: 0 auto;
     -moz-appearance:textfield;
   }
 
@@ -141,4 +142,14 @@ table tbody tr td {
 .far-right {
   @extend .pull-right;
   position: relative;
+}
+
+.fa-male {
+  font-size: 3em;
+  color: $blue;
+}
+
+.fa-female {
+  font-size: 3em;
+  color: #FF69B4;
 }

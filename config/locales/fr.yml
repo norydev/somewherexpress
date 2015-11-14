@@ -1,21 +1,73 @@
 
 fr:
-  remove_track: "Supprimer cette étape"
-  add_track: "Ajouter une étape"
-  track_question: "Cette competition comporte plusieurs étapes"
+  home: Accueil
+  cancel: Annuler
+  track_question: "Cette compétition comporte plusieurs étapes"
   competitions:
+    params:
+      name: Nom
+      start_location: "De (lieu)"
+      end_location: "À (lieu)"
+      start_date: "Du (date)"
+      end_date: "Au (date)"
+    index:
+      new:
+        title: "Créer une compétition"
     show:
       edit:
         title: "Modifier cette compétition"
+      final_ranking: "Résultat final"
+    new:
+      title: "Nouvelle compétition"
+    edit:
+      title: "Modifier cette compétition"
     form:
       delete:
         message: "Êtes-vous sûr? Cette action ne peut être annulée."
+      general:
+        title: "Informations générales"
+      tracks:
+        title: "Étapes"
+        remove_track: "Supprimer cette étape"
+        add_track: "Ajouter une étape"
+      rules:
+        title: "Règles et paramètres"
+        published:
+          question: "Est-ce que cette compétition peut-être publiée?"
+          hint: "Elle sera visible dans la liste des compétitions"
+        finished:
+          question: "Est-ce que cette compétition est terminée?"
+          hint: "Les résultats sont-ils définitifs?"
     apply: "S'inscrire"
     cancel: "Annuler mon inscription"
     edit_results: "Mettre à jour le résultat"
-  track:
-    one: 'Une seule étape'
-    other: '%{count} étapes'
+  users:
+    params:
+      first_name: "Prénom"
+      last_name: "Nom de famille"
+      girl_boy: "Es-tu une fille ou un garçon?"
+    show:
+      profile:
+        title: Mon profil
+        settings: Paramètres
+    edit:
+      account: Paramètres du compte
+  tracks:
+    params:
+      start_location: "De"
+      end_location: "À"
+      start_time: "Heure de départ"
+      start_registration: "Début des inscriptions"
+      end_registration: "Fin des inscriptions"
+    edit:
+      title: Résultats de l'étape %{name}
+      user: "Participant"
+      dsq: "Disq."
+      save: "Enregistrer les résultats"
+  ranks:
+    params:
+      result: Résultat
+      points: Points
   open: 'ouverte'
   finished: 'terminée'
   closed: 'close'
@@ -165,7 +217,7 @@ fr:
     submit:
       create: Créer une %{model}
       submit: Enregistrer cette %{model}
-      update: Mettre cette %{model} à jour
+      update: Mettre à jour cette %{model}
   number:
     currency:
       format:
@@ -235,7 +287,21 @@ fr:
         password_confirmation: Confirmation du mot de passe
         remember_me: Se souvenir de moi
     models:
-      user: Utilisateur
+      user:
+        one: utilisateur
+        other: utilisateurs
+      competition:
+        one: compétition
+        other: compétitions
+      track:
+        one: étape
+        other: étapes
+      subscription:
+        one: inscription
+        other: inscriptions
+      rank:
+        one: rang
+        other: rangs
   devise:
     confirmations:
       new:
@@ -277,9 +343,15 @@ fr:
         we_need_your_current_password_to_confirm_your_changes: nous avons besoin de votre mot de passe actuel pour valider ces modifications
       new:
         sign_up: Inscription
+        validatable:
+          hint:
+            one: "1 charactère minimum"
+            other: "%{count} charactères minimum"
     sessions:
       new:
         sign_in: Connexion
+      destroy:
+        sign_out: Déconnexion
     shared:
       links:
         back: Retour

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
-      <h3>Results for <%= @track %></h3>
+      <h3><%= t('.title', name: @track) %></h3>
 
       <%= simple_form_for([@track.competition, @track]) do |f| %>
         <%= f.error_notification %>
@@ -9,10 +9,10 @@
         <table class="table edit_result_table">
           <thead>
             <tr class="active">
-              <th colspan="2" class="text-center">Hitchhiker</th>
-              <th class="text-center">Result</th>
-              <th class="text-center">Points</th>
-              <th class="text-center">Disq.</th>
+              <th colspan="2" class="text-center"><%= t('.user') %></th>
+              <th class="text-center"><%= t('ranks.params.result') %></th>
+              <th class="text-center"><%= t('ranks.params.points') %></th>
+              <th class="text-center"><%= t('.dsq') %></th>
             </tr>
           </thead>
           <tbody>
@@ -24,8 +24,8 @@
                   <% end %>
                 </td>
                 <td class="text-uppercase"><%= link_to t.object.user.name, t.object.user %></td>
-                <td><%= t.input :points, label: false %></td>
-                <td><%= t.input :result, label: false %></td>
+                <td class="text-center"><%= t.input :points, label: false %></td>
+                <td class="text-center"><%= t.input :result, label: false %></td>
                 <td class="text-center">
                   <%= t.input_field :dsq, as: :boolean, boolean_style: :inline, class: "cmn-toggle cmn-toggle-round cmn-toggle-red" %>
                   <label for="track_ranks_attributes_<%= t.index %>_dsq"></label>
@@ -35,7 +35,7 @@
           </tbody>
         </table>
 
-        <%= f.button :submit, "Save results", class: "btn btn-primary" %>
+        <%= f.button :submit, "#{t('.save')}", class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn btn-ghost" %>
       <% end %>
     </div>
   </div>

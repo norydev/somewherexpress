@@ -1,0 +1,12 @@
+<% (competition.ranks.where.not(result: 0).order(:dsq, :result) + competition.ranks.where(result: 0)).each do |rank| %>
+  <tr>
+    <td class="text-center"><%= result(rank) %></td>
+    <td class="text-center">
+      <%= link_to rank.user do %>
+        <%= image_tag rank.user.avatar, class: "avatar", alt: "#{rank.user.first_name}" %>
+      <% end %>
+    </td>
+    <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
+    <td class="text-right text-uppercase"><%= rank.points %> <%= t('ranks.params.points') %></td>
+  </tr>
+<% end %>

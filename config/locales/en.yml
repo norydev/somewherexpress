@@ -20,16 +20,74 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  remove_track: "Remove this track"
-  add_track: "Add a track"
+  home: Home
+  cancel: Cancel
   track_question: "This competition has multiple tracks"
   competitions:
+    params:
+      name: Name
+      start_location: "From (location)"
+      end_location: "To (location)"
+      start_date: "From (date)"
+      end_date: "To (date)"
+    index:
+      new:
+        title: "Create a competition"
     show:
       edit:
         title: "Modifier"
-    apply: "Apply"
+      final_ranking: "Final ranking"
+    new:
+      title: "New competition"
+    edit:
+      title: "Edit this competition"
+    form:
+      delete:
+        message: "Are you sure? This action can't be undone."
+      general:
+        title: "General informations"
+      tracks:
+        title: "Tracks"
+        remove_track: "Remove this track"
+        add_track: "Add a track"
+      rules:
+        title: "Rules and parameters"
+        published:
+          question: "Can this competition be published?"
+          hint: "It will be visible in the list of competitions"
+        finished:
+          question: "Is the competition finished?"
+          hint: "Are the results final?"
+    apply: "Register"
     cancel: "Cancel my registration"
-  track:
-    one: 'Single stage'
-    other: '%{count} stage'
+    edit_results: "Update the result"
+  users:
+    params:
+      first_name: "First name"
+      last_name: "Last name"
+      girl: "Are you a girl or a boy?"
+    show:
+      profile:
+        title: My profile
+        settings: Settings
+    edit:
+      account: Account Settings
+  tracks:
+    params:
+      start_location: "From"
+      end_location: "To"
+      start_time: "Start time"
+      start_registration: "Registrations start on"
+      end_registration: "Registrations close on"
+    edit:
+      title: "Results for stage %{name}"
+      user: "Participant"
+      dsq: "Disq."
+      save: "Save results"
+  ranks:
+    params:
+      result: Result
+      points: Points
+  open: 'open'
+  finished: 'finished'
+  closed: 'closed'

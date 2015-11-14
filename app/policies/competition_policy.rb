@@ -10,11 +10,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def create?
-    user.se_committee
+    user && user.se_committee
   end
 
   def update?
-    record.author == user
+    user && record.author == user
   end
 
   def apply?

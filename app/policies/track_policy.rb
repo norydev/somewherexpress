@@ -6,10 +6,10 @@ class TrackPolicy < ApplicationPolicy
   end
 
   def update?
-    record.competition.author == user
+    user && record.competition.author == user
   end
 
   def destroy?
-    record.competition.author == user
+    user && record.competition.author == user
   end
 end

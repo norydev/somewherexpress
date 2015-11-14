@@ -33,7 +33,7 @@ jQuery(function($) {
         newNestedForm = $(nestedForm).clone();
 
         // lastNestedForm position + 1
-        formsOnPage = parseInt(/[0-9]+/.exec(lastNestedForm.find('label').attr('for'))[0]) + 1;
+        formsOnPage = parseInt(/[0-9]+/.exec(lastNestedForm.find('input').attr('id'))[0]) + 1;
 
         $(newNestedForm).find('label').each(function() {
           var newLabel, oldLabel;
@@ -51,6 +51,7 @@ jQuery(function($) {
           return $(this).attr('name', newName);
         });
         $(newNestedForm).insertAfter(lastNestedForm);
+        $('[data-toggle="tooltip"]').tooltip()
         initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_start_location');
         return initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_end_location');
       });
