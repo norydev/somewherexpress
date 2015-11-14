@@ -10,7 +10,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def create?
-    user && user.se_committee
+    user && user.organizer
   end
 
   def update?

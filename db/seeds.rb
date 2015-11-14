@@ -18,7 +18,7 @@ Rank.destroy_all
   u.password = "12345678"
   u.first_name = Faker::Name.first_name
   u.last_name = Faker::Name.last_name
-  u.se_committee = [true,false].sample
+  u.organizer = [true,false].sample
   u.save
 end
 

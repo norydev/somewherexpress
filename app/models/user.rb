@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :creations, foreign_key: "author_id", class_name: "Competition"
 
+  has_many :badges
+
   def to_s
     name
   end

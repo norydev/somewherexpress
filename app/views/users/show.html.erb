@@ -5,8 +5,8 @@
       <div class="padded-mini-bottom">
         <div class="profile-pic">
           <%= image_tag @user.avatar, class: "avatar-ultra", alt: "#{@user.first_name}" %>
-          <% if @user.se_committee %>
-            <%= image_tag "badge_committee.svg", class: "avatar-badge", data: {toggle: "tooltip", placement: "bottom"}, title: "Membre Fondateur du Comité Central de SomewherExpress", style: "margin-top: 3px;" %>
+          <% if founder_badge(@user) %>
+            <%= image_tag "badge_committee.svg", class: "avatar-badge", data: {toggle: "tooltip", placement: "bottom"}, title: "#{founder_badge(@user).description}", style: "margin-top: 3px;" %>
           <% end %>
         </div>
 

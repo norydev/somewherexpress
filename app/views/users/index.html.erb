@@ -6,7 +6,7 @@
 
       <table class="table">
         <tbody>
-          <% @users.sort_by{ |u| [-Competition.includes(:ranks).where(finished: true).where('ranks.result = ? AND ranks.user_id = ?', 1, u.id).references(:ranks).count, -u.ranks.where(race_type: "Track", result: 1).count, u.se_committee ? 0 : 1] }.each_with_index do |user, index| %>
+          <% @users.sort_by{ |u| [-Competition.includes(:ranks).where(finished: true).where('ranks.result = ? AND ranks.user_id = ?', 1, u.id).references(:ranks).count, -u.ranks.where(race_type: "Track", result: 1).count, founder_badge(u) ? 0 : 1] }.each_with_index do |user, index| %>
             <tr>
               <td>
                 <%= link_to user do %>
@@ -31,8 +31,8 @@
                 <% end %>
               </td>
               <td>
-                <% if user.se_committee %>
-                  <%= image_tag "badge_committee.svg", class: "award", data: {toggle: "tooltip", placement: "bottom"}, title: "Membre Fondateur du Comité Central de SomewherExpress" %>
+                <% if founder_badge(user) %>
+                  <%= image_tag "badge_committee.svg", class: "award", data: {toggle: "tooltip", placement: "bottom"}, title: "#{founder_badge(user).description}" %>
                 <% end %>
               </td>
             </tr>
