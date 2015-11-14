@@ -2,6 +2,7 @@
 fr:
   home: Accueil
   cancel: Annuler
+  save: Enregistrer
   track_question: "Cette compétition comporte plusieurs étapes"
   competitions:
     params:
@@ -45,12 +46,14 @@ fr:
     params:
       first_name: "Prénom"
       last_name: "Nom de famille"
-      girl_boy: "Es-tu une fille ou un garçon?"
+      girl: "Es-tu une fille ou un garçon?"
+      picture: "Photo"
     show:
       profile:
         title: Mon profil
         settings: Paramètres
     edit:
+      title: "Modifier mon profile"
       account: Paramètres du compte
   tracks:
     params:

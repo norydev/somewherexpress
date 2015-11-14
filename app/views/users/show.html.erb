@@ -2,6 +2,20 @@
   <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
 
+
+        <!-- EDIT -->
+        <% if policy(@user).update? %>
+          <div class="btn-group far-right">
+            <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-cogs"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "#{t('users.edit.title')}", edit_user_path(@user) %></li>
+            </ul>
+          </div>
+        <% end %>
+        <!-- END EDIT -->
+
       <div class="padded-mini-bottom">
         <div class="profile-pic">
           <%= image_tag @user.avatar, class: "avatar-ultra", alt: "#{@user.first_name}" %>
