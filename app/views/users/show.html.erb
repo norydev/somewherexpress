@@ -10,7 +10,7 @@
               <i class="fa fa-cogs"></i> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to "#{t('users.edit.title')}", edit_user_path(@user) %></li>
+              <li><%= link_to t('users.edit.title'), edit_user_path(@user) %></li>
             </ul>
           </div>
         <% end %>

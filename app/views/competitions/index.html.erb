@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <div class="text-center padded-mini">
-        <%= link_to "#{t('.new.title')}", new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" if policy(Competition).create? %>
+        <%= link_to t('.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" if policy(Competition).create? %>
       </div>
 
       <% @competitions.where(finished: false).order(:start_date).select{ |c| c.registrations_open? }.each do |competition| %>

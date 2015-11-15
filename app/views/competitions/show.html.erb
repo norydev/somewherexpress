@@ -16,7 +16,7 @@
               <i class="fa fa-cogs"></i> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to "#{t('.edit.title')}", edit_competition_path(@competition) %></li>
+              <li><%= link_to t('.edit.title'), edit_competition_path(@competition) %></li>
             </ul>
           </div>
         <% end %>
@@ -32,13 +32,13 @@
 
         <% if policy(@competition).apply? %>
           <% if @competition.users.include?(current_user) %>
-            <%= link_to "#{t('competitions.cancel')}", subscription_path(Subscription.where(user: current_user, competition: @competition).take), method: :delete %>
+            <%= link_to t('competitions.cancel'), subscription_path(Subscription.where(user: current_user, competition: @competition).take), method: :delete %>
           <% else %>
             <!-- APPLY -->
             <%= simple_form_for Subscription.new do |f| %>
               <%= f.error_notification %>
               <%= f.association :competition, as: :hidden, input_html: { value: @competition.id } %>
-              <%= f.button :submit, "#{t('competitions.apply')}", class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
+              <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
             <% end %>
           <% end %>
         <% end %>

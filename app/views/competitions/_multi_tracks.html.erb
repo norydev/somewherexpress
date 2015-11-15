@@ -19,7 +19,7 @@
           <i class="fa fa-cogs"></i> <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li><%= link_to "#{t('competitions.edit_results')}", edit_competition_track_path(@competition, track) %></li>
+          <li><%= link_to t('competitions.edit_results'), edit_competition_track_path(@competition, track) %></li>
         </ul>
       </div>
     <% end %>

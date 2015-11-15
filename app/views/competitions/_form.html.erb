@@ -3,10 +3,10 @@
 
   <!-- GENERAL INFORMATIONS -->
   <h4><%= t('.general.title') %></h4>
-  <%= f.input :name, label: "#{t('competitions.params.name')}" %>
+  <%= f.input :name, label: t('competitions.params.name') %>
   <div class="row">
     <div class="col-xs-6">
-      <%= f.input :start_location, label: "#{t('competitions.params.start_location')}" %>
+      <%= f.input :start_location, label: t('competitions.params.start_location') %>
       <%= f.input :start_location_street_number, as: :hidden %>
       <%= f.input :start_location_route, as: :hidden %>
       <%= f.input :start_location_locality, as: :hidden %>
@@ -18,7 +18,7 @@
       <%= f.input :start_location_postal_code, as: :hidden %>
     </div>
     <div class="col-xs-6">
-      <%= f.input :end_location, label: "#{t('competitions.params.end_location')}" %>
+      <%= f.input :end_location, label: t('competitions.params.end_location') %>
       <%= f.input :end_location_street_number, as: :hidden %>
       <%= f.input :end_location_route, as: :hidden %>
       <%= f.input :end_location_locality, as: :hidden %>
@@ -32,10 +32,10 @@
   </div>
   <div class="row">
     <div class="col-xs-6">
-      <%= f.input :start_date, as: :string, label: "#{t('competitions.params.start_date')}"  %>
+      <%= f.input :start_date, as: :string, label: t('competitions.params.start_date')  %>
     </div>
     <div class="col-xs-6">
-      <%= f.input :end_date, as: :string, label: "#{t('competitions.params.end_date')}" %>
+      <%= f.input :end_date, as: :string, label: t('competitions.params.end_date') %>
     </div>
   </div>
   <!-- END GENERAL INFORMATIONS -->
@@ -106,7 +106,7 @@
               <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
             <% end %>
           <% else %>
-            <%= link_to competition_track_path(competition, t.object), method: :delete, remote: true, data: { confirm: "#{t('.delete.message')}" }, class: 'destroy_track' do %>
+            <%= link_to competition_track_path(competition, t.object), method: :delete, remote: true, data: { confirm: t('.delete.message') }, class: 'destroy_track' do %>
               <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
             <% end %>
             <%= t.input :id, as: :hidden %>
@@ -116,7 +116,7 @@
     <% end %>
     <div class="text-center padded-mini-bottom">
       <%= link_to '#', remote: true, class: "add_track" do %>
-        <i class="fa fa-plus-circle"></i> <span><%= "#{t('.tracks.add_track')}" %></span>
+        <i class="fa fa-plus-circle"></i> <span><%= t('.tracks.add_track') %></span>
       <% end %>
     </div>
   <!-- TRACKS -->
@@ -127,17 +127,17 @@
       <h4><%= t('.rules.title') %></h4>
       <div class="row">
         <div class="col-xs-6">
-          <%= f.input :start_registration, as: :string, label: "#{t('tracks.params.start_registration')}" %>
+          <%= f.input :start_registration, as: :string, label: t('tracks.params.start_registration') %>
         </div>
         <div class="col-xs-6">
-          <%= f.input :end_registration, as: :string, label: "#{t('tracks.params.start_registration')}" %>
+          <%= f.input :end_registration, as: :string, label: t('tracks.params.start_registration') %>
         </div>
       </div>
 
       <div class="row">
         <div class="col-xs-9">
           <strong><%= t('.rules.published.question') %></strong>
-          <%= f.hint "#{t('.rules.published.hint')}" %>
+          <%= f.hint t('.rules.published.hint') %>
         </div>
         <div class="col-xs-3">
           <%= f.input_field :published, as: :boolean, boolean_style: :inline, class: "cmn-toggle cmn-toggle-round" %>
@@ -148,7 +148,7 @@
       <div class="row">
         <div class="col-xs-9">
           <strong><%= t('.rules.finished.question') %></strong>
-          <%= f.hint "#{t('.rules.finished.hint')}" %>
+          <%= f.hint t('.rules.finished.hint') %>
         </div>
         <div class="col-xs-3">
           <%= f.input_field :finished, as: :boolean, boolean_style: :inline, class: "cmn-toggle cmn-toggle-round" %>
