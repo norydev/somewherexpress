@@ -23,6 +23,7 @@ en:
   home: Home
   cancel: Cancel
   save: Save
+  more: More information
   track_question: "This competition has multiple tracks"
   competitions:
     params:
@@ -31,6 +32,8 @@ en:
       end_location: "To (location)"
       start_date: "From (date)"
       end_date: "To (date)"
+      start_registration: "Registrations start on"
+      end_registration: "Registrations close on"
     registrations:
       start: "Registrations open in %{time}"
       end: "Registrations close in %{time}"
@@ -83,8 +86,6 @@ en:
       start_location: "From"
       end_location: "To"
       start_time: "Start time"
-      start_registration: "Registrations start on"
-      end_registration: "Registrations close on"
     edit:
       title: "Results for stage %{name}"
       user: "Participant"

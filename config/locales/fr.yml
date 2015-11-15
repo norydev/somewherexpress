@@ -2,6 +2,7 @@
 fr:
   home: Accueil
   cancel: Annuler
+  more: Plus d'informations
   save: Enregistrer
   track_question: "Cette compétition comporte plusieurs étapes"
   competitions:
@@ -11,6 +12,8 @@ fr:
       end_location: "À (lieu)"
       start_date: "Du (date)"
       end_date: "Au (date)"
+      start_registration: "Début des inscriptions"
+      end_registration: "Fin des inscriptions"
     registrations:
       start: "Ouverture des inscriptions dans %{time}"
       end: "Fermeture des inscriptions dans %{time}"
@@ -63,8 +66,6 @@ fr:
       start_location: "De"
       end_location: "À"
       start_time: "Heure de départ"
-      start_registration: "Début des inscriptions"
-      end_registration: "Fin des inscriptions"
     edit:
       title: Résultats de l'étape %{name}
       user: "Participant"

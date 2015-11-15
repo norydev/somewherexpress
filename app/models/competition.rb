@@ -10,6 +10,9 @@ class Competition < ActiveRecord::Base
 
   before_validation :geocoding, if: :location_changed?
 
+  validates_presence_of :name
+  validates_presence_of :start_registration, :start_location,:start_location_locality, :end_location, :end_location_locality, :start_date, :end_date, :tracks, if: :published?
+
   def to_s
     name
   end

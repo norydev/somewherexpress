@@ -4,6 +4,8 @@ class Rank < ActiveRecord::Base
 
   after_save :set_competition_ranks
 
+  validates_presence_of :user, :race
+
   private
 
     def set_competition_ranks

@@ -7,6 +7,8 @@ class Subscription < ActiveRecord::Base
   after_create :make_track_ranks
   before_destroy :destroy_ranks
 
+  validates_presence_of :user, :competition
+
   def points
     competition.t_ranks.where(user: user).map(&:points).reduce(:+)
   end

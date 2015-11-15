@@ -127,10 +127,10 @@
       <h4><%= t('.rules.title') %></h4>
       <div class="row">
         <div class="col-xs-6">
-          <%= f.input :start_registration, as: :string, label: t('tracks.params.start_registration') %>
+          <%= f.input :start_registration, as: :string, label: t('competitions.params.start_registration') %>
         </div>
         <div class="col-xs-6">
-          <%= f.input :end_registration, as: :string, label: t('tracks.params.start_registration') %>
+          <%= f.input :end_registration, as: :string, label: t('competitions.params.end_registration') %>
         </div>
       </div>
 
@@ -159,5 +159,5 @@
   </div>
   <!-- SETTINGS -->
 
-  <%= f.button :submit, class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn btn-ghost" %>
+  <%= f.button :submit, class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn" %>
 <% end %>
