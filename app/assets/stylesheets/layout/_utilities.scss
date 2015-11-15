@@ -17,9 +17,21 @@
   }
 }
 
-.marged-micro-sides {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+.marged {
+  &-mini {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  &-medium {
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+  }
+  &-micro {
+    &-sides {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
+  }
 }
 
 // Backgrounds

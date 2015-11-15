@@ -53,7 +53,7 @@ class CompetitionsController < ApplicationController
     def competition_params
       params.require(:competition).permit(
         :name, :start_date, :end_date, :start_location, :end_location, :start_registration,
-        :end_registration, :published, :finished,
+        :end_registration, :published, :finished, :description,
         :start_location_street_number, :start_location_route, :start_location_locality,
         :start_location_administrative_area_level_2, :start_location_administrative_area_level_1,
         :start_location_administrative_area_level_1_short, :start_location_country,

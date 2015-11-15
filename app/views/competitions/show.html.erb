@@ -47,6 +47,10 @@
 
       <div id="map" style="width: 100%; height: 400px;"></div>
 
+      <% if @competition.description %>
+        <blockquote class="marged-medium"><%= @competition.description %></blockquote>
+      <% end %>
+
       <% if @competition.multiple_tracks? %>
         <%= render 'multi_tracks', competition: @competition %>
       <% else %>
