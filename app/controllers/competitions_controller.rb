@@ -1,6 +1,6 @@
 class CompetitionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_competition, only: [:show, :edit, :update]
+  before_action :set_competition, only: [:show, :edit, :update, :destroy]
 
   def index
     @competitions = policy_scope(Competition)
@@ -43,6 +43,13 @@ class CompetitionsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    authorize @competition
+
+    @competition.destroy
+    redirect_to competitions_path, notice: 'Competition was successfully deleted.'
   end
 
   private

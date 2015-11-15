@@ -20,4 +20,8 @@ class CompetitionPolicy < ApplicationPolicy
   def apply?
     record.registrations_open?
   end
+
+  def destroy?
+    user && record.author == user && record.users.none?
+  end
 end

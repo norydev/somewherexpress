@@ -42,7 +42,9 @@ en:
         title: "Create a competition"
     show:
       edit:
-        title: "Modifier"
+        title: "Edit this competition"
+      destroy:
+        title: "Delete this competition"
       final_ranking: "Final ranking"
     new:
       title: "New competition"

@@ -23,6 +23,8 @@ fr:
     show:
       edit:
         title: "Modifier cette compétition"
+      destroy:
+        title: "Supprimer cette compétition"
       final_ranking: "Résultat final"
     new:
       title: "Nouvelle compétition"

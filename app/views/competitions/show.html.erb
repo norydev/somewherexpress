@@ -17,6 +17,9 @@
             </button>
             <ul class="dropdown-menu">
               <li><%= link_to t('.edit.title'), edit_competition_path(@competition) %></li>
+              <% if policy(@competition).destroy? %>
+                <li><%= link_to t('.destroy.title'), competition_path(@competition), method: 'delete' %></li>
+              <% end %>
             </ul>
           </div>
         <% end %>
