@@ -31,6 +31,9 @@ en:
       end_location: "To (location)"
       start_date: "From (date)"
       end_date: "To (date)"
+    registrations:
+      start: "Registrations open in %{time}"
+      end: "Registrations close in %{time}"
     index:
       new:
         title: "Create a competition"

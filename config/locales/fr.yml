@@ -11,6 +11,9 @@ fr:
       end_location: "À (lieu)"
       start_date: "Du (date)"
       end_date: "Au (date)"
+    registrations:
+      start: "Ouverture des inscriptions dans %{time}"
+      end: "Fermeture des inscriptions dans %{time}"
     index:
       new:
         title: "Créer une compétition"
