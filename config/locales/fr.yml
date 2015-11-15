@@ -4,7 +4,6 @@ fr:
   cancel: Annuler
   more: Plus d'informations
   save: Enregistrer
-  track_question: "Cette compétition comporte plusieurs étapes"
   competitions:
     params:
       name: Nom

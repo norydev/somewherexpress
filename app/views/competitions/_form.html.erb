@@ -32,31 +32,21 @@
   </div>
   <div class="row">
     <div class="col-xs-6">
-      <%= f.input :start_date, as: :string, label: t('competitions.params.start_date')  %>
+      <%= f.input :start_date, as: :date, html5: true, label: t('competitions.params.start_date'), input_html: { class: "datepicker" } %>
     </div>
     <div class="col-xs-6">
-      <%= f.input :end_date, as: :string, label: t('competitions.params.end_date') %>
+      <%= f.input :end_date, as: :date, html5: true, label: t('competitions.params.end_date'), input_html: { class: "datepicker" } %>
     </div>
   </div>
   <%= f.input :description, input_html: { rows: 6 } %>
   <!-- END GENERAL INFORMATIONS -->
-
-  <!-- <div class="row">
-    <div class="col-xs-9">
-      <%#= t('track_question') %>
-    </div>
-    <div class="col-xs-3">
-      <input id="multi-tracks" class="cmn-toggle cmn-toggle-round" type="checkbox">
-      <label for="multi-tracks"></label>
-    </div>
-  </div> -->
 
   <!-- TRACKS -->
   <h4 class="text-capitalize"><%= t('activerecord.models.track', count: 2) %></h4>
 
     <%= f.simple_fields_for :tracks, @tracks do |t| %>
       <div class="row tracks_form">
-        <div class="col-xs-10">
+        <div class="col-xs-10 col-sm-11">
           <div class="panel panel-default">
             <div class="row panel-body">
               <div class="col-sm-8 col-xs-12">
@@ -75,7 +65,7 @@
                 <%= t.input :start_location_postal_code, as: :hidden %>
               </div>
               <div class="col-sm-4 hidden-xs">
-                <strong><%= t('tracks.params.start_time') %></strong>
+                <%= t.label t('tracks.params.start_time') %>
               </div>
               <div class="col-sm-8 col-xs-12">
                 <div class="input-group">
@@ -93,15 +83,12 @@
                 <%= t.input :end_location_postal_code, as: :hidden %>
               </div>
               <div class="col-sm-4 col-xs-12">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <%= t.input :start_time, label: false, as: :string %>
-                </div>
+                <%= t.input :start_time, label: false, as: :string, input_html: { class: "datetime_picker", value: datetime_value(t.object.start_time) } %>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-2 padded-mini">
+        <div class="col-xs-2 col-sm-1 padded-mini">
           <% if t.object.new_record? %>
             <%= link_to '#', remote: true, class: 'destroy_track' do %>
               <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
@@ -126,12 +113,20 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h4><%= t('.rules.title') %></h4>
-      <div class="row">
+      <div class="row padded-mini">
         <div class="col-xs-6">
-          <%= f.input :start_registration, as: :string, label: t('competitions.params.start_registration') %>
+          <%= f.label t('competitions.params.start_registration') %>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <%= f.input :start_registration, as: :string, label: false, input_html: { class: "datetime_picker", value: datetime_value(f.object.start_registration) } %>
+          </div>
         </div>
         <div class="col-xs-6">
-          <%= f.input :end_registration, as: :string, label: t('competitions.params.end_registration') %>
+          <%= f.label t('competitions.params.end_registration') %>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <%= f.input :end_registration, as: :string, label: false, input_html: { class: "datetime_picker", value: datetime_value(f.object.end_registration) } %>
+          </div>
         </div>
       </div>
 

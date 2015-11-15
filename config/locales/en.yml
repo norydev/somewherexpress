@@ -24,7 +24,6 @@ en:
   cancel: Cancel
   save: Save
   more: More information
-  track_question: "This competition has multiple tracks"
   competitions:
     params:
       name: Name

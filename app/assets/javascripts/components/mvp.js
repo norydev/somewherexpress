@@ -1,6 +1,26 @@
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+var datetime_picker = function() {
+  $('.datetime_picker').datetimepicker({
+    language: "fr",
+    format: 'yyyy-mm-dd hh:ii',
+    weekStart: 1,
+    autoclose: true
+  });
+};
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+  datetime_picker();
+
+  if (!Modernizr.inputtypes.date) {
+    $('.datepicker').datetimepicker({
+      language: "fr",
+      format: 'yyyy-mm-dd',
+      minView: 2,
+      weekStart: 1,
+      autoclose: true
+    });
+  }
+});
 
 // as found on http://davidlesches.com/blog/rails-nested-forms-using-jquery-and-simpleform
 // with a few customisations
