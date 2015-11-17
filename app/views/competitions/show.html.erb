@@ -35,7 +35,7 @@
 
         <% if policy(@competition).apply? %>
           <% if @competition.users.include?(current_user) %>
-            <%= link_to t('competitions.cancel'), subscription_path(Subscription.where(user: current_user, competition: @competition).take), method: :delete %>
+            <%= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: @competition)), method: :delete %>
           <% else %>
             <!-- APPLY -->
             <%= simple_form_for Subscription.new do |f| %>

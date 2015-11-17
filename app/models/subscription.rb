@@ -14,7 +14,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def result
-    competition.ranks.where(user: user).take.try(:result)
+    competition.ranks.find_by(user: user).try(:result)
   end
 
   private
