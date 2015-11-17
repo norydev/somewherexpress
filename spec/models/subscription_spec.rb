@@ -8,14 +8,19 @@ RSpec.describe Subscription, type: :model do
   it 'returns the correct nb of points' do
     u = FactoryGirl.create :user, email: "u1@yopmail.com"
     c = FactoryGirl.create :competition
+    ts = []
+    5.times do |n|
+      ts[n] = FactoryGirl.create :track, competition: c
+    end
+
     s = FactoryGirl.create :subscription, user: u, competition: c
 
-    5.times do
-      FactoryGirl.create :track, competition: c
+    ts.each do |t|
+      r = t.ranks.find_by(user: u)
+      r.points = 4
+      r.save
     end
-    Track.all.each do |t|
-      FactoryGirl.create :rank, user: u, race: t, points: 4, result: 2
-    end
+
     expect(s.points).to eq(20)
   end
 
@@ -24,15 +29,24 @@ RSpec.describe Subscription, type: :model do
     u2 = FactoryGirl.create :user, email: "u2@yopmail.com"
     u3 = FactoryGirl.create :user, email: "u3@yopmail.com"
     c = FactoryGirl.create :competition
-    s = FactoryGirl.create :subscription, user: u2, competition: c
-
     t = FactoryGirl.create :track, competition: c
+    s1 = FactoryGirl.create :subscription, user: u1, competition: c
+    s2 = FactoryGirl.create :subscription, user: u2, competition: c
+    s3 = FactoryGirl.create :subscription, user: u3, competition: c
 
-    FactoryGirl.create :rank, race: t, user: u1, points: 5, result: 1
-    FactoryGirl.create :rank, race: t, user: u2, points: 4, result: 2
-    FactoryGirl.create :rank, race: t, user: u3, points: 3, result: 3
+    r = t.ranks.find_by(user: u1)
+    r.result = 1
+    r.save
 
-    expect(s.result).to eq(2)
+    r = t.ranks.find_by(user: u2)
+    r.result = 2
+    r.save
+
+    r = t.ranks.find_by(user: u3)
+    r.result = 3
+    r.save
+
+    expect(s2.result).to eq(2)
   end
 
 end
