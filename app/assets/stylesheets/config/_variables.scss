@@ -2,7 +2,7 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700");
+// @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700");
 $base-font: "Open Sans", "Helvetica", "sans-serif";
 $header-font: "Open Sans", "Helvetica", "sans-serif";
 
@@ -23,15 +23,15 @@ $base-height: 1.4;
 /* -------------------------------------
  * Colors
  * ------------------------------------- */
-// Scheme
-$brand-color: #D23333;
-
 $red: #d9534f;
 $blue: #5bc0de;
 $yellow: #FDB631;
 $orange: #f0ad4e;
 $green: #5cb85c;
 $purple: darken(#428bca, 6.5%);
+
+// Scheme
+$brand-color: $red;// #D23333;
 
 // Gray scale
 $gray-darker:  lighten(#000, 13.5%); // #222
