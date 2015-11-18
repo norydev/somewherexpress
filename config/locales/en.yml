@@ -24,6 +24,10 @@ en:
   cancel: Cancel
   save: Save
   more: More information
+  welcome:
+    index:
+      intro: "SomewherExpress encourages and organizes hitchhiking competitions and other trips in Europe (for now). It is managed by the Central Committee of SomewherExpress. Every associate member can organize and promote a hitchhiking event."
+    dashboard:
   competitions:
     params:
       name: Name

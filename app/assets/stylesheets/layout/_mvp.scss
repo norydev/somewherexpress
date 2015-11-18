@@ -153,3 +153,35 @@ table tbody tr td {
   font-size: 3em;
   color: #FF69B4;
 }
+
+.dashboard .panel {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bio-panel {
+  .profile-pic {
+    position: relative;
+    display: block;
+    margin: -40px auto 0;
+    width: 80px;
+  }
+  .avatar-badge {
+    bottom: -5px;
+    right: -5px;
+  }
+}
+
+.cover-image-mini {
+  background: $red url(image_path("bg1.jpg")) no-repeat top center;
+  background-size: cover;
+  height: 80px;
+}
+
+/* Welcome page */
+
+.welcome .intro {
+  background: $red url(image_path("bg1.jpg")) no-repeat top center;
+  background-size: cover;
+  color: white;
+}

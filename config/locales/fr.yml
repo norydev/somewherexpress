@@ -4,6 +4,10 @@ fr:
   cancel: Annuler
   more: Plus d'informations
   save: Enregistrer
+  welcome:
+    index:
+      intro: "SomewherExpress encourage et organise des compétitions et autres voyages en autostop en Europe (pour l'instant). Il est géré par le Comité Central de SomwherExpress. Chaque membre associé peut organiser un évènement d'autostop et en faire la promotion."
+    dashboard:
   competitions:
     params:
       name: Nom
