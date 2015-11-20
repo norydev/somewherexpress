@@ -39,6 +39,18 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def self.open_for_registration
+    self.where(finished: false).order(:start_date).select{ |c| c.registrations_open? }
+  end
+
+  def self.not_open_for_registration
+    self.where(finished: false).order(:start_date).reject{ |c| c.registrations_open? }
+  end
+
+  def self.finished
+    self.where(finished: true).order(start_date: :desc)
+  end
+
   private
 
     def geocoding

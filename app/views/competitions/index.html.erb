@@ -6,22 +6,16 @@
         <%= link_to t('.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" if policy(Competition).create? %>
       </div>
 
-      <% @competitions.where(finished: false).order(:start_date).select{ |c| c.registrations_open? }.each do |competition| %>
-
+      <% @competitions.open_for_registration.each do |competition| %>
         <%= render 'card', competition: competition, status: "open" %>
-
       <% end %>
 
-      <% @competitions.where(finished: false).order(:start_date).select{ |c| !c.registrations_open? }.each do |competition| %>
-
+      <% @competitions.not_open_for_registration.each do |competition| %>
         <%= render 'card', competition: competition, status: "closed" %>
-
       <% end %>
 
-      <% @competitions.where(finished: true).order(start_date: :desc).each do |competition| %>
-
+      <% @competitions.finished.each do |competition| %>
         <%= render 'card', competition: competition, status: "finished" %>
-
       <% end %>
     </div>
   </div>

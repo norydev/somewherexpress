@@ -180,8 +180,11 @@ table tbody tr td {
 
 /* Welcome page */
 
-.welcome .intro {
+.red-bg {
   background: $red url(image_path("bg1.jpg")) no-repeat top center;
   background-size: cover;
+}
+
+.intro .lead {
   color: white;
 }

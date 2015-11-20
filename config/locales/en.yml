@@ -26,7 +26,10 @@ en:
   more: More information
   welcome:
     index:
-      intro: "SomewherExpress encourages and organizes hitchhiking competitions and other trips in Europe (for now). It is managed by the Central Committee of SomewherExpress. Every associate member can organize and promote a hitchhiking event."
+      intro: "SomewherExpress is a community of hitchhikers based in Switzerland. We organize hitchhiking teams competitions throughout Europe every year. Join us!"
+      open_title: "Coming competitions"
+      closed_title: "Registrations closed"
+      passed_title: "Passed competitions"
     dashboard:
   competitions:
     params:

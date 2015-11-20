@@ -6,7 +6,10 @@ fr:
   save: Enregistrer
   welcome:
     index:
-      intro: "SomewherExpress encourage et organise des compétitions et autres voyages en autostop en Europe (pour l'instant). Il est géré par le Comité Central de SomwherExpress. Chaque membre associé peut organiser un évènement d'autostop et en faire la promotion."
+      intro: "SomewherExpress est un collectif d'autostopeurs basé en Suisse Romande. Nous organisons chaque année des compétitions d'autostop par équipe à travers l'Europe. Rejoins-nous!"
+      open_title: "Compétitions à venir"
+      closed_title: "Inscriptions closes"
+      passed_title: "Compétitions passées"
     dashboard:
   competitions:
     params:

@@ -1,0 +1,21 @@
+<td>
+  <h4><%= link_to competition, competition %></h4>
+  <p class="text-uppercase small">
+    <%= competition.start_location_locality %> (<%= competition.start_location_country_short %>) –
+    <% competition.tracks.order(:start_time).each do |t| %>
+      <% unless t.end_location == competition.end_location %>
+        <%= t.end_location_locality %> (<%= t.end_location_country_short %>) –
+      <% end %>
+    <% end %>
+    <%= competition.end_location_locality %> (<%= competition.end_location_country_short %>)
+  </p>
+  <p>
+    <% competition.ranks.where(result: 1).each do |r| %>
+      <span style="margin-right: 10px;">
+        <span class="trophies-small"><i class="fa fa-trophy"></i></span>
+        <%= link_to r.user.name, r.user %>
+      </span>
+    <% end %>
+  </p>
+</td>
+
