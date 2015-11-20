@@ -145,13 +145,15 @@ table tbody tr td {
 }
 
 .fa-male {
-  font-size: 3em;
   color: $blue;
 }
 
 .fa-female {
-  font-size: 3em;
   color: #FF69B4;
+}
+
+.profile .fa-male, .profile .fa-female {
+  font-size: 3em;
 }
 
 .dashboard .panel {
