@@ -40,7 +40,12 @@
               <li class="list-group-item">
                 <h5><%= competition.name %></h5>
                 <p><%= link_to t('more'), competition %></p>
-                <p><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></p>
+                <% if policy(competition).update? %>
+                  <p><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></p>
+                <% end %>
+                <% if policy(competition).destroy? %>
+                  <p><%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete' %></p>
+                <% end %>
               </li>
             <% end %>
           </ul>
