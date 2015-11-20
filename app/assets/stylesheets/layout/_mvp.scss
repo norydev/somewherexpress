@@ -1,14 +1,14 @@
 h1 {
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 3em;
   margin-bottom: 0.3em;
   color: $gray-dark;
-  // letter-spacing: 2px;
 }
 
 h2,h3 {
   text-align: center;
+  margin-bottom: 1em;
 }
 
 .table {
@@ -183,6 +183,14 @@ table tbody tr td {
 .red-bg {
   background: $red url(image_path("bg1.jpg")) no-repeat top center;
   background-size: cover;
+
+  h2 {
+    color: white;
+  }
+
+  .table {
+    background: white;
+  }
 }
 
 .intro .lead {

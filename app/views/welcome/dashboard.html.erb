@@ -31,25 +31,44 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-default">
-        <h5 class="text-center">Competitions I created</h5>
-        <ul class="list-group">
-          <% current_user.creations.each do |competition| %>
-            <li class="list-group-item">
-              <h5><%= competition.name %></h5>
-              <p><%= link_to t('more'), competition %></p>
-              <p><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></p>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+
+      <% if current_user.creations.any? %>
+        <div class="panel panel-default">
+          <h5 class="text-center"><%= t('.creations_title') %></h5>
+          <ul class="list-group">
+            <% current_user.creations.each do |competition| %>
+              <li class="list-group-item">
+                <h5><%= competition.name %></h5>
+                <p><%= link_to t('more'), competition %></p>
+                <p><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></p>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
     <div class="col-sm-7 col-md-8 col-lg-9">
-      <div class="panel panel-default">
-        <h5 class="text-center"><%= t('welcome.index.open_title') %></h5>
-      </div>
-      <% policy_scope(Competition).open_for_registration.each do |competition| %>
-        <%= render 'competitions/card', competition: competition, status: "open" %>
+      <% if policy_scope(Competition).open_for_registration.any? %>
+        <div class="panel panel-default">
+          <h5 class="text-center"><%= t('welcome.index.open_title') %></h5>
+        </div>
+        <% policy_scope(Competition).open_for_registration.each do |competition| %>
+          <%= render 'competitions/card', competition: competition, status: "open" %>
+        <% end %>
+      <% elsif policy_scope(Competition).not_open_for_registration.any?  %>
+        <div class="panel panel-default">
+          <h5 class="text-center"><%= t('welcome.index.closed_title') %></h5>
+        </div>
+        <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
+          <%= render 'competitions/card', competition: competition, status: "closed" %>
+        <% end %>
+      <% else %>
+        <div class="panel panel-default">
+          <h5 class="text-center"><%= t('welcome.index.passed_title') %></h5>
+        </div>
+        <% policy_scope(Competition).finished.each do |competition| %>
+          <%= render 'competitions/card', competition: competition, status: "finished" %>
+        <% end %>
       <% end %>
     </div>
   </div>

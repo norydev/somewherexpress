@@ -1,30 +1,25 @@
 <!-- START FINAL RANKING -->
-<div id="competition-<%= @competition.id %>-result">
+<div id="competition-<%= competition.id %>-result">
   <h2><%= t('competitions.show.final_ranking') %></h2>
   <table class="table">
     <tbody>
-      <%= render 'final_ranks', competition: @competition %>
+      <%= render 'final_ranks', competition: competition %>
     </tbody>
   </table>
 </div>
 <!-- END FINAL RANKING -->
 
 <!-- START STAGE RANKING -->
-<% @competition.tracks.order(:start_time).each_with_index do |track, i| %>
+<% competition.tracks.order(:start_time).each_with_index do |track, i| %>
   <div id="track-<%= track.id %>-result">
-    <!-- EDIT RESULTS -->
-    <% if policy(@competition).update? %>
-      <div class="btn-group pull-right">
-        <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-cogs"></i> <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><%= link_to t('competitions.edit_results'), edit_competition_track_path(@competition, track) %></li>
-        </ul>
-      </div>
-    <% end %>
-    <!-- END EDIT RESULTS -->
-    <h3><%= i + 1 %>. <%= track %></h3>
+    <h3>
+      <%= i + 1 %>. <%= track %>
+      <!-- EDIT RESULTS -->
+      <% if policy(competition).update? %>
+        <small><%= link_to t('competitions.edit_results'), edit_competition_track_path(competition, track) %></small>
+      <% end %>
+      <!-- END EDIT RESULTS -->
+    </h3>
     <table class="table">
       <tbody>
         <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
@@ -53,8 +48,8 @@
       var directionsService = new google.maps.DirectionsService();
 
       var waypts = [];
-      <% @competition.tracks.order(:start_time).each do |t| %>
-        <% unless t.end_location == @competition.end_location %>
+      <% competition.tracks.order(:start_time).each do |t| %>
+        <% unless t.end_location == competition.end_location %>
           waypts.push({
             location: '<%= t.end_location %>',
             stopover: true
@@ -63,8 +58,8 @@
       <% end %>
 
       function calcRoute() {
-        var origin      = new google.maps.LatLng(<%= @competition.start_location_lat %>, <%= @competition.start_location_lng %>);
-        var destination = new google.maps.LatLng(<%= @competition.end_location_lat %>, <%= @competition.end_location_lng %>);
+        var origin      = new google.maps.LatLng(<%= competition.start_location_lat %>, <%= competition.start_location_lng %>);
+        var destination = new google.maps.LatLng(<%= competition.end_location_lat %>, <%= competition.end_location_lng %>);
         var request = {
             origin:      origin,
             destination: destination,
@@ -88,8 +83,8 @@
       },
       internal: { id: 'map' } }, function(){
         markers = handler.addMarkers([
-          <% @competition.tracks.order(:start_time).each do |t| %>
-            <% unless t.end_location == @competition.end_location %>
+          <% competition.tracks.order(:start_time).each do |t| %>
+            <% unless t.end_location == competition.end_location %>
               {
                 "lat": <%= t.end_location_lat %>,
                 "lng": <%= t.end_location_lng %>,
@@ -102,16 +97,16 @@
           <% end %>
 
             {
-              "lat": <%= @competition.start_location_lat %>,
-              "lng": <%= @competition.start_location_lng %>,
+              "lat": <%= competition.start_location_lat %>,
+              "lng": <%= competition.start_location_lng %>,
               "picture": {
                 "url": "<%= image_url("marker.svg") %>",
                 "width":  32,
                 "height": 32}
             },
             {
-              "lat": <%= @competition.end_location_lat %>,
-              "lng": <%= @competition.end_location_lng %>,
+              "lat": <%= competition.end_location_lat %>,
+              "lng": <%= competition.end_location_lng %>,
               "picture": {
                 "url": "<%= image_url("marker.svg") %>",
                 "width":  32,
