@@ -5,11 +5,11 @@ class WelcomeController < ApplicationController
 
   def index
     if user_signed_in?
-      @open_competitions = policy_scope(Competition).open_for_registration
       render 'dashboard'
     else
       @markers = []
       # .first: I know they all started in the same place
+      # refactor: new table cities
       @markers += Gmaps4rails.build_markers(policy_scope(Competition).where(finished: true).first) do |competition, marker|
         marker.lat competition.start_location_lat
         marker.lng competition.start_location_lng

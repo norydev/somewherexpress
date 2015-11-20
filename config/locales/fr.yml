@@ -11,6 +11,7 @@ fr:
       closed_title: "Inscriptions closes"
       passed_title: "Compétitions passées"
     dashboard:
+      my_competitions: "inscrit"
   competitions:
     params:
       name: Nom

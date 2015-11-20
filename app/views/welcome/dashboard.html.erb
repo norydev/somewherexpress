@@ -31,42 +31,26 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-6">
       <div class="panel panel-default">
         <h5 class="text-center">Competitions I created</h5>
         <ul class="list-group">
           <% current_user.creations.each do |competition| %>
             <li class="list-group-item">
               <h5><%= competition.name %></h5>
+              <p><%= link_to t('more'), competition %></p>
+              <p><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></p>
             </li>
           <% end %>
         </ul>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-7 col-md-8 col-lg-9">
       <div class="panel panel-default">
-        <h5 class="text-center">Competitions to come</h5>
-        <ul class="list-group">
-          <% @open_competitions.each do |competition| %>
-            <li class="list-group-item">
-              <h5><%= competition.name %></h5>
-              <% if policy(competition).apply? %>
-                <% if competition.users.include?(current_user) %>
-                  <%= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
-                <% else %>
-                  <!-- APPLY -->
-                  <%= simple_form_for Subscription.new do |f| %>
-                    <%= f.error_notification %>
-                    <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
-                    <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
+        <h5 class="text-center"><%= t('welcome.index.open_title') %></h5>
       </div>
+      <% policy_scope(Competition).open_for_registration.each do |competition| %>
+        <%= render 'competitions/card', competition: competition, status: "open" %>
+      <% end %>
     </div>
   </div>
 </div>
