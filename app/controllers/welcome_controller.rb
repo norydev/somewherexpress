@@ -38,7 +38,7 @@ class WelcomeController < ApplicationController
         marker.infowindow render_to_string(:partial => "/welcome/map_box", locals: {track: track, competition: track.competition, city: track.end_location_locality})
       end
       @markers = @markers.uniq
-      render 'index'
+      render 'index', layout: 'home'
     end
   end
 end

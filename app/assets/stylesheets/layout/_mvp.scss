@@ -207,19 +207,11 @@ table tbody tr td {
   color: white;
 }
 
-footer {
-  padding: 30px;
-
-  .boxed {
-    padding: 5px 8px;
-    border: 2px solid white;
-  }
-}
-
 .white-link {
   color: white;
 
   &:hover, &:focus {
+    outline: none;
     color: $gray-lighter;
   }
 }
@@ -230,4 +222,40 @@ footer {
 }
 .icon-medal:before {
   content: "\e901";
+}
+.icon-laurel:before {
+  content: "\e902";
+}
+
+.home {
+  background: transparent;
+  box-shadow: none;
+
+  .navbar-wagon-container {
+    height: 70px;
+  }
+
+  .navbar-wagon-logo {
+    font-size: 3em;
+    color: white;
+  }
+
+  .navbar-wagon-link {
+    color: white;
+  }
+
+  hr {
+    background-color: white;
+  }
+
+  .navbar-wagon-button {
+    background-color: white;
+    color: $brand-color;
+    border: 2px solid white;
+
+    &:hover {
+      color: $brand-color;
+      background: $gray-lighter;
+    }
+  }
 }

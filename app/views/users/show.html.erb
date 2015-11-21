@@ -37,7 +37,7 @@
         <div class="text-center">
           <% @user.ranks.where(race_type: "Track", result: 1).each do |r| %>
             <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-              <span class="medals"><i class="icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
+              <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
             <% end %>
           <% end %>
         </div>
@@ -58,7 +58,7 @@
               <td>
                 <% competition.t_ranks.where(user: @user, result: 1).each do |r| %>
                   <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-                    <span class="medals"><i class="icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
+                    <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
                   <% end %>
                 <% end %>
               </td>

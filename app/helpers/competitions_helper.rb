@@ -11,7 +11,7 @@ module CompetitionsHelper
 
   def track_result(rank)
     if rank.try(:result) == 1
-      '<span class="medals"><i class="icon-medal"></i></span>'.html_safe
+      '<span class="medals"><i class="icomoon icon-medal"></i></span>'.html_safe
     else
       rank.try(:result)
     end

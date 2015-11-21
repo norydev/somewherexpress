@@ -12,12 +12,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="wrapper">
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/notices' %>
 
-    <%= yield %>
-  </div>
+  <%= render 'shared/notices' %>
+
+  <%= yield %>
 
   <%= render 'shared/footer' %>
 

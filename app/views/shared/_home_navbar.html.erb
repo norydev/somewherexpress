@@ -1,7 +1,7 @@
-<nav class="navbar-wagon">
+<nav class="navbar-wagon home">
   <div class="container navbar-wagon-container">
 
-    <%= link_to root_path, class: "white-link" do %>
+    <%= link_to root_path, class: "white-link hidden-xs" do %>
       <i class="icomoon icon-se_logo navbar-wagon-logo"></i>
     <% end %>
 
@@ -18,21 +18,7 @@
     <% end %>
     <hr>
 
-    <!-- <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
-      <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
-      <button type="submit" class="navbar-wagon-search-btn">
-        <i class="fa fa-search"></i>
-      </button>
-    </form> -->
-    <!-- <hr class="hidden-xs hidden-sm"> -->
     <% if user_signed_in? %>
-      <%#= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
-        <!-- <div class="icon-badge-container">
-          <i class="fa fa-envelope-o"></i>
-          <div class="icon-badge icon-badge-blue">3</div>
-        </div> -->
-      <%# end %>
-      <!-- <hr> -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <div class="dropdown-toggle" data-toggle="dropdown">
