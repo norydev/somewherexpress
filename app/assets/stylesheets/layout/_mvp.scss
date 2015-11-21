@@ -87,7 +87,7 @@ table tbody tr td {
 }
 
 .add_track {
-  color: #ddd;
+  color: $purple;
   font-size: 1.5em;
   height: 2.5em;
 
@@ -106,7 +106,7 @@ table tbody tr td {
 }
 
 .destroy_track {
-  color: #ddd;
+  color: $red;
   font-size: 3em;
   padding-left: 10px;
 
@@ -258,4 +258,8 @@ table tbody tr td {
       background: $gray-lighter;
     }
   }
+}
+
+.rules li {
+  margin-bottom: 10px;
 }

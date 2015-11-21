@@ -41,4 +41,7 @@ class WelcomeController < ApplicationController
       render 'index', layout: 'home'
     end
   end
+
+  def rules
+  end
 end

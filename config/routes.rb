@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'welcome/index'
+  get '/rules', to: 'welcome#rules'
 
   devise_for :users
 

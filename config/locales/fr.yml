@@ -20,7 +20,8 @@ fr:
     params:
       status: "Status"
       rules: "Règles"
-      rules_label: "J'accepte les règles de la compétition"
+      rules_label_html: "J'accepte les %{href} de la compétition"
+      rules_href_text: règles
     new:
       title: Inscription à %{competition}
       user_infos: "Informations du participant"
