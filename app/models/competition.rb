@@ -1,6 +1,6 @@
 class Competition < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
-  has_many :users, -> { where subscriptions: { status: "accepted" } }, through: :subscriptions
+  has_many :users, through: :subscriptions
   has_many :tracks, dependent: :destroy
   accepts_nested_attributes_for :tracks, allow_destroy: true
 
@@ -23,6 +23,16 @@ class Competition < ActiveRecord::Base
     "#{start_location_locality} (#{start_location_country_short}) – #{end_location_locality} (#{end_location_country_short})"
   end
 
+  def route
+    rte = "#{start_location_locality} (#{start_location_country_short}) – "
+    tracks.order(:start_time).each do |t|
+      unless t.end_location == end_location
+        rte += "#{t.end_location_locality} (#{t.end_location_country_short}) – "
+      end
+    end
+    rte += "#{end_location_locality} (#{end_location_country_short})"
+  end
+
   def multiple_tracks?
     self.tracks.size > 1
   end
@@ -41,12 +51,16 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def accepted_users
+    users.includes(:subscriptions).where("subscriptions.status = 'accepted'")
+  end
+
   def pending_users
-    User.joins(:subscriptions).where("subscriptions.status = 'applied'")
+    users.includes(:subscriptions).where("subscriptions.status = 'applied'")
   end
 
   def refused_users
-    User.joins(:subscriptions).where("subscriptions.status = 'refused'")
+    users.includes(:subscriptions).where("subscriptions.status = 'refused'")
   end
 
   def self.open_for_registration

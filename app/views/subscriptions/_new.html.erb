@@ -1,40 +1,36 @@
-<% if policy(competition).apply? %>
-
-  <%# if competition.users.include?(current_user) %>
+<div id="registration-area-<%= competition.id %>" class="text-center">
+  <% if competition.accepted_users.include?(current_user) %>
     <!-- case: applied, accepted -->
+    <div class="alert alert-info" role="alert"><%= t('subscriptions.accepted') %></div>
+    <%#= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
 
-  <%# elsif competition.pending_users.include?(current_user) %>
+  <% elsif competition.pending_users.include?(current_user) %>
     <!-- case: applied, pending -->
+    <div class="alert alert-warning" role="alert"><%= t('subscriptions.pending') %></div>
 
-  <%# elsif competition.refused_users.include?(current_user) %>
+  <% elsif competition.refused_users.include?(current_user) %>
     <!-- case: applied, refused -->
+    <div class="alert alert-danger" role="alert"><%= t('subscriptions.refused') %></div>
 
-  <%# else %>
-
-  <%# end %>
-
-
-  <% if competition.users.include?(current_user) %>
-    <%= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
-  <%# elsif user_signed_in? %>
-    <!-- APPLY -->
-    <!-- <button class="navbar-wagon-button btn" style="margin: 20px 0;" data-toggle="modal" data-target="#modal-<%#= competition.id %>"><%#= t('competitions.apply') %></button> -->
   <% else %>
-    <%= simple_form_for(Subscription.new, url: new_subscriptions_path, remote: user_signed_in?) do |f| %>
-      <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
-      <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
+    <% if policy(competition).apply? %>
+      <!-- case: not applied or not signed in -->
+      <%= simple_form_for(Subscription.new, url: new_subscriptions_path, remote: user_signed_in?) do |f| %>
+        <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
+        <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 0 0 20px;" %>
+      <% end %>
+
+      <!-- MODAL -->
+      <% if user_signed_in? %>
+        <div class="modal" id="modal-<%= competition.id %>" tabindex="-1" role="dialog" aria-labelledby="new_registration">
+          <div class="modal-dialog" role="document">
+            <div id="modal-content-<%= competition.id %>" class="modal-content">
+              <%= render 'subscriptions/form', competition: competition, subscription: Subscription.new %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!-- END MODAL -->
     <% end %>
-
   <% end %>
-<% end %>
-
-<!-- Modal -->
-<% if user_signed_in? %>
-  <div class="modal" id="modal-<%= competition.id %>" tabindex="-1" role="dialog" aria-labelledby="new_registration">
-    <div class="modal-dialog" role="document">
-      <div id="modal-content-<%= competition.id %>" class="modal-content">
-        <%= render 'subscriptions/form', competition: competition, subscription: Subscription.new %>
-      </div>
-    </div>
-  </div>
-<% end %>
+</div>

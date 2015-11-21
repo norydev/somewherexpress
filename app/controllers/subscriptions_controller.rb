@@ -40,6 +40,6 @@ class SubscriptionsController < ApplicationController
 
   private
     def subscription_params
-      params.require(:subscription).permit(:competition_id, :rules)
+      params.require(:subscription).permit(:competition_id, :status, :rules)
     end
 end

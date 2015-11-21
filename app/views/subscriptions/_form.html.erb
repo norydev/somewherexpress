@@ -1,40 +1,35 @@
 <%= simple_form_for(subscription, remote: true) do |f| %>
   <%= f.error_notification %>
   <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
+  <%= f.input :status, as: :hidden, input_html: { value: "accepted" } %>
 
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="new_registration">Inscriptions à <%= competition %></h4>
+    <h4 class="modal-title" id="new_registration"><%= t('subscriptions.new.title', competition: competition.name) %></h4>
   </div>
 
   <div class="modal-body text-left">
     <div class="competition_details">
-      <p><strong>Compétition</strong></p>
+      <p><strong><%= t('activerecord.models.competition', count: 1).capitalize %></strong></p>
       <div class="row">
-        <div class="col-xs-3 col-sm-2">Nom:</div>
+        <div class="col-xs-3 col-sm-2"><%= t('competitions.params.name') %>:</div>
         <div class="col-xs-9 col-sm-10"><%= competition %></div>
       </div>
       <div class="row">
-        <div class="col-xs-3 col-sm-2">Parcours:</div>
+        <div class="col-xs-3 col-sm-2"><%= t('competitions.route') %>:</div>
         <div class="col-xs-9 col-sm-10">
-          <%= competition.start_location_locality %> (<%= competition.start_location_country_short %>) –
-          <% competition.tracks.order(:start_time).each do |t| %>
-            <% unless t.end_location == competition.end_location %>
-              <%= t.end_location_locality %> (<%= t.end_location_country_short %>) –
-            <% end %>
-          <% end %>
-          <%= competition.end_location_locality %> (<%= competition.end_location_country_short %>)
+          <%= competition.route %>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-3 col-sm-2">Dates:</div>
+        <div class="col-xs-3 col-sm-2"><%= t('competitions.dates') %>:</div>
         <div class="col-xs-9 col-sm-10"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %>
         </div>
       </div>
     </div>
     <div class="user_details padded-mini">
       <p>
-        <strong>Informations du participant</strong>
+        <strong><%= t('subscriptions.new.user_infos') %></strong>
         <% if policy(current_user).update? %>
           <small><%= link_to t('edit'), edit_user_path(current_user), target: "_blank" %></small>
         <% end %>
@@ -54,9 +49,9 @@
     </div>
 
     <div class="tos">
-      <%= f.input :rules, as: :boolean, label: "I accept the rules of this competition" %>
+      <%= f.input :rules, as: :boolean, label: t('subscriptions.params.rules_label') %>
 
-      <p class="text-uppercase small">Please note: Your application to <%= competition %> must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences.</p>
+      <p class="text-uppercase small"><%= t('subscriptions.new.tos', competition: competition.name) %></p>
     </div>
 
   </div> <!-- END MODAL-BODY -->

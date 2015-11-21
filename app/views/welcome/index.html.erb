@@ -21,7 +21,7 @@
   <% if policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any? %>
     <div class="container padded-mini">
       <div class="row">
-        <div class="col-xs-12 col-lg-10 col-lg-offset-1 text-center">
+        <div class="col-lg-10 col-lg-offset-1 text-center">
           <% if policy_scope(Competition).open_for_registration.any? %>
             <h2><%= t('.open_title') %></h2>
             <% policy_scope(Competition).open_for_registration.each do |competition| %>
@@ -32,19 +32,15 @@
           <% if policy_scope(Competition).not_open_for_registration.any? %>
             <h2><%= t('.closed_title') %></h2>
             <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
-              <div class="col-sm-6">
-                <%= render 'competitions/card', competition: competition, status: "closed" %>
-              </div>
+              <%= render 'competitions/card', competition: competition, status: "closed" %>
             <% end %>
           <% end %>
         </div>
       </div>
     </div>
-
-    <div class="red-bg">
-  <% else %>
-    <div>
   <% end %>
+
+  <div class="<%= (policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any?) ? 'red-bg' : '' %>">
     <div class="container padded-mini">
       <div class="row">
         <h2><%= t('.passed_title') %></h2>

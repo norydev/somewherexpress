@@ -33,7 +33,7 @@ class Track < ActiveRecord::Base
     end
 
     def make_track_ranks
-      competition.users.each do |user|
+      competition.accepted_users.each do |user|
         Rank.create!(user: user, race: self)
       end
     end

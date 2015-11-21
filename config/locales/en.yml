@@ -33,7 +33,25 @@ en:
       passed_title: "Passed competitions"
     dashboard:
       creations_title: "Competitions I organize"
+  subscriptions:
+    accepted: Your are registred!
+    pending: Your application is waiting for approval by the organizer
+    refused: Your application has been refused by the organizer
+    params:
+      status: "Status"
+      rules: "Rules"
+      rules_label: "I accept the rules of this competition"
+    new:
+      title: Application for %{competition}
+      user_infos: "Details of the participant"
+      old_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+      tos: "Please note: Your application for %{competition} is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
   competitions:
+    open: 'open'
+    finished: 'finished'
+    closed: 'closed'
+    route: 'Route'
+    dates: 'Dates'
     params:
       name: Name
       start_location: "From (location)"
@@ -105,6 +123,3 @@ en:
     params:
       result: Result
       points: Points
-  open: 'open'
-  finished: 'finished'
-  closed: 'closed'

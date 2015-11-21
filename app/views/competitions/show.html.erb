@@ -26,7 +26,7 @@
         <!-- END EDIT -->
 
         <p>
-          <% @competition.users.each do |user| %>
+          <% @competition.accepted_users.each do |user| %>
             <%= link_to user do %>
               <%= image_tag user.avatar, class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user}", alt: "#{user.first_name}" %>
             <% end %>

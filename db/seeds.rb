@@ -83,7 +83,7 @@ Competition.all.each do |c|
 end
 
 Track.all.each do |t|
-  t.competition.users.shuffle.each_slice(2).to_a.each_with_index do |team, index|
+  t.competition.accepted_users.shuffle.each_slice(2).to_a.each_with_index do |team, index|
     r = Rank.new
     r.race = t
     r.user = team[0]

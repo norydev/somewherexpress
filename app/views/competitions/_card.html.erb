@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div id="panel-<%= competition.id %>" class="panel panel-default">
   <div class="ribbon-wrapper"><%= ribon(status) %></div>
 
   <div class="panel-body">
@@ -7,19 +7,15 @@
       <p class="lead"><%= competition.locations %></p>
       <p class="text-uppercase text-muted small"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %>
       </p>
-      <p>
-        <% competition.users.each do |user| %>
-          <%= link_to user do %>
-            <%= image_tag user.avatar, class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user}", alt: "#{user.first_name}" %>
-          <% end %>
+      <p class="users-area">
+        <% competition.accepted_users.each do |user| %>
+          <%= render 'users/avatar_small', user: user %>
         <% end %>
       </p>
+      <p><%= link_to t('more'), competition, class: "btn" %></p>
 
-      <%= render 'subscriptions/new', competition: competition %>
-      <p>
-        <%= link_to t('more'), competition, class: "btn" %>
-      </p>
     </div>
   </div>
+  <%= render 'subscriptions/new', competition: competition %>
   <%= registrations(competition) %>
 </div>

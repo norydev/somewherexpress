@@ -6,7 +6,8 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :user, :competition
   validates_acceptance_of :rules, on: :create, allow_nil: false
 
-  after_update :make_track_ranks
+  # after_update :make_track_ranks
+  after_create :make_track_ranks
   before_destroy :destroy_ranks
 
   def points
@@ -20,13 +21,13 @@ class Subscription < ActiveRecord::Base
   private
 
     def make_track_ranks
-      if changes['status'].any? && changes['status'] == "accepted"
+      # if changes['status'].any? && changes['status'] == "accepted"
         competition.tracks.each do |track|
           Rank.create!(user: user, race: track)
         end
-      elsif changes['status'].any? && changes['status'] != "accepted"
-        destroy_ranks
-      end
+      # elsif changes['status'].any? && changes['status'] != "accepted"
+      #   destroy_ranks
+      # end
     end
 
     def destroy_ranks
