@@ -70,7 +70,8 @@
       handler.buildMap({
       provider: {
         disableDefaultUI: true,
-        zoomControl: true
+        zoomControl: true,
+        scrollwheel: false
       },
         internal: { id: 'map' } }, function(){
         markers = handler.addMarkers(<%= raw @markers.to_json %>);

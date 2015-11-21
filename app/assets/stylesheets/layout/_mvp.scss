@@ -198,3 +198,20 @@ table tbody tr td {
 .intro .lead {
   color: white;
 }
+
+footer {
+  padding: 30px;
+
+  .boxed {
+    padding: 5px 8px;
+    border: 2px solid white;
+  }
+}
+
+.white-link {
+  color: white;
+
+  &:hover, &:focus {
+    color: $gray-lighter;
+  }
+}
