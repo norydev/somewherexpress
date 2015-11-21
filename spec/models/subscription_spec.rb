@@ -4,6 +4,7 @@ RSpec.describe Subscription, type: :model do
 
   it { should belong_to(:user) }
   it { should belong_to(:competition) }
+  it { should validate_acceptance_of(:rules) }
 
   it 'returns the correct nb of points' do
     u = FactoryGirl.create :user, email: "u1@yopmail.com"
@@ -13,7 +14,7 @@ RSpec.describe Subscription, type: :model do
       ts[n] = FactoryGirl.create :track, competition: c
     end
 
-    s = FactoryGirl.create :subscription, user: u, competition: c
+    s = FactoryGirl.create :subscription, user: u, competition: c, rules: "1"
 
     ts.each do |t|
       r = t.ranks.find_by(user: u)
@@ -30,9 +31,9 @@ RSpec.describe Subscription, type: :model do
     u3 = FactoryGirl.create :user, email: "u3@yopmail.com"
     c = FactoryGirl.create :competition
     t = FactoryGirl.create :track, competition: c
-    s1 = FactoryGirl.create :subscription, user: u1, competition: c
-    s2 = FactoryGirl.create :subscription, user: u2, competition: c
-    s3 = FactoryGirl.create :subscription, user: u3, competition: c
+    s1 = FactoryGirl.create :subscription, user: u1, competition: c, rules: "1"
+    s2 = FactoryGirl.create :subscription, user: u2, competition: c, rules: "1"
+    s3 = FactoryGirl.create :subscription, user: u3, competition: c, rules: "1"
 
     r = t.ranks.find_by(user: u1)
     r.result = 1

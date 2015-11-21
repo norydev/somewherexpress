@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     resources :tracks, only: [:destroy, :edit, :update]
   end
 
-  resources :subscriptions, only: [:new, :create, :destroy]
+  resources :subscriptions, only: [:create, :destroy] do
+    collection do
+      post 'new', as: "new"
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

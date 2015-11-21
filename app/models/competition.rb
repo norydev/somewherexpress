@@ -1,6 +1,6 @@
 class Competition < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
-  has_many :users, through: :subscriptions
+  has_many :users, -> { where subscriptions: { status: "accepted" } }, through: :subscriptions
   has_many :tracks, dependent: :destroy
   accepts_nested_attributes_for :tracks, allow_destroy: true
 
@@ -12,6 +12,8 @@ class Competition < ActiveRecord::Base
 
   validates_presence_of :name
   validates_presence_of :start_registration, :start_location,:start_location_locality, :end_location, :end_location_locality, :start_date, :end_date, :tracks, if: :published?
+
+  # status can take: "applied" (default), "accepted", "refused"
 
   def to_s
     name
@@ -37,6 +39,14 @@ class Competition < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def pending_users
+    User.joins(:subscriptions).where("subscriptions.status = 'applied'")
+  end
+
+  def refused_users
+    User.joins(:subscriptions).where("subscriptions.status = 'refused'")
   end
 
   def self.open_for_registration

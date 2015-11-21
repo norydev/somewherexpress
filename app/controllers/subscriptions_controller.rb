@@ -1,8 +1,14 @@
 class SubscriptionsController < ApplicationController
 
+  # POST
   def new
-    authorize Subscription.new
-    redirect_to new_user_session_path, alert: t('devise.failure.unauthenticated')
+    @subscription = Subscription.new(subscription_params)
+    authorize @subscription
+
+    respond_to do |format|
+      format.html { redirect_to @subscription.competition }
+      format.js
+    end
   end
 
   def create

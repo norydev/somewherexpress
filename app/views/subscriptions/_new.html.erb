@@ -1,11 +1,30 @@
 <% if policy(competition).apply? %>
+
+  <%# if competition.users.include?(current_user) %>
+    <!-- case: applied, accepted -->
+
+  <%# elsif competition.pending_users.include?(current_user) %>
+    <!-- case: applied, pending -->
+
+  <%# elsif competition.refused_users.include?(current_user) %>
+    <!-- case: applied, refused -->
+
+  <%# else %>
+
+  <%# end %>
+
+
   <% if competition.users.include?(current_user) %>
     <%= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
-  <% elsif user_signed_in? %>
+  <%# elsif user_signed_in? %>
     <!-- APPLY -->
-    <button class="navbar-wagon-button btn" style="margin: 20px 0;" data-toggle="modal" data-target="#modal-<%= competition.id %>"><%= t('competitions.apply') %></button>
+    <!-- <button class="navbar-wagon-button btn" style="margin: 20px 0;" data-toggle="modal" data-target="#modal-<%#= competition.id %>"><%#= t('competitions.apply') %></button> -->
   <% else %>
-    <%= link_to t('competitions.apply'), new_subscription_path, class: "navbar-wagon-button btn" %>
+    <%= simple_form_for(Subscription.new, url: new_subscriptions_path, remote: user_signed_in?) do |f| %>
+      <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
+      <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
+    <% end %>
+
   <% end %>
 <% end %>
 
