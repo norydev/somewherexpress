@@ -54,21 +54,21 @@
     <div class="col-sm-7 col-md-8 col-lg-9">
       <% if policy_scope(Competition).open_for_registration.any? %>
         <div class="panel panel-default">
-          <h5 class="text-center"><%= t('welcome.index.open_title') %></h5>
+          <h4 class="text-center"><%= t('welcome.index.open_title') %></h4>
         </div>
         <% policy_scope(Competition).open_for_registration.each do |competition| %>
           <%= render 'competitions/card', competition: competition, status: "open" %>
         <% end %>
       <% elsif policy_scope(Competition).not_open_for_registration.any?  %>
         <div class="panel panel-default">
-          <h5 class="text-center"><%= t('welcome.index.closed_title') %></h5>
+          <h4 class="text-center"><%= t('welcome.index.closed_title') %></h4>
         </div>
         <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
           <%= render 'competitions/card', competition: competition, status: "closed" %>
         <% end %>
       <% else %>
         <div class="panel panel-default">
-          <h5 class="text-center"><%= t('welcome.index.passed_title') %></h5>
+          <h4 class="text-center"><%= t('welcome.index.passed_title') %></h4>
         </div>
         <% policy_scope(Competition).finished.each do |competition| %>
           <%= render 'competitions/card', competition: competition, status: "finished" %>
