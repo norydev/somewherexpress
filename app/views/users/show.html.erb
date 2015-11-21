@@ -45,7 +45,7 @@
 
       <table class="table">
         <tbody>
-          <% @user.competitions.order(start_date: :desc).each do |competition| %>
+          <% @user.finished_competitions.order(start_date: :desc).each do |competition| %>
             <tr>
               <td><%= link_to competition, competition %></td>
               <td><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %></td>

@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
   def avatar
     self.picture || ActionController::Base.helpers.asset_path("default_user_picture.svg")
   end
+
+  def finished_competitions
+    competitions.finished
+  end
 end

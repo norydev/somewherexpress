@@ -1,5 +1,5 @@
 <div id="registration-area-<%= competition.id %>" class="text-center">
-  <% if competition.accepted_users.include?(current_user) %>
+  <% if !competition.finished? && competition.accepted_users.include?(current_user) %>
     <!-- case: applied, accepted -->
     <div class="alert alert-info" role="alert"><%= t('subscriptions.accepted') %></div>
     <%#= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
