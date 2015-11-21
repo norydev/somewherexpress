@@ -8,6 +8,12 @@ class User < ActiveRecord::Base
   has_many :competitions, through: :subscriptions
   has_many :ranks, dependent: :destroy
 
+  has_many :creations, foreign_key: "author_id", class_name: "Competition"
+
+  has_many :badges
+
+  validates_presence_of :first_name, :last_name
+
   def to_s
     name
   end
@@ -18,5 +24,9 @@ class User < ActiveRecord::Base
 
   def avatar
     self.picture || ActionController::Base.helpers.asset_path("default_user_picture.svg")
+  end
+
+  def finished_competitions
+    competitions.finished
   end
 end

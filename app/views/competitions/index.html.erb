@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h1><%= t('activerecord.models.competition', count: 2).capitalize %></h1>
+      <div class="text-center padded-mini">
+        <%= link_to t('.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" if policy(Competition).create? %>
+      </div>
+
+      <% @competitions.open_for_registration.each do |competition| %>
+        <%= render 'card', competition: competition, status: "open" %>
+      <% end %>
+
+      <% @competitions.not_open_for_registration.each do |competition| %>
+        <%= render 'card', competition: competition, status: "closed" %>
+      <% end %>
+
+      <% @competitions.finished.each do |competition| %>
+        <%= render 'card', competition: competition, status: "finished" %>
+      <% end %>
+    </div>
+  </div>
+</div>

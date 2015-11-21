@@ -2,9 +2,9 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700");
-$base-font: "Open Sans", "Helvetica", "sans-serif";
-$header-font: "Open Sans", "Helvetica", "sans-serif";
+@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700");
+$base-font: "Lato", "Helvetica", "sans-serif";
+$header-font: "Lato", "Helvetica", "sans-serif";
 
 // Local fonts (uncomment following lines)
 // @font-face {
@@ -16,6 +16,32 @@ $header-font: "Open Sans", "Helvetica", "sans-serif";
 // }
 // $my-font: "Font Name";
 
+@font-face {
+  font-family: 'icomoon';
+  src: font-url('icomoon.eot?uan05r');
+  src: font-url('icomoon.eot?uan05r#iefix') format('embedded-opentype'),
+       font-url('icomoon.ttf?uan05r') format('truetype'),
+       font-url('icomoon.woff?uan05r') format('woff'),
+       font-url('icomoon.svg?uan05r#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+$icomoon-font: "icomoon";
+
+i.icomoon {
+  font-family: $icomoon-font;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 // Font-size and line-height
 $base-size: 14px;
 $base-height: 1.4;
@@ -23,15 +49,15 @@ $base-height: 1.4;
 /* -------------------------------------
  * Colors
  * ------------------------------------- */
-// Scheme
-$brand-color: #D23333;
-
 $red: #d9534f;
 $blue: #5bc0de;
 $yellow: #FDB631;
 $orange: #f0ad4e;
 $green: #5cb85c;
 $purple: darken(#428bca, 6.5%);
+
+// Scheme
+$brand-color: $red;// #D23333;
 
 // Gray scale
 $gray-darker:  lighten(#000, 13.5%); // #222

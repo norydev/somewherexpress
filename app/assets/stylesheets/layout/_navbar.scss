@@ -10,11 +10,13 @@
     width: 100%;
   }
   &-logo {
-    width: 50px;
+    font-size: 2em;
+    color: black;
   }
   &-container {
     display: flex;
-    height: 70px;
+    flex-wrap: wrap;
+    // height: 50px;
     align-items: center;
   }
   &-pusher {
@@ -66,11 +68,11 @@
     }
   }
   &-button {
-    margin-left: 10px;
+    margin: 5px 0 5px 10px;
     padding: 0 20px;
     border-radius: 20em;
     line-height: 40px;
-    background-color: #D23333;
+    background-color: $brand-color;
     color: white;
     font-size: 14px;
     border: 2px solid $brand-color;
@@ -117,5 +119,22 @@
     background-color: rgba(0, 0, 0, 0.2);
     margin-left: 10px;
     margin-right: 10px;
+  }
+}
+
+@media (max-width:767px){
+  .navbar-wagon-link, .navbar-wagon-button {
+    font-size: 0.8em;
+  }
+  .navbar-wagon-button {
+    line-height: 32px;
+    margin-left: 5px;
+  }
+  .navbar-wagon-item {
+    padding: 0 8px;
+  }
+  .navbar-wagon hr {
+    margin-left: 0;
+    margin-right: 0;
   }
 }

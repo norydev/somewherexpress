@@ -1,0 +1,85 @@
+<div class="welcome">
+  <div class="red-bg">
+
+    <%= render 'shared/home_navbar' %>
+    <div class="container padded intro">
+      <div class="row">
+        <div class="col-xs-12 col-lg-10 col-lg-offset-1 text-center">
+          <div class="lead">
+            <%= t('.intro') %>
+          </div>
+          <div class="users">
+            <% policy_scope(User).sort_by{ |u| founder_badge(u) ? 0 : 1 }.each do |user| %>
+              <%= link_to user do %>
+                <%= image_tag user.avatar, class: "img-circle avatar-medium", alt: "#{user.first_name}", title:"#{user.first_name}",data: { toggle: "tooltip", placement: "bottom"}, style: "margin-top: 5px;" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any? %>
+    <div class="container padded-mini">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 text-center">
+          <% if policy_scope(Competition).open_for_registration.any? %>
+            <h2><%= t('.open_title') %></h2>
+            <% policy_scope(Competition).open_for_registration.each do |competition| %>
+              <%= render 'competitions/card', competition: competition, status: "open" %>
+            <% end %>
+          <% end %>
+
+          <% if policy_scope(Competition).not_open_for_registration.any? %>
+            <h2><%= t('.closed_title') %></h2>
+            <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
+              <%= render 'competitions/card', competition: competition, status: "closed" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="<%= (policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any?) ? 'red-bg' : '' %>">
+    <div class="container padded-mini">
+      <div class="row">
+        <h2><%= t('.passed_title') %></h2>
+        <div class="col-xs-12 col-md-6">
+          <table class="table" style="background: white">
+            <tbody>
+              <% policy_scope(Competition).finished.each do |competition| %>
+                <tr>
+                  <%= render 'competition_summary', competition: competition %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div id="map" style="width: 100%; height: 590px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).on('ready', function() {
+      handler = Gmaps.build('Google', { markers: { clusterer: undefined  }});
+      handler.buildMap({
+      provider: {
+        disableDefaultUI: true,
+        zoomControl: true,
+        scrollwheel: false
+      },
+        internal: { id: 'map' } }, function(){
+        markers = handler.addMarkers(<%= raw @markers.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    })
+  <% end %>
+<% end %>

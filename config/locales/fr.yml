@@ -1,12 +1,109 @@
 
 fr:
-  remove_track: "Supprimer cette étape"
-  add_track: "Ajouter une étape"
-  track_question: "Cette competition comporte plusieurs étapes"
+  home: Accueil
+  cancel: Annuler
+  edit: Modifier
+  more: Plus d'informations
+  save: Enregistrer
+  welcome:
+    index:
+      intro: "SomewherExpress est un collectif d'autostopeurs basé en Suisse Romande. Nous organisons chaque année des compétitions d'autostop par équipe à travers l'Europe. Rejoins-nous!"
+      open_title: "Compétitions à venir"
+      closed_title: "Inscriptions closes"
+      passed_title: "Compétitions terminées"
+    dashboard:
+      creations_title: "Compétitions que j'organise"
+  subscriptions:
+    accepted: Vous êtes inscrit!
+    pending: Votre inscription est en attente d'approbation par l'organisateur
+    refused: Votre inscription a été refusée par l'organisateur
+    params:
+      status: "Status"
+      rules: "Règles"
+      rules_label_html: "J'accepte les %{href} de la compétition"
+      rules_href_text: règles
+    new:
+      title: Inscription à %{competition}
+      user_infos: "Informations du participant"
+      old_tos: "Notez bien: Votre inscription à %{competition} doit être approuvée par l'organisateur de la compétition. Vous serez notifié de votre acceptation ou refus par email. Si votre inscription est acceptée, elle est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
+      tos: "Notez bien: Votre inscription à %{competition} est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
   competitions:
+    open: 'ouverte'
+    finished: 'terminée'
+    closed: 'close'
+    route: 'Parcours'
+    dates: 'Dates'
+    params:
+      name: Nom
+      start_location: "De (lieu)"
+      end_location: "À (lieu)"
+      start_date: "Du (date)"
+      end_date: "Au (date)"
+      start_registration: "Début des inscriptions"
+      end_registration: "Fin des inscriptions"
+    registrations:
+      start: "Ouverture des inscriptions dans %{time}"
+      end: "Fermeture des inscriptions dans %{time}"
+    index:
+      new:
+        title: "Créer une compétition"
     show:
       edit:
-        title: "Modifier"
+        title: "Modifier cette compétition"
+      destroy:
+        title: "Supprimer cette compétition"
+      final_ranking: "Résultat final"
+    new:
+      title: "Nouvelle compétition"
+    edit:
+      title: "Modifier cette compétition"
+    form:
+      delete:
+        message: "Êtes-vous sûr? Cette action ne peut être annulée."
+      general:
+        title: "Informations générales"
+      tracks:
+        title: "Étapes"
+        remove_track: "Supprimer cette étape"
+        add_track: "Ajouter une étape"
+      rules:
+        title: "Règles et paramètres"
+        published:
+          question: "Est-ce que cette compétition peut-être publiée?"
+          hint: "Elle sera visible dans la liste des compétitions"
+        finished:
+          question: "Est-ce que cette compétition est terminée?"
+          hint: "Les résultats sont-ils définitifs?"
+    apply: "S'inscrire"
+    cancel: "Annuler mon inscription"
+    edit_results: "Mettre à jour le résultat"
+  users:
+    params:
+      first_name: "Prénom"
+      last_name: "Nom de famille"
+      girl: "Es-tu une fille ou un garçon?"
+      picture: "Photo"
+    show:
+      profile:
+        title: Mon profil
+        settings: Paramètres
+    edit:
+      title: "Modifier mon profile"
+      account: Paramètres du compte
+  tracks:
+    params:
+      start_location: "De"
+      end_location: "À"
+      start_time: "Heure de départ"
+    edit:
+      title: Résultats de l'étape %{name}
+      user: "Participant"
+      dsq: "Disq."
+      save: "Enregistrer les résultats"
+  ranks:
+    params:
+      result: Résultat
+      points: Points
 
   # Rails + Devise strings
   date:
@@ -151,9 +248,9 @@ fr:
     select:
       prompt: Veuillez sélectionner
     submit:
-      create: Créer un(e) %{model}
-      submit: Enregistrer ce(tte) %{model}
-      update: Modifier ce(tte) %{model}
+      create: Créer une %{model}
+      submit: Enregistrer cette %{model}
+      update: Mettre à jour cette %{model}
   number:
     currency:
       format:
@@ -223,7 +320,21 @@ fr:
         password_confirmation: Confirmation du mot de passe
         remember_me: Se souvenir de moi
     models:
-      user: Utilisateur
+      user:
+        one: utilisateur
+        other: utilisateurs
+      competition:
+        one: compétition
+        other: compétitions
+      track:
+        one: étape
+        other: étapes
+      subscription:
+        one: inscription
+        other: inscriptions
+      rank:
+        one: rang
+        other: rangs
   devise:
     confirmations:
       new:
@@ -265,9 +376,15 @@ fr:
         we_need_your_current_password_to_confirm_your_changes: nous avons besoin de votre mot de passe actuel pour valider ces modifications
       new:
         sign_up: Inscription
+        validatable:
+          hint:
+            one: "1 charactère minimum"
+            other: "%{count} charactères minimum"
     sessions:
       new:
         sign_in: Connexion
+      destroy:
+        sign_out: Déconnexion
     shared:
       links:
         back: Retour

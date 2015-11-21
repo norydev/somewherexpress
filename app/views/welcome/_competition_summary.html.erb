@@ -1,0 +1,13 @@
+<td>
+  <h4><%= link_to competition, competition %></h4>
+  <p class="text-uppercase small"><%= competition.route %></p>
+  <p>
+    <% competition.ranks.where(result: 1).each do |r| %>
+      <span style="margin-right: 10px;">
+        <span class="trophies-small"><i class="fa fa-trophy"></i></span>
+        <%= link_to r.user.name, r.user %>
+      </span>
+    <% end %>
+  </p>
+</td>
+

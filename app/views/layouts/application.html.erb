@@ -8,15 +8,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag :modernizr %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'shared/navbar' %>
-  <%= render 'shared/notices' %>
+  <div class="wrapper">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/notices' %>
 
-  <%= yield %>
+    <%= yield %>
+  </div>
 
-  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBIgBZYtIm36frHrldqoUmgKw1aLbTMOIQ" %>
+  <%= render 'shared/footer' %>
+
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV["GMAPS"]}" %>
   <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" %>
   <%= javascript_include_tag "application" %>
 

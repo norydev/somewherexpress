@@ -1,0 +1,62 @@
+<nav class="navbar-wagon home">
+  <div class="container navbar-wagon-container">
+
+    <%= link_to root_path, class: "white-link hidden-xs" do %>
+      <i class="icomoon icon-se_logo navbar-wagon-logo"></i>
+    <% end %>
+
+    <div class="navbar-wagon-pusher"></div>
+
+    <%= link_to competitions_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
+      <span class="visible-xs-block"><i class="fa fa-map-o"></i></span>
+      <%= t('activerecord.models.competition', count: 2).capitalize %>
+    <% end %>
+    <hr>
+    <%= link_to users_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
+      <span class="visible-xs-block"><i class="icomoon icon-laurel"></i></span>
+      Hall of fame
+    <% end %>
+    <hr>
+
+    <% if user_signed_in? %>
+      <div class="navbar-wagon-item">
+        <div class="dropdown">
+          <div class="dropdown-toggle" data-toggle="dropdown">
+            <%= image_tag current_user.avatar, alt: "#{current_user.first_name}", class: "avatar", id: "navbar-wagon-menu" %> &nbsp;<i class="fa fa-caret-down text-muted"></i>
+          </div>
+          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+            <li>
+              <%= link_to root_path do %>
+                <i class="fa fa-fw fa-home"></i> <%= t('home') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to current_user do %>
+                <i class="fa fa-fw fa-user"></i> <%= t('users.show.profile.title') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to edit_user_registration_path(current_user) do %>
+                <i class="fa fa-fw fa-cogs"></i> <%= t('users.show.profile.settings') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <i class="fa fa-fw fa-sign-out"></i> <%= t('devise.sessions.destroy.sign_out', default: "Log out") %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to new_user_session_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
+        <span class="visible-xs-block"><i class="fa fa-sign-in"></i></span>
+        <%= t('devise.sessions.new.sign_in') %>
+      <% end %>
+      <%= link_to new_user_registration_path, class: "navbar-wagon-item navbar-wagon-button btn" do %>
+        <span class="visible-xs-inline"><i class="fa fa-users"></i></span>
+        <%= t('devise.registrations.new.sign_up') %>
+      <% end %>
+    <% end %>
+  </div>
+</nav>

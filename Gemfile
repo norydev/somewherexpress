@@ -36,6 +36,8 @@ gem 'devise-i18n-views'
 gem 'gravatarify'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'pundit'
+gem 'modernizr-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'

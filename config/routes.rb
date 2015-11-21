@@ -1,18 +1,26 @@
 Rails.application.routes.draw do
 
+  get 'welcome/index'
+  get '/rules', to: 'welcome#rules'
+
   devise_for :users
 
-  resources :users, only: [:index, :show]
-  resources :competitions, only: [:show, :new, :create, :edit, :update] do
-    resources :tracks, only: [:destroy]
+  resources :users, only: [:index, :show, :edit, :update]
+  resources :competitions do
+    resources :tracks, only: [:destroy, :edit, :update]
   end
 
-  root 'users#index'
+  resources :subscriptions, only: [:create, :destroy] do
+    collection do
+      post 'new', as: "new"
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

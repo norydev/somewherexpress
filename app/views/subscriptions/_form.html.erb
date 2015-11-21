@@ -1,0 +1,62 @@
+<%= simple_form_for(subscription, remote: true) do |f| %>
+  <%= f.error_notification %>
+  <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
+  <%= f.input :status, as: :hidden, input_html: { value: "accepted" } %>
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="new_registration"><%= t('subscriptions.new.title', competition: competition.name) %></h4>
+  </div>
+
+  <div class="modal-body text-left">
+    <div class="competition_details">
+      <p><strong><%= t('activerecord.models.competition', count: 1).capitalize %></strong></p>
+      <div class="row">
+        <div class="col-xs-3 col-sm-2"><%= t('competitions.params.name') %>:</div>
+        <div class="col-xs-9 col-sm-10"><%= competition %></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-2"><%= t('competitions.route') %>:</div>
+        <div class="col-xs-9 col-sm-10">
+          <%= competition.route %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-2"><%= t('competitions.dates') %>:</div>
+        <div class="col-xs-9 col-sm-10"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %>
+        </div>
+      </div>
+    </div>
+    <div class="user_details padded-mini">
+      <p>
+        <strong><%= t('subscriptions.new.user_infos') %></strong>
+        <% if policy(current_user).update? %>
+          <small><%= link_to t('edit'), edit_user_path(current_user), target: "_blank" %></small>
+        <% end %>
+      </p>
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag current_user.avatar, alt: current_user.first_name, class: "avatar-large" %>
+        </div>
+        <div class="media-body">
+          <p>
+            <%= current_user.name %>
+            <%= current_user.girl ? '<i class="fa fa-female"></i>'.html_safe : '<i class="fa fa-male"></i>'.html_safe %>
+          </p>
+          <p><%= current_user.email %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tos">
+      <%= f.input :rules, as: :boolean, label: t('subscriptions.params.rules_label_html', href: link_to(t('subscriptions.params.rules_href_text'), rules_path, target: "_blank")) %>
+
+      <p class="text-uppercase small"><%= t('subscriptions.new.tos', competition: competition.name) %></p>
+    </div>
+
+  </div> <!-- END MODAL-BODY -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('cancel') %></button>
+    <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 20px 0;", data: {toggle: "modal", target: "#modal"} %>
+  </div>
+<% end %>

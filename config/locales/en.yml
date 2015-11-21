@@ -20,7 +20,106 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  remove_track: "Remove this track"
-  add_track: "Add a track"
-  track_question: "This competition has multiple tracks"
+  home: Home
+  cancel: Cancel
+  edit: Edit
+  save: Save
+  more: More information
+  welcome:
+    index:
+      intro: "SomewherExpress is a community of hitchhikers based in Switzerland. We organize hitchhiking teams competitions throughout Europe every year. Join us!"
+      open_title: "Competitions to come"
+      closed_title: "Registrations closed"
+      passed_title: "Passed competitions"
+    dashboard:
+      creations_title: "Competitions I organize"
+  subscriptions:
+    accepted: Your are registred!
+    pending: Your application is waiting for approval by the organizer
+    refused: Your application has been refused by the organizer
+    params:
+      status: "Status"
+      rules: "Rules"
+      rules_label: "I accept the rules of this competition"
+    new:
+      title: Application for %{competition}
+      user_infos: "Details of the participant"
+      old_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+      tos: "Please note: Your application for %{competition} is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+  competitions:
+    open: 'open'
+    finished: 'finished'
+    closed: 'closed'
+    route: 'Route'
+    dates: 'Dates'
+    params:
+      name: Name
+      start_location: "From (location)"
+      end_location: "To (location)"
+      start_date: "From (date)"
+      end_date: "To (date)"
+      start_registration: "Registrations start on"
+      end_registration: "Registrations close on"
+    registrations:
+      start: "Registrations open in %{time}"
+      end: "Registrations close in %{time}"
+    index:
+      new:
+        title: "Create a competition"
+    show:
+      edit:
+        title: "Edit this competition"
+      destroy:
+        title: "Delete this competition"
+      final_ranking: "Final ranking"
+    new:
+      title: "New competition"
+    edit:
+      title: "Edit this competition"
+    form:
+      delete:
+        message: "Are you sure? This action can't be undone."
+      general:
+        title: "General informations"
+      tracks:
+        title: "Tracks"
+        remove_track: "Remove this track"
+        add_track: "Add a track"
+      rules:
+        title: "Rules and parameters"
+        published:
+          question: "Can this competition be published?"
+          hint: "It will be visible in the list of competitions"
+        finished:
+          question: "Is the competition finished?"
+          hint: "Are the results final?"
+    apply: "Register"
+    cancel: "Cancel my registration"
+    edit_results: "Update the result"
+  users:
+    params:
+      first_name: "First name"
+      last_name: "Last name"
+      girl: "Are you a girl or a boy?"
+      picture: "Picture"
+    show:
+      profile:
+        title: My profile
+        settings: Settings
+    edit:
+      title: "Edit my profile"
+      account: Account Settings
+  tracks:
+    params:
+      start_location: "From"
+      end_location: "To"
+      start_time: "Start time"
+    edit:
+      title: "Results for stage %{name}"
+      user: "Participant"
+      dsq: "Disq."
+      save: "Save results"
+  ranks:
+    params:
+      result: Result
+      points: Points

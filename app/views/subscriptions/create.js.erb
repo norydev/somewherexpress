@@ -1,0 +1,13 @@
+<% if @subscription.errors.any? %>
+  // Render new review form with errors
+  $("#modal-content-<%= @subscription.competition.id %>").html("<%= j render 'subscriptions/form', competition: @subscription.competition, subscription: @subscription %>");
+<% else %>
+  $("#modal-<%= @subscription.competition.id %>").modal('hide');
+
+  $("#registration-area-<%= @subscription.competition.id %>").html('<div class="alert alert-info" role="alert">your are registred!</div>');
+  $("#panel-<%= @subscription.competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
+  $('[data-toggle="tooltip"]').tooltip();
+
+  $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Your application has been sent succesfully.</div>').hide();
+  $("#alerts-bar").slideDown();
+<% end %>

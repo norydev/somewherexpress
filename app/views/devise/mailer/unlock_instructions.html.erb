@@ -1,5 +1,5 @@
 <% require 'devise/version' %>
-<p><%= t('.greeting', :recipient => @resource.email, :default => "Hello #{@resource.email}!") %></p>
+<p><%= t('.greeting', :recipient => @resource.email, :default => "Hello #{@resource.first_name}!") %></p>
 
 <p><%= t('.message', :default => "Your account has been locked due to an excessive amount of unsuccessful sign in attempts.") %></p>
 

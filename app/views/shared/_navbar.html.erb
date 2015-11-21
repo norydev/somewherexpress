@@ -1,55 +1,76 @@
 <nav class="navbar-wagon">
   <div class="container navbar-wagon-container">
 
-    <a href="">
-      <%= link_to root_path do %>
-        <%= image_tag "logo_no_text.svg", class: "navbar-wagon-logo" %>
-      <% end %>
-    </a>
+    <%= link_to root_path, class: "white-link" do %>
+      <i class="icomoon icon-se_logo navbar-wagon-logo"></i>
+    <% end %>
 
     <div class="navbar-wagon-pusher"></div>
 
-    <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
+    <%= link_to competitions_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
+      <span class="visible-xs-block"><i class="fa fa-map-o"></i></span>
+      <%= t('activerecord.models.competition', count: 2).capitalize %>
+    <% end %>
+    <hr>
+    <%= link_to users_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
+      <span class="visible-xs-block"><i class="icomoon icon-laurel"></i></span>
+      Hall of fame
+    <% end %>
+    <hr>
+
+    <!-- <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
       <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
       <button type="submit" class="navbar-wagon-search-btn">
         <i class="fa fa-search"></i>
       </button>
-    </form>
-    <hr class="hidden-xs hidden-sm">
+    </form> -->
+    <!-- <hr class="hidden-xs hidden-sm"> -->
     <% if user_signed_in? %>
-      <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
-        <div class="icon-badge-container">
+      <%#= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
+        <!-- <div class="icon-badge-container">
           <i class="fa fa-envelope-o"></i>
           <div class="icon-badge icon-badge-blue">3</div>
-        </div>
-      <% end %>
-      <hr>
+        </div> -->
+      <%# end %>
+      <!-- <hr> -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <div class="dropdown-toggle" data-toggle="dropdown">
+            <%= image_tag current_user.avatar, alt: "#{current_user.first_name}", class: "avatar", id: "navbar-wagon-menu" %> &nbsp;<i class="fa fa-caret-down text-muted"></i>
+          </div>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t ".profile", default: "Profile" %>
+              <%= link_to root_path do %>
+                <i class="fa fa-fw fa-home"></i> <%= t('home') %>
               <% end %>
             </li>
             <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-home"></i>  <%= t ".profile", default: "Home" %>
+              <%= link_to current_user do %>
+                <i class="fa fa-fw fa-user"></i> <%= t('users.show.profile.title') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to edit_user_registration_path(current_user) do %>
+                <i class="fa fa-fw fa-cogs"></i> <%= t('users.show.profile.settings') %>
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Log out" %>
+                <i class="fa fa-fw fa-sign-out"></i> <%= t('devise.sessions.destroy.sign_out', default: "Log out") %>
               <% end %>
             </li>
           </ul>
         </div>
       </div>
     <% else %>
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to new_user_session_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
+        <span class="visible-xs-block"><i class="fa fa-sign-in"></i></span>
+        <%= t('devise.sessions.new.sign_in') %>
+      <% end %>
+      <%= link_to new_user_registration_path, class: "navbar-wagon-item navbar-wagon-button btn" do %>
+        <span class="visible-xs-inline"><i class="fa fa-users"></i></span>
+        <%= t('devise.registrations.new.sign_up') %>
+      <% end %>
     <% end %>
-    <hr>
-    <%= link_to t(".top_call_to_action", default: "New competition"), new_competition_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 </nav>

@@ -8,11 +8,35 @@
 .padded {
   padding-top: 5em;
   padding-bottom: 5em;
+  &-medium {
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  }
   &-mini {
     padding-top: 1em;
     padding-bottom: 1em;
     &-bottom {
       padding-bottom: 1em;
+    }
+    &-top {
+      padding-top: 1em;
+    }
+  }
+}
+
+.marged {
+  &-mini {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  &-medium {
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+  }
+  &-micro {
+    &-sides {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
     }
   }
 }
@@ -32,4 +56,8 @@
 }
 .bg-dark-blue {
   background: #3b5998;
+}
+.bg-dark-grey {
+  background: $gray-dark;
+  color: white;
 }

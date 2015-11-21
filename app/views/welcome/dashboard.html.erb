@@ -1,0 +1,79 @@
+<div class="dashboard container padded-mini">
+  <div class="row">
+    <div class="col-sm-5 col-md-4 col-lg-3">
+      <div class="panel panel-default bio-panel">
+        <div class="cover-image-mini">
+        </div>
+        <div class="profile-pic">
+          <%= link_to current_user do %>
+            <%= image_tag current_user.avatar, class: "avatar-large img-circle", alt: "#{current_user.first_name}" %>
+          <% end %>
+          <% if founder_badge(current_user) %>
+            <%= image_tag "badge_committee.svg", class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{founder_badge(current_user).description}", style: "margin-top: 3px;" %>
+          <% end %>
+        </div>
+        <div class="padded-mini text-center">
+          <h4><%= link_to current_user, current_user %></h4>
+          <div>
+            <% current_user.subscriptions.each do |s| %>
+              <% if s.result == 1 && s.competition.finished %>
+                <%= link_to s.competition do %>
+                  <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
+                <% end %>
+              <% end %>
+            <% end %>
+            <% current_user.ranks.where(race_type: "Track", result: 1).each do |r| %>
+              <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
+                <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <% if current_user.creations.any? %>
+        <div class="panel panel-default">
+          <h5 class="text-center"><%= t('.creations_title') %></h5>
+          <ul class="list-group">
+            <% current_user.creations.each do |competition| %>
+              <li class="list-group-item">
+                <h5><%= competition.name %></h5>
+                <p><%= link_to t('more'), competition %></p>
+                <% if policy(competition).update? %>
+                  <p><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></p>
+                <% end %>
+                <% if policy(competition).destroy? %>
+                  <p><%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete' %></p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-7 col-md-8 col-lg-9">
+      <% if policy_scope(Competition).open_for_registration.any? %>
+        <div class="panel panel-default">
+          <h4 class="text-center"><%= t('welcome.index.open_title') %></h4>
+        </div>
+        <% policy_scope(Competition).open_for_registration.each do |competition| %>
+          <%= render 'competitions/card', competition: competition, status: "open" %>
+        <% end %>
+      <% elsif policy_scope(Competition).not_open_for_registration.any?  %>
+        <div class="panel panel-default">
+          <h4 class="text-center"><%= t('welcome.index.closed_title') %></h4>
+        </div>
+        <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
+          <%= render 'competitions/card', competition: competition, status: "closed" %>
+        <% end %>
+      <% else %>
+        <div class="panel panel-default">
+          <h4 class="text-center"><%= t('welcome.index.passed_title') %></h4>
+        </div>
+        <% policy_scope(Competition).finished.each do |competition| %>
+          <%= render 'competitions/card', competition: competition, status: "finished" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

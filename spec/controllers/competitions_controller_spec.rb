@@ -76,7 +76,7 @@ RSpec.describe CompetitionsController, type: :controller do
 
       it "updates the requested competition" do
         sign_in @user
-        competition = FactoryGirl.create :competition
+        competition = FactoryGirl.create :competition, author: @user
         put :update, { id: competition.to_param, competition: new_attributes }, valid_session
         competition.reload
         expect(assigns(:competition)).to have_attributes(start_location: "Bâle")
@@ -84,14 +84,14 @@ RSpec.describe CompetitionsController, type: :controller do
 
       it "assigns the requested competition as @competition" do
         sign_in @user
-        competition = FactoryGirl.create :competition
+        competition = FactoryGirl.create :competition, author: @user
         put :update, { id: competition.to_param, competition: valid_attributes }, valid_session
         expect(assigns(:competition)).to eq(competition)
       end
 
       it "redirects to the competition" do
         sign_in @user
-        competition = FactoryGirl.create :competition
+        competition = FactoryGirl.create :competition, author: @user
         put :update, { id: competition.to_param, competition: valid_attributes }, valid_session
         expect(response).to redirect_to(competition_path(competition))
       end

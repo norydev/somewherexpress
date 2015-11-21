@@ -1,0 +1,15 @@
+<div class="map_box">
+  <strong><%= city %></strong><br>
+  <% if competition == "many" %>
+    <% policy_scope(Competition).finished.where(start_location_locality: city).each do |c| %>
+      <%= link_to c, c %><br>
+    <% end %>
+  <% else %>
+    <%= link_to competition, competition %>
+  <% end %>
+  <% if track %>
+    <div>
+      <span class="medals-small"><i class="icomoon icon-medal"></i></span> <%= track.ranks.where(result: 1).map{ |r| r.user.first_name if r }.join(' & ') %>
+    </div>
+  <% end %>
+</div>

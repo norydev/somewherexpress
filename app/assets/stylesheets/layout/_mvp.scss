@@ -1,17 +1,17 @@
 h1 {
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 3em;
   margin-bottom: 0.3em;
   color: $gray-dark;
-  // letter-spacing: 2px;
 }
 
 h2,h3 {
   text-align: center;
+  margin-bottom: 1em;
 }
 
-table {
+.table {
   border: 1px solid #DDDDDD;
 }
 
@@ -21,6 +21,21 @@ table {
   &-small {
     color: $yellow;
   }
+}
+
+.medals {
+  font-size: 1.2em;
+  color: #dddddd;
+  &-small {
+    font-size: 1em;
+    line-height: 1.4em;
+    color: #dddddd;
+  }
+}
+
+.award {
+  width: 30px;
+  border-radius: 50%;
 }
 
 .avatar-badge {
@@ -40,15 +55,6 @@ table {
 
 .text-lightweight {
   font-weight: 300;
-}
-
-.medal {
-  width: 20px;
-}
-
-.award {
-  width: 30px;
-  border-radius: 50%;
 }
 
 table tbody tr td {
@@ -78,4 +84,182 @@ table tbody tr td {
       border-right: 20px solid $red;
     }
   }
+}
+
+.add_track {
+  color: $purple;
+  font-size: 1.5em;
+  height: 2.5em;
+
+  & i, & span {
+    vertical-align: middle;
+  }
+
+  & .fa {
+    font-size: 2em;
+  }
+
+  &:hover, &:focus {
+    outline: none;
+    color: $purple;
+  }
+}
+
+.destroy_track {
+  color: $red;
+  font-size: 3em;
+  padding-left: 10px;
+
+  &:hover, &:focus {
+    outline: none;
+    color: $red;
+  }
+
+}
+
+.panel {
+  position: relative;
+}
+
+.edit_result_table {
+
+  & .form-group {
+    margin-bottom: 0;
+  }
+
+  & input[type='number'] {
+    width: 50px;
+    margin: 0 auto;
+    -moz-appearance:textfield;
+  }
+
+  &input::-webkit-outer-spin-button,
+  &input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.btn-grey {
+  @extend .btn-default;
+  background-color: $gray-lighter;
+  color: $gray-light;
+}
+
+.far-right {
+  @extend .pull-right;
+  position: relative;
+}
+
+.fa-male {
+  color: $blue;
+}
+
+.fa-female {
+  color: #FF69B4;
+}
+
+.profile .fa-male, .profile .fa-female {
+  font-size: 3em;
+}
+
+.dashboard .panel {
+  border-radius: 5px;
+}
+
+.bio-panel {
+  .profile-pic {
+    position: relative;
+    display: block;
+    margin: -40px auto 0;
+    width: 80px;
+  }
+  .avatar-badge {
+    bottom: -5px;
+    right: -5px;
+  }
+}
+
+.cover-image-mini {
+  background: $red url(image_path("bg1.jpg")) no-repeat top center;
+  background-size: cover;
+  height: 100px;
+
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+}
+
+/* Welcome page */
+
+.red-bg {
+  background: $red url(image_path("bg1.jpg")) no-repeat top center;
+  background-size: cover;
+
+  h2 {
+    color: white;
+  }
+
+  .table {
+    background: white;
+  }
+}
+
+.intro .lead {
+  color: white;
+}
+
+.white-link {
+  color: white;
+
+  &:hover, &:focus {
+    outline: none;
+    color: $gray-lighter;
+  }
+}
+
+
+.icon-se_logo:before {
+  content: "\e900";
+}
+.icon-medal:before {
+  content: "\e901";
+}
+.icon-laurel:before {
+  content: "\e902";
+}
+
+.home {
+  background: transparent;
+  box-shadow: none;
+
+  .navbar-wagon-container {
+    height: 70px;
+  }
+
+  .navbar-wagon-logo {
+    font-size: 3em;
+    color: white;
+  }
+
+  .navbar-wagon-link {
+    color: white;
+  }
+
+  hr {
+    background-color: white;
+  }
+
+  .navbar-wagon-button {
+    background-color: white;
+    color: $brand-color;
+    border: 2px solid white;
+
+    &:hover {
+      color: $brand-color;
+      background: $gray-lighter;
+    }
+  }
+}
+
+.rules li {
+  margin-bottom: 10px;
 }

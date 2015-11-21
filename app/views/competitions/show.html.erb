@@ -5,28 +5,49 @@
       <h1><%= @competition %></h1>
 
       <div class="text-center">
-        <p class="lead"><%= @competition.start_location %> – <%= @competition.end_location %></p>
+        <p class="lead"><%= @competition.locations %></p>
         <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
         </p>
+
+        <!-- EDIT -->
+        <% if policy(@competition).update? %>
+          <div class="btn-group far-right">
+            <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-cogs"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to t('.edit.title'), edit_competition_path(@competition) %></li>
+              <% if policy(@competition).destroy? %>
+                <li><%= link_to t('.destroy.title'), competition_path(@competition), method: 'delete' %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <!-- END EDIT -->
+
         <p>
-          <% @competition.users.each do |user| %>
+          <% @competition.accepted_users.each do |user| %>
             <%= link_to user do %>
               <%= image_tag user.avatar, class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user}", alt: "#{user.first_name}" %>
             <% end %>
           <% end %>
         </p>
+
+        <%= render 'subscriptions/new', competition: @competition %>
       </div>
       <!-- END DESCRIPTION -->
 
       <div id="map" style="width: 100%; height: 400px;"></div>
 
-      <% if @competition.tracks.size > 1 %>
+      <% if @competition.description.present? %>
+        <blockquote class="marged-medium"><%= @competition.description %></blockquote>
+      <% end %>
+
+      <% if @competition.multiple_tracks? %>
         <%= render 'multi_tracks', competition: @competition %>
       <% else %>
         <%= render 'mono_track', competition: @competition %>
       <% end %>
-
-      <%= link_to "#{t('.edit.title')}", edit_competition_path(@competition) %>
 
     </div>
   </div>

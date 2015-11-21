@@ -1,6 +1,26 @@
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+var datetime_picker = function() {
+  $('.datetime_picker').datetimepicker({
+    language: "fr",
+    format: 'yyyy-mm-dd hh:ii',
+    weekStart: 1,
+    autoclose: true
+  });
+};
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+  datetime_picker();
+
+  if (!Modernizr.inputtypes.date) {
+    $('.datepicker').datetimepicker({
+      language: "fr",
+      format: 'yyyy-mm-dd',
+      minView: 2,
+      weekStart: 1,
+      autoclose: true
+    });
+  }
+});
 
 // as found on http://davidlesches.com/blog/rails-nested-forms-using-jquery-and-simpleform
 // with a few customisations
@@ -33,7 +53,7 @@ jQuery(function($) {
         newNestedForm = $(nestedForm).clone();
 
         // lastNestedForm position + 1
-        formsOnPage = parseInt(/[0-9]+/.exec(lastNestedForm.find('label').attr('for'))[0]) + 1;
+        formsOnPage = parseInt(/[0-9]+/.exec(lastNestedForm.find('input').attr('id'))[0]) + 1;
 
         $(newNestedForm).find('label').each(function() {
           var newLabel, oldLabel;
@@ -51,6 +71,7 @@ jQuery(function($) {
           return $(this).attr('name', newName);
         });
         $(newNestedForm).insertAfter(lastNestedForm);
+        $('[data-toggle="tooltip"]').tooltip()
         initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_start_location');
         return initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_end_location');
       });
