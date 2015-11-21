@@ -1,13 +1,24 @@
 class SubscriptionsController < ApplicationController
 
+  def new
+    authorize Subscription.new
+    redirect_to new_user_session_path, alert: t('devise.failure.unauthenticated')
+  end
+
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
     authorize @subscription
 
     if @subscription.save
-      redirect_to @subscription.competition, notice: 'Your application has been sent.'
+      respond_to do |format|
+        format.html { redirect_to @subscription.competition, notice: 'Your application has been sent.' }
+        format.js
+      end
     else
-      redirect_to @subscription.competition, alert: (@subscription.errors[:user_id].join(', ') || 'Your application failed.')
+      respond_to do |format|
+        format.html { redirect_to @subscription.competition, alert: 'Your application failed: rules must be accepted.' }
+        format.js
+      end
     end
   end
 
@@ -23,6 +34,6 @@ class SubscriptionsController < ApplicationController
 
   private
     def subscription_params
-      params.require(:subscription).permit(:competition_id)
+      params.require(:subscription).permit(:competition_id, :rules)
     end
 end

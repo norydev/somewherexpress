@@ -1,0 +1,8 @@
+<% if @subscription.errors.any? %>
+  // Render new review form with errors
+  $("#modal-content-<%= @subscription.competition.id %>").html("<%= j render 'subscriptions/form', competition: @subscription.competition, subscription: @subscription %>");
+<% else %>
+  $("#modal-<%= @subscription.competition.id %>").modal('hide');
+  $("#alerts-bar").html('<div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Your application has been sent succesfully.</div>').hide();
+  $("#alerts-bar").slideDown();
+<% end %>

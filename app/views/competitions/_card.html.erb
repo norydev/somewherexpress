@@ -15,18 +15,7 @@
         <% end %>
       </p>
 
-      <% if policy(competition).apply? %>
-        <% if competition.users.include?(current_user) %>
-          <%= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
-        <% else %>
-          <!-- APPLY -->
-          <%= simple_form_for Subscription.new do |f| %>
-            <%= f.error_notification %>
-            <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
-            <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 20px 0;" %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render 'subscriptions/new', competition: competition %>
       <p>
         <%= link_to t('more'), competition, class: "btn" %>
       </p>

@@ -3,11 +3,11 @@ class Subscription < ActiveRecord::Base
   belongs_to :competition
 
   validates_uniqueness_of :user_id, scope: :competition_id, message: "You already applied to this competition"
+  validates_presence_of :user, :competition
+  validates_acceptance_of :rules, on: :create, allow_nil: false
 
   after_create :make_track_ranks
   before_destroy :destroy_ranks
-
-  validates_presence_of :user, :competition
 
   def points
     competition.t_ranks.where(user: user).map(&:points).reduce(:+)

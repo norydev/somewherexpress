@@ -5,6 +5,10 @@ class SubscriptionPolicy < ApplicationPolicy
     end
   end
 
+  def new?
+    true
+  end
+
   def create?
     record.competition.registrations_open?
   end
