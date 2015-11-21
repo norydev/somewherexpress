@@ -8,6 +8,8 @@
     <%= link_to competition, competition %>
   <% end %>
   <% if track %>
-    <div><%= image_tag 'medal.svg', class: 'medal', height: "15px" %> <%= track.ranks.where(result: 1).map{ |r| r.user.first_name if r }.join(' & ') %></div>
+    <div>
+      <span class="medals-small"><i class="icon-medal"></i></span> <%= track.ranks.where(result: 1).map{ |r| r.user.first_name if r }.join(' & ') %>
+    </div>
   <% end %>
 </div>

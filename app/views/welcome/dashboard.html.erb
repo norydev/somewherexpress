@@ -4,7 +4,6 @@
       <div class="panel panel-default bio-panel">
         <div class="cover-image-mini">
         </div>
-        <%#= image_tag current_user.picture, class: "avatar-large img-circle" %>
         <div class="profile-pic">
           <%= link_to current_user do %>
             <%= image_tag current_user.avatar, class: "avatar-large img-circle", alt: "#{current_user.first_name}" %>
@@ -19,13 +18,13 @@
             <% current_user.subscriptions.each do |s| %>
               <% if s.result == 1 && s.competition.finished %>
                 <%= link_to s.competition do %>
-                  <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="top" title="<%= s.competition %>"></i></span>
+                  <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
                 <% end %>
               <% end %>
             <% end %>
             <% current_user.ranks.where(race_type: "Track", result: 1).each do |r| %>
               <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-                <%= image_tag "medal.svg", class: "medal", data: {toggle: "tooltip", placement: "top"}, title: "#{r.race}" %>
+                <span class="medals"><i class="icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
               <% end %>
             <% end %>
           </div>

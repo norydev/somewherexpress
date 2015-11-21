@@ -26,7 +26,7 @@
               <td>
                 <% user.ranks.where(race_type: "Track", result: 1).each do |r| %>
                   <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-                    <%= image_tag "medal.svg", class: "medal", data: {toggle: "tooltip", placement: "bottom"}, title: "#{r.race}" %>
+                    <span class="medals"><i class="icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
                   <% end %>
                 <% end %>
               </td>
