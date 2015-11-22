@@ -1,3 +1,11 @@
+<%= content_for(:title) do %>
+  <%= @competition %>
+<% end %>
+
+<%= content_for(:description) do %>
+  <%= @competition.route %>, Du <%= date_format(@competition.start_date) %> au <%= date_format(@competition.end_date) %>. <%= t('welcome.index.intro') %>
+<% end %>
+
 <div class="container padded-mini">
   <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">

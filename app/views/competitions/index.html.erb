@@ -1,3 +1,11 @@
+<%= content_for(:title) do %>
+  <%= t('activerecord.models.competition', count: 2).capitalize %>
+<% end %>
+
+<%= content_for(:description) do %>
+  Toutes les compétitions de SomewherExpress. <%= t('welcome.index.intro') %>
+<% end %>
+
 <div class="container padded-mini">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">

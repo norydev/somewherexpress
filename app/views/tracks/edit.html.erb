@@ -1,3 +1,11 @@
+<%= content_for(:title) do %>
+  <%= @track %> | Résultats
+<% end %>
+
+<%= content_for(:description) do %>
+  Résultats de l'étape <%= @track %> faisant partie de la compétition <%= @track.competition %>. <%= t('welcome.index.intro') %>
+<% end %>
+
 <div class="container padded-mini">
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
