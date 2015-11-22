@@ -1,3 +1,11 @@
+<%= content_for(:title) do %>
+  SomewherExpress
+<% end %>
+
+<%= content_for(:description) do %>
+  <%= t('welcome.index.intro') %>
+<% end %>
+
 <div class="welcome">
   <div class="red-bg">
 
@@ -45,9 +53,9 @@
   <div class="<%= (policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any?) ? 'red-bg' : '' %>">
     <div class="container padded-mini">
       <div class="row">
-        <h2><%= t('.passed_title') %></h2>
+        <h2 class="text-center"><%= t('.passed_title') %></h2>
         <div class="col-xs-12 col-md-6">
-          <table class="table" style="background: white">
+          <table class="table">
             <tbody>
               <% policy_scope(Competition).finished.each do |competition| %>
                 <tr>
@@ -58,7 +66,7 @@
           </table>
         </div>
         <div class="col-xs-12 col-md-6">
-          <div id="map" style="width: 100%; height: 590px;"></div>
+          <div id="map" style="width: 100%; height: 590px; max-height: 90vh;"></div>
         </div>
       </div>
     </div>

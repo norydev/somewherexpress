@@ -75,6 +75,10 @@ class Competition < ActiveRecord::Base
     self.where(finished: true).order(start_date: :desc)
   end
 
+  def self.not_finished
+    self.where(finished: false).order(start_date: :desc)
+  end
+
   private
 
     def geocoding

@@ -9,7 +9,7 @@
     <!-- END EDIT RESULTS -->
   </h2>
 
-  <table class="table">
+  <table class="table bordered">
     <tbody>
       <% if competition.ranks.where.not(result: 0).any? %>
         <% (competition.ranks.where.not(result: 0).order(:dsq, :result) + competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>

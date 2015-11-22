@@ -1,4 +1,12 @@
-<div class="container padded">
+<%= content_for(:title) do %>
+  <%= t('.title') %>
+<% end %>
+
+<%= content_for(:description) do %>
+  Modifier une compétition de SomewherExpress. <%= t('welcome.index.intro') %>
+<% end %>
+
+<div class="container padded-mini">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <h3><%= t('.title') %></h3>

@@ -4,11 +4,6 @@ class SubscriptionsController < ApplicationController
   def new
     @subscription = Subscription.new(subscription_params)
     authorize @subscription
-
-    respond_to do |format|
-      format.html { redirect_to @subscription.competition }
-      format.js
-    end
   end
 
   def create
@@ -22,7 +17,7 @@ class SubscriptionsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to @subscription.competition, alert: 'Your application failed: rules must be accepted.' }
+        format.html { render :new }
         format.js
       end
     end

@@ -1,7 +1,7 @@
 <!-- START FINAL RANKING -->
 <div id="competition-<%= competition.id %>-result">
   <h2><%= t('competitions.show.final_ranking') %></h2>
-  <table class="table">
+  <table class="table bordered">
     <tbody>
       <%= render 'final_ranks', competition: competition %>
     </tbody>
@@ -20,7 +20,7 @@
       <% end %>
       <!-- END EDIT RESULTS -->
     </h3>
-    <table class="table">
+    <table class="table bordered">
       <tbody>
         <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
           <tr>

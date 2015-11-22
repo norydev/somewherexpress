@@ -1,9 +1,9 @@
-<div id="panel-<%= competition.id %>" class="panel panel-default">
+<li id="panel-<%= competition.id %>" class="list-group-item text-center">
   <div class="ribbon-wrapper"><%= ribon(status) %></div>
 
-  <div class="panel-body">
+  <div class="list-body">
     <h3><%= link_to competition, competition %></h3>
-    <div class="text-center">
+    <div>
       <p class="lead"><%= competition.locations %></p>
       <p class="text-uppercase text-muted small"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %>
       </p>
@@ -18,4 +18,4 @@
   </div>
   <%= render 'subscriptions/new', competition: competition %>
   <%= registrations(competition) %>
-</div>
+</li>

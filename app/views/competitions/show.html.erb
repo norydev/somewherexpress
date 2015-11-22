@@ -1,54 +1,67 @@
-<div class="container">
+<%= content_for(:title) do %>
+  <%= @competition %>
+<% end %>
+
+<%= content_for(:description) do %>
+  <%= @competition.route %>, Du <%= date_format(@competition.start_date) %> au <%= date_format(@competition.end_date) %>. <%= t('welcome.index.intro') %>
+<% end %>
+
+<div class="container padded-mini">
   <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
-      <!-- START DESCRIPTION -->
-      <h1><%= @competition %></h1>
-
-      <div class="text-center">
-        <p class="lead"><%= @competition.locations %></p>
-        <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
-        </p>
-
+      <div class="panel panel-default">
         <!-- EDIT -->
         <% if policy(@competition).update? %>
-          <div class="btn-group far-right">
-            <button type="button" class="btn btn-grey dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-cogs"></i> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><%= link_to t('.edit.title'), edit_competition_path(@competition) %></li>
-              <% if policy(@competition).destroy? %>
-                <li><%= link_to t('.destroy.title'), competition_path(@competition), method: 'delete' %></li>
-              <% end %>
-            </ul>
+          <div class="bg-light-grey padded-mini-full bordered-bottom">
+            <div class="dropdown pull-right">
+              <div class="pointer dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-cogs"></i> <span class="caret"></span>
+              </div>
+              <ul class="dropdown-menu navbar-wagon-dropdown-menu">
+                <li><%= link_to t('.edit.title'), edit_competition_path(@competition) %></li>
+                <% if policy(@competition).destroy? %>
+                  <li><%= link_to t('.destroy.title'), competition_path(@competition), method: 'delete' %></li>
+                <% end %>
+              </ul>
+            </div>
+            <%= t('.edit.label') %>
           </div>
         <% end %>
         <!-- END EDIT -->
 
-        <p>
-          <% @competition.accepted_users.each do |user| %>
-            <%= link_to user do %>
-              <%= image_tag user.avatar, class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user}", alt: "#{user.first_name}" %>
+        <!-- START DESCRIPTION -->
+        <div class="head-icon text-center"><i class="fa fa-map-o"></i></div>
+        <h1><%= @competition %></h1>
+
+        <div class="text-center">
+          <p class="lead"><%= @competition.locations %></p>
+          <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
+          </p>
+
+          <p>
+            <% @competition.accepted_users.each do |user| %>
+              <%= link_to user do %>
+                <%= image_tag user.avatar, class: "avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user}", alt: "#{user.first_name}" %>
+              <% end %>
             <% end %>
-          <% end %>
-        </p>
+          </p>
 
-        <%= render 'subscriptions/new', competition: @competition %>
+          <%= render 'subscriptions/new', competition: @competition %>
+        </div>
+        <!-- END DESCRIPTION -->
+
+        <div id="map" style="width: 100%; height: 400px; max-height: 90vh;"></div>
+
+        <% if @competition.description.present? %>
+          <blockquote class="marged-medium"><%= @competition.description %></blockquote>
+        <% end %>
+
+        <% if @competition.multiple_tracks? %>
+          <%= render 'multi_tracks', competition: @competition %>
+        <% else %>
+          <%= render 'mono_track', competition: @competition %>
+        <% end %>
       </div>
-      <!-- END DESCRIPTION -->
-
-      <div id="map" style="width: 100%; height: 400px;"></div>
-
-      <% if @competition.description.present? %>
-        <blockquote class="marged-medium"><%= @competition.description %></blockquote>
-      <% end %>
-
-      <% if @competition.multiple_tracks? %>
-        <%= render 'multi_tracks', competition: @competition %>
-      <% else %>
-        <%= render 'mono_track', competition: @competition %>
-      <% end %>
-
     </div>
   </div>
 </div>

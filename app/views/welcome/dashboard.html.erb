@@ -1,3 +1,11 @@
+<%= content_for(:title) do %>
+  SomewherExpress
+<% end %>
+
+<%= content_for(:description) do %>
+  <%= t('welcome.index.intro') %>
+<% end %>
+
 <div class="dashboard container padded-mini">
   <div class="row">
     <div class="col-sm-5 col-md-4 col-lg-3">
@@ -31,11 +39,17 @@
         </div>
       </div>
 
+      <% if policy(Competition).create? %>
+        <div class="text-center padded-mini-bottom">
+          <%= link_to t('competitions.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" %>
+        </div>
+      <% end %>
+
       <% if current_user.creations.any? %>
         <div class="panel panel-default">
           <h5 class="text-center"><%= t('.creations_title') %></h5>
           <ul class="list-group">
-            <% current_user.creations.each do |competition| %>
+            <% current_user.creations.not_finished.each do |competition| %>
               <li class="list-group-item">
                 <h5><%= competition.name %></h5>
                 <p><%= link_to t('more'), competition %></p>
@@ -52,28 +66,82 @@
       <% end %>
     </div>
     <div class="col-sm-7 col-md-8 col-lg-9">
-      <% if policy_scope(Competition).open_for_registration.any? %>
-        <div class="panel panel-default">
-          <h4 class="text-center"><%= t('welcome.index.open_title') %></h4>
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#open" aria-controls="open" role="tab" data-toggle="tab"><%= t('welcome.index.open_title') %></a></li>
+        <li role="presentation"><a href="#closed" aria-controls="closed" role="tab" data-toggle="tab"><%= t('welcome.index.closed_title') %></a></li>
+        <li role="presentation"><a href="#finished" aria-controls="finished" role="tab" data-toggle="tab" onclick="showMap();"><%= t('welcome.index.passed_title') %></a></li>
+        <!-- <li role="presentation"><a href="#mines" aria-controls="mines" role="tab" data-toggle="tab">mines</a></li> -->
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active panel panel-default" id="open">
+          <% if policy_scope(Competition).open_for_registration.any? %>
+            <ul class="list-group">
+              <% policy_scope(Competition).open_for_registration.each do |competition| %>
+                <%= render 'competitions/card', competition: competition, status: "open" %>
+              <% end %>
+            </ul>
+          <% else %>
+            <div class="text-muted padded-mini-full"><em><%= t('competitions.zero') %></em></div>
+          <% end %>
         </div>
-        <% policy_scope(Competition).open_for_registration.each do |competition| %>
-          <%= render 'competitions/card', competition: competition, status: "open" %>
-        <% end %>
-      <% elsif policy_scope(Competition).not_open_for_registration.any?  %>
-        <div class="panel panel-default">
-          <h4 class="text-center"><%= t('welcome.index.closed_title') %></h4>
+        <div role="tabpanel" class="tab-pane panel panel-default" id="closed">
+          <% if policy_scope(Competition).not_open_for_registration.any? %>
+            <ul class="list-group">
+              <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
+                <%= render 'competitions/card', competition: competition, status: "closed" %>
+              <% end %>
+            </ul>
+          <% else %>
+            <div class="text-muted padded-mini-full"><em><%= t('competitions.zero') %></em></div>
+          <% end %>
         </div>
-        <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
-          <%= render 'competitions/card', competition: competition, status: "closed" %>
-        <% end %>
-      <% else %>
-        <div class="panel panel-default">
-          <h4 class="text-center"><%= t('welcome.index.passed_title') %></h4>
+        <div role="tabpanel" class="tab-pane panel panel-default" id="finished">
+          <% if policy_scope(Competition).finished.any? %>
+            <div id="map" style="width: 100%; height: 590px; max-height: 90vh;"></div>
+            <table class="table" style="margin-bottom: 0;">
+              <tbody>
+                <% policy_scope(Competition).finished.each do |competition| %>
+                  <tr>
+                    <%= render 'competition_summary', competition: competition %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
         </div>
-        <% policy_scope(Competition).finished.each do |competition| %>
-          <%= render 'competitions/card', competition: competition, status: "finished" %>
-        <% end %>
-      <% end %>
+        <!-- <div role="tabpanel" class="tab-pane" id="mines">...</div> -->
+      </div>
     </div>
   </div>
+
+  <% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    var mapized = false;
+    var gmapize = function() {
+      handler = Gmaps.build('Google', { markers: { clusterer: undefined  }});
+      handler.buildMap({
+      provider: {
+        disableDefaultUI: true,
+        zoomControl: true,
+        draggable: false,
+        scrollwheel: false
+      },
+        internal: { id: 'map' } }, function(){
+        markers = handler.addMarkers(<%= raw @markers.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    }
+    var showMap = function() {
+      if (mapized == false) {
+        gmapize();
+        mapized = true;
+      }
+    }
+  <% end %>
+<% end %>
 </div>
