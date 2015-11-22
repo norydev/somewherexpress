@@ -31,7 +31,6 @@ class CompetitionsController < ApplicationController
     if @competition.save
       redirect_to @competition, notice: 'Competition was successfully created.'
     else
-      puts @competition.errors.inspect
       render :new
     end
   end
