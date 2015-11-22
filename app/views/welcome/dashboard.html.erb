@@ -14,7 +14,7 @@
         </div>
         <div class="profile-pic">
           <%= link_to current_user do %>
-            <%= image_tag current_user.avatar, class: "avatar-large img-circle", alt: "#{current_user.first_name}" %>
+            <%= image_tag h(gravatar_url(current_user, size: 160, default: )), class: "avatar-large img-circle", alt: "#{current_user.first_name}" %>
           <% end %>
           <% if founder_badge(current_user) %>
             <%= image_tag "badge_committee.svg", class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{founder_badge(current_user).description}", style: "margin-top: 3px;" %>
@@ -45,7 +45,7 @@
         </div>
       <% end %>
 
-      <% if current_user.creations.any? %>
+      <% if current_user.creations.not_finished.any? %>
         <div class="panel panel-default">
           <h5 class="text-center"><%= t('.creations_title') %></h5>
           <ul class="list-group">
