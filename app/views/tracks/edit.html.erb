@@ -1,42 +1,44 @@
 <div class="container padded-mini">
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
-      <h3><%= t('.title', name: @track) %></h3>
+      <div class="panel panel-default">
+        <h3><%= t('.title') %><br><small><%= @track %></small></h3>
 
-      <%= simple_form_for([@track.competition, @track]) do |f| %>
-        <%= f.error_notification %>
+        <%= simple_form_for([@track.competition, @track]) do |f| %>
+          <%= f.error_notification %>
 
-        <table class="table edit_result_table">
-          <thead>
-            <tr class="active">
-              <th colspan="2" class="text-center"><%= t('.user') %></th>
-              <th class="text-center"><%= t('ranks.params.result') %></th>
-              <th class="text-center"><%= t('ranks.params.points') %></th>
-              <th class="text-center"><%= t('.dsq') %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= f.simple_fields_for :ranks do |t| %>
-              <tr>
-                <td>
-                  <%= link_to t.object.user do %>
-                    <%= image_tag t.object.user.avatar, class: "avatar hidden-xs", alt: "#{t.object.user.first_name}" %>
-                  <% end %>
-                </td>
-                <td class="text-uppercase"><%= link_to t.object.user.name, t.object.user %></td>
-                <td class="text-center"><%= t.input :points, label: false %></td>
-                <td class="text-center"><%= t.input :result, label: false %></td>
-                <td class="text-center">
-                  <%= t.input_field :dsq, as: :boolean, boolean_style: :inline, class: "cmn-toggle cmn-toggle-round cmn-toggle-red" %>
-                  <label for="track_ranks_attributes_<%= t.index %>_dsq"></label>
-                </td>
+          <table class="table edit_result_table bordered">
+            <thead>
+              <tr class="active">
+                <th colspan="2" class="text-center"><%= t('.user') %></th>
+                <th class="text-center"><%= t('ranks.params.result') %></th>
+                <th class="text-center"><%= t('ranks.params.points') %></th>
+                <th class="text-center"><%= t('.dsq') %></th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <%= f.simple_fields_for :ranks do |t| %>
+                <tr>
+                  <td>
+                    <%= link_to t.object.user do %>
+                      <%= image_tag t.object.user.avatar, class: "avatar hidden-xs", alt: "#{t.object.user.first_name}" %>
+                    <% end %>
+                  </td>
+                  <td class="text-uppercase"><%= link_to t.object.user.name, t.object.user %></td>
+                  <td class="text-center"><%= t.input :points, label: false %></td>
+                  <td class="text-center"><%= t.input :result, label: false %></td>
+                  <td class="text-center">
+                    <%= t.input_field :dsq, as: :boolean, boolean_style: :inline, class: "cmn-toggle cmn-toggle-round cmn-toggle-red" %>
+                    <label for="track_ranks_attributes_<%= t.index %>_dsq"></label>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
 
-        <%= f.button :submit, t('.save'), class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn" %>
-      <% end %>
+          <%= f.button :submit, t('.save'), class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn" %>
+        <% end %>
     </div>
   </div>
 </div>

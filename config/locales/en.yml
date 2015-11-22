@@ -68,6 +68,7 @@ en:
         title: "Create a competition"
     show:
       edit:
+        label: "You are the organizer of this competition"
         title: "Edit this competition"
       destroy:
         title: "Delete this competition"

@@ -71,7 +71,8 @@ jQuery(function($) {
           return $(this).attr('name', newName);
         });
         $(newNestedForm).insertAfter(lastNestedForm);
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip();
+        datetime_picker();
         initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_start_location');
         return initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_end_location');
       });

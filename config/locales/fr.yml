@@ -31,6 +31,7 @@ fr:
     open: 'ouverte'
     finished: 'terminée'
     closed: 'close'
+    zero: "Aucune pour l'instant"
     route: 'Parcours'
     dates: 'Dates'
     params:
@@ -49,6 +50,7 @@ fr:
         title: "Créer une compétition"
     show:
       edit:
+        label: "Vous êtes l'organisateur de cette compétition"
         title: "Modifier cette compétition"
       destroy:
         title: "Supprimer cette compétition"
@@ -96,7 +98,7 @@ fr:
       end_location: "À"
       start_time: "Heure de départ"
     edit:
-      title: Résultats de l'étape %{name}
+      title: Résultats de l'étape
       user: "Participant"
       dsq: "Disq."
       save: "Enregistrer les résultats"

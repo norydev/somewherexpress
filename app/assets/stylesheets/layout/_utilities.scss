@@ -21,6 +21,13 @@
     &-top {
       padding-top: 1em;
     }
+    &-full {
+      padding: 1em;
+    }
+    &-sides {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
   }
 }
 
@@ -50,6 +57,7 @@
 }
 .bg-light-grey {
   background: #eeeeee;
+  color: #777;
 }
 .bg-blue {
   background: #00a3e1;

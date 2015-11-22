@@ -2,51 +2,55 @@
   <%= f.error_notification %>
 
   <!-- GENERAL INFORMATIONS -->
-  <h4><%= t('.general.title') %></h4>
-  <%= f.input :name, label: t('competitions.params.name') %>
-  <div class="row">
-    <div class="col-xs-6">
-      <%= f.input :start_location, label: t('competitions.params.start_location') %>
-      <%= f.input :start_location_street_number, as: :hidden %>
-      <%= f.input :start_location_route, as: :hidden %>
-      <%= f.input :start_location_locality, as: :hidden %>
-      <%= f.input :start_location_administrative_area_level_2, as: :hidden %>
-      <%= f.input :start_location_administrative_area_level_1, as: :hidden %>
-      <%= f.input :start_location_administrative_area_level_1_short, as: :hidden %>
-      <%= f.input :start_location_country, as: :hidden %>
-      <%= f.input :start_location_country_short, as: :hidden %>
-      <%= f.input :start_location_postal_code, as: :hidden %>
-    </div>
-    <div class="col-xs-6">
-      <%= f.input :end_location, label: t('competitions.params.end_location') %>
-      <%= f.input :end_location_street_number, as: :hidden %>
-      <%= f.input :end_location_route, as: :hidden %>
-      <%= f.input :end_location_locality, as: :hidden %>
-      <%= f.input :end_location_administrative_area_level_2, as: :hidden %>
-      <%= f.input :end_location_administrative_area_level_1, as: :hidden %>
-      <%= f.input :end_location_administrative_area_level_1_short, as: :hidden %>
-      <%= f.input :end_location_country, as: :hidden %>
-      <%= f.input :end_location_country_short, as: :hidden %>
-      <%= f.input :end_location_postal_code, as: :hidden %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6">
-      <%= f.label :start_date, t('competitions.params.start_date') %>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-        <%= f.input :start_date, as: :string, label: false, input_html: { type: "date", class: "datepicker" } %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4><%= t('.general.title') %></h4>
+      <%= f.input :name, label: t('competitions.params.name') %>
+      <div class="row">
+        <div class="col-xs-6">
+          <%= f.input :start_location, label: t('competitions.params.start_location') %>
+          <%= f.input :start_location_street_number, as: :hidden %>
+          <%= f.input :start_location_route, as: :hidden %>
+          <%= f.input :start_location_locality, as: :hidden %>
+          <%= f.input :start_location_administrative_area_level_2, as: :hidden %>
+          <%= f.input :start_location_administrative_area_level_1, as: :hidden %>
+          <%= f.input :start_location_administrative_area_level_1_short, as: :hidden %>
+          <%= f.input :start_location_country, as: :hidden %>
+          <%= f.input :start_location_country_short, as: :hidden %>
+          <%= f.input :start_location_postal_code, as: :hidden %>
+        </div>
+        <div class="col-xs-6">
+          <%= f.input :end_location, label: t('competitions.params.end_location') %>
+          <%= f.input :end_location_street_number, as: :hidden %>
+          <%= f.input :end_location_route, as: :hidden %>
+          <%= f.input :end_location_locality, as: :hidden %>
+          <%= f.input :end_location_administrative_area_level_2, as: :hidden %>
+          <%= f.input :end_location_administrative_area_level_1, as: :hidden %>
+          <%= f.input :end_location_administrative_area_level_1_short, as: :hidden %>
+          <%= f.input :end_location_country, as: :hidden %>
+          <%= f.input :end_location_country_short, as: :hidden %>
+          <%= f.input :end_location_postal_code, as: :hidden %>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-6">
-      <%= f.label :end_date, t('competitions.params.end_date') %>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-        <%= f.input :end_date, as: :string, label: false, input_html: { type: "date", class: "datepicker" } %>
+      <div class="row">
+        <div class="col-xs-6">
+          <%= f.label :start_date, t('competitions.params.start_date') %>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <%= f.input :start_date, as: :string, label: false, input_html: { type: "date", class: "datepicker" } %>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <%= f.label :end_date, t('competitions.params.end_date') %>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <%= f.input :end_date, as: :string, label: false, input_html: { type: "date", class: "datepicker" } %>
+          </div>
+        </div>
+        <div class="col-xs-12 padded-mini-top">
+          <%= f.input :description, input_html: { rows: 6 } %>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-12 padded-mini-top">
-      <%= f.input :description, input_html: { rows: 6 } %>
     </div>
   </div>
   <!-- END GENERAL INFORMATIONS -->
