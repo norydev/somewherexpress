@@ -1,7 +1,9 @@
 <div class="container padded-mini">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <%= render 'subscriptions/form', competition: @subscription.competition, subscription: @subscription %>
+    <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+      <div class="panel panel-default">
+        <%= render 'subscriptions/form', competition: @subscription.competition, subscription: @subscription %>
+      </div>
     </div>
   </div>
 </div>
