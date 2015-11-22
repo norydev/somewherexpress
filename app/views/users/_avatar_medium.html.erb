@@ -1,0 +1,3 @@
+<%= link_to user do %>
+  <%= image_tag h(gravatar_url(user, size: 80, default: user.avatar)), class: "img-circle avatar-medium", alt: user.first_name %>
+<% end %>

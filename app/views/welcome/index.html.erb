@@ -19,7 +19,7 @@
           <div class="users">
             <% policy_scope(User).sort_by{ |u| founder_badge(u) ? 0 : 1 }.each do |user| %>
               <%= link_to user do %>
-                <%= image_tag user.avatar, class: "img-circle avatar-medium", alt: "#{user.first_name}", title:"#{user.first_name}",data: { toggle: "tooltip", placement: "bottom"}, style: "margin-top: 5px;" %>
+                <%= render 'users/avatar_medium', user: user %>
               <% end %>
             <% end %>
           </div>

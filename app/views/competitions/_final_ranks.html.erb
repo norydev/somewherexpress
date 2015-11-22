@@ -2,9 +2,7 @@
   <tr>
     <td class="text-center"><%= result(rank) %></td>
     <td class="text-center">
-      <%= link_to rank.user do %>
-        <%= image_tag rank.user.avatar, class: "avatar", alt: "#{rank.user.first_name}" %>
-      <% end %>
+      <%= render 'users/avatar_small', user: rank.user %>
     </td>
     <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
     <td class="text-right text-uppercase"><%= rank.points %> <%= t('ranks.params.points') %></td>

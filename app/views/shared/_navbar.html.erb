@@ -36,7 +36,7 @@
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <div class="dropdown-toggle" data-toggle="dropdown">
-            <%= image_tag current_user.avatar, alt: "#{current_user.first_name}", class: "avatar", id: "navbar-wagon-menu" %> &nbsp;<i class="fa fa-caret-down text-muted"></i>
+            <%= image_tag h(gravatar_url(current_user, size: 60, default: "https://somewherexpress.herokuapp.com/assets/default_user_picture-9bf0d1fecf56cabbbf007491c4ef726a52ac9ba05dbec980706c9720ad91b155.png")), alt: "#{current_user.first_name}", class: "avatar", id: "navbar-wagon-menu" %> &nbsp;<i class="fa fa-caret-down text-muted"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
