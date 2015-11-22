@@ -56,6 +56,13 @@
         <div class="panel panel-default">
           <h4 class="text-center"><%= t('welcome.index.open_title') %></h4>
         </div>
+
+        <% if policy(Competition).create? %>
+          <div class="text-center padded-mini-bottom">
+            <%= link_to t('competitions.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" %>
+          </div>
+        <% end %>
+
         <% policy_scope(Competition).open_for_registration.each do |competition| %>
           <%= render 'competitions/card', competition: competition, status: "open" %>
         <% end %>
@@ -63,6 +70,13 @@
         <div class="panel panel-default">
           <h4 class="text-center"><%= t('welcome.index.closed_title') %></h4>
         </div>
+
+        <% if policy(Competition).create? %>
+          <div class="text-center padded-mini-bottom">
+            <%= link_to t('competitions.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" %>
+          </div>
+        <% end %>
+
         <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
           <%= render 'competitions/card', competition: competition, status: "closed" %>
         <% end %>
@@ -70,6 +84,13 @@
         <div class="panel panel-default">
           <h4 class="text-center"><%= t('welcome.index.passed_title') %></h4>
         </div>
+
+        <% if policy(Competition).create? %>
+          <div class="text-center padded-mini-bottom">
+            <%= link_to t('competitions.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" %>
+          </div>
+        <% end %>
+
         <% policy_scope(Competition).finished.each do |competition| %>
           <%= render 'competitions/card', competition: competition, status: "finished" %>
         <% end %>

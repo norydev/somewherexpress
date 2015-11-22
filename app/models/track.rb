@@ -7,7 +7,7 @@ class Track < ActiveRecord::Base
 
   after_create :make_track_ranks
 
-  validates_presence_of :competition, :start_location, :start_location_locality, :end_location, :end_location_locality, :start_time
+  validates_presence_of :start_location, :start_location_locality, :end_location, :end_location_locality, :start_time
 
   def to_s
     "#{start_location_locality} (#{start_location_country_short}) – #{end_location_locality} (#{end_location_country_short})"
