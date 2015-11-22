@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar
-    self.picture || ActionController::Base.helpers.asset_path("default_user_picture.svg")
+    self.picture || ActionController::Base.helpers.asset_path("default_user_picture.png")
   end
 
   def sex
