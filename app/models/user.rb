@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     self.picture || ActionController::Base.helpers.asset_path("default_user_picture.svg")
   end
 
+  def sex
+    girl? ? 'female' : 'male'
+  end
+
   def finished_competitions
     competitions.finished
   end

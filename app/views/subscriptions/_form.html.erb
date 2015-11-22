@@ -39,11 +39,8 @@
           <%= image_tag current_user.avatar, alt: current_user.first_name, class: "avatar-large" %>
         </div>
         <div class="media-body">
-          <p>
-            <%= current_user.name %>
-            <%= current_user.girl ? '<i class="fa fa-female"></i>'.html_safe : '<i class="fa fa-male"></i>'.html_safe %>
-          </p>
-          <p><%= current_user.email %></p>
+          <p><i class="fa fa-<%= current_user.sex %> fa-fw"></i><%= current_user.name %></p>
+          <p><i class="fa fa-envelope-o fa-fw"></i><%= current_user.email %></p>
         </div>
       </div>
     </div>

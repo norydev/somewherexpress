@@ -1,9 +1,9 @@
-<div id="panel-<%= competition.id %>" class="panel panel-default">
+<div id="panel-<%= competition.id %>" class="panel panel-default text-center">
   <div class="ribbon-wrapper"><%= ribon(status) %></div>
 
   <div class="panel-body">
     <h3><%= link_to competition, competition %></h3>
-    <div class="text-center">
+    <div>
       <p class="lead"><%= competition.locations %></p>
       <p class="text-uppercase text-muted small"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %>
       </p>
