@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get '/rules', to: 'welcome#rules'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :users, only: [:index, :show, :edit, :update]
   resources :competitions do

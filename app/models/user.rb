@@ -33,4 +33,20 @@ class User < ActiveRecord::Base
   def finished_competitions
     competitions.finished
   end
+
+  # instead of deleting, indicate the user requested a delete & timestamp it
+  def soft_delete
+    update_attributes(deleted_at: Time.current, old_email: email, old_first_name: first_name, old_last_name: last_name, picture: nil)
+    update_attributes(first_name: first_name.first, last_name: last_name.first, email: "#{Time.now.to_i}#{rand(100)}#{email}")
+  end
+
+  # ensure user account is active
+  def active_for_authentication?
+    super && !deleted_at
+  end
+
+  # provide a custom message for a deleted account
+  def inactive_message
+    !deleted_at ? super : :deleted_account
+  end
 end
