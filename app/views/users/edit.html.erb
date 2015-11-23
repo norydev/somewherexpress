@@ -6,46 +6,50 @@
   Modification du profil de <%= @user %>. <%= t('welcome.index.intro') %>
 <% end %>
 
-<div class="container profile">
+<div class="container profile padded-mini">
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
-      <h3><%= t('.title', name: @track) %></h3>
-      <%= simple_form_for(@user) do |f| %>
-        <%= f.error_notification %>
+      <div class="panel panel-default">
+        <h3><%= t('.title', name: @track) %></h3>
+        <div class="panel-body">
+          <%= simple_form_for(@user) do |f| %>
+            <%= f.error_notification %>
 
-        <div class="row">
-          <div class="col-xs-6">
-            <%= f.input :first_name, label: t('users.params.first_name'), required: true, autofocus: true %>
-          </div>
-          <div class="col-xs-6">
-            <%= f.input :last_name, label: t('users.params.last_name'), required: true %>
-          </div>
-        </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <%= f.input :first_name, label: t('users.params.first_name'), required: true, autofocus: true %>
+              </div>
+              <div class="col-xs-6">
+                <%= f.input :last_name, label: t('users.params.last_name'), required: true %>
+              </div>
+            </div>
 
-        <%= f.label :picture, t('users.params.picture') %>
-        <div class="media">
-          <div class="media-left">
-            <%= image_tag h(gravatar_url(@user, size: 160)), class: "avatar-large pull-left", alt: @user.first_name %>
-          </div>
-          <div class="media-body">
-            <strong>ATTENTION!</strong>
-            <p>Les photos de profils par défaut vont bientôt être remplacée par votre image <%= link_to 'Gravatar', 'https://www.gravatar.com/', target: "_blank" %>.</p>
-            <p>L'image ci-contre est votre gravatar actuel, vous pouvez le changer sur le site de <%= link_to 'Gravatar', 'https://www.gravatar.com/', target: "_blank" %>.</p>
-            <p class="text-center">
-              <%= link_to 'Modifier mon avatar', 'https://www.gravatar.com/', class: "btn btn-danger", target: "_blank" %>
-            </p>
-          </div>
-        </div>
+            <%= f.label :picture, t('users.params.picture') %>
+            <div class="media">
+              <div class="media-left">
+                <%= image_tag h(gravatar_url(@user, size: 160)), class: "avatar-large pull-left", alt: @user.first_name %>
+              </div>
+              <div class="media-body">
+                <strong>ATTENTION!</strong>
+                <p>Les photos de profils par défaut vont bientôt être remplacée par votre image <%= link_to 'Gravatar', 'https://www.gravatar.com/', target: "_blank" %>.</p>
+                <p>L'image ci-contre est votre gravatar actuel, vous pouvez le changer sur le site de <%= link_to 'Gravatar', 'https://www.gravatar.com/', target: "_blank" %>.</p>
+                <p class="text-center">
+                  <%= link_to 'Modifier mon avatar', 'https://www.gravatar.com/', class: "btn btn-danger", target: "_blank" %>
+                </p>
+              </div>
+            </div>
 
-        <%= f.label t('users.params.girl'), required: true %>
-        <div class="text-center">
-          <%= f.collection_radio_buttons :girl, [[true, 'female'] ,[false, 'male']], :first, :last do |b|
-            b.label(class: "marged-micro-sides") { "<i class='fa fa-#{ b.text }'></i>".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
-            end %>
-        </div>
+            <%= f.label t('users.params.girl'), required: true %>
+            <div class="text-center">
+              <%= f.collection_radio_buttons :girl, [[true, 'female'] ,[false, 'male']], :first, :last do |b|
+                b.label(class: "marged-micro-sides") { "<i class='fa fa-#{ b.text }'></i>".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
+                end %>
+            </div>
+          </div><!-- END PANEL BODY -->
+        </div><!-- END PANEL -->
 
-        <%= f.button :submit, t('save'), class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn" %>
-      <% end %>
+          <%= f.button :submit, t('save'), class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn" %>
+        <% end %>
     </div>
   </div>
 </div>

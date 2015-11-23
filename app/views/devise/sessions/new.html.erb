@@ -1,16 +1,23 @@
-<div class="container padded-mini">
+<div class="container padded-medium">
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-      <h2><%= t('.sign_in', :default => "Sign in") %></h2>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="pull-right"><%= link_to t("devise.registrations.new.sign_up"), new_registration_path(resource_name) %></span>
+          <strong><%= t('.sign_in', :default => "Sign in") %></strong>
+        </div>
+        <div class="panel-body">
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <%= f.input :email, required: false, autofocus: true %>
+              <%= f.label :password, t('activerecord.attributes.user.password') %> (<%= link_to t("devise.passwords.new.forgot_your_password"), new_password_path(resource_name) %>)
+              <%= f.input :password, required: false, label: false %>
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+              <%= f.button :submit, t('.sign_in', :default => "Sign in"), class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
 
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <%= f.input :email, required: false, autofocus: true %>
-          <%= f.input :password, required: false %>
-          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-          <%= f.button :submit, t('.sign_in', :default => "Sign in"), class: "btn btn-primary" %>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
+      <%#= render "devise/shared/links" %>
     </div>
   </div>
 </div>
