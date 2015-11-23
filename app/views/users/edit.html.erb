@@ -22,7 +22,20 @@
           </div>
         </div>
 
-        <%= f.input :picture, label: t('users.params.picture') %>
+        <%= f.label :picture, t('users.params.picture') %>
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag h(gravatar_url(@user, size: 160)), class: "avatar-large pull-left", alt: @user.first_name %>
+          </div>
+          <div class="media-body">
+            <strong>ATTENTION!</strong>
+            <p>Les photos de profils par défaut vont bientôt être remplacée par votre image <%= link_to 'Gravatar', 'https://www.gravatar.com/', target: "_blank" %>.</p>
+            <p>L'image ci-contre est votre gravatar actuel, vous pouvez le changer sur le site de <%= link_to 'Gravatar', 'https://www.gravatar.com/', target: "_blank" %>.</p>
+            <p class="text-center">
+              <%= link_to 'Modifier mon avatar', 'https://www.gravatar.com/', class: "btn btn-danger", target: "_blank" %>
+            </p>
+          </div>
+        </div>
 
         <%= f.label t('users.params.girl'), required: true %>
         <div class="text-center">
