@@ -333,14 +333,10 @@ table tbody tr td {
   }
 }
 
-.list-group-item.active {
+.list-group-item.myactive {
   background-color: $link-color;
   border-color: $link-color;
-
-  &:hover {
-    background-color: $link-color;
-    border-color: $link-color;
-  }
+  color: white;
 
   a {
     color: white;
@@ -348,5 +344,15 @@ table tbody tr td {
       color: $gray-lighter;
       outline: none;
     }
+  }
+}
+
+.text-right-center {
+  text-align: center;
+}
+
+@media (min-width: $screen-md-min) {
+  .text-right-center {
+    text-align: right;
   }
 }

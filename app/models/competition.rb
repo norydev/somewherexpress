@@ -76,7 +76,7 @@ class Competition < ActiveRecord::Base
   end
 
   def self.not_finished
-    self.where(finished: false).order(start_date: :desc)
+    self.where(finished: false).order(:start_date)
   end
 
   private

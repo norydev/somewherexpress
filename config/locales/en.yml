@@ -47,7 +47,7 @@ en:
     new:
       title: Application for %{competition}
       user_infos: "Details of the participant"
-      old_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+      pending_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
       tos: "Please note: Your application for %{competition} is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
   competitions:
     open: 'open'
@@ -91,6 +91,11 @@ en:
         add_track: "Add a track"
       rules:
         title: "Rules and parameters"
+        default:
+          question: "Are applications automatically accepted?"
+          hint: "Or do you want to accept them manually?"
+          accepted: "Automatically"
+          pending: "Manually"
         published:
           question: "Can this competition be published?"
           hint: "It will be visible in the list of competitions"

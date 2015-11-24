@@ -4,9 +4,13 @@
 <% else %>
   $("#modal-<%= @subscription.competition.id %>").modal('hide');
 
-  $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-check text-success"></i> <%= t("subscriptions.accepted") %>');
-  $("#panel-<%= @subscription.competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
-  $('[data-toggle="tooltip"]').tooltip();
+  <% if @subscription.competition.default_registration_status == "accepted" %>
+    $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-check text-success"></i> <%= t("subscriptions.accepted") %>');
+    $("#panel-<%= @subscription.competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
+    $('[data-toggle="tooltip"]').tooltip();
+  <% else %>
+    $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-refresh text-warning"></i> <%= t("subscriptions.pending") %>');
+  <% end %>
 
   $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Your application has been sent succesfully.</div>').hide();
   $("#alerts-bar").slideDown();

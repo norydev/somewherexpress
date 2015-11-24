@@ -1,7 +1,7 @@
 <%= simple_form_for(subscription, remote: true) do |f| %>
   <%= f.error_notification %>
   <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
-  <%= f.input :status, as: :hidden, input_html: { value: "accepted" } %>
+  <%= f.input :status, as: :hidden, input_html: { value: competition.default_registration_status } %>
 
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -48,7 +48,13 @@
     <div class="tos">
       <%= f.input :rules, as: :boolean, label: t('subscriptions.params.rules_label_html', href: link_to(t('subscriptions.params.rules_href_text'), rules_path, target: "_blank")) %>
 
-      <p class="text-uppercase small"><%= t('subscriptions.new.tos', competition: competition.name) %></p>
+      <p class="text-uppercase small">
+        <% if competition.default_registration_status == "accepted" %>
+          <%= t('subscriptions.new.tos', competition: competition.name) %>
+        <% else %>
+          <%= t('subscriptions.new.pending_tos', competition: competition.name) %>
+        <% end %>
+      </p>
     </div>
 
   </div> <!-- END MODAL-BODY -->

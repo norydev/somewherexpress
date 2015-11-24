@@ -28,7 +28,7 @@ fr:
     new:
       title: Inscription à %{competition}
       user_infos: "Informations du participant"
-      old_tos: "Notez bien: Votre inscription à %{competition} doit être approuvée par l'organisateur de la compétition. Vous serez notifié de votre acceptation ou refus par email. Si votre inscription est acceptée, elle est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
+      pending_tos: "Notez bien: Votre inscription à %{competition} doit être approuvée par l'organisateur de la compétition. Vous serez notifié de votre acceptation ou refus par email. Si votre inscription est acceptée, elle est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
       tos: "Notez bien: Votre inscription à %{competition} est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
   competitions:
     open: 'ouverte'
@@ -73,6 +73,11 @@ fr:
         add_track: "Ajouter une étape"
       rules:
         title: "Règles et paramètres"
+        default:
+          question: "Est-ce que les inscriptions sont acceptées automatiquement?"
+          hint: "Ou voulez-vous les accepter manuellement?"
+          accepted: "Automatiquement"
+          pending: "Manuellement"
         published:
           question: "Est-ce que cette compétition peut-être publiée?"
           hint: "Elle sera visible dans la liste des compétitions"
