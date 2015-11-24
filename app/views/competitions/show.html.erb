@@ -9,10 +9,10 @@
 <div class="container padded-mini">
   <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
+      <div id="panel-<%= @competition.id %>" class="panel panel-default">
         <!-- EDIT -->
         <% if policy(@competition).update? %>
-          <div class="bg-light-grey padded-mini-full bordered-bottom">
+          <div class="panel-heading">
             <div class="dropdown pull-right">
               <div class="pointer dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-cogs"></i> <span class="caret"></span>
@@ -38,7 +38,7 @@
           <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
           </p>
 
-          <p>
+          <p class="users-area">
             <% @competition.accepted_users.each do |user| %>
               <%= render 'users/avatar_small', user: user %>
             <% end %>

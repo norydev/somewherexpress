@@ -11,9 +11,9 @@ class Competition < ActiveRecord::Base
   before_validation :geocoding, if: :location_changed?
 
   validates_presence_of :name
-  validates_presence_of :start_registration, :start_location, :start_location_locality, :end_location, :end_location_locality, :start_date, :end_date, :tracks, if: :published?
+  validates_presence_of :start_registration, :start_location, :start_location_locality, :end_location, :end_location_locality, :start_date, :end_date, if: :published?
 
-  # status can take: "applied" (default), "accepted", "refused"
+  # status can take: "pending" (default), "accepted", "refused"
 
   def to_s
     name
@@ -56,7 +56,7 @@ class Competition < ActiveRecord::Base
   end
 
   def pending_users
-    users.includes(:subscriptions).where("subscriptions.status = 'applied'")
+    users.includes(:subscriptions).where("subscriptions.status = 'pending'")
   end
 
   def refused_users

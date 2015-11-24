@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20151123184852) do
     t.integer  "competition_id",                     null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.string   "status",         default: "applied", null: false
+    t.string   "status",         default: "pending", null: false
   end
 
   add_index "subscriptions", ["competition_id"], name: "index_subscriptions_on_competition_id", using: :btree

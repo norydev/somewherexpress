@@ -319,3 +319,16 @@ table tbody tr td {
 .pointer {
   cursor: pointer;
 }
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.flex-item {
+  flex: 0 1 auto;
+  &:nth-child(2) {
+    flex: 1 0 auto;
+    margin-left: 5px;
+  }
+}
