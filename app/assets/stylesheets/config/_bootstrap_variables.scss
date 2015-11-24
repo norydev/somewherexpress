@@ -24,8 +24,8 @@ $border-radius-small: 2px;
 
 // Links style
 $link-hover-decoration: none;
-$link-hover-color: $purple;
-$link-color: $blue;
+$link-hover-color: darken($red, 10%);
+$link-color: $red;
 
 // Grid padding
 $grid-gutter-width: 10px ;
