@@ -37,6 +37,9 @@ en:
     accepted: Your are registred!
     pending: Your application is waiting for approval by the organizer
     refused: Your application has been refused by the organizer
+    accepted_short: Accepted
+    pending_short: Pending
+    refused_short: Refused
     params:
       status: "Status"
       rules: "Rules"

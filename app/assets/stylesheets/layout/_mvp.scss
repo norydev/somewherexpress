@@ -332,3 +332,21 @@ table tbody tr td {
     margin-left: 5px;
   }
 }
+
+.list-group-item.active {
+  background-color: $link-color;
+  border-color: $link-color;
+
+  &:hover {
+    background-color: $link-color;
+    border-color: $link-color;
+  }
+
+  a {
+    color: white;
+    &:hover, &:focus {
+      color: $gray-lighter;
+      outline: none;
+    }
+  }
+}

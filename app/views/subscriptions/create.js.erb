@@ -4,7 +4,7 @@
 <% else %>
   $("#modal-<%= @subscription.competition.id %>").modal('hide');
 
-  $("#registration-area-<%= @subscription.competition.id %>").html('<div class="alert alert-info" role="alert">your are registred!</div>');
+  $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-check text-success"></i> <%= t("subscriptions.accepted") %>');
   $("#panel-<%= @subscription.competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
   $('[data-toggle="tooltip"]').tooltip();
 

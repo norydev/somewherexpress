@@ -75,7 +75,7 @@
                     <%= render 'users/avatar_small', user: user %>
                   </span>
                   <%= link_to user.name, user, class: "flex-item" %>
-                  <i class="fa fa-refresh text-warning flex-item" data-toggle="tooltip" data-placement="bottom" title="Pending"></i>
+                  <i class="fa fa-refresh text-warning flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.pending_short') %>"></i>
                 </li>
               <% end %>
               <% competition.accepted_users.each do |user| %>
@@ -84,7 +84,7 @@
                     <%= render 'users/avatar_small', user: user %>
                   </span>
                   <%= link_to user.name, user, class: "flex-item" %>
-                  <i class="fa fa-check text-success flex-item" data-toggle="tooltip" data-placement="bottom" title="Accpted"></i>
+                  <i class="fa fa-check text-success flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.accepted_short') %>"></i>
                 </li>
               <% end %>
               <% competition.refused_users.each do |user| %>
@@ -93,7 +93,7 @@
                     <%= render 'users/avatar_small', user: user %>
                   </span>
                   <%= link_to user.name, user, class: "flex-item" %>
-                  <i class="fa fa-times text-danger flex-item" data-toggle="tooltip" data-placement="bottom" title="Refused"></i>
+                  <i class="fa fa-times text-danger flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.refused_short') %>"></i>
                 </li>
               <% end %>
             <% end %>

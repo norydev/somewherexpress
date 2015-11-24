@@ -1,16 +1,16 @@
-<div id="registration-area-<%= competition.id %>" class="text-center">
+<div id="registration-area-<%= competition.id %>" class="text-center padded-mini-bottom">
   <% if !competition.finished? && competition.accepted_users.include?(current_user) %>
     <!-- case: applied, accepted -->
-    <div class="alert alert-info" role="alert"><%= t('subscriptions.accepted') %></div>
+    <i class="fa fa-check text-success"></i> <%= t('subscriptions.accepted') %>
     <%#= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
 
   <% elsif competition.pending_users.include?(current_user) %>
     <!-- case: applied, pending -->
-    <div class="alert alert-warning" role="alert"><%= t('subscriptions.pending') %></div>
+    <i class="fa fa-refresh text-warning"></i> <%= t('subscriptions.pending') %>
 
   <% elsif competition.refused_users.include?(current_user) %>
     <!-- case: applied, refused -->
-    <div class="alert alert-danger" role="alert"><%= t('subscriptions.refused') %></div>
+    <i class="fa fa-times text-danger"></i> <%= t('subscriptions.refused') %>
 
   <% else %>
     <% if policy(competition).apply? %>

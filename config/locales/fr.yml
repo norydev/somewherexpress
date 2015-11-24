@@ -17,6 +17,9 @@ fr:
     accepted: Vous êtes inscrit!
     pending: Votre inscription est en attente d'approbation par l'organisateur
     refused: Votre inscription a été refusée par l'organisateur
+    accepted_short: Accepté
+    pending_short: À traiter
+    refused_short: Refusé
     params:
       status: "Status"
       rules: "Règles"
