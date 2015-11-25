@@ -76,7 +76,7 @@
                   </span>
                   <%= link_to user.name, user, class: "flex-item" %>
                   <span class="edit-form flex-item marged-micro-sides">
-                    <%= render 'subscriptions/edit', subscription: Subscription.find_by(competition: competition, user: user) %>
+                    <%= render 'subscriptions/edit', subscription: Subscription.find_by(competition: competition, user: user), competition: competition, user: user %>
                   </span>
                   <span class="flex-item status">
                     <i class="fa fa-refresh text-warning" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.pending_short') %>"></i>

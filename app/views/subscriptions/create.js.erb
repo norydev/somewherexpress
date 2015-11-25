@@ -1,15 +1,15 @@
 <% if @subscription.errors.any? %>
   // Render new review form with errors
-  $("#modal-content-<%= @subscription.competition.id %>").html("<%= j render 'subscriptions/form', competition: @subscription.competition, subscription: @subscription %>");
+  $("#modal-content-<%= @competition.id %>").html("<%= j render 'subscriptions/form', competition: @competition, subscription: @subscription %>");
 <% else %>
-  $("#modal-<%= @subscription.competition.id %>").modal('hide');
+  $("#modal-<%= @competition.id %>").modal('hide');
 
-  <% if @subscription.competition.default_registration_status == "accepted" %>
-    $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-check text-success"></i> <%= t("subscriptions.accepted") %>');
-    $("#panel-<%= @subscription.competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
+  <% if @competition.default_registration_status == "accepted" %>
+    $("#registration-area-<%= @competition.id %>").html('<i class="fa fa-check text-success"></i> <%= t("subscriptions.accepted") %>');
+    $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
     $('[data-toggle="tooltip"]').tooltip();
   <% else %>
-    $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-refresh text-warning"></i> <%= t("subscriptions.pending") %>&nbsp;&nbsp;<%= link_to t("competitions.cancel"), subscription_path(@subscription), method: :delete, data: { confirm: t("competitions.form.delete.message") } %>');
+    $("#registration-area-<%= @competition.id %>").html('<i class="fa fa-refresh text-warning"></i> <%= t("subscriptions.pending") %>&nbsp;&nbsp;<%= link_to t("competitions.cancel"), competition_subscription_path(@competition, @subscription), method: :delete, data: { confirm: t("competitions.form.delete.message") } %>');
   <% end %>
 
   $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Your application has been sent succesfully.</div>').hide();

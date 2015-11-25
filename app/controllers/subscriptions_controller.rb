@@ -1,19 +1,20 @@
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: [:update, :destroy]
+  before_action :set_subscription, only: [:edit, :update, :destroy]
+  before_action :find_competition, only: [:new, :edit, :create, :update]
 
   # POST
   def new
-    @subscription = Subscription.new(subscription_params)
+    @subscription = Subscription.new(competition: @competition, status: @competition.default_registration_status)
     authorize @subscription
   end
 
   def edit
-    @subscription = Subscription.find_by(subscription_params)
     authorize @subscription, :update?
   end
 
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
+    @subscription.competition = @competition
     authorize @subscription
 
     if @subscription.save
@@ -60,7 +61,11 @@ class SubscriptionsController < ApplicationController
       @subscription = Subscription.find(params[:id])
     end
 
+    def find_competition
+      @competition = Competition.find(params[:competition_id])
+    end
+
     def subscription_params
-      params.require(:subscription).permit(:competition_id, :user_id, :status, :rules)
+      params.require(:subscription).permit(:status, :rules)
     end
 end

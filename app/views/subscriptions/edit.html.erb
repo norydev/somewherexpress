@@ -1,16 +1,16 @@
 <%= content_for(:title) do %>
-  <%= @subscription.competition %> | <%= @subscription.user %>
+  <%= @competition %> | <%= @subscription.user %>
 <% end %>
 
 <%= content_for(:description) do %>
-  Traitement de l'inscription de <%= @subscription.user %> à <%= @subscription.competition %>. <%= t('welcome.index.intro') %>
+  Traitement de l'inscription de <%= @subscription.user %> à <%= @competition %>. <%= t('welcome.index.intro') %>
 <% end %>
 
 <div class="container padded-mini">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
       <div class="panel panel-default">
-        <%= render 'process', subscription: @subscription, competition: @subscription.competition, user: @subscription.user %>
+        <%= render 'process', subscription: @subscription, competition: @competition, user: @subscription.user %>
       </div>
     </div>
   </div>

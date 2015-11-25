@@ -2,11 +2,11 @@
   <% if !competition.finished? && competition.accepted_users.include?(current_user) %>
     <!-- case: applied, accepted -->
     <i class="fa fa-check text-success"></i> <%= t('subscriptions.accepted') %>
-    <%#= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete %>
 
   <% elsif competition.pending_users.include?(current_user) %>
     <!-- case: applied, pending -->
-    <i class="fa fa-refresh text-warning"></i> <%= t('subscriptions.pending') %>&nbsp;&nbsp;<%= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete, data: { confirm: t('competitions.form.delete.message') } %>
+    <i class="fa fa-refresh text-warning"></i> <%= t('subscriptions.pending') %>&nbsp;&nbsp;
+    <%= link_to t('competitions.cancel'), competition_subscription_path(competition, Subscription.find_by(user: current_user, competition: competition)), method: :delete, data: { confirm: t('competitions.form.delete.message') } %>
 
   <% elsif competition.refused_users.include?(current_user) %>
     <!-- case: applied, refused -->
@@ -15,10 +15,7 @@
   <% else %>
     <% if policy(competition).apply? %>
       <!-- case: not applied or not signed in -->
-      <%= simple_form_for(Subscription.new, url: new_subscriptions_path, remote: user_signed_in?) do |f| %>
-        <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
-        <%= f.button :submit, t('competitions.apply'), class: "navbar-wagon-button btn", style: "margin: 0 0 20px;" %>
-      <% end %>
+      <%= link_to t('competitions.apply'), new_competition_subscription_path(competition), class: "navbar-wagon-button btn padded-mini-bottom", remote: user_signed_in? %>
 
       <!-- MODAL -->
       <% if user_signed_in? %>

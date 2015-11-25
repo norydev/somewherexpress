@@ -1,14 +1,14 @@
 <% if @subscription.errors.any? %>
   // Render new review form with errors
-  $("#modal-content-sub-<%= @subscription.id %>").html("<%= j render 'subscriptions/process', subscription: @subscription, competition: @subscription.competition, user: @subscription.user %>");
+  $("#modal-content-sub-<%= @subscription.id %>").html("<%= j render 'subscriptions/process', subscription: @subscription, competition: @competition, user: @subscription.user %>");
 <% else %>
   $("#modal-sub-<%= @subscription.id %>").modal('hide');
 
   <% if @subscription.status == "accepted" %>
-    $("#panel-<%= @subscription.competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @subscription.user %>")
+    $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @subscription.user %>")
 
-    $("#competition-<%= @subscription.competition.id %>-user-<%= @subscription.user.id %> .edit-form").remove();
-    $("#competition-<%= @subscription.competition.id %>-user-<%= @subscription.user.id %> .status").html('<i class="fa fa-check text-success flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t("subscriptions.accepted_short") %>"></i>');
+    $("#competition-<%= @competition.id %>-user-<%= @subscription.user.id %> .edit-form").remove();
+    $("#competition-<%= @competition.id %>-user-<%= @subscription.user.id %> .status").html('<i class="fa fa-check text-success flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t("subscriptions.accepted_short") %>"></i>');
     $('[data-toggle="tooltip"]').tooltip();
   <% else %>
   <% end %>

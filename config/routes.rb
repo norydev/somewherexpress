@@ -8,13 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :competitions do
     resources :tracks, only: [:destroy, :edit, :update]
-  end
-
-  resources :subscriptions, only: [:update, :create, :destroy] do
-    collection do
-      post 'new', as: "new"
-      patch 'edit', as: "edit"
-    end
+    resources :subscriptions, only: [:new, :edit, :update, :create, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

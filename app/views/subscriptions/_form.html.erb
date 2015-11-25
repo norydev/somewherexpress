@@ -1,6 +1,5 @@
-<%= simple_form_for(subscription, remote: true) do |f| %>
+<%= simple_form_for([competition, subscription], remote: true) do |f| %>
   <%= f.error_notification %>
-  <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
   <%= f.input :status, as: :hidden, input_html: { value: competition.default_registration_status } %>
 
   <div class="modal-header">
