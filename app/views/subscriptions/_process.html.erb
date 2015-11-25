@@ -1,0 +1,37 @@
+<%= simple_form_for(subscription, remote: true) do |f| %>
+  <%= f.error_notification %>
+  <%= f.association :competition, as: :hidden, input_html: { value: competition.id } %>
+  <%= f.association :user, as: :hidden, input_html: { value: user.id } %>
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="new_registration"><%= t('subscriptions.edit.title', competition: competition.name, user: user.name) %></h4>
+  </div>
+
+  <div class="modal-body text-left">
+    <div class="user_details padded-mini">
+      <p>
+        <strong><%= t('subscriptions.new.user_infos') %></strong>
+      </p>
+      <div class="media">
+        <div class="media-left">
+          <%= render 'users/avatar_large', user: user %>
+        </div>
+        <div class="media-body">
+          <p><i class="fa fa-<%= user.sex %> fa-fw"></i><%= user.name %></p>
+          <p><i class="fa fa-envelope-o fa-fw"></i><%= user.email %></p>
+        </div>
+      </div>
+      <div class="text-center padded-mini">
+        <%= f.collection_radio_buttons :status, [["pending", "refresh text-warning"], ["accepted", "check text-success"], ["refused", "times text-danger"]], :first, :last, checked: subscription.status do |b| %>
+          <% b.label(class: "marged-micro-sides") {"<span class='marged-micro-sides'><i class='fa fa-#{ b.text }'></i> #{t("subscriptions.#{b.value}_short")}</span><div>#{b.radio_button}</div>".html_safe } %>
+        <% end %>
+      </div>
+    </div>
+
+  </div> <!-- END MODAL-BODY -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('cancel') %></button>
+    <%= f.button :submit, t('subscriptions.edit.button'), class: "navbar-wagon-button btn", style: "margin: 20px 0;", data: {toggle: "modal", target: "#modal"} %>
+  </div>
+<% end %>

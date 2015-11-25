@@ -9,7 +9,7 @@
     $("#panel-<%= @subscription.competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
     $('[data-toggle="tooltip"]').tooltip();
   <% else %>
-    $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-refresh text-warning"></i> <%= t("subscriptions.pending") %>');
+    $("#registration-area-<%= @subscription.competition.id %>").html('<i class="fa fa-refresh text-warning"></i> <%= t("subscriptions.pending") %>&nbsp;&nbsp;<%= link_to t("competitions.cancel"), subscription_path(@subscription), method: :delete, data: { confirm: t("competitions.form.delete.message") } %>');
   <% end %>
 
   $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Your application has been sent succesfully.</div>').hide();

@@ -9,6 +9,7 @@ RSpec.describe Subscription, type: :model do
   it 'returns the correct nb of points' do
     u = FactoryGirl.create :user, email: "u1@yopmail.com"
     c = FactoryGirl.create :competition
+
     ts = []
     5.times do |n|
       ts[n] = FactoryGirl.create :track, competition: c

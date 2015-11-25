@@ -151,6 +151,11 @@ table tbody tr td {
   color: $gray-light;
 }
 
+.btn-ghost {
+  background: transparent;
+  border: none
+}
+
 .far-right {
   @extend .pull-right;
   position: relative;

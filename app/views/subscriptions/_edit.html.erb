@@ -1,0 +1,18 @@
+<%= simple_form_for(subscription, url: edit_subscriptions_path, remote: true) do |f| %>
+  <%= f.association :competition, as: :hidden, input_html: { value: subscription.competition.id } %>
+  <%= f.association :user, as: :hidden, input_html: { value: subscription.user.id } %>
+  <%#= f.button :submit, '<i class="fa fa-reply text-muted"></i>', title: "Reply", data: { toggle: 'tooltip', placement: 'bottom'} %>
+  <button type="submit" title="Reply" data-toggle"tooltip" data-placement="bottom" class="btn btn-ghost"><i class="fa fa-reply text-muted"></i></button>
+<% end %>
+
+<!-- MODAL -->
+<% if user_signed_in? %>
+  <div class="modal" id="modal-sub-<%= subscription.id %>" tabindex="-1" role="dialog" aria-labelledby="new_registration">
+    <div class="modal-dialog" role="document">
+      <div id="modal-content-sub-<%= subscription.id %>" class="modal-content">
+        <%= render 'subscriptions/process', subscription: subscription, competition: subscription.competition, user: subscription.user %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!-- END MODAL -->

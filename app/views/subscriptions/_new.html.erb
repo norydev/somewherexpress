@@ -6,7 +6,7 @@
 
   <% elsif competition.pending_users.include?(current_user) %>
     <!-- case: applied, pending -->
-    <i class="fa fa-refresh text-warning"></i> <%= t('subscriptions.pending') %>
+    <i class="fa fa-refresh text-warning"></i> <%= t('subscriptions.pending') %>&nbsp;&nbsp;<%= link_to t('competitions.cancel'), subscription_path(Subscription.find_by(user: current_user, competition: competition)), method: :delete, data: { confirm: t('competitions.form.delete.message') } %>
 
   <% elsif competition.refused_users.include?(current_user) %>
     <!-- case: applied, refused -->

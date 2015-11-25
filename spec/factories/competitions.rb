@@ -29,6 +29,7 @@ FactoryGirl.define do
     end_registration      DateTime.parse("1 april 2015")
     association           :author, factory: :user, email: "ramirez@yopmail.com"
     description           "This race is great"
+    default_registration_status "accepted"
   end
 
 end

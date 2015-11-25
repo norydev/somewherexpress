@@ -10,9 +10,10 @@ Rails.application.routes.draw do
     resources :tracks, only: [:destroy, :edit, :update]
   end
 
-  resources :subscriptions, only: [:create, :destroy] do
+  resources :subscriptions, only: [:update, :create, :destroy] do
     collection do
       post 'new', as: "new"
+      patch 'edit', as: "edit"
     end
   end
 

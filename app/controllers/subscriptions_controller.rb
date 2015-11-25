@@ -1,9 +1,15 @@
 class SubscriptionsController < ApplicationController
+  before_action :set_subscription, only: [:update, :destroy]
 
   # POST
   def new
     @subscription = Subscription.new(subscription_params)
     authorize @subscription
+  end
+
+  def edit
+    @subscription = Subscription.find_by(subscription_params)
+    authorize @subscription, :update?
   end
 
   def create
@@ -23,8 +29,24 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def update
+    authorize @subscription
+
+    if @subscription.update(subscription_params)
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'Application updated successfuly.' }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render :edit }
+        format.js
+      end
+    end
+
+  end
+
   def destroy
-    @subscription = Subscription.find(params[:id])
     authorize @subscription
 
     competition = @subscription.competition
@@ -34,7 +56,11 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+    def set_subscription
+      @subscription = Subscription.find(params[:id])
+    end
+
     def subscription_params
-      params.require(:subscription).permit(:competition_id, :status, :rules)
+      params.require(:subscription).permit(:competition_id, :user_id, :status, :rules)
     end
 end
