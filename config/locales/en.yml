@@ -1,30 +1,10 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   home: Home
   cancel: Cancel
   edit: Edit
   save: Save
   more: More information
+  process: Process
   welcome:
     index:
       intro: "SomewherExpress is a community of hitchhikers based in Switzerland. We organize hitchhiking teams competitions throughout Europe every year. Join us!"
@@ -37,19 +17,27 @@ en:
     accepted: Your are registred!
     pending: Your application is waiting for approval by the organizer
     refused: Your application has been refused by the organizer
+    accepted_short: Accepted
+    pending_short: Pending
+    refused_short: Refused
     params:
       status: "Status"
       rules: "Rules"
-      rules_label: "I accept the rules of this competition"
+      rules_label_html: "I accept the %{href} of this competition"
+      rules_href_text: rules
     new:
       title: Application for %{competition}
       user_infos: "Details of the participant"
-      old_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+      pending_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
       tos: "Please note: Your application for %{competition} is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+    edit:
+      title: "%{user} applied for %{competition}"
+      button: "Validate"
   competitions:
     open: 'open'
     finished: 'finished'
     closed: 'closed'
+    zero: "None for now"
     route: 'Route'
     dates: 'Dates'
     params:
@@ -88,6 +76,11 @@ en:
         add_track: "Add a track"
       rules:
         title: "Rules and parameters"
+        default:
+          question: "Are applications automatically accepted?"
+          hint: "Or do you want to accept them manually?"
+          accepted: "Automatically"
+          pending: "Manually"
         published:
           question: "Can this competition be published?"
           hint: "It will be visible in the list of competitions"

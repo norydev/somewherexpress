@@ -3,17 +3,12 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get '/rules', to: 'welcome#rules'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :users, only: [:index, :show, :edit, :update]
   resources :competitions do
     resources :tracks, only: [:destroy, :edit, :update]
-  end
-
-  resources :subscriptions, only: [:create, :destroy] do
-    collection do
-      post 'new', as: "new"
-    end
+    resources :subscriptions, only: [:new, :edit, :update, :create, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

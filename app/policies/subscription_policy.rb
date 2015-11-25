@@ -13,6 +13,10 @@ class SubscriptionPolicy < ApplicationPolicy
     record.competition.registrations_open?
   end
 
+  def update?
+    user && record.competition.author == user
+  end
+
   def destroy?
     record.competition.registrations_open?
   end

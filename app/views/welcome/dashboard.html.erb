@@ -14,7 +14,7 @@
         </div>
         <div class="profile-pic">
           <%= link_to current_user do %>
-            <%= image_tag current_user.avatar, class: "avatar-large img-circle", alt: "#{current_user.first_name}" %>
+            <%= render 'users/avatar_large', user: current_user %>
           <% end %>
           <% if founder_badge(current_user) %>
             <%= image_tag "badge_committee.svg", class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{founder_badge(current_user).description}", style: "margin-top: 3px;" %>
@@ -45,21 +45,62 @@
         </div>
       <% end %>
 
-      <% if current_user.creations.any? %>
+      <% if current_user.creations.not_finished.any? %>
         <div class="panel panel-default">
-          <h5 class="text-center"><%= t('.creations_title') %></h5>
+          <div class="panel-heading">
+            <strong><%= t('.creations_title') %></strong>
+          </div>
+
           <ul class="list-group">
             <% current_user.creations.not_finished.each do |competition| %>
-              <li class="list-group-item">
-                <h5><%= competition.name %></h5>
-                <p><%= link_to t('more'), competition %></p>
-                <% if policy(competition).update? %>
-                  <p><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></p>
-                <% end %>
-                <% if policy(competition).destroy? %>
-                  <p><%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete' %></p>
-                <% end %>
+              <li class="list-group-item myactive">
+                <div class="dropdown pull-right">
+                  <div class="pointer dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cogs"></i> <span class="caret"></span>
+                  </div>
+                  <ul class="dropdown-menu navbar-wagon-dropdown-menu">
+                    <% if policy(competition).update? %>
+                      <li><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></li>
+                    <% end %>
+                    <% if policy(competition).destroy? %>
+                      <li><%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete' %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <span><%= link_to competition, competition %></span>
               </li>
+              <% competition.pending_users.each do |user| %>
+                <li id="competition-<%= competition.id %>-user-<%= user.id %>" class="list-group-item flex-container">
+                  <span class="flex-item">
+                    <%= render 'users/avatar_small', user: user %>
+                  </span>
+                  <%= link_to user.name, user, class: "flex-item" %>
+                  <span class="edit-form flex-item marged-micro-sides">
+                    <%= render 'subscriptions/edit', subscription: Subscription.find_by(competition: competition, user: user), competition: competition, user: user %>
+                  </span>
+                  <span class="flex-item status">
+                    <i class="fa fa-refresh text-warning" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.pending_short') %>"></i>
+                  </span>
+                </li>
+              <% end %>
+              <% competition.accepted_users.each do |user| %>
+                <li class="list-group-item flex-container">
+                  <span class="flex-item">
+                    <%= render 'users/avatar_small', user: user %>
+                  </span>
+                  <%= link_to user.name, user, class: "flex-item" %>
+                  <i class="fa fa-check text-success flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.accepted_short') %>"></i>
+                </li>
+              <% end %>
+              <% competition.refused_users.each do |user| %>
+                <li class="list-group-item flex-container">
+                  <span class="flex-item">
+                    <%= render 'users/avatar_small', user: user %>
+                  </span>
+                  <%= link_to user.name, user, class: "flex-item" %>
+                  <i class="fa fa-times text-danger flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.refused_short') %>"></i>
+                </li>
+              <% end %>
             <% end %>
           </ul>
         </div>
@@ -102,15 +143,11 @@
         <div role="tabpanel" class="tab-pane panel panel-default" id="finished">
           <% if policy_scope(Competition).finished.any? %>
             <div id="map" style="width: 100%; height: 590px; max-height: 90vh;"></div>
-            <table class="table" style="margin-bottom: 0;">
-              <tbody>
-                <% policy_scope(Competition).finished.each do |competition| %>
-                  <tr>
-                    <%= render 'competition_summary', competition: competition %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
+            <ul class="list-group">
+              <% policy_scope(Competition).finished.each do |competition| %>
+                <%= render 'competition_summary', competition: competition %>
+              <% end %>
+            </ul>
           <% end %>
         </div>
         <!-- <div role="tabpanel" class="tab-pane" id="mines">...</div> -->

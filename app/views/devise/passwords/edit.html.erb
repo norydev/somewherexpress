@@ -1,24 +1,27 @@
-<div class="container padded-mini">
+<div class="container padded-medium">
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong><%= t('.change_your_password', :default => 'Change your password') %></strong>
+        </div>
+        <div class="panel-body">
+          <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name)) do |f| %>
+            <%= f.error_notification %>
 
-      <h2><%= t('.change_your_password', :default => 'Change your password') %></h2>
+            <%= f.input :reset_password_token, as: :hiden  %>
 
-      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name)) do |f| %>
-        <%= f.error_notification %>
+            <%= f.label :password, t('.new_password', :default => 'New password') %>
+            <%= f.input :password, label: false %>
 
-        <%= f.input :reset_password_token, as: :hiden  %>
+            <%= f.label :password_confirmation, t('.confirm_new_password', :default => 'Confirm new password') %>
+            <%= f.input :password_confirmation, label: false %>
 
-        <%= f.label :password, t('.new_password', :default => 'New password') %>
-        <%= f.input :password, label: false %>
-
-        <%= f.label :password_confirmation, t('.confirm_new_password', :default => 'Confirm new password') %>
-        <%= f.input :password_confirmation, label: false %>
-
-        <%= f.button :submit, t('.change_my_password', :default => 'Change my password') %>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
+            <%= f.button :submit, t('.change_my_password', :default => 'Change my password') %>
+          <% end %>
+        </div>
+      </div>
+      <%#= render "devise/shared/links" %>
 
     </div>
   </div>

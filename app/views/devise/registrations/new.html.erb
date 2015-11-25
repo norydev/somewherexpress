@@ -1,34 +1,39 @@
-<div class="container profile">
+<div class="container profile padded-medium">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <h2><%= t('.sign_up', :default => "Sign up") %></h2>
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= f.error_notification %>
-
-        <div class="row">
-          <div class="col-xs-6">
-            <%= f.input :first_name, label: t('users.params.first_name'), required: true, autofocus: true %>
-          </div>
-          <div class="col-xs-6">
-            <%= f.input :last_name, label: t('users.params.last_name'), required: true %>
-          </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="pull-right"><%= link_to t("devise.sessions.new.sign_in"), new_session_path(resource_name) %></span>
+          <strong><%= t('.sign_up', :default => "Sign up") %></strong>
         </div>
+        <div class="panel-body">
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= f.error_notification %>
 
-        <%= f.label t('users.params.girl'), required: true%>
-        <div class="text-center">
-          <%= f.collection_radio_buttons :girl, [[true, 'female'] ,[false, 'male']], :first, :last, checked: true do |b|
-            b.label(class: "marged-micro-sides") { "<i class='fa fa-#{ b.text }'></i>".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
-            end %>
+            <div class="row">
+              <div class="col-xs-6">
+                <%= f.input :first_name, label: t('users.params.first_name'), required: true, autofocus: true %>
+              </div>
+              <div class="col-xs-6">
+                <%= f.input :last_name, label: t('users.params.last_name'), required: true %>
+              </div>
+            </div>
+
+            <%= f.label t('users.params.girl'), required: true%>
+            <div class="text-center">
+              <%= f.collection_radio_buttons :girl, [[true, 'female'] ,[false, 'male']], :first, :last, checked: true do |b|
+                b.label(class: "marged-micro-sides") { "<i class='fa fa-#{ b.text }'></i>".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
+                end %>
+            </div>
+
+            <%= f.input :email, required: true %>
+            <%= f.input :password, required: true, hint: (t('.validatable.hint', count: @minimum_password_length)) %>
+            <%= f.button :submit, t('.sign_up', :default => "Sign up"), class: "btn btn-primary" %>
+          <% end %>
         </div>
+      </div>
 
-        <%= f.input :email, required: true %>
-        <%= f.input :password, required: true, hint: (t('.validatable.hint', count: @minimum_password_length)) %>
-        <%#= f.input :password, required: true %>
-        <%#= f.input :password_confirmation, required: true %>
-        <%= f.button :submit, t('.sign_up', :default => "Sign up"), class: "btn btn-primary" %>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
+      <%#= render "devise/shared/links" %>
     </div>
   </div>
 </div>

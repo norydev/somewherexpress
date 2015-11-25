@@ -1,0 +1,15 @@
+<%= link_to edit_competition_subscription_path(competition, subscription), data: { toggle: "tooltip", placement: "bottom" }, title: t('process'), remote: true do %>
+  <i class="fa fa-reply text-muted"></i>
+<% end %>
+
+<!-- MODAL -->
+<% if user_signed_in? %>
+  <div class="modal" id="modal-sub-<%= subscription.id %>" tabindex="-1" role="dialog" aria-labelledby="new_registration">
+    <div class="modal-dialog" role="document">
+      <div id="modal-content-sub-<%= subscription.id %>" class="modal-content">
+        <%= render 'subscriptions/process', subscription: subscription, competition: competition, user: user %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!-- END MODAL -->

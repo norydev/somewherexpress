@@ -19,9 +19,7 @@
             <% @users.sort_by{ |u| [-Competition.includes(:ranks).where(finished: true).where('ranks.result = ? AND ranks.user_id = ?', 1, u.id).references(:ranks).count, -u.ranks.where(race_type: "Track", result: 1).count, founder_badge(u) ? 0 : 1] }.each_with_index do |user, index| %>
               <tr>
                 <td>
-                  <%= link_to user do %>
-                    <%= image_tag user.avatar, class: "img-circle avatar-medium", alt: "#{user.first_name}" %>
-                  <% end %>
+                  <%= render 'users/avatar_medium', user: user %>
                 </td>
                 <td class="text-uppercase"><%= link_to user, user %></td>
                 <td>

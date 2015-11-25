@@ -15,18 +15,14 @@
         <% (competition.ranks.where.not(result: 0).order(:dsq, :result) + competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>
           <tr>
             <td>
-              <%= link_to rank1.user do %>
-                <%= image_tag rank1.user.avatar, class: "avatar", alt: "#{rank1.user.first_name}" %>
-              <% end %>
+              <%= render 'users/avatar_small', user: rank1.user %>
             </td>
             <td class="text-uppercase"><%= link_to rank1.user, rank1.user %></td>
             <td class="text-center"><%= result(rank1) %></td>
             <% if rank2 %>
               <td class="text-right text-uppercase"><%= link_to rank2.user, rank2.user %></td>
               <td class="text-right">
-                <%= link_to rank2.user do %>
-                  <%= image_tag rank2.user.avatar, class: "avatar", alt: "#{rank2.user.first_name}" %>
-                <% end %>
+                <%= render 'users/avatar_small', user: rank2.user %>
               </td>
             <% else %>
               <td></td>

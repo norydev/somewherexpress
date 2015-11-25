@@ -141,6 +141,18 @@
       </div>
 
       <div class="row">
+        <div class="col-xs-12 col-md-8">
+          <strong><%= t('.rules.default.question') %></strong>
+          <%= f.hint t('.rules.default.hint') %>
+        </div>
+        <div class="col-xs-12 col-md-4 text-right-center">
+          <%= f.collection_radio_buttons :default_registration_status, [["accepted", "check text-success"] ,["pending", "refresh text-warning"]], :first, :last, checked: "pending" do |b| %>
+            <% b.label(class: "marged-micro-sides") {"<span class='marged-micro-sides'><i class='fa fa-#{ b.text }'></i> #{t(".rules.default.#{b.value}")}</span>".html_safe + b.radio_button } %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-xs-9">
           <strong><%= t('.rules.published.question') %></strong>
           <%= f.hint t('.rules.published.hint') %>

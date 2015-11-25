@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121063924) do
+ActiveRecord::Schema.define(version: 20151124145439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20151121063924) do
     t.date     "end_date"
     t.string   "start_location"
     t.string   "end_location"
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
     t.float    "start_location_lat"
     t.float    "start_location_lng"
     t.float    "end_location_lat"
@@ -57,12 +57,13 @@ ActiveRecord::Schema.define(version: 20151121063924) do
     t.string   "end_location_country"
     t.string   "end_location_country_short"
     t.string   "end_location_postal_code"
-    t.boolean  "finished",                                         default: false, null: false
-    t.boolean  "published",                                        default: false, null: false
+    t.boolean  "finished",                                         default: false,     null: false
+    t.boolean  "published",                                        default: false,     null: false
     t.datetime "start_registration"
     t.datetime "end_registration"
     t.integer  "author_id"
     t.text     "description"
+    t.string   "default_registration_status",                      default: "pending", null: false
   end
 
   create_table "ranks", force: :cascade do |t|
@@ -84,7 +85,7 @@ ActiveRecord::Schema.define(version: 20151121063924) do
     t.integer  "competition_id",                     null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.string   "status",         default: "applied", null: false
+    t.string   "status",         default: "pending", null: false
   end
 
   add_index "subscriptions", ["competition_id"], name: "index_subscriptions_on_competition_id", using: :btree
@@ -142,6 +143,10 @@ ActiveRecord::Schema.define(version: 20151121063924) do
     t.boolean  "admin",                  default: false, null: false
     t.boolean  "organizer",              default: false, null: false
     t.boolean  "girl",                   default: false, null: false
+    t.datetime "deleted_at"
+    t.string   "old_first_name"
+    t.string   "old_last_name"
+    t.string   "old_email"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
