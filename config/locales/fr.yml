@@ -13,6 +13,9 @@ fr:
       passed_title: "Compétitions terminées"
     dashboard:
       creations_title: "Compétitions que j'organise"
+  user_mailer:
+    welcome:
+      subject: "Bienvenue sur SomewherExpress.com"
   subscriptions:
     accepted: Vous êtes inscrit!
     pending: Votre inscription est en attente d'approbation par l'organisateur
