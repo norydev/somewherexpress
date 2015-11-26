@@ -19,6 +19,6 @@ class UserMailer < ApplicationMailer
   def goodbye(user)
     @user = user
 
-    mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subject: t('.subject'))
+    mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.old_email, subject: t('.subject'))
   end
 end
