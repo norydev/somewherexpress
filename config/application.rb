@@ -45,5 +45,10 @@ module Somewherexpress
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Devise Layout
+    config.to_prepare do
+      Devise::Mailer.layout 'mailer' # email.haml or email.erb
+    end
   end
 end

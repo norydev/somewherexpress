@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
 
+  after_create :send_welcome_email
+
   def to_s
     name
   end
@@ -38,6 +40,7 @@ class User < ActiveRecord::Base
   def soft_delete
     update_attributes(deleted_at: Time.current, old_email: email, old_first_name: first_name, old_last_name: last_name, picture: nil)
     update_attributes(first_name: first_name.first, last_name: last_name.first, email: "#{Time.now.to_i}#{rand(100)}#{email}")
+    UserMailer.goodbye(self).deliver_now
   end
 
   # ensure user account is active
@@ -49,4 +52,14 @@ class User < ActiveRecord::Base
   def inactive_message
     !deleted_at ? super : :deleted_account
   end
+
+  def founder_badge
+    badges.find_by(name: "Founder")
+  end
+
+  private
+
+    def send_welcome_email
+      UserMailer.welcome(self).deliver_now
+    end
 end

@@ -38,6 +38,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'pundit'
 gem 'modernizr-rails'
+gem 'premailer-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
@@ -64,10 +65,6 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-end
-
-group :development do
-  gem 'letter_opener'
 end
 
 group :test do
