@@ -16,8 +16,8 @@
           <%= link_to current_user do %>
             <%= render 'users/avatar_large', user: current_user %>
           <% end %>
-          <% if founder_badge(current_user) %>
-            <%= image_tag "badge_committee.svg", class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{founder_badge(current_user).description}", style: "margin-top: 3px;" %>
+          <% if current_user.founder_badge %>
+            <%= image_tag current_user.founder_badge.picture, class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{current_user.founder_badge.description}", style: "margin-top: 3px;" %>
           <% end %>
         </div>
         <div class="padded-mini text-center">

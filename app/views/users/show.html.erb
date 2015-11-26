@@ -14,8 +14,8 @@
           <div class="profile-pic">
             <%#= image_tag h(gravatar_url(@user, size: 240, default: "https://somewherexpress.herokuapp.com/assets/default_user_picture-9bf0d1fecf56cabbbf007491c4ef726a52ac9ba05dbec980706c9720ad91b155.png")), class: "avatar-ultra", alt: @user.first_name %>
             <%= image_tag @user.avatar, class: "avatar-ultra", alt: @user.first_name %>
-            <% if founder_badge(@user) %>
-              <%= image_tag "badge_committee.svg", class: "avatar-badge", data: {toggle: "tooltip", placement: "bottom"}, title: founder_badge(@user).description, style: "margin-top: 3px;" %>
+            <% if @user.founder_badge %>
+              <%= image_tag @user.founder_badge.picture, class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{@user.founder_badge.description}", style: "margin-top: 3px;" %>
             <% end %>
           </div>
 

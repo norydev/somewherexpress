@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     !deleted_at ? super : :deleted_account
   end
 
+  def founder_badge
+    badges.find_by(name: "Founder")
+  end
+
   private
 
     def send_welcome_email
