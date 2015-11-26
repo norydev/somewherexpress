@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
 
+  after_create :send_welcome_email
+
   def to_s
     name
   end
@@ -49,4 +51,10 @@ class User < ActiveRecord::Base
   def inactive_message
     !deleted_at ? super : :deleted_account
   end
+
+  private
+
+    def send_welcome_email
+      UserMailer.welcome(self).deliver_now
+    end
 end
