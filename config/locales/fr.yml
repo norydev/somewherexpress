@@ -16,6 +16,8 @@ fr:
   user_mailer:
     welcome:
       subject: "Bienvenue sur SomewherExpress.com"
+    goodbye:
+      subject: "Au revoir et bonne route"
   subscriptions:
     accepted: Vous êtes inscrit!
     pending: Votre inscription est en attente d'approbation par l'organisateur

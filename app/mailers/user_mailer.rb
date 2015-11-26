@@ -7,7 +7,6 @@ class UserMailer < ApplicationMailer
   #
   def welcome(user)
     @user = user
-    @greeting = "Hi"
 
     mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subject: t('.subject'))
   end
@@ -17,9 +16,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.goodbye.subject
   #
-  def goodbye
-    @greeting = "Hi"
+  def goodbye(user)
+    @user = user
 
-    mail to: "to@example.org"
+    mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subject: t('.subject'))
   end
 end
