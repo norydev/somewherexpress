@@ -10,6 +10,14 @@ class Subscription < ActiveRecord::Base
   after_create :make_track_ranks, if: :default_accepted
   before_destroy :destroy_ranks
 
+  def name
+    "#{user.name} => #{competition.name}"
+  end
+
+  def to_s
+    name
+  end
+
   def points
     competition.t_ranks.where(user: user).map(&:points).reduce(:+)
   end
