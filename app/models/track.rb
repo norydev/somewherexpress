@@ -9,8 +9,12 @@ class Track < ActiveRecord::Base
 
   validates_presence_of :start_location, :start_location_locality, :end_location, :end_location_locality, :start_time
 
-  def to_s
+  def name
     "#{start_location_locality} (#{start_location_country_short}) – #{end_location_locality} (#{end_location_country_short})"
+  end
+
+  def to_s
+    name
   end
 
   private

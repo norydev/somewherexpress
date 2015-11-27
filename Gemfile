@@ -39,6 +39,7 @@ gem 'gmaps4rails'
 gem 'pundit'
 gem 'modernizr-rails'
 gem 'premailer-rails'
+gem 'rails_admin'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'

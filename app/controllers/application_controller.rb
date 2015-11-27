@@ -7,10 +7,18 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
-  after_action :verify_authorized, except: :index, unless: :devise_controller?
-  after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
+  after_action :verify_authorized, except: :index, unless: :devise_or_admin_controller?
+  after_action :verify_policy_scoped, only: :index, unless: :devise_or_admin_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  def devise_or_admin_controller?
+    devise_controller? || admin_controller?
+  end
+
+  def admin_controller?
+    is_a?(RailsAdmin::MainController)
+  end
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
