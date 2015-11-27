@@ -45,7 +45,25 @@ class Competition < ActiveRecord::Base
     if !finished && start_registration && end_registration
       Time.now.between?(start_registration, end_registration)
     elsif !finished && start_registration
-      Time.now.between?(start_registration, end_date)
+      Time.now.between?(start_registration, start_date - 1)
+    else
+      false
+    end
+  end
+
+  def after_registrations?
+    if start_registration && end_registration
+      Time.now > end_registration
+    elsif start_registration
+      Time.now > (start_date - 1)
+    else
+      false
+    end
+  end
+
+  def before_registrations?
+    if start_registration
+      Time.now < start_registration
     else
       false
     end

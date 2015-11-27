@@ -10,11 +10,11 @@
   <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
       <!-- START HALL OF FAME -->
+      <div class="head-icon text-center"><i class="icomoon icon-laurel"></i></div>
+      <h1>Hall of Fame</h1>
+      <!-- Panel becomes useless... -->
       <div class="panel panel-default">
-        <div class="head-icon text-center"><i class="icomoon icon-laurel"></i></div>
-        <h1>Hall of Fame</h1>
-
-        <table class="table bordered-top">
+        <table class="table">
           <tbody>
             <% @users.sort_by{ |u| [-Competition.includes(:ranks).where(finished: true).where('ranks.result = ? AND ranks.user_id = ?', 1, u.id).references(:ranks).count, -u.ranks.where(race_type: "Track", result: 1).count, u.founder_badge ? 0 : 1] }.each_with_index do |user, index| %>
               <tr>
