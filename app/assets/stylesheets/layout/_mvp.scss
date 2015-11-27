@@ -290,12 +290,16 @@ table tbody tr td {
 }
 
 .nav-tabs {
-  // background: $gray-lighter;
-  border-radius: 5px 5px 0 0;
+  a {
+    color: #555;
+    &:hover, &:focus {
+      color: #555;
+    }
+  }
 }
 
 .wrapper {
-  background-color: #F6FCFF;
+  background-color: #ffffff;
 }
 
 .head-icon {
@@ -360,4 +364,10 @@ table tbody tr td {
   .text-right-center {
     text-align: right;
   }
+}
+
+.separator {
+  width: 60px;
+  margin: 0 auto;
+  border-top: 1px solid #555;
 }
