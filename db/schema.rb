@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124145439) do
+ActiveRecord::Schema.define(version: 20151127162628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20151124145439) do
     t.integer  "author_id"
     t.text     "description"
     t.string   "default_registration_status",                      default: "pending", null: false
+    t.string   "video"
   end
 
   create_table "ranks", force: :cascade do |t|

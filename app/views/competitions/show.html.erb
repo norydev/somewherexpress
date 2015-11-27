@@ -50,6 +50,12 @@
 
         <div id="map" style="width: 100%; height: 400px; max-height: 90vh;"></div>
 
+        <% if @competition.video.present? %>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="<%= @competition.video %>"></iframe>
+          </div>
+        <% end %>
+
         <% if @competition.description.present? %>
           <blockquote class="marged-medium"><%= @competition.description %></blockquote>
         <% end %>
