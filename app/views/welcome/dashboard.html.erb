@@ -14,7 +14,7 @@
         </div>
         <div class="profile-pic">
           <%= link_to current_user do %>
-            <%= render 'users/avatar_large', user: current_user %>
+            <%= image_tag current_user.avatar, class: "avatar-ultra", alt: current_user.first_name %>
           <% end %>
           <% if current_user.founder_badge %>
             <%= image_tag current_user.founder_badge.picture, class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{current_user.founder_badge.description}", style: "margin-top: 3px;" %>
