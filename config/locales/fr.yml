@@ -39,9 +39,13 @@ fr:
       title: "%{user} s'est inscrit à %{competition}"
       button: "Valider"
   competitions:
-    open: 'ouverte'
+    open:
+      one: 'ouverte'
+      other: 'ouvertes'
     finished: 'terminée'
-    closed: 'close'
+    closed:
+      one: 'close'
+      other: 'closes'
     zero: "Aucune pour l'instant"
     route: 'Parcours'
     dates: 'Dates'
@@ -56,6 +60,7 @@ fr:
     registrations:
       start: "Ouverture des inscriptions dans %{time}"
       end: "Fermeture des inscriptions dans %{time}"
+      message: "Les inscriptions sont "
     index:
       new:
         title: "Créer une compétition"
@@ -92,6 +97,8 @@ fr:
         finished:
           question: "Est-ce que cette compétition est terminée?"
           hint: "Les résultats sont-ils définitifs?"
+      souvenirs:
+        title: "Souvenirs"
     apply: "S'inscrire"
     cancel: "Annuler mon inscription"
     edit_results: "Mettre à jour le résultat"

@@ -1,7 +1,7 @@
 <% if competition.registrations_open? %>
   <div class="separator padded-micro"></div>
   <p>
-    <span class="text-uppercase small">Les inscriptions sont </span><span class="text-uppercase label label-success">ouvertes</span>
+    <span class="text-uppercase small"><%= t('competitions.registrations.message') %></span><span class="text-uppercase label label-success"><%= t('competitions.open', count: 2) %></span>
   </p>
   <div class="text-uppercase small">
     <%= t('competitions.registrations.end', time: distance_of_time_in_words(competition.end_registration || (competition.start_date - 1), Time.now)) %>:
@@ -10,7 +10,7 @@
 <% elsif competition.before_registrations? %>
   <div class="separator padded-micro"></div>
   <p>
-    <span class="text-uppercase small">Les inscriptions sont </span><span class="text-uppercase label label-success">ouvertes</span>
+    <span class="text-uppercase small"><%= t('competitions.registrations.message') %></span><span class="text-uppercase label label-success"><%= t('competitions.open', count: 2) %></span>
   </p>
   <div class="text-uppercase small">
     <%= t('competitions.registrations.start', time: distance_of_time_in_words(competition.start_registration, Time.now)) %>:
@@ -19,6 +19,6 @@
 <% elsif competition.after_registrations? %>
   <div class="separator padded-micro"></div>
   <p>
-    <span class="text-uppercase small">Les inscriptions sont </span><span class="text-uppercase label label-danger">closes</span>
+    <span class="text-uppercase small"><%= t('competitions.registrations.message') %></span><span class="text-uppercase label label-danger"><%= t('competitions.closed', count: 2) %></span>
   </p>
 <% end %>
