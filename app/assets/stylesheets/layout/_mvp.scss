@@ -46,7 +46,7 @@ h2,h3 {
 
 .avatar-badge {
   border-radius: 50%;
-  width: 30px;
+  width: 36px;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -54,9 +54,13 @@ h2,h3 {
 
 .profile-pic {
   position: relative;
-  width: 120px;
   display: block;
-  margin: 20px auto;
+  width: 126px;
+  margin: -60px auto 0;
+
+  img {
+    border: 3px solid white;
+  }
 }
 
 .text-lightweight {
@@ -173,26 +177,17 @@ table tbody tr td {
   font-size: 3em;
 }
 
-.dashboard .panel {
+.radius-5 {
   border-radius: 5px;
+}
+
+.dashboard .panel {
+  @extend .radius-5
 }
 
 .tab-content .panel-outside {
   border-top: 0;
   border-radius: 0 0 5px 5px;
-}
-
-.bio-panel {
-  .profile-pic {
-    position: relative;
-    display: block;
-    margin: -40px auto 0;
-    width: 80px;
-  }
-  .avatar-badge {
-    bottom: -5px;
-    right: -5px;
-  }
 }
 
 .cover-image-mini {
@@ -374,4 +369,25 @@ table tbody tr td {
 
 .cursor-default {
   cursor: default;
+}
+
+.error-page {
+  color: white;
+
+  h1 {
+    color: white;
+    font-size: 100px;
+    font-weight: 700;
+  }
+
+  .btn {
+    background-color: white;
+    color: $brand-color;
+    border: 2px solid white;
+
+    &:hover {
+      color: $brand-color;
+      background: $gray-lighter;
+    }
+  }
 }

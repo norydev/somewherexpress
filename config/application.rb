@@ -50,5 +50,7 @@ module Somewherexpress
     config.to_prepare do
       Devise::Mailer.layout 'mailer' # email.haml or email.erb
     end
+
+    config.exceptions_app = self.routes
   end
 end

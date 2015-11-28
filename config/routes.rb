@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resources :subscriptions, only: [:new, :edit, :update, :create, :destroy]
   end
 
+  %w( 404 422 500 ).each do |code|
+    get code, to: "errors#show", code: code
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

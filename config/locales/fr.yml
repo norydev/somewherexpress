@@ -130,6 +130,11 @@ fr:
     params:
       result: Résultat
       points: Points
+  error_pages:
+    p404: "Ce que vous cherchez n'est pas ici"
+    p422: "La modification a été refusée. Peut-être que vous essayez de modifier quelque chose dont vous n'avez l'accès."
+    p500: "Une erreur s'est produite."
+
 
   # Rails + Devise strings
   date:

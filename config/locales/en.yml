@@ -145,3 +145,7 @@ en:
       rank:
         one: rank
         other: ranks
+  error_pages:
+    404: "What you are looking for is not here"
+    422: "The change you wanted was rejected. Maybe you tried to change something you didn't have access to."
+    500: "Something went wrong."
