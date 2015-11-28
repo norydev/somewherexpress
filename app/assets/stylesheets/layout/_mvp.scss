@@ -375,3 +375,24 @@ table tbody tr td {
 .cursor-default {
   cursor: default;
 }
+
+.error-page {
+  color: white;
+
+  h1 {
+    color: white;
+    font-size: 100px;
+    font-weight: 700;
+  }
+
+  .btn {
+    background-color: white;
+    color: $brand-color;
+    border: 2px solid white;
+
+    &:hover {
+      color: $brand-color;
+      background: $gray-lighter;
+    }
+  }
+}

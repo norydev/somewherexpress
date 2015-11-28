@@ -7,17 +7,21 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
-  after_action :verify_authorized, except: :index, unless: :devise_or_admin_controller?
-  after_action :verify_policy_scoped, only: :index, unless: :devise_or_admin_controller?
+  after_action :verify_authorized, except: :index, unless: :unverified_controller?
+  after_action :verify_policy_scoped, only: :index, unless: :unverified_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  def devise_or_admin_controller?
-    devise_controller? || admin_controller?
+  def unverified_controller?
+    devise_controller? || admin_controller? || errors_controller?
   end
 
   def admin_controller?
     is_a?(RailsAdmin::MainController)
+  end
+
+  def errors_controller?
+    self.controller_name == 'errors'
   end
 
   def user_not_authorized
