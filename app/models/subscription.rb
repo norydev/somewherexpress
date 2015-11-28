@@ -7,7 +7,7 @@ class Subscription < ActiveRecord::Base
   validates_acceptance_of :rules, on: :create, allow_nil: false
 
   after_update :status_changed
-  after_create :make_track_ranks, if: :default_accepted
+  after_create :make_track_ranks, if: :accepted
   before_destroy :destroy_ranks
 
   def name
@@ -28,12 +28,11 @@ class Subscription < ActiveRecord::Base
 
   private
 
-    def default_accepted
-      competition.default_registration_status == "accepted"
+    def accepted
+      status == "accepted"
     end
 
     def status_changed
-      puts changes['status']
       if changes['status'].any? && changes['status'].last == "accepted"
         make_track_ranks
       elsif changes['status'].any? && changes['status'].last != "accepted"

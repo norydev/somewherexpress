@@ -8,7 +8,8 @@ en:
   welcome:
     index:
       intro: "SomewherExpress is a community of hitchhikers based in Switzerland. We organize hitchhiking teams competitions throughout Europe every year. Join us!"
-      open_title: "Competitions to come"
+      future_title: "Competitions to come"
+      open_title: "Registrations open"
       closed_title: "Registrations closed"
       passed_title: "Passed competitions"
     dashboard:
@@ -136,8 +137,8 @@ en:
         one: competition
         other: competitions
       track:
-        one: stage
-        other: stages
+        one: track
+        other: tracks
       subscription:
         one: registration
         other: registrations
