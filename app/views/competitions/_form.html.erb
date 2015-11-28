@@ -3,8 +3,10 @@
 
   <!-- GENERAL INFORMATIONS -->
   <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><%= t('.general.title') %></strong>
+    </div>
     <div class="panel-body">
-      <h4><%= t('.general.title') %></h4>
       <%= f.input :name, label: t('competitions.params.name') %>
       <div class="row">
         <div class="col-xs-6">
@@ -56,73 +58,78 @@
   <!-- END GENERAL INFORMATIONS -->
 
   <!-- TRACKS -->
-  <h4 class="text-capitalize"><%= t('activerecord.models.track', count: 2) %></h4>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong class="text-capitalize"><%= t('activerecord.models.track', count: 2) %></strong>
+    </div>
+  </div>
+  <%= f.simple_fields_for :tracks, @tracks do |t| %>
+    <div class="row tracks_form">
+      <div class="col-xs-10 col-sm-11">
+        <div class="panel panel-default">
+          <div class="row panel-body">
+            <div class="col-xs-6">
+              <%= t.input :start_location, label: t('tracks.params.start_location') %>
+              <%= t.input :start_location_street_number, as: :hidden %>
+              <%= t.input :start_location_route, as: :hidden %>
+              <%= t.input :start_location_locality, as: :hidden %>
+              <%= t.input :start_location_administrative_area_level_2, as: :hidden %>
+              <%= t.input :start_location_administrative_area_level_1, as: :hidden %>
+              <%= t.input :start_location_administrative_area_level_1_short, as: :hidden %>
+              <%= t.input :start_location_country, as: :hidden %>
+              <%= t.input :start_location_country_short, as: :hidden %>
+              <%= t.input :start_location_postal_code, as: :hidden %>
+            </div>
+            <div class="col-xs-6">
+              <%= t.input :end_location, label: t('tracks.params.end_location') %>
+              <%= t.input :end_location_street_number, as: :hidden %>
+              <%= t.input :end_location_route, as: :hidden %>
+              <%= t.input :end_location_locality, as: :hidden %>
+              <%= t.input :end_location_administrative_area_level_2, as: :hidden %>
+              <%= t.input :end_location_administrative_area_level_1, as: :hidden %>
+              <%= t.input :end_location_administrative_area_level_1_short, as: :hidden %>
+              <%= t.input :end_location_country, as: :hidden %>
+              <%= t.input :end_location_country_short, as: :hidden %>
+              <%= t.input :end_location_postal_code, as: :hidden %>
+            </div>
 
-    <%= f.simple_fields_for :tracks, @tracks do |t| %>
-      <div class="row tracks_form">
-        <div class="col-xs-10 col-sm-11">
-          <div class="panel panel-default">
-            <div class="row panel-body">
-              <div class="col-xs-6">
-                <%= t.input :start_location, label: t('tracks.params.start_location') %>
-                <%= t.input :start_location_street_number, as: :hidden %>
-                <%= t.input :start_location_route, as: :hidden %>
-                <%= t.input :start_location_locality, as: :hidden %>
-                <%= t.input :start_location_administrative_area_level_2, as: :hidden %>
-                <%= t.input :start_location_administrative_area_level_1, as: :hidden %>
-                <%= t.input :start_location_administrative_area_level_1_short, as: :hidden %>
-                <%= t.input :start_location_country, as: :hidden %>
-                <%= t.input :start_location_country_short, as: :hidden %>
-                <%= t.input :start_location_postal_code, as: :hidden %>
-              </div>
-              <div class="col-xs-6">
-                <%= t.input :end_location, label: t('tracks.params.end_location') %>
-                <%= t.input :end_location_street_number, as: :hidden %>
-                <%= t.input :end_location_route, as: :hidden %>
-                <%= t.input :end_location_locality, as: :hidden %>
-                <%= t.input :end_location_administrative_area_level_2, as: :hidden %>
-                <%= t.input :end_location_administrative_area_level_1, as: :hidden %>
-                <%= t.input :end_location_administrative_area_level_1_short, as: :hidden %>
-                <%= t.input :end_location_country, as: :hidden %>
-                <%= t.input :end_location_country_short, as: :hidden %>
-                <%= t.input :end_location_postal_code, as: :hidden %>
-              </div>
-
-              <div class="col-xs-12">
-                <%= f.label :start_time, t('tracks.params.start_time') %>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <%= t.input :start_time, label: false, as: :string, input_html: { class: "datetime_picker", value: datetime_value(t.object.start_time) } %>
-                </div>
+            <div class="col-xs-12">
+              <%= f.label :start_time, t('tracks.params.start_time') %>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <%= t.input :start_time, label: false, as: :string, input_html: { class: "datetime_picker", value: datetime_value(t.object.start_time) } %>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-2 col-sm-1 padded-mini">
-          <% if t.object.new_record? %>
-            <%= link_to '#', remote: true, class: 'destroy_track' do %>
-              <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
-            <% end %>
-          <% else %>
-            <%= link_to competition_track_path(competition, t.object), method: :delete, remote: true, data: { confirm: t('.delete.message') }, class: 'destroy_track' do %>
-              <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
-            <% end %>
-            <%= t.input :id, as: :hidden %>
-          <% end %>
-        </div>
       </div>
-    <% end %>
-    <div class="text-center padded-mini-bottom">
-      <%= link_to '#', remote: true, class: "add_track" do %>
-        <i class="fa fa-plus-circle"></i> <span><%= t('.tracks.add_track') %></span>
-      <% end %>
+      <div class="col-xs-2 col-sm-1 padded-mini">
+        <% if t.object.new_record? %>
+          <%= link_to '#', remote: true, class: 'destroy_track' do %>
+            <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
+          <% end %>
+        <% else %>
+          <%= link_to competition_track_path(competition, t.object), method: :delete, remote: true, data: { confirm: t('.delete.message') }, class: 'destroy_track' do %>
+            <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
+          <% end %>
+          <%= t.input :id, as: :hidden %>
+        <% end %>
+      </div>
     </div>
+  <% end %>
+  <div class="text-center padded-mini-bottom">
+    <%= link_to '#', remote: true, class: "add_track" do %>
+      <i class="fa fa-plus-circle"></i> <span><%= t('.tracks.add_track') %></span>
+    <% end %>
+  </div>
   <!-- TRACKS -->
 
   <!-- SETTINGS -->
   <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><%= t('.rules.title') %></strong>
+    </div>
     <div class="panel-body">
-      <h4><%= t('.rules.title') %></h4>
       <div class="row padded-mini">
         <div class="col-xs-6">
           <%= f.label :start_registration, t('competitions.params.start_registration') %>
@@ -176,6 +183,18 @@
     </div>
   </div>
   <!-- SETTINGS -->
+
+  <!-- SOUVENIRS -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>Souvenirs</strong>
+    </div>
+
+    <div class="panel-body">
+      <%= f.input :video, placeholder: "https://www.youtube.com/embed/your-youtube-id" %>
+    </div>
+  </div>
+  <!-- SOUVENIRS -->
 
   <%= f.button :submit, class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn" %>
 <% end %>

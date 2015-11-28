@@ -53,9 +53,7 @@ class Competition < ActiveRecord::Base
 
   def after_registrations?
     if start_registration && end_registration
-      Time.now > end_registration
-    elsif start_registration
-      Time.now > (start_date - 1)
+      Time.now > end_registration && Time.now < start_date
     else
       false
     end

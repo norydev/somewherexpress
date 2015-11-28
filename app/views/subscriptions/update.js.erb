@@ -8,9 +8,14 @@
     $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @subscription.user %>")
 
     $("#competition-<%= @competition.id %>-user-<%= @subscription.user.id %> .edit-form").remove();
-    $("#competition-<%= @competition.id %>-user-<%= @subscription.user.id %> .status").html('<i class="fa fa-check text-success flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t("subscriptions.accepted_short") %>"></i>');
+    $("#competition-<%= @competition.id %>-user-<%= @subscription.user.id %> .status").html('<i class="fa fa-check text-success cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t("subscriptions.accepted_short") %>"></i>');
     $('[data-toggle="tooltip"]').tooltip();
-  <% else %>
+  <% elsif @subscription.status == "refused" %>
+    $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @subscription.user %>")
+
+    $("#competition-<%= @competition.id %>-user-<%= @subscription.user.id %> .edit-form").remove();
+    $("#competition-<%= @competition.id %>-user-<%= @subscription.user.id %> .status").html('<i class="fa fa-times text-danger cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t("subscriptions.refused_short") %>"></i>');
+    $('[data-toggle="tooltip"]').tooltip();
   <% end %>
 
   $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Application updated successfuly.</div>').hide();
