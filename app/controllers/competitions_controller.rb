@@ -14,20 +14,22 @@ class CompetitionsController < ApplicationController
     @competition = current_user.creations.new
     authorize @competition, :create?
 
-    @competition.start_city.build
-    @competition.end_city.build
+    @competition.build_start_city
+    @competition.build_end_city
+
     @competition.tracks.build
-    @competition.tracks.each do |t|
-      t.start_city.build
-      t.end_city.build
-    end
+    @competition.tracks.last.build_start_city
+    @competition.tracks.last.build_end_city
   end
 
   def edit
     authorize @competition, :update?
 
     @tracks = @competition.tracks.order(:start_time, :created_at)
-    @tracks << @competition.tracks.build
+    track = @competition.tracks.build
+    track.build_start_city
+    track.build_end_city
+    @tracks << track
   end
 
   def create
@@ -67,11 +69,19 @@ class CompetitionsController < ApplicationController
       params.require(:competition).permit(
         :name, :start_date, :end_date, :start_registration,
         :end_registration, :published, :finished, :description, :default_registration_status, :video,
-        cities_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
+        start_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
           :administrative_area_level_1, :administrative_area_level_1_short, :country,
           :country_short, :postal_code],
-        tracks_attributes: [:id, :start_time, cities_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
+        end_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
           :administrative_area_level_1, :administrative_area_level_1_short, :country,
-          :country_short, :postal_code]])
+          :country_short, :postal_code],
+        tracks_attributes: [:id, :start_time,
+          start_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
+          :administrative_area_level_1, :administrative_area_level_1_short, :country,
+          :country_short, :postal_code],
+          end_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
+          :administrative_area_level_1, :administrative_area_level_1_short, :country,
+          :country_short, :postal_code]]
+        )
     end
 end

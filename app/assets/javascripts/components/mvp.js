@@ -31,8 +31,8 @@ jQuery(function($) {
 
       // initialize autocomplete for tracks attributes :start_location & :end_location
       for (i=0; i<($('.tracks_form').length); i++) {
-        initializeAutocomplete('competition_tracks_attributes_'+ i +'_start_location');
-        initializeAutocomplete('competition_tracks_attributes_'+ i +'_end_location');
+        initializeAutocomplete('competition_tracks_attributes_'+ i +'_start_city_attributes_name');
+        initializeAutocomplete('competition_tracks_attributes_'+ i +'_end_city_attributes_name');
       }
 
       nestedForm = $('.tracks_form').last().clone();
@@ -73,8 +73,8 @@ jQuery(function($) {
         $(newNestedForm).insertAfter(lastNestedForm);
         $('[data-toggle="tooltip"]').tooltip();
         datetime_picker();
-        initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_start_location');
-        return initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_end_location');
+        initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_start_city_attributes_name');
+        return initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_end_city_attributes_name');
       });
     }
   });
