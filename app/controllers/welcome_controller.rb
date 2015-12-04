@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
           "url" => ActionController::Base.helpers.asset_path("marker.svg"),
           "width" =>  32,
           "height" => 32 })
-      marker.infowindow render_to_string(partial: "/welcome/map_box", locals: { cities: City.where(lat: city.lat, lng: city.lng), end_cities: City.where(lat: city.lat, lng: city.lng, localizable_type: "Track", order: "end") })
+      marker.infowindow render_to_string(partial: "/welcome/map_box", locals: { cities: City.on_map.where(lat: city.lat, lng: city.lng), end_cities: City.on_map.where(lat: city.lat, lng: city.lng, localizable_type: "Track", order: "end") })
     end
     if user_signed_in?
       render 'dashboard'

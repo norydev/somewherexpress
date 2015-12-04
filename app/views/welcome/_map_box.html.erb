@@ -1,5 +1,5 @@
 <div class="map_box">
-  <strong><%= cities.first.locality %></strong><br>
+  <strong><%= cities.first.locality if cities.first %></strong><br>
 
   <% end_cities.each do |end_city| %>
     <%= link_to end_city.competition, end_city.competition %>
