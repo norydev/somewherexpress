@@ -47,17 +47,17 @@
 
       var waypts = [];
       <% competition.tracks.order(:start_time).each do |t| %>
-        <% unless t.end_location == competition.end_location %>
+        <% unless t.end_city.name == competition.end_city.name %>
           waypts.push({
-            location: '<%= t.end_location %>',
+            location: '<%= t.end_city.name %>',
             stopover: true
           });
         <% end %>
       <% end %>
 
       function calcRoute() {
-        var origin      = new google.maps.LatLng(<%= competition.start_location_lat %>, <%= competition.start_location_lng %>);
-        var destination = new google.maps.LatLng(<%= competition.end_location_lat %>, <%= competition.end_location_lng %>);
+        var origin      = new google.maps.LatLng(<%= competition.start_city.lat %>, <%= competition.start_city.lng %>);
+        var destination = new google.maps.LatLng(<%= competition.end_city.lat %>, <%= competition.end_city.lng %>);
         var request = {
             origin:      origin,
             destination: destination,
@@ -83,10 +83,10 @@
       internal: { id: 'map' } }, function(){
         markers = handler.addMarkers([
           <% competition.tracks.order(:start_time).each do |t| %>
-            <% unless t.end_location == competition.end_location %>
+            <% unless t.end_city.name == competition.end_city.name %>
               {
-                "lat": <%= t.end_location_lat %>,
-                "lng": <%= t.end_location_lng %>,
+                "lat": <%= t.end_city.lat %>,
+                "lng": <%= t.end_city.lng %>,
                 "picture": {
                   "url": "<%= image_url("marker.svg") %>",
                   "width":  32,
@@ -96,16 +96,16 @@
           <% end %>
 
             {
-              "lat": <%= competition.start_location_lat %>,
-              "lng": <%= competition.start_location_lng %>,
+              "lat": <%= competition.start_city.lat %>,
+              "lng": <%= competition.start_city.lng %>,
               "picture": {
                 "url": "<%= image_url("marker.svg") %>",
                 "width":  32,
                 "height": 32}
             },
             {
-              "lat": <%= competition.end_location_lat %>,
-              "lng": <%= competition.end_location_lng %>,
+              "lat": <%= competition.end_city.lat %>,
+              "lng": <%= competition.end_city.lng %>,
               "picture": {
                 "url": "<%= image_url("marker.svg") %>",
                 "width":  32,

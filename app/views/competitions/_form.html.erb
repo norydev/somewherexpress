@@ -10,28 +10,32 @@
       <%= f.input :name, label: t('competitions.params.name') %>
       <div class="row">
         <div class="col-xs-6">
-          <%= f.input :start_location, label: t('competitions.params.start_location') %>
-          <%= f.input :start_location_street_number, as: :hidden %>
-          <%= f.input :start_location_route, as: :hidden %>
-          <%= f.input :start_location_locality, as: :hidden %>
-          <%= f.input :start_location_administrative_area_level_2, as: :hidden %>
-          <%= f.input :start_location_administrative_area_level_1, as: :hidden %>
-          <%= f.input :start_location_administrative_area_level_1_short, as: :hidden %>
-          <%= f.input :start_location_country, as: :hidden %>
-          <%= f.input :start_location_country_short, as: :hidden %>
-          <%= f.input :start_location_postal_code, as: :hidden %>
+          <%= f.simple_fields_for :start_city, competition.start_city do |c| %>
+            <%= c.input :name, label: t('competitions.params.start_location') %>
+            <%= c.input :street_number, as: :hidden %>
+            <%= c.input :route, as: :hidden %>
+            <%= c.input :locality, as: :hidden %>
+            <%= c.input :administrative_area_level_2, as: :hidden %>
+            <%= c.input :administrative_area_level_1, as: :hidden %>
+            <%= c.input :administrative_area_level_1_short, as: :hidden %>
+            <%= c.input :country, as: :hidden %>
+            <%= c.input :country_short, as: :hidden %>
+            <%= c.input :postal_code, as: :hidden %>
+          <% end %>
         </div>
         <div class="col-xs-6">
-          <%= f.input :end_location, label: t('competitions.params.end_location') %>
-          <%= f.input :end_location_street_number, as: :hidden %>
-          <%= f.input :end_location_route, as: :hidden %>
-          <%= f.input :end_location_locality, as: :hidden %>
-          <%= f.input :end_location_administrative_area_level_2, as: :hidden %>
-          <%= f.input :end_location_administrative_area_level_1, as: :hidden %>
-          <%= f.input :end_location_administrative_area_level_1_short, as: :hidden %>
-          <%= f.input :end_location_country, as: :hidden %>
-          <%= f.input :end_location_country_short, as: :hidden %>
-          <%= f.input :end_location_postal_code, as: :hidden %>
+          <%= f.simple_fields_for :end_city, competition.end_city do |c| %>
+            <%= c.input :name, label: t('competitions.params.end_location') %>
+            <%= c.input :street_number, as: :hidden %>
+            <%= c.input :route, as: :hidden %>
+            <%= c.input :locality, as: :hidden %>
+            <%= c.input :administrative_area_level_2, as: :hidden %>
+            <%= c.input :administrative_area_level_1, as: :hidden %>
+            <%= c.input :administrative_area_level_1_short, as: :hidden %>
+            <%= c.input :country, as: :hidden %>
+            <%= c.input :country_short, as: :hidden %>
+            <%= c.input :postal_code, as: :hidden %>
+          <% end %>
         </div>
       </div>
       <div class="row">
@@ -63,34 +67,38 @@
       <strong class="text-capitalize"><%= t('activerecord.models.track', count: 2) %></strong>
     </div>
   </div>
-  <%= f.simple_fields_for :tracks, @tracks do |t| %>
+  <%= f.simple_fields_for :tracks, tracks do |t| %>
     <div class="row tracks_form">
       <div class="col-xs-10 col-sm-11">
         <div class="panel panel-default">
           <div class="row panel-body">
             <div class="col-xs-6">
-              <%= t.input :start_location, label: t('tracks.params.start_location') %>
-              <%= t.input :start_location_street_number, as: :hidden %>
-              <%= t.input :start_location_route, as: :hidden %>
-              <%= t.input :start_location_locality, as: :hidden %>
-              <%= t.input :start_location_administrative_area_level_2, as: :hidden %>
-              <%= t.input :start_location_administrative_area_level_1, as: :hidden %>
-              <%= t.input :start_location_administrative_area_level_1_short, as: :hidden %>
-              <%= t.input :start_location_country, as: :hidden %>
-              <%= t.input :start_location_country_short, as: :hidden %>
-              <%= t.input :start_location_postal_code, as: :hidden %>
+              <%= t.simple_fields_for :start_city, t.object.start_city do |c| %>
+                <%= c.input :name, label: t('tracks.params.start_location') %>
+                <%= c.input :street_number, as: :hidden %>
+                <%= c.input :route, as: :hidden %>
+                <%= c.input :locality, as: :hidden %>
+                <%= c.input :administrative_area_level_2, as: :hidden %>
+                <%= c.input :administrative_area_level_1, as: :hidden %>
+                <%= c.input :administrative_area_level_1_short, as: :hidden %>
+                <%= c.input :country, as: :hidden %>
+                <%= c.input :country_short, as: :hidden %>
+                <%= c.input :postal_code, as: :hidden %>
+              <% end %>
             </div>
             <div class="col-xs-6">
-              <%= t.input :end_location, label: t('tracks.params.end_location') %>
-              <%= t.input :end_location_street_number, as: :hidden %>
-              <%= t.input :end_location_route, as: :hidden %>
-              <%= t.input :end_location_locality, as: :hidden %>
-              <%= t.input :end_location_administrative_area_level_2, as: :hidden %>
-              <%= t.input :end_location_administrative_area_level_1, as: :hidden %>
-              <%= t.input :end_location_administrative_area_level_1_short, as: :hidden %>
-              <%= t.input :end_location_country, as: :hidden %>
-              <%= t.input :end_location_country_short, as: :hidden %>
-              <%= t.input :end_location_postal_code, as: :hidden %>
+              <%= t.simple_fields_for :end_city, t.object.end_city do |c| %>
+                <%= c.input :name, label: t('tracks.params.end_location') %>
+                <%= c.input :street_number, as: :hidden %>
+                <%= c.input :route, as: :hidden %>
+                <%= c.input :locality, as: :hidden %>
+                <%= c.input :administrative_area_level_2, as: :hidden %>
+                <%= c.input :administrative_area_level_1, as: :hidden %>
+                <%= c.input :administrative_area_level_1_short, as: :hidden %>
+                <%= c.input :country, as: :hidden %>
+                <%= c.input :country_short, as: :hidden %>
+                <%= c.input :postal_code, as: :hidden %>
+              <% end %>
             </div>
 
             <div class="col-xs-12">

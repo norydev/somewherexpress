@@ -19,7 +19,7 @@ class Rank < ActiveRecord::Base
           # multi track competition: result according to nb of points
           results = Rank.where(race: c).order(points: :desc)
           a = results.map(&:points)
-          ranks = a.map{ |e| a.index(e) + 1 } # ranks with ex-aequo
+          ranks = a.map { |e| a.index(e) + 1 } # ranks with ex-aequo
 
           results.each_with_index do |r, i|
             r.result = ranks[i]

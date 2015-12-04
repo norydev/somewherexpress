@@ -1,15 +1,16 @@
 <div class="map_box">
-  <strong><%= city %></strong><br>
-  <% if competition == "many" %>
-    <% policy_scope(Competition).finished.where(start_location_locality: city).each do |c| %>
-      <%= link_to c, c %><br>
-    <% end %>
-  <% else %>
-    <%= link_to competition, competition %>
-  <% end %>
-  <% if track %>
+  <strong><%= cities.first.locality %></strong><br>
+
+  <% end_cities.each do |end_city| %>
+    <%= link_to end_city.competition, end_city.competition %>
     <div>
-      <span class="medals-small"><i class="icomoon icon-medal"></i></span> <%= track.ranks.where(result: 1).map{ |r| r.user.first_name if r }.join(' & ') %>
+      <span class="medals-small"><i class="icomoon icon-medal"></i></span> <%= end_city.localizable.ranks.where(result: 1).map{ |r| r.user.first_name if r }.join(' & ') %>
     </div>
+  <% end %>
+
+  <% if end_cities.empty? %>
+    <% cities.map(&:competition).select { |c| c.finished } .uniq.each do |competition| %>
+      <%= link_to competition, competition %><br>
+    <% end %>
   <% end %>
 </div>

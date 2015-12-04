@@ -9,12 +9,12 @@ function initializeAutocomplete(id) {
         var component = place.address_components[i];
         for (var j in component.types) {
           // Long name for country and admn area
-          var type_element = document.getElementById(id+'_'+component.types[j]);
+          var type_element = document.getElementById(id.replace( /name/g, '' ) + component.types[j]);
           if (type_element) {
             type_element.value = component.long_name;
           }
           // Short name for country and admn area
-          var type_element = document.getElementById(id+'_'+component.types[j]+'_short');
+          var type_element = document.getElementById(id.replace( /name/g, '' ) + component.types[j] + '_short');
           if (type_element) {
             type_element.value = component.short_name;
           }
@@ -25,6 +25,8 @@ function initializeAutocomplete(id) {
 }
 
 google.maps.event.addDomListener(window, 'load', function() {
-  initializeAutocomplete('competition_start_location');
-  initializeAutocomplete('competition_end_location');
+  initializeAutocomplete('competition_start_city_attributes_name');
+  initializeAutocomplete('competition_end_city_attributes_name');
 });
+
+competition_start_city_attributes_street_number
