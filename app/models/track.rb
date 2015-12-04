@@ -3,6 +3,9 @@ class Track < ActiveRecord::Base
   has_many :ranks, as: :race, dependent: :destroy
   accepts_nested_attributes_for :ranks
 
+  has_one :start_city, -> { where order: 'start' }, class_name: 'City', as: :localizable
+  has_one :end_city, -> { where order: 'end' }, class_name: 'City', as: :localizable
+
   before_validation :geocoding, if: :location_changed?
 
   after_create :make_track_ranks

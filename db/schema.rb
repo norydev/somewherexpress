@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127162628) do
+ActiveRecord::Schema.define(version: 20151204085819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,43 +27,41 @@ ActiveRecord::Schema.define(version: 20151127162628) do
 
   add_index "badges", ["user_id"], name: "index_badges_on_user_id", using: :btree
 
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "street_number"
+    t.string   "route"
+    t.string   "locality"
+    t.string   "administrative_area_level_2"
+    t.string   "administrative_area_level_1"
+    t.string   "administrative_area_level_1_short"
+    t.string   "country"
+    t.string   "country_short"
+    t.string   "postal_code"
+    t.float    "lat"
+    t.float    "lng"
+    t.integer  "localizable_id"
+    t.string   "localizable_type"
+    t.string   "order",                             default: "start", null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+  end
+
+  add_index "cities", ["localizable_type", "localizable_id"], name: "index_cities_on_localizable_type_and_localizable_id", using: :btree
+
   create_table "competitions", force: :cascade do |t|
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "start_location"
-    t.string   "end_location"
-    t.datetime "created_at",                                                           null: false
-    t.datetime "updated_at",                                                           null: false
-    t.float    "start_location_lat"
-    t.float    "start_location_lng"
-    t.float    "end_location_lat"
-    t.float    "end_location_lng"
-    t.string   "start_location_street_number"
-    t.string   "start_location_route"
-    t.string   "start_location_locality"
-    t.string   "start_location_administrative_area_level_2"
-    t.string   "start_location_administrative_area_level_1"
-    t.string   "start_location_administrative_area_level_1_short"
-    t.string   "start_location_country"
-    t.string   "start_location_country_short"
-    t.string   "start_location_postal_code"
-    t.string   "end_location_street_number"
-    t.string   "end_location_route"
-    t.string   "end_location_locality"
-    t.string   "end_location_administrative_area_level_2"
-    t.string   "end_location_administrative_area_level_1"
-    t.string   "end_location_administrative_area_level_1_short"
-    t.string   "end_location_country"
-    t.string   "end_location_country_short"
-    t.string   "end_location_postal_code"
-    t.boolean  "finished",                                         default: false,     null: false
-    t.boolean  "published",                                        default: false,     null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.boolean  "finished",                    default: false,     null: false
+    t.boolean  "published",                   default: false,     null: false
     t.datetime "start_registration"
     t.datetime "end_registration"
     t.integer  "author_id"
     t.text     "description"
-    t.string   "default_registration_status",                      default: "pending", null: false
+    t.string   "default_registration_status", default: "pending", null: false
     t.string   "video"
   end
 
@@ -95,32 +93,8 @@ ActiveRecord::Schema.define(version: 20151127162628) do
   create_table "tracks", force: :cascade do |t|
     t.integer  "competition_id"
     t.datetime "start_time"
-    t.string   "start_location"
-    t.string   "end_location"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.float    "start_location_lat"
-    t.float    "start_location_lng"
-    t.float    "end_location_lat"
-    t.float    "end_location_lng"
-    t.string   "start_location_street_number"
-    t.string   "start_location_route"
-    t.string   "start_location_locality"
-    t.string   "start_location_administrative_area_level_2"
-    t.string   "start_location_administrative_area_level_1"
-    t.string   "start_location_administrative_area_level_1_short"
-    t.string   "start_location_country"
-    t.string   "start_location_country_short"
-    t.string   "start_location_postal_code"
-    t.string   "end_location_street_number"
-    t.string   "end_location_route"
-    t.string   "end_location_locality"
-    t.string   "end_location_administrative_area_level_2"
-    t.string   "end_location_administrative_area_level_1"
-    t.string   "end_location_administrative_area_level_1_short"
-    t.string   "end_location_country"
-    t.string   "end_location_country_short"
-    t.string   "end_location_postal_code"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "tracks", ["competition_id"], name: "index_tracks_on_competition_id", using: :btree

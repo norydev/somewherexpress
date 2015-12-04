@@ -6,6 +6,9 @@ class Competition < ActiveRecord::Base
 
   has_many :ranks, as: :race, dependent: :destroy
 
+  has_one :start_city, -> { where order: 'start' }, class_name: 'City', as: :localizable
+  has_one :end_city, -> { where order: 'end' }, class_name: 'City', as: :localizable
+
   belongs_to :author, class_name: "User"
 
   before_validation :geocoding, if: :location_changed?
