@@ -72,14 +72,14 @@ RSpec.describe CompetitionsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) { { start_location: "Bâle" } }
+      let(:new_attributes) { { name: "One upon a time in mexico" } }
 
       it "updates the requested competition" do
         sign_in @user
         competition = FactoryGirl.create :competition, author: @user
         put :update, { id: competition.to_param, competition: new_attributes }, valid_session
         competition.reload
-        expect(assigns(:competition)).to have_attributes(start_location: "Bâle")
+        expect(assigns(:competition)).to have_attributes(name: "One upon a time in mexico")
       end
 
       it "assigns the requested competition as @competition" do

@@ -8,11 +8,11 @@ RSpec.describe Subscription, type: :model do
 
   it 'returns the correct nb of points' do
     u = FactoryGirl.create :user, email: "u1@yopmail.com"
-    c = FactoryGirl.create :competition
+    c = FactoryGirl.create :competition, start_city: FactoryGirl.create(:city, order: "start", localizable: c), end_city: FactoryGirl.create(:city, order: "end", localizable: c)
 
     ts = []
     5.times do |n|
-      ts[n] = FactoryGirl.create :track, competition: c
+      ts[n] = FactoryGirl.create :track, competition: c, start_city: FactoryGirl.create(:city, order: "start", localizable: ts[n]), end_city: FactoryGirl.create(:city, order: "end", localizable: ts[n])
     end
 
     s = FactoryGirl.create :subscription, user: u, competition: c, rules: "1"
@@ -30,8 +30,8 @@ RSpec.describe Subscription, type: :model do
     u1 = FactoryGirl.create :user, email: "u1@yopmail.com"
     u2 = FactoryGirl.create :user, email: "u2@yopmail.com"
     u3 = FactoryGirl.create :user, email: "u3@yopmail.com"
-    c = FactoryGirl.create :competition
-    t = FactoryGirl.create :track, competition: c
+    c = FactoryGirl.create :competition, start_city: FactoryGirl.create(:city, order: "start", localizable: c), end_city: FactoryGirl.create(:city, order: "end", localizable: c)
+    t = FactoryGirl.create :track, competition: c, start_city: FactoryGirl.create(:city, order: "start", localizable: c), end_city: FactoryGirl.create(:city, order: "end", localizable: c)
     s1 = FactoryGirl.create :subscription, user: u1, competition: c, rules: "1"
     s2 = FactoryGirl.create :subscription, user: u2, competition: c, rules: "1"
     s3 = FactoryGirl.create :subscription, user: u3, competition: c, rules: "1"
