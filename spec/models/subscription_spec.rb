@@ -32,9 +32,9 @@ RSpec.describe Subscription, type: :model do
     u3 = FactoryGirl.create :user, email: "u3@yopmail.com"
     c = FactoryGirl.create :competition, start_city: FactoryGirl.create(:city, order: "start", localizable: c), end_city: FactoryGirl.create(:city, order: "end", localizable: c)
     t = FactoryGirl.create :track, competition: c, start_city: FactoryGirl.create(:city, order: "start", localizable: c), end_city: FactoryGirl.create(:city, order: "end", localizable: c)
-    s1 = FactoryGirl.create :subscription, user: u1, competition: c, rules: "1"
+    FactoryGirl.create :subscription, user: u1, competition: c, rules: "1"
     s2 = FactoryGirl.create :subscription, user: u2, competition: c, rules: "1"
-    s3 = FactoryGirl.create :subscription, user: u3, competition: c, rules: "1"
+    FactoryGirl.create :subscription, user: u3, competition: c, rules: "1"
 
     r = t.ranks.find_by(user: u1)
     r.result = 1

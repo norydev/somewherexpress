@@ -67,7 +67,7 @@
       <strong class="text-capitalize"><%= t('activerecord.models.track', count: 2) %></strong>
     </div>
   </div>
-  <%= f.simple_fields_for :tracks, @tracks do |t| %>
+  <%= f.simple_fields_for :tracks, tracks do |t| %>
     <div class="row tracks_form">
       <div class="col-xs-10 col-sm-11">
         <div class="panel panel-default">

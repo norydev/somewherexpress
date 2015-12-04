@@ -83,11 +83,11 @@ class Competition < ActiveRecord::Base
   end
 
   def self.open_for_registration
-    self.where(finished: false).order(:start_date).select{ |c| c.registrations_open? }
+    self.where(finished: false).order(:start_date).select { |c| c.registrations_open? }
   end
 
   def self.not_open_for_registration
-    self.where(finished: false).order(:start_date).reject{ |c| c.registrations_open? }
+    self.where(finished: false).order(:start_date).reject { |c| c.registrations_open? }
   end
 
   def self.finished

@@ -47,7 +47,7 @@ class Subscription < ActiveRecord::Base
     end
 
     def destroy_ranks
-      Rank.where(user:user, race: competition).destroy_all
+      Rank.where(user: user, race: competition).destroy_all
 
       competition.tracks.each do |track|
         Rank.where(user: user, race: track).destroy_all
