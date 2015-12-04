@@ -5,15 +5,15 @@ class Track < ActiveRecord::Base
 
   has_one :start_city, -> { where order: 'start' }, class_name: 'City', as: :localizable
   has_one :end_city, -> { where order: 'end' }, class_name: 'City', as: :localizable
-
-  before_validation :geocoding, if: :location_changed?
+  accepts_nested_attributes_for :start_city, allow_destroy: true
+  accepts_nested_attributes_for :end_city, allow_destroy: true
 
   after_create :make_track_ranks
 
-  validates_presence_of :start_location, :start_location_locality, :end_location, :end_location_locality, :start_time
+  validates_presence_of :start_city, :end_city, :start_time
 
   def name
-    "#{start_location_locality} (#{start_location_country_short}) – #{end_location_locality} (#{end_location_country_short})"
+    "#{start_city.locality} (#{start_city.country_short}) – #{end_city.locality} (#{end_city.country_short})"
   end
 
   def to_s
@@ -21,23 +21,6 @@ class Track < ActiveRecord::Base
   end
 
   private
-
-    def geocoding
-      if start_location.present?
-        start_geo = Geocoder.search(start_location)
-        self.start_location_lat = start_geo.first.data["geometry"]["location"]["lat"] if start_geo.first
-        self.start_location_lng = start_geo.first.data["geometry"]["location"]["lng"] if start_geo.first
-      end
-      if end_location.present?
-        end_geo = Geocoder.search(end_location)
-        self.end_location_lat = end_geo.first.data["geometry"]["location"]["lat"] if end_geo.first
-        self.end_location_lng = end_geo.first.data["geometry"]["location"]["lng"] if end_geo.first
-      end
-    end
-
-    def location_changed?
-      start_location_changed? || end_location_changed?
-    end
 
     def make_track_ranks
       competition.accepted_users.each do |user|
