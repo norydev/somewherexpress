@@ -3,21 +3,21 @@
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <strong><%= t('.change_your_password', :default => 'Change your password') %></strong>
+          <strong><%= t('.change_your_password', default: 'Change your password') %></strong>
         </div>
         <div class="panel-body">
-          <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
             <%= f.error_notification %>
 
             <%= f.input :reset_password_token, as: :hidden  %>
 
-            <%= f.label :password, t('.new_password', :default => 'New password') %>
+            <%= f.label :password, t('.new_password', default: 'New password') %>
             <%= f.input :password, label: false %>
 
-            <%= f.label :password_confirmation, t('.confirm_new_password', :default => 'Confirm new password') %>
+            <%= f.label :password_confirmation, t('.confirm_new_password', default: 'Confirm new password') %>
             <%= f.input :password_confirmation, label: false %>
 
-            <%= f.button :submit, t('.change_my_password', :default => 'Change my password'), class: "btn btn-primary" %>
+            <%= f.button :submit, t('.change_my_password', default: 'Change my password'), class: "btn btn-primary" %>
           <% end %>
         </div>
       </div>
