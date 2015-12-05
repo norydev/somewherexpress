@@ -7,6 +7,12 @@
 
     <div class="navbar-wagon-pusher"></div>
 
+    <% if params[:locale] == 'en' %>
+      <%= link_to "FR", url_for( locale: 'fr' ), class: "navbar-wagon-item navbar-wagon-link text-center" %>
+    <% else %>
+      <%= link_to "EN", url_for( locale: 'en' ), class: "navbar-wagon-item navbar-wagon-link text-center" %>
+    <% end %>
+    <hr>
     <%= link_to competitions_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
       <span class="visible-xs-block"><i class="fa fa-map-signs"></i></span>
       <%= t('activerecord.models.competition', count: 2).capitalize %>

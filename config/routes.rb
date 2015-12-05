@@ -1,26 +1,31 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  get 'welcome/index'
-  get '/rules', to: 'welcome#rules'
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  scope '(:locale)', locale: /fr|en/ do
+    get 'welcome/index'
+    get '/rules', to: 'welcome#rules'
 
-  resources :users, only: [:index, :show, :edit, :update]
-  resources :competitions do
-    resources :tracks, only: [:destroy, :edit, :update]
-    resources :subscriptions, only: [:new, :edit, :update, :create, :destroy]
-  end
+    devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  %w( 404 422 500 ).each do |code|
-    get code, to: "errors#show", code: code
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :competitions do
+      resources :tracks, only: [:destroy, :edit, :update]
+      resources :subscriptions, only: [:new, :edit, :update, :create, :destroy]
+    end
+
+    %w( 404 422 500 ).each do |code|
+      get code, to: "errors#show", code: code
+    end
+
+    root 'welcome#index'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
