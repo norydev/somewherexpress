@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+
   scope '(:locale)', locale: /fr|en/ do
     get 'welcome/index'
     get '/rules', to: 'welcome#rules'
-
-    devise_for :users, controllers: { registrations: 'users/registrations' }
 
     resources :users, only: [:index, :show, :edit, :update]
     resources :competitions do
