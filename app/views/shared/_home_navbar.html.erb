@@ -58,5 +58,11 @@
         <%= t('devise.registrations.new.sign_up') %>
       <% end %>
     <% end %>
+    <hr class="hidden-xs">
+    <% if params[:locale] == 'en' %>
+      <%= link_to "FR", url_for( locale: 'fr' ), class: "navbar-wagon-item navbar-wagon-link text-center" %>
+    <% else %>
+      <%= link_to "EN", url_for( locale: 'en' ), class: "navbar-wagon-item navbar-wagon-link text-center" %>
+    <% end %>
   </div>
 </nav>

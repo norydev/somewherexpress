@@ -14,24 +14,26 @@
         </tr>
         <tr>
           <td class="message" bgcolor="#FFFFFF">
-            <h3>Salut <%= @user.first_name %>,</h3>
-            <p>Bienvenue dans <a href="http://www.somewherexpress.com">SomewherExpress</a>, nous sommes très heureux de t'avoir parmi nous.</p>
-            <p>Pour te connecter, utilise ton adresse email <strong><%= @user.email %></strong> comme identifiant.</p>
+            <h3>Hi <%= @user.first_name %>,</h3>
+            <p>Welcome to <a href="http://www.somewherexpress.com">SomewherExpress</a>, we are very excited to have you among us.</p>
+            <p>To log in, use your email address <strong><%= @user.email %></strong> as identifier.</p>
             <!-- button -->
             <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
               <tr>
+                <td></td>
                 <td>
-                  <a href="http://www.somewherexpress.com/competitions">Voir les prochaines compétitions</a>
+                  <a href="http://www.somewherexpress.com/competitions">All the coming competitions</a>
                 </td>
+                <td></td>
               </tr>
             </table>
             <!-- /button -->
 
-            <p>Tu seras bientôt automatiquement ajouté à notre <a href="https://somewherexpress.slack.com">groupe slack</a>. C'est là que nous discutons des compétitions SomewherExpress et de tout ce qui est lié à l'autostop.</p>
-            <p>Tu peux aussi nous retrouver sur <a href="https://www.facebook.com/somewherexpress/">facebook</a>.</p>
+            <p>You will soon be added automatically to our <a href="https://somewherexpress.slack.com">slack group</a>. It is there that we talk about Somewherexpress competitions and everything related to hitchhiking.</p>
+            <p>You can also find us on <a href="https://www.facebook.com/somewherexpress/">facebook</a>.</p>
 
-            <p>A bientôt,<br>
-              Fabien pour le Comité Central de SomewherExpress.</p>
+            <p>See you soon,<br>
+              Fabien for the Central Committee of SomewherExpress.</p>
           </td>
         </tr>
       </table>
@@ -45,7 +47,7 @@
 <!-- /body -->
 
 <!-- footer -->
-<table class="footer-wrap">
+<table class="footer-wrap" bgcolor="#f6f6f6">
   <tr>
     <td></td>
     <td class="container">
@@ -55,9 +57,9 @@
         <table>
           <tr>
             <td align="center">
-              <p>Trop d'email? <a href="http://www.somewherexpress.com/users/edit.<%= @user.id %>"><unsubscribe>Modifier mes préférences</unsubscribe></a>.
+              <p>Too many emails? <a href="http://www.somewherexpress.com/users/edit.<%= @user.id %>"><unsubscribe>Modify my preferences</unsubscribe></a>.
               </p>
-              <p>Retrouve SomewherExpress: <a href="https://www.facebook.com/somewherexpress/">facebook</a> | <a href="https://somewherexpress.slack.com">slack</a></p>
+              <p>SomewherExpress elsewhere: <a href="https://www.facebook.com/somewherexpress/">facebook</a> | <a href="https://somewherexpress.slack.com">slack</a></p>
             </td>
           </tr>
         </table>
