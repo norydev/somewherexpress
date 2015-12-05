@@ -14,6 +14,11 @@ en:
       passed_title: "Passed competitions"
     dashboard:
       creations_title: "Competitions I organize"
+  user_mailer:
+    welcome:
+      subject: "Welcome to SomewherExpress.com"
+    goodbye:
+      subject: "Goodbye and have a nice trip"
   subscriptions:
     accepted: Your are registred!
     pending: Your application is waiting for approval by the organizer
