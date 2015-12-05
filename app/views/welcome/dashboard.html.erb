@@ -110,8 +110,8 @@
 
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#open" aria-controls="open" role="tab" data-toggle="tab"><%= t('welcome.index.future_title') %></a></li>
-        <li role="presentation"><a href="#finished" aria-controls="finished" role="tab" data-toggle="tab" onclick="showMap();"><%= t('welcome.index.passed_title') %></a></li>
+        <li role="presentation" class="active"><a href="#open" aria-controls="open" role="tab" data-toggle="tab"><i class="fa fa-bullhorn fa-fw"></i> <%= t('welcome.index.future_title') %></a></li>
+        <li role="presentation"><a href="#finished" aria-controls="finished" role="tab" data-toggle="tab" onclick="showMap();"><i class="fa fa-list fa-fw"></i> <%= t('welcome.index.passed_title') %></a></li>
         <!-- <li role="presentation"><a href="#mines" aria-controls="mines" role="tab" data-toggle="tab"><%#= t('.creations_title') %></a></li> -->
         <% if policy(current_user).update? %>
           <div class="pull-right marged-micro hidden-sm hidden-xs">

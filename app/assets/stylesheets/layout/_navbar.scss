@@ -119,22 +119,27 @@
     background-color: rgba(0, 0, 0, 0.2);
     margin-left: 10px;
     margin-right: 10px;
+    border-top: 0;
   }
 }
 
 @media (max-width:767px){
-  .navbar-wagon-link, .navbar-wagon-button {
-    font-size: 0.8em;
+  .navbar-wagon-link, .navbar-wagon .navbar-wagon-button {
+    font-size: 0.7em;
   }
-  .navbar-wagon-button {
-    line-height: 32px;
+  .navbar-wagon .navbar-wagon-button {
+    line-height: 28px;
     margin-left: 5px;
+    margin-right: 5px;
   }
   .navbar-wagon-item {
-    padding: 0 8px;
+    padding: 0 7px;
   }
   .navbar-wagon hr {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .navbar-wagon.home hr {
+    display: none;
   }
 }

@@ -1,21 +1,20 @@
-<li id="panel-<%= competition.id %>" class="list-group-item text-center">
+<li id="panel-<%= competition.id %>" class="list-group-item">
   <div class="ribbon-wrapper"><%= ribon(status) %></div>
 
   <div class="list-body">
-    <h3><%= link_to competition, competition %></h3>
-    <div>
-      <p class="lead"><%= competition.locations %></p>
-      <p class="text-uppercase text-muted small"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %>
-      </p>
-      <p class="users-area">
-        <% competition.accepted_users.each do |user| %>
-          <%= render 'users/avatar_small', user: user %>
-        <% end %>
-      </p>
-      <p><%= link_to t('more'), competition, class: "btn" %></p>
-
+    <div class="left-of-ribbon">
+      <h4><%= link_to competition, competition %></h4>
+      <p class="text-uppercase small"><%= competition.route %></p>
+      <p class="text-uppercase text-muted small"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %></p>
     </div>
+    <p class="users-area text-center">
+      <% competition.accepted_users.each do |user| %>
+        <%= render 'users/avatar_small', user: user %>
+      <% end %>
+    </p>
+    <%= render 'subscriptions/new', competition: competition %>
   </div>
-  <%= render 'subscriptions/new', competition: competition %>
-  <%= render 'competitions/registrations', competition: competition %>
+  <div class="text-center">
+    <%= render 'competitions/registrations', competition: competition %>
+  </div>
 </li>
