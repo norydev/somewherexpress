@@ -40,7 +40,7 @@
           <% end %>
 
           <% if policy_scope(Competition).not_open_for_registration.any? %>
-            <h2><%= t('.closed_title') %></h2>
+            <h2 class="text-center"><%= t('.closed_title') %></h2>
             <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
               <%= render 'competitions/card', competition: competition, status: "closed" %>
             <% end %>
