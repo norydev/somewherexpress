@@ -13,6 +13,6 @@ class City < ActiveRecord::Base
   end
 
   def self.on_map
-    all.select { |c| c.competition.finished? }
+    select { |c| c.competition.finished? }
   end
 end
