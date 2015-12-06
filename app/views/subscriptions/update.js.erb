@@ -4,6 +4,12 @@
 <% else %>
   $("#modal-sub-<%= @subscription.id %>").modal('hide');
 
+  <% if current_user.pending_registrations_for_creations > 0 %>
+    $('.registrations-alert').html("<%= current_user.pending_registrations_for_creations %>");
+  <% else %>
+    $('.registrations-alert').hide();
+  <% end %>
+
   <% if @subscription.status == "accepted" %>
     $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @subscription.user %>")
 

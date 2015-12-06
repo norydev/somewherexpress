@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     badges.find_by(name: "Founder")
   end
 
+  def pending_registrations_for_creations
+    creations.not_finished.map{ |c| c.subscriptions.where(status: "pending") }.flatten.size
+  end
+
   private
 
     def send_welcome_email

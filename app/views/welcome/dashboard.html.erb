@@ -44,67 +44,6 @@
           <%= link_to t('competitions.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" %>
         </div>
       <% end %>
-
-      <% if current_user.creations.not_finished.any? %>
-        <% current_user.creations.not_finished.each do |competition| %>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <div class="dropdown pull-right">
-                <div class="pointer dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-cogs"></i> <span class="caret"></span>
-                </div>
-                <ul class="dropdown-menu navbar-wagon-dropdown-menu">
-                  <% if policy(competition).update? %>
-                    <li><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></li>
-                  <% end %>
-                  <% if policy(competition).destroy? %>
-                    <li><%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete' %></li>
-                  <% end %>
-                </ul>
-              </div>
-              <strong>
-                <%= link_to competition do %>
-                <i class="fa fa-map-signs"></i> <%= competition %>
-                <% end %>
-              </strong>
-            </div>
-            <ul class="list-group">
-              <% competition.pending_users.each do |user| %>
-                <li id="competition-<%= competition.id %>-user-<%= user.id %>" class="list-group-item flex-container">
-                  <span class="flex-item">
-                    <%= render 'users/avatar_small', user: user %>
-                  </span>
-                  <%= link_to user.name, user, class: "flex-item" %>
-                  <span class="edit-form flex-item marged-micro-sides">
-                    <%= render 'subscriptions/edit', subscription: Subscription.find_by(competition: competition, user: user), competition: competition, user: user %>
-                  </span>
-                  <span class="flex-item status">
-                    <i class="fa fa-refresh text-warning cursor-default" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.pending_short') %>"></i>
-                  </span>
-                </li>
-              <% end %>
-              <% competition.accepted_users.each do |user| %>
-                <li class="list-group-item flex-container">
-                  <span class="flex-item">
-                    <%= render 'users/avatar_small', user: user %>
-                  </span>
-                  <%= link_to user.name, user, class: "flex-item" %>
-                  <i class="fa fa-check text-success cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.accepted_short') %>"></i>
-                </li>
-              <% end %>
-              <% competition.refused_users.each do |user| %>
-                <li class="list-group-item flex-container">
-                  <span class="flex-item">
-                    <%= render 'users/avatar_small', user: user %>
-                  </span>
-                  <%= link_to user.name, user, class: "flex-item" %>
-                  <i class="fa fa-times text-danger cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.refused_short') %>"></i>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-      <% end %>
     </div>
     <div class="col-sm-7 col-md-8 col-lg-9">
 
@@ -112,9 +51,21 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#open" aria-controls="open" role="tab" data-toggle="tab"><i class="fa fa-bullhorn fa-fw"></i> <%= t('welcome.index.future_title') %></a></li>
         <li role="presentation"><a href="#finished" aria-controls="finished" role="tab" data-toggle="tab" onclick="showMap();"><i class="fa fa-list fa-fw"></i> <%= t('welcome.index.passed_title') %></a></li>
-        <!-- <li role="presentation"><a href="#mines" aria-controls="mines" role="tab" data-toggle="tab"><%#= t('.creations_title') %></a></li> -->
+
+        <% if current_user.creations.not_finished.any? %>
+          <li role="presentation">
+            <a href="#mines" aria-controls="mines" role="tab" data-toggle="tab">
+              <i class="fa fa-dashboard fa-fw"></i>
+              <%= t('.creations_title') %>
+              <% if current_user.pending_registrations_for_creations > 0 %>
+                <span class="badge badge-red registrations-alert"><%= current_user.pending_registrations_for_creations %></span>
+              <% end %>
+            </a>
+          </li>
+        <% end %>
+
         <% if policy(current_user).update? %>
-          <div class="pull-right marged-micro hidden-sm hidden-xs">
+          <div class="pull-right marged-micro visible-lg-block <%= 'visible-md-block' unless current_user.creations.not_finished.any? %>">
             <%= link_to edit_user_path(current_user), class: "btn btn-xs btn-default" do %>
               <i class="fa fa-pencil"></i> <%= t('users.edit.title') %>
             <% end %>
@@ -164,8 +115,70 @@
             </ul>
           <% end %>
         </div>
-        <!-- <div role="tabpanel" class="tab-pane" id="mines">
-        </div> -->
+
+        <% if current_user.creations.not_finished.any? %>
+          <div role="tabpanel" class="tab-pane" id="mines">
+            <% current_user.creations.not_finished.each do |competition| %>
+              <div class="panel panel-default marged-mini">
+                <div class="panel-heading">
+                  <div class="dropdown pull-right">
+                    <div class="pointer dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-cogs"></i> <span class="caret"></span>
+                    </div>
+                    <ul class="dropdown-menu navbar-wagon-dropdown-menu">
+                      <% if policy(competition).update? %>
+                        <li><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></li>
+                      <% end %>
+                      <% if policy(competition).destroy? %>
+                        <li><%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete' %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <strong><i class="fa fa-map-signs"></i> <%= competition %></strong>
+                </div>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <h4><%= link_to competition, competition %></h4>
+                    <p class="text-uppercase small"><%= competition.route %></p>
+                    <p class="text-uppercase text-muted small"><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %></p>
+                  </li>
+                  <% competition.pending_users.each do |user| %>
+                    <li id="competition-<%= competition.id %>-user-<%= user.id %>" class="list-group-item flex-container">
+                      <span class="flex-item">
+                        <%= render 'users/avatar_small', user: user %>
+                      </span>
+                      <%= link_to user.name, user, class: "flex-item" %>
+                      <span class="edit-form flex-item marged-micro-sides">
+                        <%= render 'subscriptions/edit', subscription: Subscription.find_by(competition: competition, user: user), competition: competition, user: user %>
+                      </span>
+                      <span class="flex-item status">
+                        <i class="fa fa-refresh text-warning cursor-default" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.pending_short') %>"></i>
+                      </span>
+                    </li>
+                  <% end %>
+                  <% competition.accepted_users.each do |user| %>
+                    <li class="list-group-item flex-container">
+                      <span class="flex-item">
+                        <%= render 'users/avatar_small', user: user %>
+                      </span>
+                      <%= link_to user.name, user, class: "flex-item" %>
+                      <i class="fa fa-check text-success cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.accepted_short') %>"></i>
+                    </li>
+                  <% end %>
+                  <% competition.refused_users.each do |user| %>
+                    <li class="list-group-item flex-container">
+                      <span class="flex-item">
+                        <%= render 'users/avatar_small', user: user %>
+                      </span>
+                      <%= link_to user.name, user, class: "flex-item" %>
+                      <i class="fa fa-times text-danger cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.refused_short') %>"></i>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
