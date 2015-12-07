@@ -1,11 +1,55 @@
 <!-- START FINAL RANKING -->
-<div id="competition-<%= competition.id %>-result">
-  <h2><%= t('competitions.show.final_ranking') %></h2>
-  <table class="table bordered">
-    <tbody>
-      <%= render 'final_ranks', competition: competition %>
-    </tbody>
-  </table>
+<div id="competition-<%= competition.id %>-result" class="panel panel-default">
+  <div class="panel-heading with-tabs">
+    <p><strong><%= t('competitions.show.all_results') %></strong></p>
+
+    <ul class="nav nav-tabs" style="margin-bottom: -1px;" role="tablist">
+      <li role="presentation" class="active"><a href="#finals" aria-controls="finals" role="tab" data-toggle="tab"><%= t('competitions.show.final_ranking') %></a></li>
+
+      <% competition.tracks.order(:start_time).each_with_index do |track, i| %>
+        <li role="presentation"><a href="#track-<%= track.id %>-result" aria-controls="track-<%= track.id %>-result" role="tab" data-toggle="tab"><%= t('activerecord.models.track', count: 1).capitalize %> <%= i + 1 %></a></li>
+      <% end %>
+    </ul>
+  </div>
+
+
+  <div class="tab-content result-tables">
+    <div role="tabpanel" class="tab-pane active" id="finals">
+      <table class="table">
+        <tbody>
+          <%= render 'final_ranks', competition: competition %>
+        </tbody>
+      </table>
+    </div>
+    <% competition.tracks.order(:start_time).each_with_index do |track, i| %>
+
+      <h3>
+        <%= i + 1 %>. <%= track %>
+        <!-- EDIT RESULTS -->
+        <% if policy(competition).update? %>
+          <small><%= link_to t('competitions.edit_results'), edit_competition_track_path(competition, track) %></small>
+        <% end %>
+        <!-- END EDIT RESULTS -->
+      </h3>
+
+      <div role="tabpanel" class="tab-pane" id="track-<%= track.id %>-result">
+        <table class="table">
+          <tbody>
+            <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
+              <tr>
+                <td class="text-center"><%= track_result(rank) %></td>
+                <td class="text-center">
+                  <%= render 'users/avatar_small', user: rank.user %>
+                </td>
+                <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
+                <td class="text-right text-uppercase"><%= rank.points %> <%= t('ranks.params.points') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
 </div>
 <!-- END FINAL RANKING -->
 
@@ -20,7 +64,7 @@
       <% end %>
       <!-- END EDIT RESULTS -->
     </h3>
-    <table class="table bordered">
+    <table class="table">
       <tbody>
         <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
           <tr>

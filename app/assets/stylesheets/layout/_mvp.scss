@@ -400,3 +400,19 @@ table tbody tr td {
   vertical-align: text-top;
   background-color: $red;
 }
+
+.result-tables .table {
+  margin-bottom: 0;
+
+  tr:first-child td {
+    border-top: 0;
+  }
+}
+
+.panel-heading.with-tabs {
+  padding-bottom: 0;
+
+  .active a, .active a:hover, .active a:focus {
+    border-top: 3px solid $red;
+  }
+}

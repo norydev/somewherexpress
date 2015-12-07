@@ -75,6 +75,7 @@ fr:
         title: "Modifier cette compétition"
       destroy:
         title: "Supprimer cette compétition"
+      all_results: "Résultats de la compétition"
       final_ranking: "Résultat final"
     new:
       title: "Nouvelle compétition"
