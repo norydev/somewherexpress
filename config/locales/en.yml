@@ -36,9 +36,13 @@ en:
       user_infos: "Details of the participant"
       pending_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
       tos: "Please note: Your application for %{competition} is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+    create:
+      notice: "Your application has been sent to the organizer"
     edit:
       title: "%{user} applied for %{competition}"
       button: "Validate"
+    destroy:
+      notice: 'Your registration has been cancelled'
   competitions:
     open: 'open'
     finished: 'finished'

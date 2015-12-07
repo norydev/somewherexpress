@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     authorize @user
 
     if @user.update(user_params)
-      redirect_to @user, notice: 'Your profile was successfully updated.'
+      redirect_to @user
     else
       render :edit
     end

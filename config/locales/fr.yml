@@ -36,9 +36,13 @@ fr:
       user_infos: "Informations du participant"
       pending_tos: "Notez bien: Votre inscription à %{competition} doit être approuvée par l'organisateur de la compétition. Vous serez notifié de votre acceptation ou refus par email. Si votre inscription est acceptée, elle est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
       tos: "Notez bien: Votre inscription à %{competition} est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
+    create:
+      notice: "Votre inscription a été envoyée à l'organisateur"
     edit:
       title: "%{user} s'est inscrit à %{competition}"
       button: "Valider"
+    destroy:
+      notice: 'Votre inscription a été annulée'
   competitions:
     open:
       one: 'ouverte'
