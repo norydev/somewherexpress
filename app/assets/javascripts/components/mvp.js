@@ -8,7 +8,7 @@ var datetime_picker = function() {
 };
 
 var openTab = function() {
-  var activeTab = $('[href=' + location.hash + ']');
+  var activeTab = $('[href="' + location.hash + '"]');
   activeTab && activeTab.tab('show');
 }
 
