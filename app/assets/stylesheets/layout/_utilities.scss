@@ -51,6 +51,9 @@
       margin-left: 0.5em;
       margin-right: 0.5em;
     }
+    &-full {
+      margin: 0.5em;
+    }
   }
 }
 
@@ -62,8 +65,8 @@
   background: #aeaeae;
 }
 .bg-light-grey {
-  background: #eeeeee;
-  color: #777;
+  background: #fafafa;
+  // color: #777;
 }
 .bg-blue {
   background: #00a3e1;

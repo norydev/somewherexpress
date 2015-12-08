@@ -37,7 +37,7 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     if @competition.save
-      redirect_to @competition, notice: 'Competition was successfully created.'
+      redirect_to @competition
     else
       render :new
     end
@@ -47,7 +47,7 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     if @competition.update(competition_params)
-      redirect_to @competition, notice: 'Competition was successfully updated.'
+      redirect_to @competition
     else
       render :edit
     end

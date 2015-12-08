@@ -21,7 +21,12 @@ module CompetitionsHelper
     if rank && rank.dsq
       'DSQ'
     elsif rank
-      "#{rank.result}<sup>#{rank.result == 1 ? 're' : 'e'}</sup> place".html_safe
+      case I18n.locale
+      when :fr
+        "#{rank.result}<sup>#{rank.result == 1 ? 're' : 'e'}</sup> place".html_safe
+      else
+        "#{rank.result}<sup>#{rank.result.ordinal}</sup> place".html_safe
+      end
     else
       ""
     end

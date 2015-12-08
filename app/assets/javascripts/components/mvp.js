@@ -7,6 +7,11 @@ var datetime_picker = function() {
   });
 };
 
+var openTab = function() {
+  var activeTab = $('[href="' + location.hash + '"]');
+  activeTab && activeTab.tab('show');
+}
+
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
   datetime_picker();
@@ -20,6 +25,8 @@ $(document).ready(function(){
       autoclose: true
     });
   }
+
+  openTab();
 });
 
 // as found on http://davidlesches.com/blog/rails-nested-forms-using-jquery-and-simpleform

@@ -12,6 +12,6 @@
     $("#registration-area-<%= @competition.id %>").html('<i class="fa fa-refresh text-warning"></i> <%= t("subscriptions.pending") %>&nbsp;&nbsp;<%= link_to t("competitions.cancel"), competition_subscription_path(@competition, @subscription), method: :delete, data: { confirm: t("competitions.form.delete.message") } %>');
   <% end %>
 
-  $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Your application has been sent succesfully.</div>').hide();
+  $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= t("subscriptions.create.notice") %></div>').hide();
   $("#alerts-bar").slideDown();
 <% end %>

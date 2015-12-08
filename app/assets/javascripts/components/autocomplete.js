@@ -28,5 +28,3 @@ google.maps.event.addDomListener(window, 'load', function() {
   initializeAutocomplete('competition_start_city_attributes_name');
   initializeAutocomplete('competition_end_city_attributes_name');
 });
-
-competition_start_city_attributes_street_number

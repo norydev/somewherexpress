@@ -1,15 +1,17 @@
 <!-- START FINAL RANKING -->
-<div id="track-<%= competition.tracks.first.id %>-result">
-  <h2>
-    <%= t('competitions.show.final_ranking') %>
-    <!-- EDIT RESULTS -->
-    <% if policy(competition).update? %>
-      <small><%= link_to t('competitions.edit_results'), edit_competition_track_path(competition, competition.tracks.first) %></small>
-    <% end %>
-    <!-- END EDIT RESULTS -->
-  </h2>
+<div id="track-<%= competition.tracks.first.id %>-result" class="panel panel-default">
+  <div class="panel-heading">
+    <strong>
+      <%= t('competitions.show.final_ranking') %>
+      <!-- EDIT RESULTS -->
+      <% if policy(competition).update? %>
+        <small><%= link_to t('competitions.edit_results'), edit_competition_track_path(competition, competition.tracks.first) %></small>
+      <% end %>
+      <!-- END EDIT RESULTS -->
+    </strong>
+  </div>
 
-  <table class="table bordered">
+  <table class="table">
     <tbody>
       <% if competition.ranks.where.not(result: 0).any? %>
         <% (competition.ranks.where.not(result: 0).order(:dsq, :result) + competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>

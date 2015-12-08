@@ -20,7 +20,7 @@ en:
     goodbye:
       subject: "Goodbye and have a nice trip"
   subscriptions:
-    accepted: Your are registred!
+    accepted: Your are registered!
     pending: Your application is waiting for approval by the organizer
     refused: Your application has been refused by the organizer
     accepted_short: Accepted
@@ -36,9 +36,13 @@ en:
       user_infos: "Details of the participant"
       pending_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
       tos: "Please note: Your application for %{competition} is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
+    create:
+      notice: "Your application has been sent to the organizer"
     edit:
       title: "%{user} applied for %{competition}"
       button: "Validate"
+    destroy:
+      notice: 'Your registration has been cancelled'
   competitions:
     open: 'open'
     finished: 'finished'
@@ -67,6 +71,7 @@ en:
         title: "Edit this competition"
       destroy:
         title: "Delete this competition"
+      all_results: "Competition Results"
       final_ranking: "Final ranking"
     new:
       title: "New competition"

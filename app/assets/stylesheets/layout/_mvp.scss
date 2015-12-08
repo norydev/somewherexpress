@@ -185,6 +185,10 @@ table tbody tr td {
   @extend .radius-5
 }
 
+.dashboard .panel-heading {
+  border-radius: 5px 5px 0 0;
+}
+
 .tab-content .panel-outside {
   border-top: 0;
   border-radius: 0 0 5px 5px;
@@ -195,7 +199,7 @@ table tbody tr td {
   background-size: cover;
   height: 100px;
 
-  border-radius: 5px 5px 0 0;
+  border-radius: 4px 4px 0 0;
   overflow: hidden;
 }
 
@@ -389,5 +393,40 @@ table tbody tr td {
       color: $brand-color;
       background: $gray-lighter;
     }
+  }
+}
+
+.badge-red {
+  vertical-align: text-top;
+  background-color: $red;
+}
+
+.result-tables .table {
+  margin-bottom: 0;
+}
+
+.race-infos {
+  td {
+    height: 47px;
+    border-top: none !important;
+    &:last-child {
+      text-align: right;
+    }
+    &:first-child {
+      text-align: left;
+    }
+  }
+}
+
+.panel-heading.with-tabs {
+  padding-bottom: 0;
+
+  a {
+    margin-top: 2px;
+  }
+
+  .active a, .active a:hover, .active a:focus {
+    margin-top: 0;
+    border-top: 3px solid $red;
   }
 }

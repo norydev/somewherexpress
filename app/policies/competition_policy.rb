@@ -10,11 +10,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def create?
-    (user && user.admin?) || (user && user.organizer)
+    user && user.organizer
   end
 
   def update?
-    (user && user.admin?) || (user && record.author == user)
+    user && record.author == user
   end
 
   def apply?

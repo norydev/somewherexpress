@@ -1,42 +1,78 @@
-<!-- START FINAL RANKING -->
-<div id="competition-<%= competition.id %>-result">
-  <h2><%= t('competitions.show.final_ranking') %></h2>
-  <table class="table bordered">
-    <tbody>
-      <%= render 'final_ranks', competition: competition %>
-    </tbody>
-  </table>
-</div>
-<!-- END FINAL RANKING -->
+<div id="competition-<%= competition.id %>-result" class="panel panel-default">
+  <div class="panel-heading with-tabs">
+    <p><strong><%= t('competitions.show.all_results') %></strong></p>
 
-<!-- START STAGE RANKING -->
-<% competition.tracks.order(:start_time).each_with_index do |track, i| %>
-  <div id="track-<%= track.id %>-result">
-    <h3>
-      <%= i + 1 %>. <%= track %>
-      <!-- EDIT RESULTS -->
-      <% if policy(competition).update? %>
-        <small><%= link_to t('competitions.edit_results'), edit_competition_track_path(competition, track) %></small>
+    <ul class="nav nav-tabs" style="margin-bottom: -1px;" role="tablist">
+      <li role="presentation" class="active"><a href="#finals" aria-controls="finals" role="tab" data-toggle="tab"><%= t('competitions.show.final_ranking') %></a></li>
+
+      <% competition.tracks.order(:start_time).each_with_index do |track, i| %>
+        <li role="presentation"><a href="#track-<%= track.id %>-result" aria-controls="track-<%= track.id %>-result" role="tab" data-toggle="tab"><%= t('activerecord.models.track', count: 1).capitalize %> <%= i + 1 %></a></li>
       <% end %>
-      <!-- END EDIT RESULTS -->
-    </h3>
-    <table class="table bordered">
-      <tbody>
-        <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
-          <tr>
-            <td class="text-center"><%= track_result(rank) %></td>
-            <td class="text-center">
-              <%= render 'users/avatar_small', user: rank.user %>
-            </td>
-            <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
-            <td class="text-right text-uppercase"><%= rank.points %> <%= t('ranks.params.points') %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    </ul>
   </div>
-<% end %>
-<!-- END STAGE RANKING -->
+
+
+  <div class="tab-content result-tables">
+    <!-- START FINAL RANKING -->
+    <div role="tabpanel" class="tab-pane active" id="finals">
+      <div class="padded-mini-sides">
+        <table class="table text-muted race-infos">
+          <tbody>
+            <tr>
+              <td><i class="fa fa-map-signs fa-fw"></i> <%= competition.route %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <table class="table">
+        <tbody>
+          <%= render 'final_ranks', competition: competition %>
+        </tbody>
+      </table>
+    </div>
+    <!-- END FINAL RANKING -->
+
+    <!-- START STAGE RANKING -->
+    <% competition.tracks.order(:start_time).each_with_index do |track, i| %>
+      <div role="tabpanel" class="tab-pane" id="track-<%= track.id %>-result">
+        <div class="padded-mini-sides">
+          <table class="table text-muted race-infos">
+            <tbody>
+              <tr>
+                <td><i class="fa fa-map-signs fa-fw"></i> <%= track %></td>
+                <td><i class="fa fa-calendar fa-fw"></i> <%= date_format(track.start_time) %></td>
+                <!-- EDIT RESULTS -->
+                <% if policy(competition).update? %>
+                  <td>
+                    <i class="fa fa-cogs fa-fw"></i>
+                    <%= link_to t('competitions.edit_results'), edit_competition_track_path(competition, track) %>
+                  </td>
+                <% end %>
+                <!-- END EDIT RESULTS -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <table class="table">
+          <tbody>
+            <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
+              <tr>
+                <td class="text-center"><%= track_result(rank) %></td>
+                <td class="text-center">
+                  <%= render 'users/avatar_small', user: rank.user %>
+                </td>
+                <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
+                <td class="text-right text-uppercase"><%= rank.points %> <%= t('ranks.params.points') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+    <!-- END STAGE RANKING -->
+  </div>
+</div>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>

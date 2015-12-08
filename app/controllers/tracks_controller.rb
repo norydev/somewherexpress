@@ -8,7 +8,7 @@ class TracksController < ApplicationController
   def update
     authorize @track
     if @track.update(track_params)
-      redirect_to @track.competition, notice: 'Result was successfully updated.'
+      redirect_to @track.competition
     else
       render :edit
     end
@@ -21,7 +21,7 @@ class TracksController < ApplicationController
     @track.destroy
 
     respond_to do |format|
-      format.html { redirect_to competition, notice: 'Track was successfully deleted.' }
+      format.html { redirect_to competition }
       format.js
     end
   end

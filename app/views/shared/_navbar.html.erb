@@ -65,11 +65,9 @@
       <hr>
     <% else %>
       <%= link_to new_user_session_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
-        <span class="visible-xs-block"><i class="fa fa-sign-in"></i></span>
         <%= t('devise.sessions.new.sign_in') %>
       <% end %>
       <%= link_to new_user_registration_path, class: "navbar-wagon-item navbar-wagon-button btn" do %>
-        <span class="visible-xs-inline"><i class="fa fa-users"></i></span>
         <%= t('devise.registrations.new.sign_up') %>
       <% end %>
       <hr class="hidden-xs">
