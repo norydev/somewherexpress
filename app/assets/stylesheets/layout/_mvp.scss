@@ -403,16 +403,30 @@ table tbody tr td {
 
 .result-tables .table {
   margin-bottom: 0;
+}
 
-  tr:first-child td {
-    border-top: 0;
+.race-infos {
+  td {
+    height: 47px;
+    border-top: none !important;
+    &:last-child {
+      text-align: right;
+    }
+    &:first-child {
+      text-align: left;
+    }
   }
 }
 
 .panel-heading.with-tabs {
   padding-bottom: 0;
 
+  a {
+    margin-top: 2px;
+  }
+
   .active a, .active a:hover, .active a:focus {
+    margin-top: 0;
     border-top: 3px solid $red;
   }
 }
