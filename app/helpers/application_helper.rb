@@ -4,7 +4,12 @@ module ApplicationHelper
   end
 
   def datetime_format(datetime)
-    l(datetime, format: "%d %B %Y à %H:%M") if datetime
+    case I18n.locale
+      when :fr
+        l(datetime, format: "%d %B %Y à %H:%M") if datetime
+      else
+        l(datetime, format: "%d %B %Y at %H:%M") if datetime
+      end
   end
 
   def datetime_value(datetime)
