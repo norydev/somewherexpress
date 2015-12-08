@@ -20,7 +20,7 @@ en:
     goodbye:
       subject: "Goodbye and have a nice trip"
   subscriptions:
-    accepted: Your are registred!
+    accepted: Your are registered!
     pending: Your application is waiting for approval by the organizer
     refused: Your application has been refused by the organizer
     accepted_short: Accepted
