@@ -33,8 +33,8 @@
                     <% end %>
                   </td>
                   <td class="text-uppercase"><%= link_to t.object.user.name, t.object.user %></td>
-                  <td class="text-center"><%= t.input :points, label: false %></td>
                   <td class="text-center"><%= t.input :result, label: false %></td>
+                  <td class="text-center"><%= t.input :points, label: false %></td>
                   <td class="text-center">
                     <%= t.input_field :dsq, as: :boolean, boolean_style: :inline, class: "cmn-toggle cmn-toggle-round cmn-toggle-red" %>
                     <label for="track_ranks_attributes_<%= t.index %>_dsq"></label>

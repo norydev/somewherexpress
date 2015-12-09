@@ -7,7 +7,6 @@ class Rank < ActiveRecord::Base
   validates_presence_of :user, :race
 
   private
-
     def set_competition_ranks
       if self.race.is_a?(Track)
         c = self.race.competition
@@ -33,5 +32,4 @@ class Rank < ActiveRecord::Base
         end
       end
     end
-
 end
