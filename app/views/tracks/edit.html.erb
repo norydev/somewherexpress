@@ -9,13 +9,22 @@
 <div class="container padded-mini">
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
-      <div class="panel panel-default">
-        <h3><%= t('.title') %><br><small><%= @track %></small></h3>
+      <div class="panel panel-default result-tables">
+        <div class="panel-heading">
+          <strong><%= t('.title') %><br></strong>
+        </div>
+        <table class="table text-muted race-infos">
+          <tbody>
+            <tr>
+              <td><i class="fa fa-map-signs fa-fw"></i> <%= @track %></td>
+            </tr>
+          </tbody>
+        </table>
 
         <%= simple_form_for([@track.competition, @track]) do |f| %>
           <%= f.error_notification %>
 
-          <table class="table edit_result_table bordered">
+          <table class="table edit_result_table bordered-top">
             <thead>
               <tr class="active">
                 <th colspan="2" class="text-center"><%= t('.user') %></th>
