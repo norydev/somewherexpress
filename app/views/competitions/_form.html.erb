@@ -161,7 +161,7 @@
           <%= f.hint t('.rules.default.hint') %>
         </div>
         <div class="col-xs-12 col-md-4 text-right-center">
-          <%= f.collection_radio_buttons :default_registration_status, [["accepted", "check text-success"] ,["pending", "refresh text-warning"]], :first, :last, checked: "pending" do |b| %>
+          <%= f.collection_radio_buttons :default_registration_status, [["accepted", "check text-success"] ,["pending", "refresh text-warning"]], :first, :last, checked: f.object.default_registration_status do |b| %>
             <% b.label(class: "marged-micro-sides") {"<span class='marged-micro-sides'><i class='fa fa-#{ b.text }'></i> #{t(".rules.default.#{b.value}")}</span>".html_safe + b.radio_button } %>
           <% end %>
         </div>
