@@ -6,8 +6,8 @@ class Competition < ActiveRecord::Base
 
   has_many :ranks, as: :race, dependent: :destroy
 
-  has_one :start_city, -> { where order: 'start' }, class_name: 'City', as: :localizable
-  has_one :end_city, -> { where order: 'end' }, class_name: 'City', as: :localizable
+  has_one :start_city, -> { where order: 'start' }, class_name: 'City', as: :localizable, dependent: :destroy
+  has_one :end_city, -> { where order: 'end' }, class_name: 'City', as: :localizable, dependent: :destroy
   accepts_nested_attributes_for :start_city, allow_destroy: true
   accepts_nested_attributes_for :end_city, allow_destroy: true
 
