@@ -1,0 +1,61 @@
+<% if competition.pending_users.any? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>Pending participants</strong>
+    </div>
+    <ul class="list-group">
+      <% competition.pending_users.each do |user| %>
+        <li id="competition-<%= competition.id %>-user-<%= user.id %>" class="list-group-item flex-container">
+          <span class="flex-item">
+            <%= render 'users/avatar_small', user: user %>
+          </span>
+          <%= link_to user.name, user, class: "flex-item" %>
+          <span class="edit-form flex-item marged-micro-sides">
+            <%= render 'subscriptions/edit', subscription: Subscription.find_by(competition: competition, user: user), competition: competition, user: user %>
+          </span>
+          <span class="flex-item status">
+            <i class="fa fa-refresh text-warning cursor-default" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.pending_short') %>"></i>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if competition.accepted_users.any? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>Accepted participants</strong>
+    </div>
+    <ul class="list-group">
+      <% competition.accepted_users.each do |user| %>
+        <li class="list-group-item flex-container">
+          <span class="flex-item">
+            <%= render 'users/avatar_small', user: user %>
+          </span>
+          <%= link_to user.name, user, class: "flex-item" %>
+          <i class="fa fa-check text-success cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.accepted_short') %>"></i>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if competition.refused_users.any? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>Refused participants</strong>
+    </div>
+    <ul class="list-group">
+      <% competition.refused_users.each do |user| %>
+        <li class="list-group-item flex-container">
+          <span class="flex-item">
+            <%= render 'users/avatar_small', user: user %>
+          </span>
+          <%= link_to user.name, user, class: "flex-item" %>
+          <i class="fa fa-times text-danger cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.refused_short') %>"></i>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

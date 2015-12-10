@@ -80,10 +80,10 @@
 
         <% if policy(@competition).update? %>
           <div role="tabpanel" class="tab-pane" id="users">
-            users
+            <%= render 'users', competition: @competition %>
           </div>
           <div role="tabpanel" class="tab-pane" id="settings">
-            <%= render 'competitions/form', competition: @competition, tracks: @competition.tracks %>
+            <%= render 'form', competition: @competition, tracks: @tracks %>
           </div>
         <% end %>
       </div>
