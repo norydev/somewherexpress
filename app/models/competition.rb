@@ -37,7 +37,7 @@ class Competition < ActiveRecord::Base
   end
 
   def multiple_tracks?
-    self.tracks.size > 1
+    self.tracks.order(:start_time).size > 1
   end
 
   def t_ranks
