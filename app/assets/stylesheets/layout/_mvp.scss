@@ -420,6 +420,9 @@ table tbody tr td {
 
 .panel-heading.with-tabs {
   padding-bottom: 0;
+}
+
+.with-tabs .nav-tabs {
 
   a {
     margin-top: 2px;
@@ -428,5 +431,14 @@ table tbody tr td {
   .active a, .active a:hover, .active a:focus {
     margin-top: 0;
     border-top: 3px solid $red;
+  }
+}
+
+.panel-danger {
+    border: 1px solid darken($red, 10%);
+  .panel-heading {
+    background: $red;
+    color: white;
+    border-bottom: 1px solid darken($red, 10%);
   }
 }

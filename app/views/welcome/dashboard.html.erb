@@ -121,19 +121,6 @@
             <% current_user.creations.not_finished.each do |competition| %>
               <div class="panel panel-default marged-mini">
                 <div class="panel-heading">
-                  <div class="dropdown pull-right">
-                    <div class="pointer dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-cogs"></i> <span class="caret"></span>
-                    </div>
-                    <ul class="dropdown-menu navbar-wagon-dropdown-menu">
-                      <% if policy(competition).update? %>
-                        <li><%= link_to t('competitions.show.edit.title'), edit_competition_path(competition) %></li>
-                      <% end %>
-                      <% if policy(competition).destroy? %>
-                        <li><%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete' %></li>
-                      <% end %>
-                    </ul>
-                  </div>
                   <strong><i class="fa fa-map-signs"></i> <%= competition %></strong>
                 </div>
                 <ul class="list-group">
