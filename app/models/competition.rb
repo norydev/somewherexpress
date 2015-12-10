@@ -37,6 +37,7 @@ class Competition < ActiveRecord::Base
   end
 
   def multiple_tracks?
+    # order to eliminate tracks with no id (used for competition form)
     self.tracks.order(:start_time).size > 1
   end
 

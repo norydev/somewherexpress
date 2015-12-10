@@ -26,6 +26,9 @@ en:
     accepted_short: Accepted
     pending_short: Pending
     refused_short: Refused
+    accepted_long: Accepted participants
+    pending_long:  Pending registrations
+    refused_long: Refused participants
     params:
       status: "Status"
       rules: "Rules"
@@ -66,11 +69,17 @@ en:
       new:
         title: "Create a competition"
     show:
+      tabs:
+        view: Published
+        users: Participants
+        settings: Settings
       edit:
         label: "You are the organizer of this competition"
         title: "Edit this competition"
       destroy:
+        panel: Danger Zone
         title: "Delete this competition"
+        text: "Once you delete a competition, there is no going back. Please be certain."
       all_results: "Competition Results"
       final_ranking: "Final ranking"
     new:

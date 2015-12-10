@@ -26,6 +26,9 @@ fr:
     accepted_short: Accepté
     pending_short: À traiter
     refused_short: Refusé
+    accepted_long: Participants acceptés
+    pending_long:  Inscriptions à traiter
+    refused_long: Participants refusés
     params:
       status: "Status"
       rules: "Règles"
@@ -70,11 +73,17 @@ fr:
       new:
         title: "Créer une compétition"
     show:
+      tabs:
+        view: Publié
+        users: Participants
+        settings: Paramètres
       edit:
         label: "Vous êtes l'organisateur de cette compétition"
         title: "Modifier cette compétition"
       destroy:
+        panel: Zone Danger
         title: "Supprimer cette compétition"
+        text: "Une fois que vous supprimer une compétition, il n'y a pas de retour en arrière. Soyez sûr de ce que vous faites."
       all_results: "Résultats de la compétition"
       final_ranking: "Résultat final"
     new:
