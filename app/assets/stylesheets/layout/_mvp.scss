@@ -433,3 +433,12 @@ table tbody tr td {
     border-top: 3px solid $red;
   }
 }
+
+.panel-danger {
+    border: 1px solid darken($red, 10%);
+  .panel-heading {
+    background: $red;
+    color: white;
+    border-bottom: 1px solid darken($red, 10%);
+  }
+}

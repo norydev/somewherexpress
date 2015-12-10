@@ -36,14 +36,7 @@
     <div class="container padded-mini-top">
       <div class="row">
         <div class="col-md-8 col-md-offset-2 with-tabs">
-          <strong><%= t('.edit.label') %></strong>
-
-          <ul class="list-group">
-            <li class="list-group-item"><%= link_to t('.edit.title'), edit_competition_path(@competition) %></li>
-            <% if policy(@competition).destroy? %>
-              <li class="list-group-item"><%= link_to t('.destroy.title'), competition_path(@competition), method: 'delete' %></li>
-            <% end %>
-          </ul>
+          <p><strong><%= t('.edit.label') %></strong></p>
 
           <ul class="nav nav-tabs" style="margin-bottom: -1px;" role="tablist">
             <li role="presentation" class="active"><a href="#view" aria-controls="view" role="tab" data-toggle="tab"><i class="fa fa-eye fa-fw"></i> View</a></li>
@@ -61,24 +54,39 @@
 <div class="container padded-mini">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <div id="panel-<%= @competition.id %>" class="panel panel-default">
-        <div id="map" style="width: 100%; height: 400px; max-height: 90vh;"></div>
+      <div class="tab-content">
+        <!-- VIEW OF THE COMPETITION -->
+        <div role="tabpanel" class="tab-pane active" id="view">
+          <div id="panel-<%= @competition.id %>" class="panel panel-default">
+            <div id="map" style="width: 100%; height: 400px; max-height: 90vh;"></div>
 
-        <% if @competition.video? %>
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="<%= @competition.video %>"></iframe>
+            <% if @competition.video? %>
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="<%= @competition.video %>"></iframe>
+              </div>
+            <% end %>
+
+            <% if @competition.description? %>
+              <blockquote class="marged-medium"><%= @competition.description %></blockquote>
+            <% end %>
+          </div>
+          <% if @competition.multiple_tracks? %>
+            <%= render 'multi_tracks', competition: @competition %>
+          <% else %>
+            <%= render 'mono_track', competition: @competition %>
+          <% end %>
+        </div>
+        <!-- END VIEW OF THE COMPETITION -->
+
+        <% if policy(@competition).update? %>
+          <div role="tabpanel" class="tab-pane" id="users">
+            users
+          </div>
+          <div role="tabpanel" class="tab-pane" id="settings">
+            <%= render 'competitions/form', competition: @competition, tracks: @competition.tracks %>
           </div>
         <% end %>
-
-        <% if @competition.description? %>
-          <blockquote class="marged-medium"><%= @competition.description %></blockquote>
-        <% end %>
       </div>
-      <% if @competition.multiple_tracks? %>
-        <%= render 'multi_tracks', competition: @competition %>
-      <% else %>
-        <%= render 'mono_track', competition: @competition %>
-      <% end %>
     </div>
   </div>
 </div>
