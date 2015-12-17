@@ -123,6 +123,8 @@ fr:
       last_name: "Nom de famille"
       girl: "Es-tu une fille ou un garçon?"
       picture: "Photo"
+    new:
+      no_fb: Je ne suis pas sur facebook
     show:
       profile:
         title: Mon profil

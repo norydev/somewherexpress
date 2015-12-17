@@ -119,6 +119,8 @@ en:
       last_name: "Last name"
       girl: "Are you a girl or a boy?"
       picture: "Picture"
+    new:
+      no_fb: I am not on facebook
     show:
       profile:
         title: My profile
