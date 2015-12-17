@@ -63,17 +63,12 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_oauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]  # Fake password for validation
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.last_name
-      user.picture = auth.info.image
-      user.girl = auth.extra.raw_info.gender == 'female'
-      user.token = auth.credentials.token
-      user.token_expiry = Time.at(auth.credentials.expires_at)
+    if find_by(provider: auth.provider, uid: auth.uid)
+      find_by(provider: auth.provider, uid: auth.uid)
+    elsif find_by(email: auth.info.email)
+      find_by(email: auth.info.email).send(:update_from_fb, auth)
+    else
+      User.new.send(:create_from_fb, auth)
     end
   end
 
@@ -81,5 +76,30 @@ class User < ActiveRecord::Base
 
     def send_welcome_email
       UserMailer.welcome(self).deliver_now
+    end
+
+    def update_from_fb(auth)
+      self.provider = auth.provider
+      self.uid = auth.uid
+      self.token = auth.credentials.token
+      self.token_expiry = Time.at(auth.credentials.expires_at)
+      self.picture = auth.info.image
+      self.save!
+      self
+    end
+
+    def create_from_fb(auth)
+      self.provider = auth.provider
+      self.uid = auth.uid
+      self.email = auth.info.email
+      self.password = Devise.friendly_token[0,20]  # Fake password for validation
+      self.first_name = auth.info.first_name
+      self.last_name = auth.info.last_name
+      self.picture = auth.info.image
+      self.girl = auth.extra.raw_info.gender == 'female'
+      self.token = auth.credentials.token
+      self.token_expiry = Time.at(auth.credentials.expires_at)
+      self.save!
+      self
     end
 end
