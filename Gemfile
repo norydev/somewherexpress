@@ -40,6 +40,7 @@ gem 'pundit'
 gem 'modernizr-rails'
 gem 'premailer-rails'
 gem 'rails_admin'
+gem 'omniauth-facebook'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
