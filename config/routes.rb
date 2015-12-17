@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope '(:locale)', locale: /fr|en/ do
     get 'welcome/index'

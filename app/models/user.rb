@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook]
 
   has_many :subscriptions, dependent: :destroy
   has_many :competitions, through: :subscriptions
@@ -61,9 +62,44 @@ class User < ActiveRecord::Base
     creations.not_finished.map{ |c| c.subscriptions.where(status: "pending") }.flatten.size
   end
 
+  def self.find_for_facebook_oauth(auth)
+    if find_by(provider: auth.provider, uid: auth.uid)
+      find_by(provider: auth.provider, uid: auth.uid)
+    elsif find_by(email: auth.info.email)
+      find_by(email: auth.info.email).send(:update_from_fb, auth)
+    else
+      User.new.send(:create_from_fb, auth)
+    end
+  end
+
   private
 
     def send_welcome_email
       UserMailer.welcome(self).deliver_now
+    end
+
+    def update_from_fb(auth)
+      self.provider = auth.provider
+      self.uid = auth.uid
+      self.token = auth.credentials.token
+      self.token_expiry = Time.at(auth.credentials.expires_at)
+      self.picture = auth.info.image
+      self.save!
+      self
+    end
+
+    def create_from_fb(auth)
+      self.provider = auth.provider
+      self.uid = auth.uid
+      self.email = auth.info.email
+      self.password = Devise.friendly_token[0,20]  # Fake password for validation
+      self.first_name = auth.info.first_name
+      self.last_name = auth.info.last_name
+      self.picture = auth.info.image
+      self.girl = auth.extra.raw_info.gender == 'female'
+      self.token = auth.credentials.token
+      self.token_expiry = Time.at(auth.credentials.expires_at)
+      self.save!
+      self
     end
 end

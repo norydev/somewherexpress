@@ -7,7 +7,7 @@ fr:
   process: Traiter
   welcome:
     index:
-      intro: "SomewherExpress est un collectif d'autostopeurs basé en Suisse Romande. Nous organisons chaque année des compétitions d'autostop par équipe à travers l'Europe. Rejoins-nous!"
+      intro: "SomewherExpress est un collectif d'autostoppeurs basé en Suisse Romande. Nous organisons chaque année des compétitions d'autostop par équipe à travers l'Europe. Rejoins-nous!"
       future_title: "Compétitions à venir"
       open_title: "Inscriptions ouvertes"
       closed_title: "Inscriptions closes"
@@ -123,6 +123,8 @@ fr:
       last_name: "Nom de famille"
       girl: "Es-tu une fille ou un garçon?"
       picture: "Photo"
+    new:
+      no_fb: Je ne suis pas sur facebook
     show:
       profile:
         title: Mon profil

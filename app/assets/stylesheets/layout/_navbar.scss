@@ -115,7 +115,7 @@
 
   hr {
     height: 12px;
-    width: 1px;
+    width: 0;
     background-color: rgba(0, 0, 0, 0.2);
     margin-left: 10px;
     margin-right: 10px;
@@ -136,8 +136,8 @@
     padding: 0 7px;
   }
   .navbar-wagon hr {
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0;
+    margin-right: 0;
   }
   .navbar-wagon.home hr {
     display: none;
