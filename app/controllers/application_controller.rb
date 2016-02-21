@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_controller?
-    is_a?(RailsAdmin::MainController)
+    is_a?(ActiveAdmin::BaseController)
   end
 
   def errors_controller?

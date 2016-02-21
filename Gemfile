@@ -39,8 +39,10 @@ gem 'gmaps4rails'
 gem 'pundit'
 gem 'modernizr-rails'
 gem 'premailer-rails'
-gem 'rails_admin'
 gem 'omniauth-facebook'
+
+# admin panel
+gem 'activeadmin', github: 'activeadmin'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
