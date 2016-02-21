@@ -10,6 +10,9 @@ ActiveAdmin.register User do
     column "picture" do |user|
       image_tag user.avatar, height: "30px", with: "30px"
     end
+    column "gravatar" do |user|
+      image_tag gravatar_url(user), height: "30px", with: "30px"
+    end
     column :first_name
     column :last_name
     column :email
