@@ -130,7 +130,7 @@ fr:
         title: Mon profil
         settings: Paramètres
     edit:
-      title: "Modifier mon profile"
+      title: "Modifier mon profil"
       account: Paramètres du compte
   tracks:
     params:
