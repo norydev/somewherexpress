@@ -25,8 +25,21 @@ class User < ActiveRecord::Base
     [first_name, last_name].reject(&:blank?).join(' ')
   end
 
-  def avatar
+  def image
     self.picture || ActionController::Base.helpers.asset_path("default_user_picture.svg")
+  end
+
+  def gravatar_url
+    hash = Digest::MD5.hexdigest(email)
+    "https://www.gravatar.com/avatar/#{hash}?s=160"
+  end
+
+  def avatar
+    if use_gravatar
+      gravatar_url
+    else
+      image
+    end
   end
 
   def sex
