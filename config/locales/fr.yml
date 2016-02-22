@@ -131,6 +131,9 @@ fr:
         settings: Paramètres
     edit:
       title: "Modifier mon profil"
+      default: "Standard"
+      image_html: "Vous pouvez changer votre gravatar sur le site de %{href}."
+      image_text: Gravatar
       account: Paramètres du compte
   tracks:
     params:
