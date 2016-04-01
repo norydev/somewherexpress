@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
+  attr_accessor :current_password
 
   has_many :subscriptions, dependent: :destroy
   has_many :competitions, through: :subscriptions

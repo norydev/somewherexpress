@@ -1,5 +1,17 @@
 # app/controllers/users/registrations_controller.rb
 class Users::RegistrationsController < Devise::RegistrationsController
+  protected
+
+  # PUT /resource
+  def update_resource(resource, params)
+    params.permit(:email, :password, :current_password)
+    if resource.provider == "facebook"
+      resource.update_without_password(params)
+    else
+      super
+    end
+  end
+
   # DELETE /resource
   def destroy
     resource.soft_delete
