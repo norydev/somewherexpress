@@ -44,6 +44,7 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     if @competition.save
+      send_new_competition_emails if @competition.published?
       redirect_to @competition
     else
       render :new
@@ -54,6 +55,12 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     if @competition.update(competition_params)
+      if @competition.just_published?
+        send_new_competition_emails
+      elsif @competition.published? && !@competition.finished?
+        send_competition_edited_emails
+      end
+
       redirect_to @competition
     else
       render :edit
@@ -90,5 +97,17 @@ class CompetitionsController < ApplicationController
           :administrative_area_level_1, :administrative_area_level_1_short, :country,
           :country_short, :postal_code]]
         )
+    end
+
+    def send_new_competition_emails
+      User.want_email_for_new_competition.each do |user|
+        UserMailer.new_competition(user, @competition).deliver_now
+      end
+    end
+
+    def send_competition_edited_emails
+      User.want_email_for_competition_edited(@competition).each do |user|
+        UserMailer.competition_edited(user, @competition).deliver_now
+      end
     end
 end

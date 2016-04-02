@@ -41,6 +41,10 @@ class Competition < ActiveRecord::Base
     self.tracks.order(:start_time).size > 1
   end
 
+  def just_published?
+    previous_changes["published"] && previous_changes["published"].last
+  end
+
   def t_ranks
     Rank.where(race_id: self.tracks.map(&:id), race_type: "Track")
   end

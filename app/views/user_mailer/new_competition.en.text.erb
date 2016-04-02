@@ -1,0 +1,13 @@
+New competition published
+
+Hi <%= @user.first_name %>, a new competition has been published on SomewherExpress (http://www.somewherexpress.com/en):
+
+------------------------------
+
+Name: <%= @competition.name %>
+Journey: <%= @competition.route %>
+Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
+
+Read more: http://www.somewherexpress.com/en/competitions/<%= @competition.id %>
+
+Too many emails? Modifiy your preferences here: http://www.somewherexpress.com/users/edit.<%= @user.id %>?locale=en
