@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402110142) do
+ActiveRecord::Schema.define(version: 20160402161700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20160402110142) do
     t.boolean  "as_author_cancelation",              default: true, null: false
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
+    t.string   "locale",                             default: "fr", null: false
   end
 
   add_index "notification_settings", ["user_id"], name: "index_notification_settings_on_user_id", using: :btree
