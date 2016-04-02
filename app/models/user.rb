@@ -1,4 +1,17 @@
 class User < ActiveRecord::Base
+  scope :want_email_for_new_competition, -> do
+    joins(:notification_setting)
+    .where(deleted_at: nil)
+    .where(notification_settings: {as_user_new_competition: true})
+  end
+
+  scope :want_email_for_competition_edited, -> (competition) do
+    joins(:notification_setting, :competitions)
+    .where(deleted_at: nil)
+    .where(competitions: {id: competition.id})
+    .where(notification_settings: {as_user_competition_edited: true})
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :creations, foreign_key: "author_id", class_name: "Competition", dependent: :nullify
 
   has_many :badges, dependent: :destroy
+
+  has_one :notification_setting, dependent: :destroy
 
   validates_presence_of :first_name, :last_name
 

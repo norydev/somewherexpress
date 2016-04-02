@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222185002) do
+ActiveRecord::Schema.define(version: 20160402161700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,21 @@ ActiveRecord::Schema.define(version: 20160222185002) do
     t.string   "default_registration_status", default: "pending", null: false
     t.string   "video"
   end
+
+  create_table "notification_settings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "as_user_new_competition",            default: true, null: false
+    t.boolean  "as_user_competition_edited",         default: true, null: false
+    t.boolean  "as_user_new_subscription",           default: true, null: false
+    t.boolean  "as_user_subscription_satus_changed", default: true, null: false
+    t.boolean  "as_author_new_subscription",         default: true, null: false
+    t.boolean  "as_author_cancelation",              default: true, null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "locale",                             default: "fr", null: false
+  end
+
+  add_index "notification_settings", ["user_id"], name: "index_notification_settings_on_user_id", using: :btree
 
   create_table "ranks", force: :cascade do |t|
     t.integer  "user_id"
@@ -149,6 +164,7 @@ ActiveRecord::Schema.define(version: 20160222185002) do
 
   add_foreign_key "badges", "users"
   add_foreign_key "competitions", "users", column: "author_id"
+  add_foreign_key "notification_settings", "users"
   add_foreign_key "ranks", "users"
   add_foreign_key "subscriptions", "competitions"
   add_foreign_key "subscriptions", "users"

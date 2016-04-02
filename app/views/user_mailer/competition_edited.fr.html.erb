@@ -14,26 +14,33 @@
         </tr>
         <tr>
           <td class="message" bgcolor="#FFFFFF">
-            <h3>Salut <%= @user.first_name %>,</h3>
-            <p>Bienvenue dans <a href="http://www.somewherexpress.com">SomewherExpress</a>, nous sommes très heureux de t'avoir parmi nous.</p>
-            <p>Pour te connecter, utilise ton adresse email <strong><%= @user.email %></strong> comme identifiant.</p>
-            <!-- button -->
-            <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
+            <h3><%= @competition.name %> a été mise à jour</h3>
+            <p>Salut <%= @user.first_name %>, une compétition à laquelle tu es inscrit-e sur <a href="http://www.somewherexpress.com">SomewherExpress</a> a été mise à jour:</p>
+
+            <table class="body-wrap">
               <tr>
-                <td></td>
-                <td>
-                  <a href="http://www.somewherexpress.com/competitions">Voir les prochaines compétitions</a>
+                <td class="message">
+                  <h3><%= @competition.name %></h3>
+                  <p>Parcours: <%= @competition.route %></p>
+                  <p>Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %></p>
+                  <% if @competition.description.present? %>
+                    <p>Description: <em><%= truncate @competition.description, length: 200 %></em></p>
+                  <% end %>
+
+                  <!-- button -->
+                  <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td></td>
+                      <td>
+                        <a href="http://www.somewherexpress.com/competitions/<%= @competition.id %>">En savoir plus</a>
+                      </td>
+                      <td></td>
+                    </tr>
+                  </table>
+                  <!-- /button -->
                 </td>
-                <td></td>
               </tr>
             </table>
-            <!-- /button -->
-
-            <p>Tu seras bientôt automatiquement ajouté à notre <a href="https://somewherexpress.slack.com">groupe slack</a>. C'est là que nous discutons des compétitions SomewherExpress et de tout ce qui est lié à l'autostop.</p>
-            <p>Tu peux aussi nous retrouver sur <a href="https://www.facebook.com/somewherexpress/">facebook</a>.</p>
-
-            <p>A bientôt,<br>
-              Fabien pour le Comité Central de SomewherExpress.</p>
           </td>
         </tr>
       </table>

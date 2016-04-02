@@ -21,4 +21,85 @@ class UserMailer < ApplicationMailer
 
     mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.old_email, subject: t('.subject'))
   end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.user_mailer.new_competition.subject
+  #
+  def new_competition(user, competition)
+    @user = user
+    @competition = competition
+
+    I18n.with_locale(@user.notification_setting.locale) do
+      mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
+    end
+  end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.user_mailer.competition_edited.subject
+  #
+  def competition_edited(user, competition)
+    @user = user
+    @competition = competition
+
+    I18n.with_locale(@user.notification_setting.locale) do
+      mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
+    end
+
+  end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.user_mailer.competition_edited.subject
+  #
+  def new_subscription(subscription)
+    @user = subscription.user
+
+    I18n.with_locale(@user.notification_setting.locale) do
+      mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
+    end
+  end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.user_mailer.competition_edited.subject
+  #
+  def new_to_my(subscription)
+    @user = subscription.competition.author
+
+    I18n.with_locale(@user.notification_setting.locale) do
+      mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
+    end
+  end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.user_mailer.competition_edited.subject
+  #
+  def status_changed(subscription)
+    @user = subscription.user
+
+    I18n.with_locale(@user.notification_setting.locale) do
+      mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
+    end
+  end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.user_mailer.competition_edited.subject
+  #
+  def cancelation(subscription)
+    @user = subscription.competition.author
+
+    I18n.with_locale(@user.notification_setting.locale) do
+      mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
+    end
+  end
 end
