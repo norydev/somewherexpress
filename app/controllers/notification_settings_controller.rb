@@ -21,6 +21,6 @@ class NotificationSettingsController < ApplicationController
       params.require(:notification_setting).permit(:as_user_new_competition,
         :as_user_competition_edited, :as_user_new_subscription,
         :as_user_subscription_satus_changed, :as_author_new_subscription,
-        :as_author_cancelation)
+        :as_author_cancelation, :locale)
     end
 end

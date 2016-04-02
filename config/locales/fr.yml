@@ -150,6 +150,7 @@ fr:
         status_changed: "Le statut de mon inscription est mis à jour"
         new_to_my: "Quelqu'un s'inscrit à la compétition"
         cancelation: "Quelqu'un annule son inscription"
+        locale: "Langue des emails"
   tracks:
     params:
       start_location: "De"

@@ -42,7 +42,6 @@
             <%= f.error_notification %>
 
             <p><%= t('users.edit.notifications.email_me') %></p>
-
             <div class="padded-mini">
               <p><strong><%= t('users.edit.notifications.general') %></strong></p>
 
@@ -58,6 +57,9 @@
               <%#= f.input :as_author_new_subscription, label: t('users.edit.notifications.new_to_my') %>
               <%#= f.input :as_author_cancelation, label: t('users.edit.notifications.cancelation') %>
             </div> -->
+
+
+            <%= f.input :locale, label: t('users.edit.notifications.locale'), collection: [['English', 'en'], ['Français', 'fr']], selected: resource.notification_setting.locale %>
 
             <%= f.button :submit, t('.update', default: "Update"), class: "btn btn-primary" %>
           <% end %>

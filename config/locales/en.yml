@@ -146,6 +146,7 @@ en:
         status_changed: "My registration status changes"
         new_to_my: "Somebody registers to the competition"
         cancelation: "Somebody cancels their registration"
+        locale: "Language of the emails"
   tracks:
     params:
       start_location: "From"
