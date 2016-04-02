@@ -22,7 +22,7 @@ fr:
     new_competition:
       subject: "Une nouvelle compétition a été publiée"
     competition_edited:
-      subject: "Une de tes compétitions a été modifiée"
+      subject: "Une de tes compétitions a été mise à jour"
   subscriptions:
     accepted: Vous êtes inscrit!
     pending: Votre inscription est en attente d'approbation par l'organisateur
