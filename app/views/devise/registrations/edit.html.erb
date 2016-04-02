@@ -34,29 +34,29 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <strong><%= t('users.edit.notifications') %></strong>
+          <strong><%= t('users.edit.notifications.title') %></strong>
         </div>
         <div class="panel-body">
 
           <%= simple_form_for(resource.notification_setting, url: notification_setting_path(resource.notification_setting)) do |f| %>
             <%= f.error_notification %>
 
-            <p>Email me when...</p>
+            <p><%= t('users.edit.notifications.email_me') %></p>
 
             <div class="padded-mini">
-              <p><strong>General Settings</strong></p>
+              <p><strong><%= t('users.edit.notifications.general') %></strong></p>
 
-              <%= f.input :as_user_new_competition, label: "A new competition is published" %>
-              <%= f.input :as_user_competition_edited, label: "One of my competitions is edited" %>
-              <%= f.input :as_user_new_subscription, label: "I register to a competition" %>
-              <%= f.input :as_user_subscription_satus_changed, label: "My subscription status changes" %>
+              <%= f.input :as_user_new_competition, label: t('users.edit.notifications.new_competition') %>
+              <%= f.input :as_user_competition_edited, label: t('users.edit.notifications.competition_edited') %>
+              <%= f.input :as_user_new_subscription, label: t('users.edit.notifications.new_subscription') %>
+              <%= f.input :as_user_subscription_satus_changed, label: t('users.edit.notifications.status_changed') %>
             </div>
 
             <div class="padded-mini-bottom">
-              <p><strong>As the author of a competition</strong></p>
+              <p><strong><%= t('users.edit.notifications.as_author') %></strong></p>
 
-              <%= f.input :as_author_new_subscription, label: "Somebody subscribes to the competition" %>
-              <%= f.input :as_author_cancelation, label: "Somebody cancels their subscription" %>
+              <%= f.input :as_author_new_subscription, label: t('users.edit.notifications.new_to_my') %>
+              <%= f.input :as_author_cancelation, label: t('users.edit.notifications.cancelation') %>
             </div>
 
             <%= f.button :submit, t('.update', default: "Update"), class: "btn btn-primary" %>
