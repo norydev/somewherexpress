@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   has_many :badges, dependent: :destroy
 
+  has_one :notification_setting, dependent: :destroy
+
   validates_presence_of :first_name, :last_name
 
   after_create :send_welcome_email

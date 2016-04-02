@@ -34,6 +34,38 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
+          <strong><%= t('users.edit.notifications') %></strong>
+        </div>
+        <div class="panel-body">
+
+          <%= simple_form_for(resource.notification_setting, url: notification_setting_path(resource.notification_setting)) do |f| %>
+            <%= f.error_notification %>
+
+            <p>Email me when...</p>
+
+            <div class="padded-mini">
+              <p><strong>General Settings</strong></p>
+
+              <%= f.input :as_user_new_competition, label: "A new competition is published" %>
+              <%= f.input :as_user_competition_edited, label: "One of my competitions is edited" %>
+              <%= f.input :as_user_new_subscription, label: "I register to a competition" %>
+              <%= f.input :as_user_subscription_satus_changed, label: "My subscription status changes" %>
+            </div>
+
+            <div class="padded-mini-bottom">
+              <p><strong>As the author of a competition</strong></p>
+
+              <%= f.input :as_author_new_subscription, label: "Somebody subscribes to the competition" %>
+              <%= f.input :as_author_cancelation, label: "Somebody cancels their subscription" %>
+            </div>
+
+            <%= f.button :submit, t('.update', default: "Update"), class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
           <strong><%= t('.cancel_my_account', default: 'Cancel my account') %></strong>
         </div>
         <div class="panel-body">

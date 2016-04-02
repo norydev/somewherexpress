@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       resources :subscriptions, only: [:new, :edit, :update, :create, :destroy]
     end
 
+    resources :notification_settings, only: [:update]
+
     %w( 404 422 500 ).each do |code|
       get code, to: "errors#show", code: code
     end
