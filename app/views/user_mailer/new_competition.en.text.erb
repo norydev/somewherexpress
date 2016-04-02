@@ -7,6 +7,9 @@ Hi <%= @user.first_name %>, a new competition has been published on SomewherExpr
 Name: <%= @competition.name %>
 Journey: <%= @competition.route %>
 Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
+<% if @competition.description.present? %>
+Description: <%= truncate @competition.description, length: 200 %>
+<% end %>
 
 Read more: http://www.somewherexpress.com/en/competitions/<%= @competition.id %>
 

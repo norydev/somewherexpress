@@ -7,6 +7,9 @@ Salut <%= @user.first_name %>, une nouvelle compétition a été publiée sur So
 Nom: <%= @competition.name %>
 Parcours: <%= @competition.route %>
 Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
+<% if @competition.description.present? %>
+Description: <%= truncate @competition.description, length: 200 %>
+<% end %>
 
 En savoir plus: http://www.somewherexpress.com/competitions/<%= @competition.id %>
 

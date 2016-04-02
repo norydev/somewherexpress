@@ -23,6 +23,9 @@
                   <h3><%= @competition.name %></h3>
                   <p>Parcours: <%= @competition.route %></p>
                   <p>Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %></p>
+                  <% if @competition.description.present? %>
+                    <p>Description: <em><%= truncate @competition.description, length: 200 %></em></p>
+                  <% end %>
 
                   <!-- button -->
                   <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
