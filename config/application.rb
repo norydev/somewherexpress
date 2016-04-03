@@ -53,5 +53,7 @@ module Somewherexpress
     end
 
     config.exceptions_app = self.routes
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

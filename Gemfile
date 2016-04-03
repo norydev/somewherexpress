@@ -40,6 +40,11 @@ gem 'modernizr-rails'
 gem 'premailer-rails'
 gem 'omniauth-facebook'
 
+# Background-jobs
+gem 'sidekiq'
+gem 'sinatra'  # Dependency of sidekiq
+gem 'sidekiq-failures'
+
 # admin panel
 gem 'activeadmin', github: 'activeadmin'
 
