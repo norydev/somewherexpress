@@ -66,8 +66,6 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
 
-  after_create :send_welcome_email
-
   def to_s
     name
   end
@@ -137,10 +135,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-    def send_welcome_email
-      UserMailer.welcome(self).deliver_now
-    end
 
     def update_from_fb(auth)
       self.provider = auth.provider
