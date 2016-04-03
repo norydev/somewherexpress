@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :badges, dependent: :destroy
 
   has_one :notification_setting, dependent: :destroy
+  accepts_nested_attributes_for :notification_setting
 
   validates_presence_of :first_name, :last_name
 

@@ -2,7 +2,11 @@ ActiveAdmin.register User do
 
   permit_params :email, :password, :first_name, :last_name, :girl, :picture,
     :admin, :organizer, :old_first_name, :old_last_name, :old_email, :provider,
-    :uid, :token, :token_expiry
+    :uid, :token, :token_expiry,
+    notification_setting_attributes: [:id, :locale, :as_user_new_competition,
+      :as_user_competition_edited, :as_user_new_subscription,
+      :as_user_subscription_satus_changed, :as_author_new_subscription,
+      :as_author_cancelation]
 
   index do
     selectable_column
@@ -46,6 +50,17 @@ ActiveAdmin.register User do
       f.input :uid
       f.input :token
       f.input :token_expiry
+    end
+
+
+    f.inputs "Notifications", for: [:notification_setting, f.object.notification_setting] do |item|
+      item.input :locale, collection: [['English', 'en'],['French', 'fr']]
+      item.input :as_user_new_competition
+      item.input :as_user_competition_edited
+      item.input :as_user_new_subscription
+      item.input :as_user_subscription_satus_changed
+      item.input :as_author_new_subscription
+      item.input :as_author_cancelation
     end
 
     f.actions
