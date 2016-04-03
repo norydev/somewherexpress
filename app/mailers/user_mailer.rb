@@ -5,8 +5,8 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.welcome.subject
   #
-  def welcome(user)
-    @user = user
+  def welcome(user_id)
+    @user = User.find(user_id)
 
     mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subject: t('.subject'))
   end
@@ -16,8 +16,8 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.goodbye.subject
   #
-  def goodbye(user)
-    @user = user
+  def goodbye(user_id)
+    @user = User.find(user_id)
 
     mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.old_email, subject: t('.subject'))
   end
@@ -27,9 +27,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.new_competition.subject
   #
-  def new_competition(user, competition)
-    @user = user
-    @competition = competition
+  def new_competition(user_id, competition_id)
+    @user = User.find(user_id)
+    @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
       mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
@@ -41,9 +41,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.competition_edited.subject
   #
-  def competition_edited(user, competition)
-    @user = user
-    @competition = competition
+  def competition_edited(user_id, competition_id)
+    @user = User.find(user_id)
+    @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
       mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
@@ -56,8 +56,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.competition_edited.subject
   #
-  def new_subscription(subscription)
-    @user = subscription.user
+  def new_subscription(user_id, competition_id)
+    @user = User.find(user_id)
+    @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
       mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
@@ -69,8 +70,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.competition_edited.subject
   #
-  def new_to_my(subscription)
-    @user = subscription.competition.author
+  def new_to_my(user_id, competition_id)
+    @user = User.find(user_id)
+    @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
       mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
@@ -82,8 +84,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.competition_edited.subject
   #
-  def status_changed(subscription)
-    @user = subscription.user
+  def status_changed(user_id, competition_id)
+    @user = User.find(user_id)
+    @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
       mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))
@@ -95,8 +98,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.competition_edited.subject
   #
-  def cancelation(subscription)
-    @user = subscription.competition.author
+  def cancelation(user_id, competition_id)
+    @user = User.find(user_id)
+    @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
       mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))

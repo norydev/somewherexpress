@@ -30,8 +30,8 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.save
-      # UserMailer.new_subscription(@subscription).deliver_now
-      # UserMailer.new_to_my(@subscription).deliver_now
+      # UserMailer.new_subscription(current_user.id, @competition.id).deliver_later
+      # UserMailer.new_to_my(@competition.author.id, @competition.id).deliver_later
 
       respond_to do |format|
         format.html { redirect_to @subscription.competition, notice: t('subscriptions.create.notice') }
@@ -49,7 +49,7 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.update(subscription_params)
-      # UserMailer.status_changed(@subscription).deliver_now
+      # UserMailer.status_changed(@subscription.user.id, @subscription.competition.id).deliver_later
 
       respond_to do |format|
         format.html { redirect_to root_path }
@@ -69,7 +69,7 @@ class SubscriptionsController < ApplicationController
 
     competition = @subscription.competition
 
-    # UserMailer.cancelation(@subscription).deliver_now
+    # UserMailer.cancelation(competition.author.id, competition.id).deliver_later
     @subscription.destroy
 
     redirect_to competition, notice: t('subscriptions.destroy.notice')
