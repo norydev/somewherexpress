@@ -229,6 +229,9 @@ fr:
       rank:
         one: rang
         other: rangs
+      notification_setting:
+        one: notifications
+        other: notifications
   devise:
     confirmations:
       new:
