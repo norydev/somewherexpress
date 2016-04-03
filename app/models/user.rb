@@ -1,3 +1,37 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  first_name             :string
+#  last_name              :string
+#  picture                :string
+#  admin                  :boolean          default(FALSE), not null
+#  organizer              :boolean          default(FALSE), not null
+#  girl                   :boolean          default(FALSE), not null
+#  deleted_at             :datetime
+#  old_first_name         :string
+#  old_last_name          :string
+#  old_email              :string
+#  provider               :string
+#  uid                    :string
+#  token                  :string
+#  token_expiry           :datetime
+#  use_gravatar           :boolean          default(FALSE), not null
+#
+
 class User < ActiveRecord::Base
   scope :want_email_for_new_competition, -> do
     joins(:notification_setting)

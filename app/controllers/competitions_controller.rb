@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: competitions
+#
+#  id                          :integer          not null, primary key
+#  name                        :string
+#  start_date                  :date
+#  end_date                    :date
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  finished                    :boolean          default(FALSE), not null
+#  published                   :boolean          default(FALSE), not null
+#  start_registration          :datetime
+#  end_registration            :datetime
+#  author_id                   :integer
+#  description                 :text
+#  default_registration_status :string           default("pending"), not null
+#  video                       :string
+#
+
 class CompetitionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_competition, only: [:show, :edit, :update, :destroy]

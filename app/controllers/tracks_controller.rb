@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: tracks
+#
+#  id             :integer          not null, primary key
+#  competition_id :integer
+#  start_time     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class TracksController < ApplicationController
   before_action :set_track, only: [:edit, :update, :destroy]
 

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: ranks
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  result     :integer          default(0)
+#  points     :integer          default(0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  race_id    :integer
+#  race_type  :string
+#  dsq        :boolean          default(FALSE), not null
+#
+
 class Rank < ActiveRecord::Base
   belongs_to :race, polymorphic: true
   belongs_to :user
