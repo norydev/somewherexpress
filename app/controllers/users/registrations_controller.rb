@@ -5,6 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do
       NotificationSetting.create!(user: resource, locale: params[:locale] || :fr)
+      UserMailer.welcome(resource.id).deliver_later
     end
   end
 

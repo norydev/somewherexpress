@@ -121,13 +121,13 @@ class CompetitionsController < ApplicationController
 
     def send_new_competition_emails
       User.want_email_for_new_competition.each do |user|
-        UserMailer.new_competition(user, @competition).deliver_now
+        UserMailer.new_competition(user.id, @competition.id).deliver_later
       end
     end
 
     def send_competition_edited_emails
       User.want_email_for_competition_edited(@competition).each do |user|
-        UserMailer.competition_edited(user, @competition).deliver_now
+        UserMailer.competition_edited(user.id, @competition.id).deliver_later
       end
     end
 end
