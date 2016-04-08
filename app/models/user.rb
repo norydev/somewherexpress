@@ -141,7 +141,7 @@ class User < ActiveRecord::Base
       self.uid = auth.uid
       self.token = auth.credentials.token
       self.token_expiry = Time.at(auth.credentials.expires_at)
-      self.picture = auth.info.image
+      self.picture = auth.info.image.gsub(/https?/, "https")
       self.save!
       self
     end
@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
       self.password = Devise.friendly_token[0,20]  # Fake password for validation
       self.first_name = auth.info.first_name
       self.last_name = auth.info.last_name
-      self.picture = auth.info.image
+      self.picture = auth.info.image.gsub(/https?/, "https")
       self.girl = auth.extra.raw_info.gender == 'female'
       self.token = auth.credentials.token
       self.token_expiry = Time.at(auth.credentials.expires_at)
