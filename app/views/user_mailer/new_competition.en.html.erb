@@ -16,31 +16,28 @@
           <td class="message" bgcolor="#FFFFFF">
             <h3>New competition published</h3>
             <p>Hi <%= @user.first_name %>, a new competition has been published on <a href="http://www.somewherexpress.com/en">SomewherExpress</a>:</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <h3><%= @competition.name %></h3>
+            <p>Journey: <%= @competition.route %></p>
+            <p>Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %></p>
+            <% if @competition.description.present? %>
+              <p>Description: <em><%= truncate @competition.description, length: 200 %></em></p>
+            <% end %>
 
-            <table class="body-wrap">
+            <!-- button -->
+            <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td class="message">
-                  <h3><%= @competition.name %></h3>
-                  <p>Journey: <%= @competition.route %></p>
-                  <p>Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %></p>
-                  <% if @competition.description.present? %>
-                    <p>Description: <em><%= truncate @competition.description, length: 200 %></em></p>
-                  <% end %>
-
-                  <!-- button -->
-                  <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td></td>
-                      <td>
-                        <a href="http://www.somewherexpress.com/en/competitions/<%= @competition.id %>">Read more</a>
-                      </td>
-                      <td></td>
-                    </tr>
-                  </table>
-                  <!-- /button -->
+                <td></td>
+                <td>
+                  <a href="http://www.somewherexpress.com/en/competitions/<%= @competition.id %>">Read more</a>
                 </td>
+                <td></td>
               </tr>
             </table>
+            <!-- /button -->
           </td>
         </tr>
       </table>
