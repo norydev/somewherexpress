@@ -1,6 +1,6 @@
 <%= @competition.name %> a été mise à jour
 
-Salut <%= @user.first_name %>, une compétition à laquelle tu es inscrit(e) sur SomewherExpress (http://www.somewherexpress.com) a été mise à jour:
+Salut <%= @user.first_name %>, une compétition à laquelle tu es inscrit(e) sur SomewherExpress (https://www.somewherexpress.com) a été mise à jour:
 
 ------------------------------
 
@@ -11,6 +11,6 @@ Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competit
 Description: <%= truncate @competition.description, length: 200 %>
 <% end %>
 
-En savoir plus: http://www.somewherexpress.com/competitions/<%= @competition.id %>
+En savoir plus: https://www.somewherexpress.com/competitions/<%= @competition.id %>
 
-Trop d'email? Modifies tes préférences ici: http://www.somewherexpress.com/users/edit
+Trop d'email? Modifies tes préférences ici: https://www.somewherexpress.com/users/edit

@@ -1,6 +1,6 @@
 New competition published
 
-Hi <%= @user.first_name %>, a new competition has been published on SomewherExpress (http://www.somewherexpress.com/en):
+Hi <%= @user.first_name %>, a new competition has been published on SomewherExpress (https://www.somewherexpress.com/en):
 
 ------------------------------
 
@@ -11,6 +11,6 @@ Dates: <%= date_format(@competition.start_date) %> – <%= date_format(@competit
 Description: <%= truncate @competition.description, length: 200 %>
 <% end %>
 
-Read more: http://www.somewherexpress.com/en/competitions/<%= @competition.id %>
+Read more: https://www.somewherexpress.com/en/competitions/<%= @competition.id %>
 
-Too many emails? Modifiy your preferences here: http://www.somewherexpress.com/users/edit?locale=en
+Too many emails? Modifiy your preferences here: https://www.somewherexpress.com/users/edit?locale=en
