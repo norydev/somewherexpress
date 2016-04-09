@@ -31,7 +31,7 @@ class SubscriptionsController < ApplicationController
 
     if @subscription.save
       # UserMailer.new_subscription(current_user.id, @competition.id).deliver_later
-      # UserMailer.new_to_my(@competition.author.id, @competition.id).deliver_later
+      UserMailer.as_author_new_subscription(current_user.id, @competition.id, @competition.author.id).deliver_later
 
       respond_to do |format|
         format.html { redirect_to @subscription.competition, notice: t('subscriptions.create.notice') }

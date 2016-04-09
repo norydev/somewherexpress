@@ -19,10 +19,12 @@ en:
       subject: "Welcome to SomewherExpress.com"
     goodbye:
       subject: "Goodbye and have a nice trip"
-    new_competition:
+    as_user_new_competition:
       subject: "A new competition has been published"
-    competition_edited:
+    as_user_competition_edited:
       subject: "One of your competitions has been updated"
+    as_author_new_subscription:
+      subject: "New registration to your competition"
   subscriptions:
     accepted: Your are registered!
     pending: Your application is waiting for approval by the organizer
@@ -140,11 +142,11 @@ en:
         email_me: "Email me when..."
         general: "General Settings"
         as_author: "As the author of a competition"
-        new_competition: "A new competition is published"
-        competition_edited: "One of my competitions is updated"
+        as_user_new_competition: "A new competition is published"
+        as_user_competition_edited: "One of my competitions is updated"
         new_subscription: "I register to a competition"
         status_changed: "My registration status changes"
-        new_to_my: "Somebody registers to the competition"
+        as_author_new_subscription: "Somebody registers to the competition"
         cancelation: "Somebody cancels their registration"
         locale: "Language of the emails"
   tracks:

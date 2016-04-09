@@ -19,10 +19,12 @@ fr:
       subject: "Bienvenue sur SomewherExpress.com"
     goodbye:
       subject: "Au revoir et bonne route"
-    new_competition:
+    as_user_new_competition:
       subject: "Une nouvelle compétition a été publiée"
-    competition_edited:
+    as_user_competition_edited:
       subject: "Une de tes compétitions a été mise à jour"
+    as_author_new_subscription:
+      subject: "Nouvelle inscription à votre compétition"
   subscriptions:
     accepted: Vous êtes inscrit!
     pending: Votre inscription est en attente d'approbation par l'organisateur
@@ -144,11 +146,11 @@ fr:
         email_me: "Envoyez-moi un email quand..."
         general: "Paramètres généraux"
         as_author: "En tant que créateur d'une compétition"
-        new_competition: "Une nouvelle compétition est publiée"
-        competition_edited: "Une de mes compétitions est mise à jour"
+        as_user_new_competition: "Une nouvelle compétition est publiée"
+        as_user_competition_edited: "Une de mes compétitions est mise à jour"
         new_subscription: "Je m'inscris à une compétition"
         status_changed: "Le statut de mon inscription est mis à jour"
-        new_to_my: "Quelqu'un s'inscrit à la compétition"
+        as_author_new_subscription: "Quelqu'un s'inscrit à la compétition"
         cancelation: "Quelqu'un annule son inscription"
         locale: "Langue des emails"
   tracks:
