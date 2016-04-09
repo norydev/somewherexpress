@@ -55,9 +55,10 @@ class UserMailer < ApplicationMailer
     end
   end
 
-  def status_changed(user_id, competition_id)
+  def as_user_subscription_status_changed(user_id, competition_id, status)
     @user = User.find(user_id)
     @competition = Competition.find(competition_id)
+    @status = status
 
     I18n.with_locale(@user.notification_setting.locale) do
       mail(from: "SomewherExpress <info@somewherexpress.com>", to: @user.email, subjet: t('.subject'))

@@ -1,0 +1,15 @@
+Salut <%= @user.first_name %>,
+
+Ton inscription à la compétition "<%= @competition.name %>" (https://www.somewherexpress.com/competitions/<%= @competition.id %>) à été traitée par l'organisateur:
+
+<% if @status == "accepted" %>
+Ton inscription à été Acceptée! Félicitations!
+
+L'organisateur prendra contact avec toi prochainement.
+<% elsif @status == "refused" %>
+Ton inscription à été Refusée.
+
+Si l'organisateur ne te contact par pour expliquer sa décision, tu peux prendre contact avec lui: <%= @competition.author.email %>
+<% end %>
+
+Trop d'email? Modifies tes préférences ici: https://www.somewherexpress.com/users/edit

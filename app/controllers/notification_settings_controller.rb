@@ -2,17 +2,17 @@
 #
 # Table name: notification_settings
 #
-#  id                                 :integer          not null, primary key
-#  user_id                            :integer
-#  as_user_new_competition            :boolean          default(TRUE), not null
-#  as_user_competition_edited         :boolean          default(TRUE), not null
-#  as_user_new_subscription           :boolean          default(TRUE), not null
-#  as_user_subscription_satus_changed :boolean          default(TRUE), not null
-#  as_author_new_subscription         :boolean          default(TRUE), not null
-#  as_author_cancelation              :boolean          default(TRUE), not null
-#  created_at                         :datetime         not null
-#  updated_at                         :datetime         not null
-#  locale                             :string           default("fr"), not null
+#  id                                  :integer          not null, primary key
+#  user_id                             :integer
+#  as_user_new_competition             :boolean          default(TRUE), not null
+#  as_user_competition_edited          :boolean          default(TRUE), not null
+#  as_user_new_subscription            :boolean          default(TRUE), not null
+#  as_user_subscription_status_changed :boolean          default(TRUE), not null
+#  as_author_new_subscription          :boolean          default(TRUE), not null
+#  as_author_cancelation               :boolean          default(TRUE), not null
+#  created_at                          :datetime         not null
+#  updated_at                          :datetime         not null
+#  locale                              :string           default("fr"), not null
 #
 
 class NotificationSettingsController < ApplicationController
@@ -37,7 +37,7 @@ class NotificationSettingsController < ApplicationController
     def notifications_params
       params.require(:notification_setting).permit(:as_user_new_competition,
         :as_user_competition_edited, :as_user_new_subscription,
-        :as_user_subscription_satus_changed, :as_author_new_subscription,
+        :as_user_subscription_status_changed, :as_author_new_subscription,
         :as_author_cancelation, :locale)
     end
 end
