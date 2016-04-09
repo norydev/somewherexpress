@@ -1,0 +1,31 @@
+New registration
+
+Hi <%= @user.first_name %>,
+
+<%= @participant.name %> registered to your competition "<%= @competition.name %>"
+
+--------------------------------------
+
+Name: <%= @participant.name %>
+Email: <%= @participant.email %>
+Sex: <%= @participant.girl? ? "fille" : "garçon" %>
+
+Profile: https://www.somewherexpress.com/en/users/<%= @participant.id %>
+
+--------------------------------------
+
+<% if @competition.default_registration_status == "pending" %>
+
+The registration is waiting for approval, as you selected this option when creating the competition. You are encouraged to process the registration as soon as possible:
+
+https://www.somewherexpress.com/em/competitions/<%= @competition.id %>/#users
+
+<%= @participant.first_name %> has not been given your email address. If you accept their registration, it would be nice to send him/her a welcome email and let him/her a way to contact you back.
+<% else %>
+
+The registration has been automatically accepted, as you selected this option when creating the competition. Therefore, there is nothing to do in this regard.
+
+<%= @participant.first_name %> has not been given your email address. It would be nice to send him/her a welcome email and let him/her a way to contact you back.
+<% end %>
+
+Too many emails? Modifiy your preferences here: http://www.somewherexpress.com/users/edit?locale=en

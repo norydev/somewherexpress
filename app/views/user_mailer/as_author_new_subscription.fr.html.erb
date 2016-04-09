@@ -1,0 +1,114 @@
+<!-- body -->
+<table class="body-wrap" bgcolor="#f6f6f6">
+  <tr>
+    <td></td>
+    <td class="container">
+
+      <!-- content -->
+      <div class="content">
+      <table class="main" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="alert alert-bad">
+            <img src="https://www.somewherexpress.com/mstile-144x144.png" alt="" height="26px" width="26px" style="display: inline-block; width: 26px; vertical-align: top"><a href="https://www.somewherexpress.com">SomewherExpress</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <h3>Nouvelle inscription</h3>
+            <p>Salut <%= @user.first_name %>,</p>
+            <p><%= @participant.name %> s'est inscrit(e) à ta compétition <a href="https://www.somewherexpress.com/competitions/<%= @competition.id %>"><%= @competition.name %></a></p>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <table>
+              <tr>
+                <td>
+                  <img src="<%= @participant.avatar %>" alt="" width="100px" height="100px" style="width: 100px; vertical-align: top">
+                </td>
+                <td>
+                  <p>
+                    Nom: <a href="https://www.somewherexpress.com/users/<%= @participant.id %>"><%= @participant.name %></a><br>
+                    Email: <a href="mailto:<%= @participant.email %>"><%= @participant.email %></a><br>
+                    Sexe: <%= @participant.girl? ? "fille" : "garçon" %>
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <% if @competition.default_registration_status == "pending" %>
+
+            <p>Son inscription est en attente de ton approbation puisque tu as séléctionné cette option lors de la création de la compétition. Tu es encouragé à traiter son inscription au plus vite:</p>
+
+
+            <!-- button -->
+            <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td></td>
+                <td>
+                  <a href="https://www.somewherexpress.com/competitions/<%= @competition.id %>/#users">Traiter l'inscription</a>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+            <!-- /button -->
+
+            <p><%= @participant.first_name %> n'est pas en possession de ton adresse email. Dans le cas ou tu accepte son inscription, il serait donc courtois de lui adresser un message de bienvenue et ainsi de lui donner un moyen de te contacter:</p>
+
+            <% else %>
+
+            <p>Son inscription a été automatiquement validée puisque tu as séléctionné cette option lors de la création de la compétition. Tu n'as donc rien à faire de ce coté là.</p>
+
+            <p><%= @participant.first_name %> n'est pas en possession de ton adresse email, il serait donc courtois de lui adresser un message de bienvenue et ainsi de lui donner un moyen de te contacter:</p>
+
+            <% end %>
+
+            <table class="center-link" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td></td>
+                <td>
+                  <a href="mailto:<%= @participant.email %>">Écrire à <%= @participant.first_name %></a>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      </div>
+      <!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table>
+<!-- /body -->
+
+<!-- footer -->
+<table class="footer-wrap" bgcolor="#f6f6f6">
+  <tr>
+    <td></td>
+    <td class="container">
+
+      <!-- content -->
+      <div class="content">
+        <table>
+          <tr>
+            <td align="center">
+              <p>Trop d'email? <a href="http://www.somewherexpress.com/users/edit"><unsubscribe>Modifier mes préférences</unsubscribe></a>.
+              </p>
+              <p>Retrouve SomewherExpress: <a href="https://www.facebook.com/somewherexpress/">facebook</a> | <a href="https://somewherexpress.slack.com">slack</a></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table>
+<!-- /footer -->
