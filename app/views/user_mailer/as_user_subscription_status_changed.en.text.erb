@@ -1,0 +1,15 @@
+Hi <%= @user.first_name %>,
+
+Your registration to the competition "<%= @competition.name %>" (https://www.somewherexpress.com/competitions/<%= @competition.id %>) has been processed by the organizer:
+
+<% if @status == "accepted" %>
+Your registration has been Accepted! Congratulations!
+
+The organizer will contact you soon.
+<% elsif @status == "refused" %>
+Your registration has been Refused.
+
+If the organizer doesn't contact you to explain his/her decision, you can contact him/her: <%= @competition.author.email %>
+<% end %>
+
+Too many emails? Modifiy your preferences here: https://www.somewherexpress.com/users/edit?locale=en

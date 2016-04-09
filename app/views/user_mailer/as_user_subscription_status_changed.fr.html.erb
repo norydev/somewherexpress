@@ -1,0 +1,81 @@
+<!-- body -->
+<table class="body-wrap" bgcolor="#f6f6f6">
+  <tr>
+    <td></td>
+    <td class="container">
+
+      <!-- content -->
+      <div class="content">
+      <table class="main" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="alert alert-bad">
+            <img src="https://www.somewherexpress.com/mstile-144x144.png" alt="" height="26px" width="26px" style="display: inline-block; width: 26px; vertical-align: top"><a href="https://www.somewherexpress.com">SomewherExpress</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <p>Salut <%= @user.first_name %>,</p>
+            <p>Ton inscription à la compétition <a href="https://www.somewherexpress.com/competitions/<%= @competition.id %>"><%= @competition.name %></a> à été traitée par l'organisateur:</p>
+
+            <% if @status == "accepted" %>
+              <table class="center-link" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td></td>
+                  <td>
+                    <p class="alert alert-good">Ton inscription à été Acceptée! Félicitations!</p>
+                  </td>
+                  <td></td>
+                </tr>
+              </table>
+
+              <p>L'organisateur prendra contact avec toi prochainement.</p>
+            <% elsif @status == "refused" %>
+              <table class="center-link" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td></td>
+                  <td>
+                    <p class="alert alert-bad">Ton inscription à été Refusée</p>
+                  </td>
+                  <td></td>
+                </tr>
+              </table>
+
+              <p>Si l'organisateur ne te contact par pour expliquer sa décision, tu peux prendre contact avec lui: <a href="mailto:<%= @competition.author.email %>"><%= @competition.author.email %></a></p>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      </div>
+      <!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table>
+<!-- /body -->
+
+<!-- footer -->
+<table class="footer-wrap" bgcolor="#f6f6f6">
+  <tr>
+    <td></td>
+    <td class="container">
+
+      <!-- content -->
+      <div class="content">
+        <table>
+          <tr>
+            <td align="center">
+              <p>Trop d'email? <a href="https://www.somewherexpress.com/users/edit"><unsubscribe>Modifier mes préférences</unsubscribe></a>.
+              </p>
+              <p>Retrouve SomewherExpress: <a href="https://www.facebook.com/somewherexpress/">facebook</a> | <a href="https://somewherexpress.slack.com">slack</a></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table>
+<!-- /footer -->

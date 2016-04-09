@@ -16,14 +16,14 @@ Profil: https://www.somewherexpress.com/users/<%= @participant.id %>
 
 <% if @competition.default_registration_status == "pending" %>
 
-Son inscription est en attente de ton approbation puisque tu as séléctionné cette option lors de la création de la compétition. Je t'encourage à traiter son inscription au plus vite:
+Son inscription est en attente de ton approbation puisque tu as sélectionné cette option lors de la création de la compétition. Je t'encourage à traiter son inscription au plus vite:
 
 https://www.somewherexpress.com/competitions/<%= @competition.id %>/#users
 
 <%= @participant.first_name %> n'est pas en possession de ton adresse email. Dans le cas ou tu accepte son inscription, il serait donc courtois de lui adresser un message de bienvenue et ainsi de lui donner un moyen de te contacter.
 <% else %>
 
-Son inscription a été automatiquement validée puisque tu as séléctionné cette option lors de la création de la compétition. Tu n'as donc rien à faire de ce coté là.
+Son inscription a été automatiquement validée puisque tu as sélectionné cette option lors de la création de la compétition. Tu n'as donc rien à faire de ce coté là.
 
 <%= @participant.first_name %> n'est pas en possession de ton adresse email, il serait donc courtois de lui adresser un message de bienvenue et ainsi de lui donner un moyen de te contacter.
 <% end %>

@@ -5,7 +5,7 @@ ActiveAdmin.register User do
     :uid, :token, :token_expiry,
     notification_setting_attributes: [:id, :locale, :as_user_new_competition,
       :as_user_competition_edited, :as_user_new_subscription,
-      :as_user_subscription_satus_changed, :as_author_new_subscription,
+      :as_user_subscription_status_changed, :as_author_new_subscription,
       :as_author_cancelation]
 
   index do
@@ -58,7 +58,7 @@ ActiveAdmin.register User do
       item.input :as_user_new_competition
       item.input :as_user_competition_edited
       item.input :as_user_new_subscription
-      item.input :as_user_subscription_satus_changed
+      item.input :as_user_subscription_status_changed
       item.input :as_author_new_subscription
       item.input :as_author_cancelation
     end

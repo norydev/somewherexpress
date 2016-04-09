@@ -49,7 +49,11 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.update(subscription_params)
-      # UserMailer.status_changed(@subscription.user.id, @subscription.competition.id).deliver_later
+      unless @subscription.status == "pending"
+        UserMailer.as_user_subscription_status_changed(@subscription.user.id,
+                                                       @subscription.competition.id,
+                                                       @subscription.status).deliver_later
+      end
 
       respond_to do |format|
         format.html { redirect_to root_path }
