@@ -27,6 +27,8 @@ en:
       subject: "New registration to your competition"
     as_user_subscription_status_changed:
       subject: "Your registration has been processed"
+    as_author_cancelation:
+      subject: "Someone cancelled their registration"
   subscriptions:
     accepted: Your are registered!
     pending: Your application is waiting for approval by the organizer
@@ -149,7 +151,7 @@ en:
         new_subscription: "I register to a competition"
         as_user_subscription_status_changed: "My registration status changes"
         as_author_new_subscription: "Somebody registers to the competition"
-        cancelation: "Somebody cancels their registration"
+        as_author_cancelation: "Somebody cancels their registration"
         locale: "Language of the emails"
   tracks:
     params:

@@ -27,6 +27,8 @@ fr:
       subject: "Nouvelle inscription à votre compétition"
     as_user_subscription_status_changed:
       subject: "Votre inscription à été traitée"
+    as_author_cancelation:
+      subject: "Quelqu'un a annulé son inscription"
   subscriptions:
     accepted: Vous êtes inscrit!
     pending: Votre inscription est en attente d'approbation par l'organisateur
@@ -153,7 +155,7 @@ fr:
         new_subscription: "Je m'inscris à une compétition"
         as_user_subscription_status_changed: "Le statut de mon inscription est mis à jour"
         as_author_new_subscription: "Quelqu'un s'inscrit à la compétition"
-        cancelation: "Quelqu'un annule son inscription"
+        as_author_cancelation: "Quelqu'un annule son inscription"
         locale: "Langue des emails"
   tracks:
     params:

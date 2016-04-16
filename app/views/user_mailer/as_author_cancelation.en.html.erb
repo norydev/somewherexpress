@@ -1,0 +1,79 @@
+<!-- body -->
+<table class="body-wrap" bgcolor="#f6f6f6">
+  <tr>
+    <td></td>
+    <td class="container">
+
+      <!-- content -->
+      <div class="content">
+      <table class="main" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="alert alert-bad">
+            <img src="https://www.somewherexpress.com/mstile-144x144.png" alt="" height="26px" width="26px" style="display: inline-block; width: 26px; vertical-align: top"><a href="https://www.somewherexpress.com/en">SomewherExpress</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <h3>A registration has been cancelled</h3>
+            <p>Hi <%= @user.first_name %>,</p>
+            <p><%= @participant.name %> cancelled his/her registration to your competition <a href="https://www.somewherexpress.com/en/competitions/<%= @competition.id %>"><%= @competition.name %></a></p>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <table>
+              <tr>
+                <td>
+                  <img src="<%= @participant.avatar %>" alt="" width="100px" height="100px" style="width: 100px; vertical-align: top">
+                </td>
+                <td>
+                  <p>
+                    Name: <a href="https://www.somewherexpress.com/en/users/<%= @participant.id %>"><%= @participant.name %></a><br>
+                    Email: <a href="mailto:<%= @participant.email %>"><%= @participant.email %></a><br>
+                    Sex: <%= @participant.girl? ? "girl" : "boy" %>
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="message" bgcolor="#FFFFFF">
+            <p>As you had not processed the registration yet, it has no consequences.</p>
+          </td>
+        </tr>
+      </table>
+      </div>
+      <!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table>
+<!-- /body -->
+
+<!-- footer -->
+<table class="footer-wrap" bgcolor="#f6f6f6">
+  <tr>
+    <td></td>
+    <td class="container">
+
+      <!-- content -->
+      <div class="content">
+        <table>
+          <tr>
+            <td align="center">
+              <p>Too many emails? <a href="https://www.somewherexpress.com/users/edit?locale=en"><unsubscribe>Modify my preferences</unsubscribe></a>.
+              </p>
+              <p>SomewherExpress elsewhere: <a href="https://www.facebook.com/somewherexpress/">facebook</a> | <a href="https://somewherexpress.slack.com">slack</a></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table>
+<!-- /footer -->

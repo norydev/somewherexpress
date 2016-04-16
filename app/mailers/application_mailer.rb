@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "info@somewherexpress.com"
+  default from: "SomewherExpress <info@somewherexpress.com>"
   layout 'mailer'
 
   add_template_helper(ApplicationHelper)
