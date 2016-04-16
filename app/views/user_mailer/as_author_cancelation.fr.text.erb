@@ -1,0 +1,19 @@
+Annulation d'une inscription
+
+Salut <%= @user.first_name %>,
+
+<%= @participant.name %> a annulé son inscription à ta compétition "<%= @competition.name %>"
+
+--------------------------------------
+
+Nom: <%= @participant.name %>
+Email: <%= @participant.email %>
+Sexe: <%= @participant.girl? ? "fille" : "garçon" %>
+
+Profil: https://www.somewherexpress.com/users/<%= @participant.id %>
+
+--------------------------------------
+
+Comme tu n'avais pas encore traité son inscription, cela n'a pas de conséquences.
+
+Trop d'email? Modifies tes préférences ici: https://www.somewherexpress.com/users/edit

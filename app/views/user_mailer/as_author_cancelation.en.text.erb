@@ -1,0 +1,19 @@
+A registration has been cancelled
+
+Hi <%= @user.first_name %>,
+
+<%= @participant.name %> cancelled his/her registration to your competition "<%= @competition.name %>"
+
+--------------------------------------
+
+Name: <%= @participant.name %>
+Email: <%= @participant.email %>
+Sex: <%= @participant.girl? ? "girl" : "boy" %>
+
+Profile: https://www.somewherexpress.com/users/<%= @participant.id %>
+
+--------------------------------------
+
+As you had not processed the registration yet, it has no consequences.
+
+Too many emails? Modifiy your preferences here: https://www.somewherexpress.com/users/edit?locale=en

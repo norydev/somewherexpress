@@ -73,7 +73,9 @@ class SubscriptionsController < ApplicationController
 
     competition = @subscription.competition
 
-    # UserMailer.cancelation(competition.author.id, competition.id).deliver_later
+    UserMailer.as_author_cancelation(@subscription.user.id,
+                                     competition.id,
+                                     competition.author.id).deliver_later
     @subscription.destroy
 
     redirect_to competition, notice: t('subscriptions.destroy.notice')
