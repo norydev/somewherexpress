@@ -9,39 +9,40 @@
       <table class="main" width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td class="alert alert-bad">
-            <img src="https://www.somewherexpress.com/mstile-144x144.png" alt="" height="26px" width="26px" style="display: inline-block; width: 26px; vertical-align: top"><a href="https://www.somewherexpress.com/en">SomewherExpress</a>
+            <img src="https://www.somewherexpress.com/mstile-144x144.png" alt="" height="26px" width="26px" style="display: inline-block; width: 26px; vertical-align: top"><a href="https://www.somewherexpress.com">SomewherExpress</a>
           </td>
         </tr>
         <tr>
           <td class="message" bgcolor="#FFFFFF">
-            <p>Hi <%= @user.first_name %>,</p>
-            <p>Your registration to the competition <a href="https://www.somewherexpress.com/en/competitions/<%= @competition.id %>"><%= @competition.name %></a> has been processed by the organizer:</p>
+            <p>Salut <%= @user.first_name %>,</p>
+            <p>Tu t'es inscrit(e) à la compétition <a href="https://www.somewherexpress.com/competitions/<%= @competition.id %>"><%= @competition.name %></a></p>
 
             <% if @status == "accepted" %>
               <table class="center-link" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td></td>
                   <td>
-                    <p class="alert alert-good">Your registration has been Accepted! Congratulations!</p>
+                    <p class="alert alert-good">Ton inscription à été automatiquement validée</p>
                   </td>
                   <td></td>
                 </tr>
               </table>
 
-              <p>The organizer will contact you soon. You can find as attachment an event to add to your calendar.</p>
-            <% elsif @status == "refused" %>
+              <p>L'organisateur prendra contact avec toi prochainement. Tu trouveras en pièce jointe un évènement à ajouter dans ton calendrier.</p>
+            <% elsif @status == "pending" %>
               <table class="center-link" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td></td>
                   <td>
-                    <p class="alert alert-bad">Your registration has been Refused.</p>
+                    <p class="alert alert-warning">Ton inscription doit être traitée par l'organisateur</p>
                   </td>
                   <td></td>
                 </tr>
               </table>
 
-              <p>If the organizer doesn't contact you to explain his/her decision, you can contact him/her: <a href="mailto:<%= @competition.author.email %>"><%= @competition.author.email %></a></p>
+              <p>Si l'organisateur ne te contacte pas ou ne traite pas ton inscription dans les jours qui viennent, tu peux prendre contact avec lui/elle: <a href="mailto:<%= @competition.author.email %>"><%= @competition.author.email %></a></p>
             <% end %>
+            <p>A bientôt!</p>
           </td>
         </tr>
       </table>
@@ -65,9 +66,9 @@
         <table>
           <tr>
             <td align="center">
-              <p>Too many emails? <a href="https://www.somewherexpress.com/users/edit?locale=en"><unsubscribe>Modify my preferences</unsubscribe></a>.
+              <p>Trop d'email? <a href="https://www.somewherexpress.com/users/edit"><unsubscribe>Modifier mes préférences</unsubscribe></a>.
               </p>
-              <p>SomewherExpress elsewhere: <a href="https://www.facebook.com/somewherexpress/">facebook</a> | <a href="https://somewherexpress.slack.com">slack</a></p>
+              <p>Retrouve SomewherExpress: <a href="https://www.facebook.com/somewherexpress/">facebook</a> | <a href="https://somewherexpress.slack.com">slack</a></p>
             </td>
           </tr>
         </table>
