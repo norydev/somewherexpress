@@ -1,0 +1,17 @@
+Salut <%= @user.first_name %>,
+
+Tu t'es inscrit(e) à la compétition "<%= @competition.name %>" (https://www.somewherexpress.com/competitions/<%= @competition.id %>)
+
+<% if @status == "accepted" %>
+Ton inscription à été automatiquement validée.
+
+L'organisateur prendra contact avec toi prochainement. Tu trouveras en pièce jointe un évènement à ajouter dans ton calendrier.
+<% elsif @status == "pending" %>
+Ton inscription doit être traitée par l'organisateur.
+
+Si l'organisateur ne te contacte pas ou ne traite pas ton inscription dans les jours qui viennent, tu peux prendre contact avec lui/elle: <%= @competition.author.email %>
+<% end %>
+
+A bientôt!
+
+Trop d'email? Modifies tes préférences ici: https://www.somewherexpress.com/users/edit

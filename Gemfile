@@ -39,6 +39,7 @@ gem 'pundit'
 gem 'modernizr-rails'
 gem 'premailer-rails'
 gem 'omniauth-facebook'
+gem 'icalendar'
 
 # Background-jobs
 gem 'sidekiq'

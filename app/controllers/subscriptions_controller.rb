@@ -30,7 +30,7 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.save
-      # UserMailer.new_subscription(current_user.id, @competition.id).deliver_later
+      UserMailer.as_user_new_subscription(current_user.id, @competition.id).deliver_later
       UserMailer.as_author_new_subscription(current_user.id, @competition.id, @competition.author.id).deliver_later
 
       respond_to do |format|

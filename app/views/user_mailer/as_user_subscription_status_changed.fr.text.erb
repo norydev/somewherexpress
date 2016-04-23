@@ -5,11 +5,11 @@ Ton inscription à la compétition "<%= @competition.name %>" (https://www.somew
 <% if @status == "accepted" %>
 Ton inscription à été Acceptée! Félicitations!
 
-L'organisateur prendra contact avec toi prochainement.
+L'organisateur prendra contact avec toi prochainement. Tu trouveras en pièce jointe un évènement à ajouter dans ton calendrier.
 <% elsif @status == "refused" %>
 Ton inscription à été Refusée.
 
-Si l'organisateur ne te contact par pour expliquer sa décision, tu peux prendre contact avec lui: <%= @competition.author.email %>
+Si l'organisateur ne te contacte pas pour expliquer sa décision, tu peux prendre contact avec lui: <%= @competition.author.email %>
 <% end %>
 
 Trop d'email? Modifies tes préférences ici: https://www.somewherexpress.com/users/edit

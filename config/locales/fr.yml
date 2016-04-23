@@ -24,11 +24,13 @@ fr:
     as_user_competition_edited:
       subject: "Une de tes compétitions a été mise à jour"
     as_author_new_subscription:
-      subject: "Nouvelle inscription à votre compétition"
+      subject: "Nouvelle inscription à ta compétition"
     as_user_subscription_status_changed:
-      subject: "Votre inscription à été traitée"
+      subject: "Ton inscription à été traitée"
     as_author_cancelation:
       subject: "Quelqu'un a annulé son inscription"
+    as_user_new_subscription:
+      subject: "Tu t'es inscrit(e) à une compétition"
   subscriptions:
     accepted: Vous êtes inscrit!
     pending: Votre inscription est en attente d'approbation par l'organisateur
@@ -152,7 +154,7 @@ fr:
         as_author: "En tant que créateur d'une compétition"
         as_user_new_competition: "Une nouvelle compétition est publiée"
         as_user_competition_edited: "Une de mes compétitions est mise à jour"
-        new_subscription: "Je m'inscris à une compétition"
+        as_user_new_subscription: "Je m'inscris à une compétition"
         as_user_subscription_status_changed: "Le statut de mon inscription est mis à jour"
         as_author_new_subscription: "Quelqu'un s'inscrit à la compétition"
         as_author_cancelation: "Quelqu'un annule son inscription"

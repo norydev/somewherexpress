@@ -1,0 +1,17 @@
+Hi <%= @user.first_name %>,
+
+You registered to the competition "<%= @competition.name %>" (https://www.somewherexpress.com/en/competitions/<%= @competition.id %>)
+
+<% if @status == "accepted" %>
+Your registration has been automatically accepted.
+
+The organizer will contact you soon. You can find as attachment an event to add to your calendar.
+<% elsif @status == "pending" %>
+Your registration must be processed by the organizer.
+
+If the organizer doesn't contact you or doesn't process your registration in the coming days, you can contact him/her: <%= @competition.author.email %>
+<% end %>
+
+See you soon!
+
+Too many emails? Modifiy your preferences here: https://www.somewherexpress.com/users/edit?locale=en
