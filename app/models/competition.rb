@@ -122,4 +122,26 @@ class Competition < ActiveRecord::Base
   def self.not_finished
     self.where(finished: false).order(:start_date)
   end
+
+  def ical_event
+    require 'icalendar'
+
+    cal = Icalendar::Calendar.new
+
+    cal.event do |e|
+      e.dtstart     = Icalendar::Values::Date.new(start_date)
+      e.dtend       = Icalendar::Values::Date.new(end_date)
+      e.summary     = name
+      e.location    = "#{start_city.locality} (#{start_city.country_short})"
+      e.description = "#{name}\n#{route}\n\n#{description}"
+      e.url         = "https://www.somewherexpress.com/competitions/#{id}"
+      e.organizer   = Icalendar::Values::CalAddress.new("mailto:#{author.email}", cn: author.name)
+      accepted_users.map do |user|
+        e.append_attendee Icalendar::Values::CalAddress.new("mailto:#{user.email}", cn: user.name, partstat: "ACCEPTED")
+      end
+      e.status      = "CONFIRMED"
+    end
+
+    cal.to_ical
+  end
 end
