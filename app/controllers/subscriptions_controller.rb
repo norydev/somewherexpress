@@ -30,8 +30,12 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.save
-      UserMailer.as_user_new_subscription(current_user.id, @competition.id).deliver_later
-      UserMailer.as_author_new_subscription(current_user.id, @competition.id, @competition.author.id).deliver_later
+      if current_user.notification_setting.as_user_new_subscription
+        UserMailer.as_user_new_subscription(current_user.id, @competition.id).deliver_later
+      end
+      if @competition.author.as_author_new_subscription
+        UserMailer.as_author_new_subscription(current_user.id, @competition.id, @competition.author.id).deliver_later
+      end
 
       respond_to do |format|
         format.html { redirect_to @subscription.competition, notice: t('subscriptions.create.notice') }
@@ -49,7 +53,7 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.update(subscription_params)
-      unless @subscription.status == "pending"
+      if @subscription.status != "pending" && @subscription.user.notification_setting.as_user_subscription_status_changed
         UserMailer.as_user_subscription_status_changed(@subscription.user.id,
                                                        @subscription.competition.id,
                                                        @subscription.status).deliver_later
@@ -73,9 +77,12 @@ class SubscriptionsController < ApplicationController
 
     competition = @subscription.competition
 
-    UserMailer.as_author_cancelation(@subscription.user.id,
-                                     competition.id,
-                                     competition.author.id).deliver_later
+    if competition.author.notification_setting.as_author_cancelation
+      UserMailer.as_author_cancelation(@subscription.user.id,
+                                       competition.id,
+                                       competition.author.id).deliver_later
+    end
+
     @subscription.destroy
 
     redirect_to competition, notice: t('subscriptions.destroy.notice')
