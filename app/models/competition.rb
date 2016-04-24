@@ -48,7 +48,7 @@ class Competition < ActiveRecord::Base
 
   def route
     rte = "#{start_city.locality} (#{start_city.country_short}) – "
-    tracks.order(:start_time).each do |t|
+    tracks.includes(:end_city).order(:start_time).each do |t|
       unless t.end_city.name == end_city.name
         rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
       end
@@ -66,7 +66,7 @@ class Competition < ActiveRecord::Base
   end
 
   def t_ranks
-    Rank.where(race_id: self.tracks.map(&:id), race_type: "Track")
+    Rank.where(race_id: self.tracks.pluck(:id), race_type: "Track")
   end
 
   def registrations_open?
