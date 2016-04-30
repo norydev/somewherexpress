@@ -28,7 +28,20 @@
                 </tr>
               </table>
 
-              <p>The organizer will contact you soon. You can find as attachment an event to add to your calendar.</p>
+              <p>The organizer will contact you soon.</p>
+
+              <table class="center-link" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td></td>
+                  <td>
+                    <img src="http://localhost:3000/icon-calendar.png" alt="" height="40px" width="40px" style="display: inline-block; width: 40px;">
+                  </td>
+                  <td></td>
+                </tr>
+              </table>
+
+              <p>You can find as attachment an event to add to your calendar.</p>
+
             <% elsif @status == "refused" %>
               <table class="center-link" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -42,6 +55,7 @@
 
               <p>If the organizer doesn't contact you to explain his/her decision, you can contact him/her: <a href="mailto:<%= @competition.author.email %>"><%= @competition.author.email %></a></p>
             <% end %>
+            <p>See you soon!</p>
           </td>
         </tr>
       </table>
