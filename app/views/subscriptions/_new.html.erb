@@ -3,6 +3,12 @@
     <!-- case: applied, accepted -->
     <i class="fa fa-check text-success"></i> <%= t('subscriptions.accepted') %>
 
+    <p class="padded-mini-top">
+      <%= link_to competition.ical_event do %>
+        <%= image_tag "icon-calendar.svg", width: "40px", height: "40px" %><br> Download calendar event
+      <% end %>
+    </p>
+
   <% elsif competition.pending_users.include?(current_user) %>
     <!-- case: applied, pending -->
     <i class="fa fa-refresh text-warning"></i> <%= t('subscriptions.pending') %>&nbsp;&nbsp;
