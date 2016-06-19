@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409174037) do
+ActiveRecord::Schema.define(version: 20160619120712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,11 @@ ActiveRecord::Schema.define(version: 20160409174037) do
     t.text     "description"
     t.string   "default_registration_status", default: "pending", null: false
     t.string   "video"
+    t.integer  "start_city_id"
+    t.integer  "end_city_id"
   end
+
+  add_index "competitions", ["start_city_id", "end_city_id"], name: "index_competitions_on_start_city_id_and_end_city_id", using: :btree
 
   create_table "notification_settings", force: :cascade do |t|
     t.integer  "user_id"
@@ -125,9 +129,12 @@ ActiveRecord::Schema.define(version: 20160409174037) do
     t.datetime "start_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "start_city_id"
+    t.integer  "end_city_id"
   end
 
   add_index "tracks", ["competition_id"], name: "index_tracks_on_competition_id", using: :btree
+  add_index "tracks", ["start_city_id", "end_city_id"], name: "index_tracks_on_start_city_id_and_end_city_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -163,10 +170,14 @@ ActiveRecord::Schema.define(version: 20160409174037) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "badges", "users"
+  add_foreign_key "competitions", "cities", column: "end_city_id"
+  add_foreign_key "competitions", "cities", column: "start_city_id"
   add_foreign_key "competitions", "users", column: "author_id"
   add_foreign_key "notification_settings", "users"
   add_foreign_key "ranks", "users"
   add_foreign_key "subscriptions", "competitions"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "tracks", "cities", column: "end_city_id"
+  add_foreign_key "tracks", "cities", column: "start_city_id"
   add_foreign_key "tracks", "competitions"
 end
