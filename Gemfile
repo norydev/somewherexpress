@@ -40,6 +40,7 @@ gem 'modernizr-rails'
 gem 'premailer-rails'
 gem 'omniauth-facebook'
 gem 'icalendar'
+gem 'activerecord_any_of'
 
 # Background-jobs
 gem 'sidekiq'

@@ -20,7 +20,7 @@
 
   <%= render 'shared/footer' %>
 
-  <%= javascript_include_tag "//maps.google.com/maps/api/js?&libraries=placesv=3.23&key=#{ENV["GMAPS"]}" %>
+  <%= javascript_include_tag "//maps.google.com/maps/api/js?v=3.23&libraries=places&key=#{ENV["GMAPS"]}" %>
   <%= javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js" %>
   <%= javascript_include_tag "application" %>
 

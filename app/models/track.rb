@@ -14,10 +14,11 @@ class Track < ActiveRecord::Base
   has_many :ranks, as: :race, dependent: :destroy
   accepts_nested_attributes_for :ranks
 
-  has_one :start_city, -> { where order: 'start' }, class_name: 'City', as: :localizable, dependent: :destroy
-  has_one :end_city, -> { where order: 'end' }, class_name: 'City', as: :localizable, dependent: :destroy
-  accepts_nested_attributes_for :start_city, allow_destroy: true
-  accepts_nested_attributes_for :end_city, allow_destroy: true
+  belongs_to :start_city, class_name: 'City', foreign_key: "start_city_id"
+  belongs_to :end_city, class_name: 'City', foreign_key: "end_city_id"
+
+  accepts_nested_attributes_for :start_city
+  accepts_nested_attributes_for :end_city
 
   after_create :make_track_ranks
 
