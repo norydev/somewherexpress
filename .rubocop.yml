@@ -1,0 +1,22 @@
+inherit_from: .rubocop_todo.yml
+AllCops:
+  TargetRubyVersion: 2.3
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
+Rails:
+  Enabled: true
+Style/IndentationConsistency:
+  EnforcedStyle: rails
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+Style/WordArray:
+  EnforcedStyle: brackets
