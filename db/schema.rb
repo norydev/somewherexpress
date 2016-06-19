@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619120712) do
+ActiveRecord::Schema.define(version: 20160619185646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,14 +55,9 @@ ActiveRecord::Schema.define(version: 20160619120712) do
     t.string   "postal_code"
     t.float    "lat"
     t.float    "lng"
-    t.integer  "localizable_id"
-    t.string   "localizable_type"
-    t.string   "order",                             default: "start", null: false
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
-
-  add_index "cities", ["localizable_type", "localizable_id"], name: "index_cities_on_localizable_type_and_localizable_id", using: :btree
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name"

@@ -36,7 +36,5 @@ FactoryGirl.define do
     country         "Suisse"
     country_short   "CH"
     postal_code     ""
-    association     :localizable
-    order           "start"
   end
 end
