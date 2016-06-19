@@ -29,8 +29,8 @@ class Competition < ActiveRecord::Base
   belongs_to :start_city, class_name: "City", foreign_key: "start_city_id"
   belongs_to :end_city, class_name: "City", foreign_key: "end_city_id"
 
-  has_many :track_cities_start, through: :tracks, source: :start_city
-  has_many :track_cities_end, through: :tracks, source: :end_city
+  has_many :tracks_start_cities, through: :tracks, source: :start_city
+  has_many :tracks_end_cities, through: :tracks, source: :end_city
 
   accepts_nested_attributes_for :start_city
   accepts_nested_attributes_for :end_city

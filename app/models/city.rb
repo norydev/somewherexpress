@@ -58,4 +58,13 @@ class City < ActiveRecord::Base
 
     self.where.any_of(fc1, fc2, fc3, fc4)
   end
+
+  def self.nowhere
+    c1 = self.joins(:start_of_competitions)
+    c2 = self.joins(:end_of_competitions)
+    c3 = self.joins(:start_of_tracks)
+    c4 = self.joins(:end_of_tracks)
+
+    City.all - c1 - c2 - c3 - c4
+  end
 end
