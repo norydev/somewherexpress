@@ -32,7 +32,7 @@ Metrics/ClassLength:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 138
+  Max: 120
 
 # Offense count: 12
 # Configuration parameters: CountComments.

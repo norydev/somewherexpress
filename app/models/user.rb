@@ -102,8 +102,13 @@ class User < ActiveRecord::Base
 
   # instead of deleting, indicate the user requested a delete & timestamp it
   def soft_delete
-    update_attributes(deleted_at: Time.current, old_email: email, old_first_name: first_name, old_last_name: last_name, picture: nil)
-    update_attributes(first_name: first_name.first, last_name: last_name.first, email: "#{Time.now.to_i}#{rand(100)}#{email}")
+    update_attributes(deleted_at: Time.current, old_email: email,
+                      old_first_name: first_name, old_last_name: last_name,
+                      picture: nil)
+
+    update_attributes(first_name: first_name.first, last_name: last_name.first,
+                      email: "#{Time.now.to_i}#{rand(100)}#{email}")
+
     UserMailer.goodbye(id).deliver_later
   end
 

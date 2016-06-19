@@ -17,7 +17,8 @@ class SubscriptionsController < ApplicationController
 
   # POST
   def new
-    @subscription = Subscription.new(competition: @competition, status: @competition.default_registration_status)
+    @subscription = Subscription.new(competition: @competition,
+                                     status: @competition.default_registration_status)
     authorize @subscription
   end
 
@@ -54,7 +55,8 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.update(subscription_params)
-      if @subscription.status != "pending" && @subscription.user.notification_setting.as_user_subscription_status_changed
+      if @subscription.status != "pending" &&
+         @subscription.user.notification_setting.as_user_subscription_status_changed
         UserMailer.as_user_subscription_status_changed(@subscription.user.id,
                                                        @subscription.competition.id,
                                                        @subscription.status).deliver_later

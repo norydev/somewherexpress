@@ -20,3 +20,5 @@ Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
 Style/WordArray:
   EnforcedStyle: brackets
+Metrics/LineLength:
+  Max: 120
