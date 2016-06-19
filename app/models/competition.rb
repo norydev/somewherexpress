@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: competitions
@@ -62,7 +63,7 @@ class Competition < ActiveRecord::Base
 
   def multiple_tracks?
     # order to eliminate tracks with no id (used for competition form)
-    self.tracks.order(:start_time).size > 1
+    tracks.order(:start_time).size > 1
   end
 
   def just_published?
@@ -70,7 +71,7 @@ class Competition < ActiveRecord::Base
   end
 
   def t_ranks
-    Rank.where(race_id: self.tracks.pluck(:id), race_type: "Track")
+    Rank.where(race_id: tracks.pluck(:id), race_type: "Track")
   end
 
   def registrations_open?
@@ -112,23 +113,23 @@ class Competition < ActiveRecord::Base
   end
 
   def self.open_for_registration
-    self.where(finished: false).order(:start_date).select { |c| c.registrations_open? }
+    where(finished: false).order(:start_date).select(&:registrations_open?)
   end
 
   def self.not_open_for_registration
-    self.where(finished: false).order(:start_date).reject { |c| c.registrations_open? }
+    where(finished: false).order(:start_date).reject(&:registrations_open?)
   end
 
   def self.finished
-    self.where(finished: true).order(start_date: :desc)
+    where(finished: true).order(start_date: :desc)
   end
 
   def self.not_finished
-    self.where(finished: false).order(:start_date)
+    where(finished: false).order(:start_date)
   end
 
   def ical_event
-    require 'icalendar'
+    require "icalendar"
 
     cal = Icalendar::Calendar.new
 
@@ -143,7 +144,7 @@ class Competition < ActiveRecord::Base
       accepted_users.map do |user|
         e.append_attendee Icalendar::Values::CalAddress.new("mailto:#{user.email}", cn: user.name, partstat: "ACCEPTED")
       end
-      e.status      = "CONFIRMED"
+      e.status = "CONFIRMED"
     end
 
     cal.to_ical

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: ranks
@@ -22,11 +23,12 @@ class Rank < ActiveRecord::Base
   validates_presence_of :user, :race
 
   private
+
     def set_competition_ranks
-      if self.race.is_a?(Track)
-        c = self.race.competition
-        c_r = Rank.where(race: c, user: self.user).first_or_create
-        c_r.points = c.t_ranks.where(user: self.user).map(&:points).reduce(&:+)
+      if race.is_a?(Track)
+        c = race.competition
+        c_r = Rank.where(race: c, user: user).first_or_create
+        c_r.points = c.t_ranks.where(user: user).map(&:points).reduce(&:+)
         c_r.save
 
         if c.multiple_tracks?
@@ -41,8 +43,8 @@ class Rank < ActiveRecord::Base
           end
         else
           # mono track competition: result = track result, dsq if dsq in track
-          c_r.result = self.result
-          c_r.dsq = self.dsq
+          c_r.result = result
+          c_r.dsq = dsq
           c_r.save
         end
       end

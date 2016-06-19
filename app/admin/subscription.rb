@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 ActiveAdmin.register Subscription do
-
   permit_params :user_id, :competition_id, :status
 
   index do
@@ -19,5 +19,4 @@ ActiveAdmin.register Subscription do
 
     f.actions
   end
-
 end

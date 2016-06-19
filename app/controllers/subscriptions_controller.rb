@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: subscriptions
@@ -38,7 +39,7 @@ class SubscriptionsController < ApplicationController
       end
 
       respond_to do |format|
-        format.html { redirect_to @subscription.competition, notice: t('subscriptions.create.notice') }
+        format.html { redirect_to @subscription.competition, notice: t("subscriptions.create.notice") }
         format.js
       end
     else
@@ -69,7 +70,6 @@ class SubscriptionsController < ApplicationController
         format.js
       end
     end
-
   end
 
   def destroy
@@ -85,10 +85,11 @@ class SubscriptionsController < ApplicationController
 
     @subscription.destroy
 
-    redirect_to competition, notice: t('subscriptions.destroy.notice')
+    redirect_to competition, notice: t("subscriptions.destroy.notice")
   end
 
   private
+
     def set_subscription
       @subscription = Subscription.find(params[:id])
     end

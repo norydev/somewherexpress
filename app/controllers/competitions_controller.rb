@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: competitions
@@ -97,10 +98,11 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     @competition.destroy
-    redirect_to competitions_path, notice: 'Competition was successfully deleted.'
+    redirect_to competitions_path, notice: "Competition was successfully deleted."
   end
 
   private
+
     def set_competition
       @competition = Competition.find(params[:id])
     end
@@ -108,21 +110,32 @@ class CompetitionsController < ApplicationController
     def competition_params
       params.require(:competition).permit(
         :name, :start_date, :end_date, :start_registration,
-        :end_registration, :published, :finished, :description, :default_registration_status, :video,
-        start_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
-          :administrative_area_level_1, :administrative_area_level_1_short, :country,
-          :country_short, :postal_code],
-        end_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
-          :administrative_area_level_1, :administrative_area_level_1_short, :country,
-          :country_short, :postal_code],
+        :end_registration, :published, :finished, :description,
+        :default_registration_status, :video,
+        start_city_attributes: [:id, :name, :street_number, :route, :locality,
+                                :administrative_area_level_2,
+                                :administrative_area_level_1,
+                                :administrative_area_level_1_short,
+                                :country, :country_short, :postal_code],
+        end_city_attributes: [:id, :name, :street_number, :route, :locality,
+                              :administrative_area_level_2,
+                              :administrative_area_level_1,
+                              :administrative_area_level_1_short,
+                              :country, :country_short, :postal_code],
         tracks_attributes: [:id, :start_time,
-          start_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
-          :administrative_area_level_1, :administrative_area_level_1_short, :country,
-          :country_short, :postal_code],
-          end_city_attributes: [:id, :name, :street_number, :route, :locality, :administrative_area_level_2,
-          :administrative_area_level_1, :administrative_area_level_1_short, :country,
-          :country_short, :postal_code]]
-        )
+                            start_city_attributes: [:id, :name, :street_number,
+                                                    :route, :locality,
+                                                    :administrative_area_level_2,
+                                                    :administrative_area_level_1,
+                                                    :administrative_area_level_1_short,
+                                                    :country, :country_short, :postal_code],
+                            end_city_attributes: [:id, :name, :street_number,
+                                                  :route, :locality,
+                                                  :administrative_area_level_2,
+                                                  :administrative_area_level_1,
+                                                  :administrative_area_level_1_short,
+                                                  :country, :country_short, :postal_code]]
+      )
     end
 
     def send_new_competition_emails

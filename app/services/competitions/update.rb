@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 class Competitions::Update
-
   attr_reader :competition
 
   def initialize(competition, params)

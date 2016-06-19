@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 class ApplicationMailer < ActionMailer::Base
   default from: "SomewherExpress <info@somewherexpress.com>"
-  layout 'mailer'
+  layout "mailer"
 
   add_template_helper(ApplicationHelper)
 end

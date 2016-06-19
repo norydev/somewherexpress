@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: competitions
@@ -31,5 +32,4 @@ FactoryGirl.define do
     description           "This race is great"
     default_registration_status "accepted"
   end
-
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: users
@@ -35,15 +36,15 @@
 class User < ActiveRecord::Base
   scope :want_email_for_new_competition, -> do
     joins(:notification_setting)
-    .where(deleted_at: nil)
-    .where(notification_settings: {as_user_new_competition: true})
+      .where(deleted_at: nil)
+      .where(notification_settings: { as_user_new_competition: true })
   end
 
   scope :want_email_for_competition_edited, -> (competition) do
     joins(:notification_setting, :competitions)
-    .where(deleted_at: nil)
-    .where(competitions: {id: competition.id})
-    .where(notification_settings: {as_user_competition_edited: true})
+      .where(deleted_at: nil)
+      .where(competitions: { id: competition.id })
+      .where(notification_settings: { as_user_competition_edited: true })
   end
 
   # Include default devise modules. Others available are:
@@ -71,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    [first_name, last_name].reject(&:blank?).join(' ')
+    [first_name, last_name].reject(&:blank?).join(" ")
   end
 
   def initials
@@ -92,7 +93,7 @@ class User < ActiveRecord::Base
   end
 
   def sex
-    girl? ? 'female' : 'male'
+    girl? ? "female" : "male"
   end
 
   def finished_competitions
@@ -103,7 +104,7 @@ class User < ActiveRecord::Base
   def soft_delete
     update_attributes(deleted_at: Time.current, old_email: email, old_first_name: first_name, old_last_name: last_name, picture: nil)
     update_attributes(first_name: first_name.first, last_name: last_name.first, email: "#{Time.now.to_i}#{rand(100)}#{email}")
-    UserMailer.goodbye(self.id).deliver_later
+    UserMailer.goodbye(id).deliver_later
   end
 
   # ensure user account is active
@@ -121,7 +122,7 @@ class User < ActiveRecord::Base
   end
 
   def pending_registrations_for_creations
-    creations.not_finished.map{ |c| c.subscriptions.where(status: "pending") }.flatten.size
+    creations.not_finished.map { |c| c.subscriptions.where(status: "pending") }.flatten.size
   end
 
   def self.find_for_facebook_oauth(auth)
@@ -142,7 +143,7 @@ class User < ActiveRecord::Base
       self.token = auth.credentials.token
       self.token_expiry = Time.at(auth.credentials.expires_at)
       self.picture = auth.info.image.gsub(/https?/, "https")
-      self.save!
+      save!
       self
     end
 
@@ -150,14 +151,14 @@ class User < ActiveRecord::Base
       self.provider = auth.provider
       self.uid = auth.uid
       self.email = auth.info.email
-      self.password = Devise.friendly_token[0,20]  # Fake password for validation
+      self.password = Devise.friendly_token[0, 20] # Fake password for validation
       self.first_name = auth.info.first_name
       self.last_name = auth.info.last_name
       self.picture = auth.info.image.gsub(/https?/, "https")
-      self.girl = auth.extra.raw_info.gender == 'female'
+      self.girl = auth.extra.raw_info.gender == "female"
       self.token = auth.credentials.token
       self.token_expiry = Time.at(auth.credentials.expires_at)
-      self.save!
+      save!
       self
     end
 end

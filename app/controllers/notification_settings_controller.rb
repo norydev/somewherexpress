@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: notification_settings
@@ -36,8 +37,11 @@ class NotificationSettingsController < ApplicationController
 
     def notifications_params
       params.require(:notification_setting).permit(:as_user_new_competition,
-        :as_user_competition_edited, :as_user_new_subscription,
-        :as_user_subscription_status_changed, :as_author_new_subscription,
-        :as_author_cancelation, :locale)
+                                                   :as_user_competition_edited,
+                                                   :as_user_new_subscription,
+                                                   :as_user_subscription_status_changed,
+                                                   :as_author_new_subscription,
+                                                   :as_author_cancelation,
+                                                   :locale)
     end
 end

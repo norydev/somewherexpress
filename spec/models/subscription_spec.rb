@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: subscriptions
@@ -10,15 +11,14 @@
 #  status         :string           default("pending"), not null
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Subscription, type: :model do
-
   it { should belong_to(:user) }
   it { should belong_to(:competition) }
   it { should validate_acceptance_of(:rules) }
 
-  it 'returns the correct nb of points' do
+  it "returns the correct nb of points" do
     u = FactoryGirl.create :user, email: "u1@yopmail.com"
     c = FactoryGirl.create :competition, start_city: FactoryGirl.create(:city), end_city: FactoryGirl.create(:city)
 
@@ -38,7 +38,7 @@ RSpec.describe Subscription, type: :model do
     expect(s.points).to eq(20)
   end
 
-  it 'returns the correct result' do
+  it "returns the correct result" do
     u1 = FactoryGirl.create :user, email: "u1@yopmail.com"
     u2 = FactoryGirl.create :user, email: "u2@yopmail.com"
     u3 = FactoryGirl.create :user, email: "u3@yopmail.com"
@@ -62,5 +62,4 @@ RSpec.describe Subscription, type: :model do
 
     expect(s2.result).to eq(2)
   end
-
 end

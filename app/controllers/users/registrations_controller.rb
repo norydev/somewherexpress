@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 # app/controllers/users/registrations_controller.rb
 class Users::RegistrationsController < Devise::RegistrationsController
-
   # POST /resource
   def create
     super do
@@ -29,5 +29,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
         super
       end
     end
-
 end

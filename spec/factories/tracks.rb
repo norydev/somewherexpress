@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: tracks
@@ -14,5 +15,4 @@ FactoryGirl.define do
     association     :competition
     start_time      DateTime.parse("10 april 2015 14:00")
   end
-
 end

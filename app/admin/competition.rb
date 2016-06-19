@@ -1,8 +1,8 @@
+# frozen_string_literal: true
 ActiveAdmin.register Competition do
-
   permit_params :name, :start_date, :end_date, :finished, :published,
-    :start_registration, :end_registration, :author_id, :description,
-    :default_registration_status, :video
+                :start_registration, :end_registration, :author_id, :description,
+                :default_registration_status, :video
 
   index do
     selectable_column
@@ -44,5 +44,4 @@ ActiveAdmin.register Competition do
 
     f.actions
   end
-
 end

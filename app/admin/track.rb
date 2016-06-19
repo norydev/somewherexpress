@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 ActiveAdmin.register Track do
-
   permit_params :competition_id, :start_time
 
   index do
@@ -22,5 +22,4 @@ ActiveAdmin.register Track do
 
     f.actions
   end
-
 end

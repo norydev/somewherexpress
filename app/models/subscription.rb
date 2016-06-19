@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: subscriptions
@@ -45,9 +46,9 @@ class Subscription < ActiveRecord::Base
     end
 
     def status_changed
-      if changes['status'].try(:any?) && changes['status'].last == "accepted"
+      if changes["status"].try(:any?) && changes["status"].last == "accepted"
         make_track_ranks
-      elsif changes['status'].try(:any?) && changes['status'].last != "accepted"
+      elsif changes["status"].try(:any?) && changes["status"].last != "accepted"
         destroy_ranks
       end
     end

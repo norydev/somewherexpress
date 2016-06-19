@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: tracks
@@ -14,8 +15,8 @@ class Track < ActiveRecord::Base
   has_many :ranks, as: :race, dependent: :destroy
   accepts_nested_attributes_for :ranks
 
-  belongs_to :start_city, class_name: 'City', foreign_key: "start_city_id"
-  belongs_to :end_city, class_name: 'City', foreign_key: "end_city_id"
+  belongs_to :start_city, class_name: "City", foreign_key: "start_city_id"
+  belongs_to :end_city, class_name: "City", foreign_key: "end_city_id"
 
   accepts_nested_attributes_for :start_city
   accepts_nested_attributes_for :end_city

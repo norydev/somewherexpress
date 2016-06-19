@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 ActiveAdmin.register Rank do
-
   permit_params :user_id, :result, :points, :race_id, :race_type, :dsq
 
   index do
@@ -24,5 +24,4 @@ ActiveAdmin.register Rank do
 
     f.actions
   end
-
 end

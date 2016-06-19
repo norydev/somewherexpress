@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TrackPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
