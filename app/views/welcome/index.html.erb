@@ -74,7 +74,7 @@
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
     $(document).on('ready', function() {
-      handler = Gmaps.build('Google', { markers: { clusterer: undefined  }});
+      handler = Gmaps.build('Google', { markers: { clusterer: undefined }});
       handler.buildMap({
       provider: {
         disableDefaultUI: true,
