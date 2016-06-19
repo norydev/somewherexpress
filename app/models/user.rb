@@ -78,10 +78,6 @@ class User < ActiveRecord::Base
     [first_name.first, last_name.first].reject(&:blank?).join
   end
 
-  def image
-    self.picture || ActionController::Base.helpers.asset_path("default_user_picture.svg")
-  end
-
   def gravatar_url
     hash = Digest::MD5.hexdigest(email)
     "https://www.gravatar.com/avatar/#{hash}?s=160"
@@ -91,7 +87,7 @@ class User < ActiveRecord::Base
     if use_gravatar
       gravatar_url
     else
-      image
+      picture
     end
   end
 
