@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: subscriptions
@@ -14,9 +15,9 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
   belongs_to :competition
 
-  validates_uniqueness_of :user_id, scope: :competition_id, message: "You already applied to this competition"
-  validates_presence_of :user, :competition
-  validates_acceptance_of :rules, on: :create, allow_nil: false
+  validates :user_id, uniqueness: { scope: :competition_id, message: "You already applied to this competition" }
+  validates :user, :competition, presence: true
+  validates :rules, acceptance: { on: :create, allow_nil: false }
 
   after_update :status_changed
   after_create :make_track_ranks, if: :accepted
@@ -45,9 +46,9 @@ class Subscription < ActiveRecord::Base
     end
 
     def status_changed
-      if changes['status'].try(:any?) && changes['status'].last == "accepted"
+      if changes["status"].try(:any?) && changes["status"].last == "accepted"
         make_track_ranks
-      elsif changes['status'].try(:any?) && changes['status'].last != "accepted"
+      elsif changes["status"].try(:any?) && changes["status"].last != "accepted"
         destroy_ranks
       end
     end

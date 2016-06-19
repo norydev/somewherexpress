@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: competitions
@@ -23,7 +24,7 @@ module CompetitionsHelper
     if rank.try(:result) == 1
       '<span class="trophies"><i class="fa fa-trophy"></i></span>'.html_safe
     elsif rank.try(:dsq)
-      'DSQ'
+      "DSQ"
     else
       rank.try(:result)
     end
@@ -39,7 +40,7 @@ module CompetitionsHelper
 
   def place(rank)
     if rank && rank.dsq
-      'DSQ'
+      "DSQ"
     elsif rank
       case I18n.locale
       when :fr

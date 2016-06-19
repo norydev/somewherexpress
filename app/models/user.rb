@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: users
@@ -33,18 +34,18 @@
 #
 
 class User < ActiveRecord::Base
-  scope :want_email_for_new_competition, -> do
+  scope :want_email_for_new_competition, lambda {
     joins(:notification_setting)
-    .where(deleted_at: nil)
-    .where(notification_settings: {as_user_new_competition: true})
-  end
+      .where(deleted_at: nil)
+      .where(notification_settings: { as_user_new_competition: true })
+  }
 
-  scope :want_email_for_competition_edited, -> (competition) do
+  scope :want_email_for_competition_edited, lambda { |competition|
     joins(:notification_setting, :competitions)
-    .where(deleted_at: nil)
-    .where(competitions: {id: competition.id})
-    .where(notification_settings: {as_user_competition_edited: true})
-  end
+      .where(deleted_at: nil)
+      .where(competitions: { id: competition.id })
+      .where(notification_settings: { as_user_competition_edited: true })
+  }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -64,14 +65,14 @@ class User < ActiveRecord::Base
   has_one :notification_setting, dependent: :destroy
   accepts_nested_attributes_for :notification_setting
 
-  validates_presence_of :first_name, :last_name
+  validates :first_name, :last_name, presence: true
 
   def to_s
     name
   end
 
   def name
-    [first_name, last_name].reject(&:blank?).join(' ')
+    [first_name, last_name].reject(&:blank?).join(" ")
   end
 
   def initials
@@ -79,20 +80,15 @@ class User < ActiveRecord::Base
   end
 
   def gravatar_url
-    hash = Digest::MD5.hexdigest(email)
-    "https://www.gravatar.com/avatar/#{hash}?s=160"
+    "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=160"
   end
 
   def avatar
-    if use_gravatar
-      gravatar_url
-    else
-      picture
-    end
+    use_gravatar ? gravatar_url : picture
   end
 
   def sex
-    girl? ? 'female' : 'male'
+    girl? ? "female" : "male"
   end
 
   def finished_competitions
@@ -101,9 +97,14 @@ class User < ActiveRecord::Base
 
   # instead of deleting, indicate the user requested a delete & timestamp it
   def soft_delete
-    update_attributes(deleted_at: Time.current, old_email: email, old_first_name: first_name, old_last_name: last_name, picture: nil)
-    update_attributes(first_name: first_name.first, last_name: last_name.first, email: "#{Time.now.to_i}#{rand(100)}#{email}")
-    UserMailer.goodbye(self.id).deliver_later
+    update_attributes(deleted_at: Time.current, old_email: email,
+                      old_first_name: first_name, old_last_name: last_name,
+                      picture: nil)
+
+    update_attributes(first_name: first_name.first, last_name: last_name.first,
+                      email: "#{Time.current.to_i}#{rand(100)}#{email}")
+
+    UserMailer.goodbye(id).deliver_later
   end
 
   # ensure user account is active
@@ -121,7 +122,7 @@ class User < ActiveRecord::Base
   end
 
   def pending_registrations_for_creations
-    creations.not_finished.map{ |c| c.subscriptions.where(status: "pending") }.flatten.size
+    creations.not_finished.map { |c| c.subscriptions.where(status: "pending") }.flatten.size
   end
 
   def self.find_for_facebook_oauth(auth)
@@ -140,9 +141,9 @@ class User < ActiveRecord::Base
       self.provider = auth.provider
       self.uid = auth.uid
       self.token = auth.credentials.token
-      self.token_expiry = Time.at(auth.credentials.expires_at)
+      self.token_expiry = Time.zone.at(auth.credentials.expires_at)
       self.picture = auth.info.image.gsub(/https?/, "https")
-      self.save!
+      save!
       self
     end
 
@@ -150,14 +151,14 @@ class User < ActiveRecord::Base
       self.provider = auth.provider
       self.uid = auth.uid
       self.email = auth.info.email
-      self.password = Devise.friendly_token[0,20]  # Fake password for validation
+      self.password = Devise.friendly_token[0, 20] # Fake password for validation
       self.first_name = auth.info.first_name
       self.last_name = auth.info.last_name
       self.picture = auth.info.image.gsub(/https?/, "https")
-      self.girl = auth.extra.raw_info.gender == 'female'
+      self.girl = auth.extra.raw_info.gender == "female"
       self.token = auth.credentials.token
-      self.token_expiry = Time.at(auth.credentials.expires_at)
-      self.save!
+      self.token_expiry = Time.zone.at(auth.credentials.expires_at)
+      save!
       self
     end
 end

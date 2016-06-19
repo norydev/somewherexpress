@@ -1,13 +1,13 @@
 <% if competition.registrations_open? %>
   <div class="separator padded-micro"></div>
   <p class="text-uppercase small">
-    <%= t('competitions.registrations.end', time: distance_of_time_in_words(competition.end_registration || (competition.start_date - 1), Time.now)) %>:
+    <%= t('competitions.registrations.end', time: distance_of_time_in_words(competition.end_registration || (competition.start_date - 1), Time.current)) %>:
     <%= (datetime_format(competition.end_registration) || datetime_format(competition.start_date - 1)) %>
   </p>
 <% elsif competition.before_registrations? %>
   <div class="separator padded-micro"></div>
   <p class="text-uppercase small">
-    <%= t('competitions.registrations.start', time: distance_of_time_in_words(competition.start_registration, Time.now)) %>:
+    <%= t('competitions.registrations.start', time: distance_of_time_in_words(competition.start_registration, Time.current)) %>:
     <%= datetime_format(competition.start_registration) %>
   </p>
 <% end %>

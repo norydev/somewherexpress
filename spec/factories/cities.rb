@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: cities
@@ -15,9 +16,6 @@
 #  postal_code                       :string
 #  lat                               :float
 #  lng                               :float
-#  localizable_id                    :integer
-#  localizable_type                  :string
-#  order                             :string           default("start"), not null
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
 #

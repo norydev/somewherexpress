@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: competitions
@@ -16,6 +17,8 @@
 #  description                 :text
 #  default_registration_status :string           default("pending"), not null
 #  video                       :string
+#  start_city_id               :integer
+#  end_city_id                 :integer
 #
 
 FactoryGirl.define do
@@ -25,11 +28,10 @@ FactoryGirl.define do
     end_date        Date.parse("15 april 2015")
     finished        true
     published       false
-    start_registration    DateTime.parse("10 november 2014")
-    end_registration      DateTime.parse("1 april 2015")
+    start_registration    DateTime.parse("10 november 2014").in_time_zone
+    end_registration      DateTime.parse("1 april 2015").in_time_zone
     association           :author, factory: :user, email: "ramirez@yopmail.com"
     description           "This race is great"
     default_registration_status "accepted"
   end
-
 end

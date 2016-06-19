@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -22,17 +23,16 @@ class ApplicationController < ActionController::Base
   end
 
   def errors_controller?
-    self.controller_name == 'errors'
+    controller_name == "errors"
   end
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(:back)
 
-    rescue ActionController::RedirectBackError
-      redirect_to root_path
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
   end
-
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
@@ -45,6 +45,8 @@ class ApplicationController < ActionController::Base
   protected
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :girl, :email, :password, :password_confirmation) }
+      devise_parameter_sanitizer.permit(:sign_up) do |u|
+        u.permit(:first_name, :last_name, :girl, :email, :password, :password_confirmation)
+      end
     end
 end

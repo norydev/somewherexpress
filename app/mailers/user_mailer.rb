@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 class UserMailer < ApplicationMailer
-
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -8,13 +8,13 @@ class UserMailer < ApplicationMailer
   def welcome(user_id)
     @user = User.find(user_id)
 
-    mail(to: @user.email, subject: t('.subject'))
+    mail(to: @user.email, subject: t(".subject"))
   end
 
   def goodbye(user_id)
     @user = User.find(user_id)
 
-    mail(to: @user.old_email, subject: t('.subject'))
+    mail(to: @user.old_email, subject: t(".subject"))
   end
 
   def as_user_new_competition(user_id, competition_id)
@@ -22,7 +22,7 @@ class UserMailer < ApplicationMailer
     @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
-      mail(to: @user.email, subjet: t('.subject'))
+      mail(to: @user.email, subjet: t(".subject"))
     end
   end
 
@@ -31,9 +31,8 @@ class UserMailer < ApplicationMailer
     @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
-      mail(to: @user.email, subjet: t('.subject'))
+      mail(to: @user.email, subjet: t(".subject"))
     end
-
   end
 
   def as_user_new_subscription(user_id, competition_id)
@@ -42,12 +41,12 @@ class UserMailer < ApplicationMailer
     @status = @competition.default_registration_status
 
     if @status == "accepted"
-      attachments["#{@competition.name}.ics"] = { mime_type: 'text/calendar',
+      attachments["#{@competition.name}.ics"] = { mime_type: "text/calendar",
                                                   content: @competition.ical_event }
     end
 
     I18n.with_locale(@user.notification_setting.locale) do
-      mail(to: @user.email, subjet: t('.subject'))
+      mail(to: @user.email, subjet: t(".subject"))
     end
   end
 
@@ -57,12 +56,12 @@ class UserMailer < ApplicationMailer
     @status = status
 
     if status == "accepted"
-      attachments["#{@competition.name}.ics"] = { mime_type: 'text/calendar',
+      attachments["#{@competition.name}.ics"] = { mime_type: "text/calendar",
                                                   content: @competition.ical_event }
     end
 
     I18n.with_locale(@user.notification_setting.locale) do
-      mail(to: @user.email, subjet: t('.subject'))
+      mail(to: @user.email, subjet: t(".subject"))
     end
   end
 
@@ -72,7 +71,7 @@ class UserMailer < ApplicationMailer
     @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
-      mail(to: @user.email, subjet: t('.subject'))
+      mail(to: @user.email, subjet: t(".subject"))
     end
   end
 
@@ -82,7 +81,7 @@ class UserMailer < ApplicationMailer
     @competition = Competition.find(competition_id)
 
     I18n.with_locale(@user.notification_setting.locale) do
-      mail(to: @user.email, subjet: t('.subject'))
+      mail(to: @user.email, subjet: t(".subject"))
     end
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: notification_settings
@@ -15,7 +16,7 @@
 #  locale                              :string           default("fr"), not null
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe NotificationSetting, type: :model do
 end

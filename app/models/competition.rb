@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: competitions
@@ -16,6 +17,8 @@
 #  description                 :text
 #  default_registration_status :string           default("pending"), not null
 #  video                       :string
+#  start_city_id               :integer
+#  end_city_id                 :integer
 #
 
 class Competition < ActiveRecord::Base
@@ -37,8 +40,8 @@ class Competition < ActiveRecord::Base
 
   belongs_to :author, class_name: "User"
 
-  validates_presence_of :name
-  validates_presence_of :start_registration, :start_city, :end_city, :start_date, :end_date, if: :published?
+  validates :name, presence: true
+  validates :start_registration, :start_city, :end_city, :start_date, :end_date, presence: { if: :published? }
 
   # status can take: "pending" (default), "accepted", "refused"
 
@@ -62,7 +65,7 @@ class Competition < ActiveRecord::Base
 
   def multiple_tracks?
     # order to eliminate tracks with no id (used for competition form)
-    self.tracks.order(:start_time).size > 1
+    tracks.order(:start_time).size > 1
   end
 
   def just_published?
@@ -70,14 +73,14 @@ class Competition < ActiveRecord::Base
   end
 
   def t_ranks
-    Rank.where(race_id: self.tracks.pluck(:id), race_type: "Track")
+    Rank.where(race_id: tracks.pluck(:id), race_type: "Track")
   end
 
   def registrations_open?
     if !finished && start_registration && end_registration
-      Time.now.between?(start_registration, end_registration)
+      Time.current.between?(start_registration, end_registration)
     elsif !finished && start_registration
-      Time.now.between?(start_registration, start_date - 1)
+      Time.current.between?(start_registration, start_date - 1)
     else
       false
     end
@@ -85,7 +88,7 @@ class Competition < ActiveRecord::Base
 
   def after_registrations?
     if start_registration && end_registration
-      Time.now > end_registration && Time.now < start_date
+      Time.current > end_registration && Time.current < start_date
     else
       false
     end
@@ -93,7 +96,7 @@ class Competition < ActiveRecord::Base
 
   def before_registrations?
     if start_registration
-      Time.now < start_registration
+      Time.current < start_registration
     else
       false
     end
@@ -112,23 +115,23 @@ class Competition < ActiveRecord::Base
   end
 
   def self.open_for_registration
-    self.where(finished: false).order(:start_date).select { |c| c.registrations_open? }
+    where(finished: false).order(:start_date).select(&:registrations_open?)
   end
 
   def self.not_open_for_registration
-    self.where(finished: false).order(:start_date).reject { |c| c.registrations_open? }
+    where(finished: false).order(:start_date).reject(&:registrations_open?)
   end
 
   def self.finished
-    self.where(finished: true).order(start_date: :desc)
+    where(finished: true).order(start_date: :desc)
   end
 
   def self.not_finished
-    self.where(finished: false).order(:start_date)
+    where(finished: false).order(:start_date)
   end
 
   def ical_event
-    require 'icalendar'
+    require "icalendar"
 
     cal = Icalendar::Calendar.new
 
@@ -143,7 +146,7 @@ class Competition < ActiveRecord::Base
       accepted_users.map do |user|
         e.append_attendee Icalendar::Values::CalAddress.new("mailto:#{user.email}", cn: user.name, partstat: "ACCEPTED")
       end
-      e.status      = "CONFIRMED"
+      e.status = "CONFIRMED"
     end
 
     cal.to_ical

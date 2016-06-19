@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: badges
@@ -17,5 +18,4 @@ FactoryGirl.define do
     picture         "https://unsplash.it/100/100"
     description     Faker::Company.catch_phrase
   end
-
 end

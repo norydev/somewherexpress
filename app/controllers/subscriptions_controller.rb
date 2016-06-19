@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: subscriptions
@@ -16,7 +17,8 @@ class SubscriptionsController < ApplicationController
 
   # POST
   def new
-    @subscription = Subscription.new(competition: @competition, status: @competition.default_registration_status)
+    @subscription = Subscription.new(competition: @competition,
+                                     status: @competition.default_registration_status)
     authorize @subscription
   end
 
@@ -38,7 +40,7 @@ class SubscriptionsController < ApplicationController
       end
 
       respond_to do |format|
-        format.html { redirect_to @subscription.competition, notice: t('subscriptions.create.notice') }
+        format.html { redirect_to @subscription.competition, notice: t("subscriptions.create.notice") }
         format.js
       end
     else
@@ -53,7 +55,8 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.update(subscription_params)
-      if @subscription.status != "pending" && @subscription.user.notification_setting.as_user_subscription_status_changed
+      if @subscription.status != "pending" &&
+         @subscription.user.notification_setting.as_user_subscription_status_changed
         UserMailer.as_user_subscription_status_changed(@subscription.user.id,
                                                        @subscription.competition.id,
                                                        @subscription.status).deliver_later
@@ -69,7 +72,6 @@ class SubscriptionsController < ApplicationController
         format.js
       end
     end
-
   end
 
   def destroy
@@ -85,10 +87,11 @@ class SubscriptionsController < ApplicationController
 
     @subscription.destroy
 
-    redirect_to competition, notice: t('subscriptions.destroy.notice')
+    redirect_to competition, notice: t("subscriptions.destroy.notice")
   end
 
   private
+
     def set_subscription
       @subscription = Subscription.find(params[:id])
     end

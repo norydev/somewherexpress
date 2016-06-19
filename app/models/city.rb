@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: cities
@@ -15,9 +16,6 @@
 #  postal_code                       :string
 #  lat                               :float
 #  lng                               :float
-#  localizable_id                    :integer
-#  localizable_type                  :string
-#  order                             :string           default("start"), not null
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
 #
@@ -40,30 +38,30 @@ class City < ActiveRecord::Base
   end
 
   def self.on_map
-    fc1 = self.includes(:start_of_competitions)
-              .where(competitions: { finished: true })
-              .distinct
+    fc1 = includes(:start_of_competitions)
+          .where(competitions: { finished: true })
+          .distinct
 
-    fc2 = self.includes(:end_of_competitions)
-              .where(end_of_competitions_cities: { finished: true })
-              .distinct
+    fc2 = includes(:end_of_competitions)
+          .where(end_of_competitions_cities: { finished: true })
+          .distinct
 
-    fc3 = self.includes(:start_of_track_competitions)
-              .where(start_of_track_competitions_cities: { finished: true })
-              .distinct
+    fc3 = includes(:start_of_track_competitions)
+          .where(start_of_track_competitions_cities: { finished: true })
+          .distinct
 
-    fc4 = self.includes(:end_of_track_competitions)
-              .where(end_of_track_competitions_cities: { finished: true })
-              .distinct
+    fc4 = includes(:end_of_track_competitions)
+          .where(end_of_track_competitions_cities: { finished: true })
+          .distinct
 
-    self.where.any_of(fc1, fc2, fc3, fc4)
+    where.any_of(fc1, fc2, fc3, fc4)
   end
 
   def self.nowhere
-    c1 = self.joins(:start_of_competitions)
-    c2 = self.joins(:end_of_competitions)
-    c3 = self.joins(:start_of_tracks)
-    c4 = self.joins(:end_of_tracks)
+    c1 = joins(:start_of_competitions)
+    c2 = joins(:end_of_competitions)
+    c3 = joins(:start_of_tracks)
+    c4 = joins(:end_of_tracks)
 
     City.all - c1 - c2 - c3 - c4
   end
