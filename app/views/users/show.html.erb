@@ -14,7 +14,7 @@
         </div>
         <div class="padded-mini-bottom">
           <div class="profile-pic">
-            <%= image_tag @user.avatar, class: "avatar-ultra", alt: @user.first_name %>
+            <%= image_tag @user.avatar, class: "avatar-ultra", alt: @user.initials %>
             <% if @user.founder_badge %>
               <%= image_tag @user.founder_badge.picture, class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{@user.founder_badge.description}", style: "margin-top: 3px;" %>
             <% end %>

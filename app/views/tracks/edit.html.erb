@@ -38,7 +38,7 @@
                 <tr>
                   <td>
                     <%= link_to t.object.user do %>
-                      <%= image_tag t.object.user.avatar, class: "avatar hidden-xs", alt: "#{t.object.user.first_name}" %>
+                      <%= image_tag t.object.user.avatar, class: "avatar hidden-xs", alt: "#{t.object.user.initials}" %>
                     <% end %>
                   </td>
                   <td class="text-uppercase"><%= link_to t.object.user.name, t.object.user %></td>

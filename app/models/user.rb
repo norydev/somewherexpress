@@ -74,6 +74,10 @@ class User < ActiveRecord::Base
     [first_name, last_name].reject(&:blank?).join(' ')
   end
 
+  def initials
+    [first_name.first, last_name.first].reject(&:blank?).join
+  end
+
   def image
     self.picture || ActionController::Base.helpers.asset_path("default_user_picture.svg")
   end
