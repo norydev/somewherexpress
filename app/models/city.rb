@@ -23,20 +23,48 @@
 #
 
 class City < ActiveRecord::Base
-  belongs_to :localizable, polymorphic: true
+  has_many :start_of_competitions, class_name: "Competition", foreign_key: "start_city_id"
+  has_many :end_of_competitions, class_name: "Competition", foreign_key: "end_city_id"
+
+  has_many :start_of_tracks, class_name: "Track", foreign_key: "start_city_id"
+  has_many :end_of_tracks, class_name: "Track", foreign_key: "end_city_id"
+
+  has_many :start_of_track_competitions, through: :start_of_tracks, source: :competition
+  has_many :end_of_track_competitions, through: :end_of_tracks, source: :competition
 
   geocoded_by :name, latitude: :lat, longitude: :lng
   after_validation :geocode, if: :name_changed?
 
   def competition
-    if localizable_type == "Competition"
-      localizable
-    else
-      localizable.competition
-    end
+    start_of_competitions.first
   end
 
   def self.on_map
-    select { |c| c.competition.finished? }
+    fc1 = self.includes(:start_of_competitions)
+              .where(competitions: { finished: true })
+              .distinct
+
+    fc2 = self.includes(:end_of_competitions)
+              .where(end_of_competitions_cities: { finished: true })
+              .distinct
+
+    fc3 = self.includes(:start_of_track_competitions)
+              .where(start_of_track_competitions_cities: { finished: true })
+              .distinct
+
+    fc4 = self.includes(:end_of_track_competitions)
+              .where(end_of_track_competitions_cities: { finished: true })
+              .distinct
+
+    self.where.any_of(fc1, fc2, fc3, fc4)
+  end
+
+  def self.nowhere
+    c1 = self.joins(:start_of_competitions)
+    c2 = self.joins(:end_of_competitions)
+    c3 = self.joins(:start_of_tracks)
+    c4 = self.joins(:end_of_tracks)
+
+    City.all - c1 - c2 - c3 - c4
   end
 end

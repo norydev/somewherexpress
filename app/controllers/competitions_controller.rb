@@ -60,10 +60,13 @@ class CompetitionsController < ApplicationController
   end
 
   def create
-    @competition = current_user.creations.new(competition_params)
+    @competition = current_user.creations.new
     authorize @competition
 
-    if @competition.save
+    updater = Competitions::Update.new(@competition, competition_params).call
+    @competition = updater.competition
+
+    if @competition.valid?
       send_new_competition_emails if @competition.published?
       redirect_to @competition
     else
@@ -74,7 +77,10 @@ class CompetitionsController < ApplicationController
   def update
     authorize @competition
 
-    if @competition.update(competition_params)
+    updater = Competitions::Update.new(@competition, competition_params).call
+
+    @competition = updater.competition
+    if @competition.valid?
       if @competition.just_published?
         send_new_competition_emails
       elsif @competition.published? && !@competition.finished?

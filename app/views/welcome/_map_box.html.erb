@@ -1,16 +1,20 @@
 <div class="map_box">
-  <strong><%= cities.first.locality %></strong><br>
+  <strong><%= city.locality %></strong><br>
 
-  <% end_cities.each do |end_city| %>
-    <%= link_to end_city.competition, end_city.competition %>
+  <% city.end_of_tracks.each do |track| %>
+    <%= link_to track.competition, track.competition %>
     <div>
-      <span class="medals-small"><i class="icomoon icon-medal"></i></span> <%= end_city.localizable.ranks.where(result: 1).map{ |r| r.user.first_name if r }.join(' & ') %>
+      <span class="medals-small"><i class="icomoon icon-medal"></i></span> <%= track.ranks.where(result: 1).map{ |r| r.user.first_name if r }.join(' & ') %>
     </div>
   <% end %>
 
-  <% if end_cities.empty? %>
-    <% cities.map(&:competition).select { |c| c.finished } .uniq.each do |competition| %>
+  <% if city.end_of_tracks.empty? %>
+    <% city.start_of_competitions.finished.distinct.each do |competition| %>
       <%= link_to competition, competition %><br>
     <% end %>
+    <% city.end_of_competitions.finished.distinct.each do |competition| %>
+      <%= link_to competition, competition %><br>
+    <% end %>
+    <% # need start_of_tracks as well if it ever happens %>
   <% end %>
 </div>

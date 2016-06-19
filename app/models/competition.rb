@@ -26,10 +26,14 @@ class Competition < ActiveRecord::Base
 
   has_many :ranks, as: :race, dependent: :destroy
 
-  has_one :start_city, -> { where order: 'start' }, class_name: 'City', as: :localizable, dependent: :destroy
-  has_one :end_city, -> { where order: 'end' }, class_name: 'City', as: :localizable, dependent: :destroy
-  accepts_nested_attributes_for :start_city, allow_destroy: true
-  accepts_nested_attributes_for :end_city, allow_destroy: true
+  belongs_to :start_city, class_name: "City", foreign_key: "start_city_id"
+  belongs_to :end_city, class_name: "City", foreign_key: "end_city_id"
+
+  has_many :tracks_start_cities, through: :tracks, source: :start_city
+  has_many :tracks_end_cities, through: :tracks, source: :end_city
+
+  accepts_nested_attributes_for :start_city
+  accepts_nested_attributes_for :end_city
 
   belongs_to :author, class_name: "User"
 
