@@ -17,6 +17,8 @@
 #  description                 :text
 #  default_registration_status :string           default("pending"), not null
 #  video                       :string
+#  start_city_id               :integer
+#  end_city_id                 :integer
 #
 
 class Competition < ActiveRecord::Base
@@ -38,8 +40,8 @@ class Competition < ActiveRecord::Base
 
   belongs_to :author, class_name: "User"
 
-  validates_presence_of :name
-  validates_presence_of :start_registration, :start_city, :end_city, :start_date, :end_date, if: :published?
+  validates :name, presence: true
+  validates :start_registration, :start_city, :end_city, :start_date, :end_date, presence: { if: :published? }
 
   # status can take: "pending" (default), "accepted", "refused"
 
@@ -76,9 +78,9 @@ class Competition < ActiveRecord::Base
 
   def registrations_open?
     if !finished && start_registration && end_registration
-      Time.now.between?(start_registration, end_registration)
+      Time.current.between?(start_registration, end_registration)
     elsif !finished && start_registration
-      Time.now.between?(start_registration, start_date - 1)
+      Time.current.between?(start_registration, start_date - 1)
     else
       false
     end
@@ -86,7 +88,7 @@ class Competition < ActiveRecord::Base
 
   def after_registrations?
     if start_registration && end_registration
-      Time.now > end_registration && Time.now < start_date
+      Time.current > end_registration && Time.current < start_date
     else
       false
     end
@@ -94,7 +96,7 @@ class Competition < ActiveRecord::Base
 
   def before_registrations?
     if start_registration
-      Time.now < start_registration
+      Time.current < start_registration
     else
       false
     end

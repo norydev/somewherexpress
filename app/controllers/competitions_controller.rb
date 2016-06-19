@@ -64,7 +64,7 @@ class CompetitionsController < ApplicationController
     @competition = current_user.creations.new
     authorize @competition
 
-    updater = Competitions::Update.new(@competition, competition_params).call
+    updater = Competitions::Update.new(@competition, params).call
     @competition = updater.competition
 
     if @competition.valid?
@@ -78,7 +78,7 @@ class CompetitionsController < ApplicationController
   def update
     authorize @competition
 
-    updater = Competitions::Update.new(@competition, competition_params).call
+    updater = Competitions::Update.new(@competition, params).call
 
     @competition = updater.competition
     if @competition.valid?
@@ -105,37 +105,6 @@ class CompetitionsController < ApplicationController
 
     def set_competition
       @competition = Competition.find(params[:id])
-    end
-
-    def competition_params
-      params.require(:competition).permit(
-        :name, :start_date, :end_date, :start_registration,
-        :end_registration, :published, :finished, :description,
-        :default_registration_status, :video,
-        start_city_attributes: [:id, :name, :street_number, :route, :locality,
-                                :administrative_area_level_2,
-                                :administrative_area_level_1,
-                                :administrative_area_level_1_short,
-                                :country, :country_short, :postal_code],
-        end_city_attributes: [:id, :name, :street_number, :route, :locality,
-                              :administrative_area_level_2,
-                              :administrative_area_level_1,
-                              :administrative_area_level_1_short,
-                              :country, :country_short, :postal_code],
-        tracks_attributes: [:id, :start_time,
-                            start_city_attributes: [:id, :name, :street_number,
-                                                    :route, :locality,
-                                                    :administrative_area_level_2,
-                                                    :administrative_area_level_1,
-                                                    :administrative_area_level_1_short,
-                                                    :country, :country_short, :postal_code],
-                            end_city_attributes: [:id, :name, :street_number,
-                                                  :route, :locality,
-                                                  :administrative_area_level_2,
-                                                  :administrative_area_level_1,
-                                                  :administrative_area_level_1_short,
-                                                  :country, :country_short, :postal_code]]
-      )
     end
 
     def send_new_competition_emails

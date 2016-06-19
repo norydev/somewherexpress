@@ -10,7 +10,7 @@ module ApplicationHelper
       l(datetime, format: "%d %B %Y à %H:%M") if datetime
     else
       l(datetime, format: "%d %B %Y at %H:%M") if datetime
-      end
+    end
   end
 
   def datetime_value(datetime)

@@ -22,3 +22,7 @@ Style/WordArray:
   EnforcedStyle: brackets
 Metrics/LineLength:
   Max: 120
+Lint/HandleExceptions:
+  Exclude:
+    - 'bin/rails'
+    - 'bin/rake'

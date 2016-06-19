@@ -8,6 +8,8 @@
 #  start_time     :datetime
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  start_city_id  :integer
+#  end_city_id    :integer
 #
 
 class Track < ActiveRecord::Base
@@ -23,7 +25,7 @@ class Track < ActiveRecord::Base
 
   after_create :make_track_ranks
 
-  validates_presence_of :start_city, :end_city, :start_time
+  validates :start_city, :end_city, :start_time, presence: true
 
   def name
     "#{start_city.locality} (#{start_city.country_short}) – #{end_city.locality} (#{end_city.country_short})"

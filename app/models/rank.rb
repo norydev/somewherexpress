@@ -20,7 +20,7 @@ class Rank < ActiveRecord::Base
 
   after_save :set_competition_ranks
 
-  validates_presence_of :user, :race
+  validates :user, :race, presence: true
 
   private
 

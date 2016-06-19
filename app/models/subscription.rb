@@ -15,9 +15,9 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
   belongs_to :competition
 
-  validates_uniqueness_of :user_id, scope: :competition_id, message: "You already applied to this competition"
-  validates_presence_of :user, :competition
-  validates_acceptance_of :rules, on: :create, allow_nil: false
+  validates :user_id, uniqueness: { scope: :competition_id, message: "You already applied to this competition" }
+  validates :user, :competition, presence: true
+  validates :rules, acceptance: { on: :create, allow_nil: false }
 
   after_update :status_changed
   after_create :make_track_ranks, if: :accepted
