@@ -88,8 +88,6 @@ class CompetitionsController < ApplicationController
     @competition = updater.competition
     @tracks = updater.updated_tracks
 
-    p "all valid: #{@tracks.map(&:valid?)}"
-
     if @competition.valid? && @tracks.map(&:valid?).all?
       if @competition.just_published?
         send_new_competition_emails

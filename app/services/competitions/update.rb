@@ -15,9 +15,7 @@ module Competitions
       update_tracks
 
       ActiveRecord::Base.transaction(requires_new: true) do
-        updated_tracks.each do |t|
-          t.save!
-        end
+        updated_tracks.each(&:save!)
         competition.save!
       end
 
