@@ -1,19 +1,24 @@
 # frozen_string_literal: true
 module Competitions
   class Update
-    attr_reader :competition
+    attr_reader :competition, :updated_tracks
 
     def initialize(competition, params)
       @competition = competition
       @params = params
+      @updated_tracks = []
     end
 
     def call
+      competition.assign_attributes(competition_params)
+      update_cities(competition, sanitized_params)
+      update_tracks
+
       ActiveRecord::Base.transaction(requires_new: true) do
-        competition.assign_attributes(competition_params)
-        update_cities(competition, sanitized_params)
+        updated_tracks.each do |t|
+          t.save!
+        end
         competition.save!
-        update_tracks
       end
 
       self
@@ -51,11 +56,12 @@ module Competitions
             track.assign_attributes(start_time: track_attributes[:start_time])
           else
             # new track
-            track = competition.tracks.new(start_time: track_attributes[:start_time])
+            track = Track.new(start_time: track_attributes[:start_time],
+                              competition: competition)
           end
 
           update_cities(track, track_attributes)
-          track.save!
+          updated_tracks << track
         end
       end
 

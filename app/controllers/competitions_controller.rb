@@ -47,6 +47,7 @@ class CompetitionsController < ApplicationController
     @competition.tracks.build
     @competition.tracks.last.build_start_city
     @competition.tracks.last.build_end_city
+    @tracks = @competition.tracks
   end
 
   # This method is soon going to be deprecated, edit will be in show page
@@ -66,11 +67,16 @@ class CompetitionsController < ApplicationController
 
     updater = Competitions::Update.new(@competition, params).call
     @competition = updater.competition
+    @tracks = updater.updated_tracks
 
-    if @competition.valid?
+    if @competition.valid? && @tracks.map(&:valid?).all?
       send_new_competition_emails if @competition.published?
+
       redirect_to @competition
     else
+      track = Track.new(end_city: City.new, start_city: City.new)
+      @tracks << track
+
       render :new
     end
   end
@@ -79,9 +85,12 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     updater = Competitions::Update.new(@competition, params).call
-
     @competition = updater.competition
-    if @competition.valid?
+    @tracks = updater.updated_tracks
+
+    p "all valid: #{@tracks.map(&:valid?)}"
+
+    if @competition.valid? && @tracks.map(&:valid?).all?
       if @competition.just_published?
         send_new_competition_emails
       elsif @competition.published? && !@competition.finished?
@@ -90,6 +99,9 @@ class CompetitionsController < ApplicationController
 
       redirect_to @competition
     else
+      track = Track.new(end_city: City.new, start_city: City.new)
+      @tracks << track
+
       render :edit
     end
   end
