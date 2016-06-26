@@ -72,6 +72,12 @@ class Competition < ActiveRecord::Base
     previous_changes["published"] && previous_changes["published"].last
   end
 
+  def enough_changes?
+    previous_changes.except("created_at", "updated_at", "finished", "published",
+                            "start_registration", "end_registration", "author_id",
+                            "default_registration_status").present?
+  end
+
   def t_ranks
     Rank.where(race_id: tracks.pluck(:id), race_type: "Track")
   end

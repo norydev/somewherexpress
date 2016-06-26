@@ -91,7 +91,7 @@ class CompetitionsController < ApplicationController
     if @competition.valid? && @tracks.map(&:valid?).all?
       if @competition.just_published?
         send_new_competition_emails
-      elsif @competition.published? && !@competition.finished?
+      elsif @competition.published? && !@competition.finished? && @competition.enough_changes?
         send_competition_edited_emails
       end
 
