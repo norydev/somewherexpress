@@ -26,22 +26,21 @@ module Competitions
 
     private
 
+      def update_city(obj, param, side = "start")
+        raise ActiveRecord::ActiveRecordError unless ["start", "end"].include?(side)
+
+        city = City.order(:created_at).find_by(locality: param[:locality])
+
+        if city
+          obj.assign_attributes("#{side}_city".to_sym => city)
+        else
+          obj.send("build_#{side}_city", param.except(:id))
+        end
+      end
+
       def update_cities(obj, param)
-        start_city = City.order(:created_at).find_by(locality: param[:start_city_attributes][:locality])
-
-        if start_city
-          obj.assign_attributes(start_city: start_city)
-        else
-          obj.build_start_city(param[:start_city_attributes].except(:id))
-        end
-
-        end_city = City.order(:created_at).find_by(locality: param[:end_city_attributes][:locality])
-
-        if end_city
-          obj.assign_attributes(end_city: end_city)
-        else
-          obj.build_end_city(param[:end_city_attributes].except(:id))
-        end
+        update_city(obj, param[:start_city_attributes], "start")
+        update_city(obj, param[:end_city_attributes], "end")
       end
 
       def update_tracks
