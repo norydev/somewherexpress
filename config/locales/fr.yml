@@ -44,11 +44,13 @@ fr:
     params:
       status: "Status"
       rules: "Règles"
-      rules_label_html: "J'accepte les %{href} de la compétition"
+      rules_label_html: "Je suis conscient que mes coordonnées ci-dessus seront accessibles à l'organisateur. J'accepte les %{href} de la compétition."
       rules_href_text: règles
     new:
       title: Inscription à %{competition}
       user_infos: "Informations du participant"
+      phone_number: "Numéro de portable"
+      messaging_apps: "J'utilise les applications suivantes"
       pending_tos: "Notez bien: Votre inscription à %{competition} doit être approuvée par l'organisateur de la compétition. Vous serez notifié de votre acceptation ou refus par email. Si votre inscription est acceptée, elle est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
       tos: "Notez bien: Votre inscription à %{competition} est considérée comme définitive et l'annuler doit être motivé. Toute annulation est sujette à conséquences."
     create:

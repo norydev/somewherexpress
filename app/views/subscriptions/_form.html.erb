@@ -40,6 +40,15 @@
         <div class="media-body">
           <p><i class="fa fa-<%= current_user.sex %> fa-fw"></i><%= current_user.name %></p>
           <p><i class="fa fa-envelope-o fa-fw"></i><%= current_user.email %></p>
+          <p class="form-inline">
+            <i class="fa fa-phone fa-fw"></i><%= t('subscriptions.new.phone_number') %>: <%= f.input_field :phone_number, as: :string, class: "form-control input-sm" %>
+          </p>
+          <p>
+            <strong><%= t('subscriptions.new.messaging_apps') %>:</strong>
+            <%= f.input :whatsapp, wrapper_html: {class: "checkbox-inline" } %>
+            <%= f.input :telegram, wrapper_html: {class: "checkbox-inline" } %>
+            <%= f.input :signal, wrapper_html: {class: "checkbox-inline" } %>
+          </p>
         </div>
       </div>
     </div>

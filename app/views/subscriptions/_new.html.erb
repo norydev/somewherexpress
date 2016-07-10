@@ -22,7 +22,13 @@
         <div class="modal" id="modal-<%= competition.id %>" tabindex="-1" role="dialog" aria-labelledby="new_registration">
           <div class="modal-dialog" role="document">
             <div id="modal-content-<%= competition.id %>" class="modal-content">
-              <%= render 'subscriptions/form', competition: competition, subscription: Subscription.new %>
+              <% last_sub = current_user.subscriptions.order(created_at: :desc).first %>
+              <%= render 'subscriptions/form', competition: competition, subscription: Subscription.new(competition: competition,
+                                 status: competition.default_registration_status,
+                                 phone_number: last_sub.phone_number,
+                                 whatsapp: last_sub.whatsapp,
+                                 telegram: last_sub.telegram,
+                                 signal: last_sub.signal) %>
             </div>
           </div>
         </div>

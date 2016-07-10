@@ -44,11 +44,13 @@ en:
     params:
       status: "Status"
       rules: "Rules"
-      rules_label_html: "I accept the %{href} of this competition"
+      rules_label_html: "I am aware that my contact details will be available to the organizer. I accept the %{href} of this competition."
       rules_href_text: rules
     new:
       title: Application for %{competition}
       user_infos: "Details of the participant"
+      phone_number: "Cell phone number"
+      messaging_apps: "I'm using the following apps"
       pending_tos: "Please note: Your application for %{competition} must be approved by the organizer of the competition. You will be notified by email about your acceptance or refusal. If your application is accepted, it is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
       tos: "Please note: Your application for %{competition} is considered definitive and canceling it must be motivated. Any cancelation is subject to consequences."
     create:

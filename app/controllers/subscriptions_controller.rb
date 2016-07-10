@@ -17,8 +17,13 @@ class SubscriptionsController < ApplicationController
 
   # POST
   def new
+    last_sub = current_user.subscriptions.order(created_at: :desc).first
     @subscription = Subscription.new(competition: @competition,
-                                     status: @competition.default_registration_status)
+                                     status: @competition.default_registration_status,
+                                     phone_number: last_sub.phone_number,
+                                     whatsapp: last_sub.whatsapp,
+                                     telegram: last_sub.telegram,
+                                     signal: last_sub.signal)
     authorize @subscription
   end
 
@@ -35,7 +40,7 @@ class SubscriptionsController < ApplicationController
       if current_user.notification_setting.as_user_new_subscription
         UserMailer.as_user_new_subscription(current_user.id, @competition.id).deliver_later
       end
-      if @competition.author.as_author_new_subscription
+      if @competition.author.notification_setting.as_author_new_subscription
         UserMailer.as_author_new_subscription(current_user.id, @competition.id, @competition.author.id).deliver_later
       end
 
@@ -101,6 +106,6 @@ class SubscriptionsController < ApplicationController
     end
 
     def subscription_params
-      params.require(:subscription).permit(:status, :rules)
+      params.require(:subscription).permit(:status, :rules, :phone_number, :whatsapp, :telegram, :signal)
     end
 end
