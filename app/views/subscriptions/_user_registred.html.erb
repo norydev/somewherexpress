@@ -1,0 +1,15 @@
+<div class="flex-item">
+  <%= render 'users/avatar_small', user: user %>
+</div>
+<div class="flex-item-fill">
+  <div>
+    <%= link_to user.name, user %>
+  </div>
+  <div>
+    <%= user.email %> <%= mail_to user.email do %><i class="fa fa-envelope-o"></i><% end %>
+  </div>
+  <div>
+    <%= subscription.phone_number %> <% if subscription.whatsapp %><i class="fa fa-whatsapp fa-fw text-success cursor-default" data-toggle="tooltip" data-placement="bottom" title="whatsapp"></i><% end %> <% if subscription.telegram %><i class="fa fa-paper-plane-o fa-fw text-success cursor-default"  data-toggle="tooltip" data-placement="bottom" title="telegram"></i><% end %>
+    <% if subscription.signal %><i class="fa fa-comment-o fa-fw text-success cursor-default"  data-toggle="tooltip" data-placement="bottom" title="signal"></i><% end %>
+  </div>
+</div>

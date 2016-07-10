@@ -336,10 +336,12 @@ table tbody tr td {
 
 .flex-item {
   flex: 0 1 auto;
-  &:nth-child(2) {
-    flex: 1 0 auto;
-    margin-left: 5px;
-  }
+  margin-left: 5px;
+}
+
+.flex-item-fill {
+  flex: 1 0 auto;
+  margin-left: 20px;
 }
 
 .list-group-item.myactive {
@@ -460,4 +462,8 @@ table tbody tr td {
     background: #3b5998;
     border-color: darken(#3b5998, 10%);
   }
+}
+
+.bg-light-orange {
+  background-color: lighten($orange, 30%);
 }
