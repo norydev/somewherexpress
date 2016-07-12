@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 ActiveAdmin.register Subscription do
-  permit_params :user_id, :competition_id, :status
+  permit_params :user_id, :competition_id, :status, :phone_number, :whatsapp,
+                :telegram, :signal
 
   index do
     selectable_column
