@@ -7,6 +7,10 @@ ActiveAdmin.register Subscription do
     column :id
     column :name
     column :status
+    column :phone_number
+    column :whatsapp
+    column :telegram
+    column :signal
     actions
   end
 
@@ -15,6 +19,13 @@ ActiveAdmin.register Subscription do
       f.input :user
       f.input :competition
       f.input :status, collection: ["pending", "accepted", "refused"]
+    end
+
+    f.inputs "Contact" do
+      f.input :phone_number
+      f.input :whatsapp
+      f.input :telegram
+      f.input :signal
     end
 
     f.actions
