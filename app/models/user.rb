@@ -163,6 +163,9 @@ class User < ActiveRecord::Base
       self.token = auth.credentials.token
       self.token_expiry = Time.zone.at(auth.credentials.expires_at)
       save!
+
+      NotificationSetting.create!(user: self, locale: params[:locale] || :fr)
+      UserMailer.welcome(self.id).deliver_later
       self
     end
 end
