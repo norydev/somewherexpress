@@ -2,14 +2,14 @@
 module Users
   class RegistrationsController < Devise::RegistrationsController
     # POST /resource
-    def create
-      super do
-        if resource.save
-          NotificationSetting.create!(user: resource, locale: params[:locale] || :fr)
-          UserMailer.welcome(resource.id).deliver_later
-        end
-      end
-    end
+    # def create
+    #   super do
+    #     if resource.save
+    #       NotificationSetting.create!(user: resource, locale: params[:locale] || :fr)
+    #       UserMailer.welcome(resource.id).deliver_later
+    #     end
+    #   end
+    # end
 
     # DELETE /resource
     def destroy

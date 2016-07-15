@@ -67,6 +67,8 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true
 
+  after_create :set_notifs_and_welcome
+
   def to_s
     name
   end
@@ -163,9 +165,11 @@ class User < ActiveRecord::Base
       self.token = auth.credentials.token
       self.token_expiry = Time.zone.at(auth.credentials.expires_at)
       save!
-
-      NotificationSetting.create!(user: self, locale: params[:locale] || :fr)
-      UserMailer.welcome(self.id).deliver_later
       self
+    end
+
+    def set_notifs_and_welcome
+      NotificationSetting.create!(user: self, locale: I18n.locale || :fr)
+      UserMailer.welcome(self.id).deliver_later
     end
 end
