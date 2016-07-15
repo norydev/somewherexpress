@@ -83,8 +83,12 @@ class User < ActiveRecord::Base
     "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=160"
   end
 
+  def image
+    picture || "https://api.adorable.io/avatars/240/#{first_name}@adorable.png"
+  end
+
   def avatar
-    use_gravatar ? gravatar_url : picture
+    use_gravatar ? gravatar_url : image
   end
 
   def sex
