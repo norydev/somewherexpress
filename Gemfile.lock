@@ -132,6 +132,9 @@ GEM
       activesupport (>= 3.2, < 5)
     hashie (3.4.4)
     htmlentities (4.3.4)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     icalendar (2.4.0)
     inherited_resources (1.6.0)
@@ -260,6 +263,10 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.2)
+    raygun4ruby (1.1.11)
+      httparty (~> 0.13.7)
+      json
+      rack
     rdoc (4.2.2)
       json (~> 1.4)
     redis (3.3.0)
@@ -375,6 +382,7 @@ DEPENDENCIES
   rails (= 4.2.5.2)
   rails-assets-underscore!
   rails_12factor
+  raygun4ruby
   rspec-rails
   rubocop
   sass-rails (~> 5.0)

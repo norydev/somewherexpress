@@ -41,6 +41,7 @@ gem 'premailer-rails'
 gem 'omniauth-facebook'
 gem 'icalendar'
 gem 'activerecord_any_of'
+gem 'raygun4ruby'
 
 # Background-jobs
 gem 'sidekiq'
