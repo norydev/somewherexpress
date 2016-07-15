@@ -4,6 +4,7 @@ function initializeAutocomplete(id) {
     var autocomplete = new google.maps.places.Autocomplete(element, { types: ['(cities)'] });
     google.maps.event.addListener(autocomplete, 'place_changed', function(){
       var place = autocomplete.getPlace();
+      // console.log(place.photos[0].getUrl({'maxWidth': 800}));
 
       for (var i in place.address_components) {
         var component = place.address_components[i];
