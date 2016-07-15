@@ -4,8 +4,10 @@ module Users
     # POST /resource
     def create
       super do
-        NotificationSetting.create!(user: resource, locale: params[:locale] || :fr)
-        UserMailer.welcome(resource.id).deliver_later
+        if resource.save
+          NotificationSetting.create!(user: resource, locale: params[:locale] || :fr)
+          UserMailer.welcome(resource.id).deliver_later
+        end
       end
     end
 
