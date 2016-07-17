@@ -77,25 +77,27 @@ module Competitions
                                   :administrative_area_level_2,
                                   :administrative_area_level_1,
                                   :administrative_area_level_1_short,
-                                  :country, :country_short, :postal_code],
+                                  :country, :country_short, :postal_code, :picture],
           end_city_attributes: [:id, :name, :street_number, :route, :locality,
                                 :administrative_area_level_2,
                                 :administrative_area_level_1,
                                 :administrative_area_level_1_short,
-                                :country, :country_short, :postal_code],
+                                :country, :country_short, :postal_code, :picture],
           tracks_attributes: [:id, :start_time,
                               start_city_attributes: [:id, :name, :street_number,
                                                       :route, :locality,
                                                       :administrative_area_level_2,
                                                       :administrative_area_level_1,
                                                       :administrative_area_level_1_short,
-                                                      :country, :country_short, :postal_code],
+                                                      :country, :country_short,
+                                                      :postal_code, :picture],
                               end_city_attributes: [:id, :name, :street_number,
                                                     :route, :locality,
                                                     :administrative_area_level_2,
                                                     :administrative_area_level_1,
                                                     :administrative_area_level_1_short,
-                                                    :country, :country_short, :postal_code]]
+                                                    :country, :country_short,
+                                                    :postal_code, :picture]]
         )
       end
   end
