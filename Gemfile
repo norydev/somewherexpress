@@ -42,6 +42,9 @@ gem 'omniauth-facebook'
 gem 'icalendar'
 gem 'activerecord_any_of'
 
+# For manual updates on cities
+gem 'google_places'
+
 # Background-jobs
 gem 'sidekiq'
 gem 'sinatra'  # Dependency of sidekiq

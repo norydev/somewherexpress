@@ -127,11 +127,16 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
+    google_places (0.32.0)
+      httparty (~> 0.13.1)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hashie (3.4.4)
     htmlentities (4.3.4)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     icalendar (2.4.0)
     inherited_resources (1.6.0)
@@ -358,6 +363,7 @@ DEPENDENCIES
   font-awesome-sass
   geocoder
   gmaps4rails
+  google_places
   icalendar
   jbuilder (~> 2.0)
   jquery-rails
