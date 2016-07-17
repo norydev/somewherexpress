@@ -4,7 +4,7 @@ namespace :cities do
     client = GooglePlaces::Client.new(ENV["GOOGLE_SERVER"])
     City.all.each do |city|
       spot = client.spots(city.lat, city.lng).first
-      picture = spot.photos.first.fetch_url(800)
+      picture = spot.photos.first.fetch_url(1200)
       city.update!(picture: picture)
       p "new city picture: #{city.picture}"
     end

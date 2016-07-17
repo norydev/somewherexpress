@@ -1,4 +1,7 @@
 <div class="map_box">
+  <div>
+    <%= image_tag city.picture, width: "150px" %>
+  </div>
   <strong><%= city.locality %></strong><br>
 
   <% city.end_of_tracks.joins(:competition).where(competitions: { finished: true }).each do |track| %>

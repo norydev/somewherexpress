@@ -15,22 +15,23 @@
         <%= link_to t('.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" if policy(Competition).create? %>
       </div>
 
-      <!-- Panel becomes useless -->
-      <div class="panel panel-default">
+      <% @competitions.open_for_registration.each do |competition| %>
         <ul class="list-group">
-        <% @competitions.open_for_registration.each do |competition| %>
           <%= render 'card', competition: competition, status: "open" %>
-        <% end %>
-
-        <% @competitions.not_open_for_registration.each do |competition| %>
-          <%= render 'card', competition: competition, status: "closed" %>
-        <% end %>
-
-        <% @competitions.finished.each do |competition| %>
-          <%= render 'card', competition: competition, status: "finished" %>
-        <% end %>
         </ul>
-      </div>
+      <% end %>
+
+      <% @competitions.not_open_for_registration.each do |competition| %>
+        <ul class="list-group">
+          <%= render 'card', competition: competition, status: "closed" %>
+        </ul>
+      <% end %>
+
+      <% @competitions.finished.each do |competition| %>
+        <ul class="list-group">
+          <%= render 'card', competition: competition, status: "finished" %>
+        </ul>
+      <% end %>
     </div>
   </div>
 </div>

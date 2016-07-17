@@ -467,3 +467,16 @@ table tbody tr td {
 .bg-light-orange {
   background-color: lighten($orange, 30%);
 }
+
+.bg-image-competition {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
+}
+
+@media (min-width: $screen-xs-min) {
+  .bg-image-competition {
+    height: 360px;
+  }
+}
