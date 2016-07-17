@@ -6,6 +6,7 @@ namespace :cities do
       spot = client.spots(city.lat, city.lng).first
       picture = spot.photos.first.fetch_url(800)
       city.update!(picture: picture)
+      p "new city picture: #{city.picture}"
     end
   end
 end
