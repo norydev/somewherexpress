@@ -71,7 +71,7 @@
             <% end %>
 
             <% if @competition.description? %>
-              <blockquote class="marged-medium"><%= @competition.description %></blockquote>
+              <blockquote class="marged-medium"><%= simple_format(@competition.description) %></blockquote>
             <% end %>
           </div>
           <% if @competition.multiple_tracks? %>
