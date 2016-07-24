@@ -60,6 +60,9 @@ en:
       button: "Validate"
     destroy:
       notice: 'Your registration has been cancelled'
+    show:
+      dl_calendar: "Download calendar event"
+      read_rules: "Read the rules of the competition"
   competitions:
     open: 'open'
     finished: 'finished'

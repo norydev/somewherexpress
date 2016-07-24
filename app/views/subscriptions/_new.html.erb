@@ -3,6 +3,21 @@
     <!-- case: applied, accepted -->
     <i class="fa fa-check text-success"></i> <%= t('subscriptions.accepted') %>
 
+    <div class="marged-mini">
+      <div class="text-left padded-mini padded-mini-sides dashed-border block-center">
+        <p>
+          <%= link_to competition_event_path(competition, format: :ics) do %>
+            <%= image_tag "icon-calendar.svg", width: "20px", height: "20px" %> &nbsp;&nbsp;<%= t("subscriptions.show.dl_calendar") %>
+          <% end %>
+        </p>
+        <p>
+          <%= link_to rules_path do %>
+            <%= image_tag "rules.svg", width: "20px", height: "20px" %> &nbsp;&nbsp;<%= t("subscriptions.show.read_rules") %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+
   <% elsif competition.pending_users.include?(current_user) %>
     <!-- case: applied, pending -->
     <i class="fa fa-refresh text-warning"></i> <%= t('subscriptions.pending') %>&nbsp;&nbsp;

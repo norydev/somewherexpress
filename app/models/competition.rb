@@ -148,11 +148,7 @@ class Competition < ActiveRecord::Base
       e.location    = "#{start_city.locality} (#{start_city.country_short})"
       e.description = "#{name}\n#{route}\n\n#{description}"
       e.url         = "https://www.somewherexpress.com/competitions/#{id}"
-      e.organizer   = Icalendar::Values::CalAddress.new("mailto:#{author.email}", cn: author.name)
-      accepted_users.map do |user|
-        e.append_attendee Icalendar::Values::CalAddress.new("mailto:#{user.email}", cn: user.name, partstat: "ACCEPTED")
-      end
-      e.status = "CONFIRMED"
+      e.status      = "CONFIRMED"
     end
 
     cal.to_ical

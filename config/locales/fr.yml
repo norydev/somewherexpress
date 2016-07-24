@@ -60,6 +60,9 @@ fr:
       button: "Valider"
     destroy:
       notice: 'Votre inscription a été annulée'
+    show:
+      dl_calendar: "Télécharger l'évènement de calendrier"
+      read_rules: "Lire les règles de la compétition"
   competitions:
     open:
       one: 'ouverte'

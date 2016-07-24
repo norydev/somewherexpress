@@ -85,3 +85,15 @@
   background: $gray-dark;
   color: white;
 }
+
+//Border
+.dashed-border {
+  border: 1px dashed $gray-dark;
+}
+
+//Other
+.block-center {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
