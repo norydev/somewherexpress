@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :competitions do
       resources :tracks, only: [:destroy, :edit, :update]
       resources :subscriptions, only: [:new, :edit, :update, :create, :destroy]
+      get 'event', to: 'competitions#event'
     end
 
     resources :notification_settings, only: [:update]

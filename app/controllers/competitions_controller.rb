@@ -37,6 +37,15 @@ class CompetitionsController < ApplicationController
     @tracks << track
   end
 
+  def event
+    @competition = Competition.find(params[:competition_id])
+    authorize @competition
+
+    respond_to do |format|
+      format.ics { render text: @competition.ical_event, layout: false }
+    end
+  end
+
   def new
     @competition = current_user.creations.new
     authorize @competition, :create?
