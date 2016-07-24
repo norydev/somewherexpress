@@ -39,7 +39,7 @@ class CompetitionsController < ApplicationController
 
   def event
     @competition = Competition.find(params[:competition_id])
-    authorize @competition
+    authorize @competition, :will_participate?
 
     respond_to do |format|
       format.ics { render text: @competition.ical_event, layout: false }

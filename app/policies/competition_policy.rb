@@ -10,9 +10,8 @@ class CompetitionPolicy < ApplicationPolicy
     true
   end
 
-  def event?
-    s = Subscription.find_by(competition: record, user: user)
-    s && s.status == "accepted"
+  def will_participate?
+    !record.finished? && record.accepted_users.include?(user)
   end
 
   def create?

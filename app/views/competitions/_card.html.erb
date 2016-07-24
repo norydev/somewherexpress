@@ -14,6 +14,11 @@
       <% end %>
     </p>
     <%= render 'subscriptions/new', competition: competition %>
+
+    <% if policy(competition).will_participate? %>
+      <%= render 'competitions/rules_calendar', competition: competition %>
+    <% end %>
+
   </div>
   <div class="text-center">
     <%= render 'competitions/registrations', competition: competition %>
