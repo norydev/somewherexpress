@@ -486,13 +486,17 @@ table tbody tr td {
   border: 1px solid rgba(0,0,0,0.2);
   background-clip: padding-box;
   border-radius: 3px;
-  overflow: hidden;
   position: relative;
   background-color: $white;
 
   .card-body {
     position: relative;
     padding: 1em;
+  }
+
+  .card-image {
+    border-radius: 2px 2px 0 0;
+    overflow: hidden;
   }
 }
 
