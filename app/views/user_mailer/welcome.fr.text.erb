@@ -4,6 +4,12 @@ Bienvenue sur SomewherExpress, nous sommes très heureux de t'avoir parmi nous.
 
 Pour te connecter, utilise ton adresse email <%= @user.email %> comme identifiant.
 
+<% if @user.facebook_user? %>
+Pour te connecter, utilise le bouton “Connexion avec Facebook” sur la page 'Connexion'
+<% else %>
+Pour te connecter, utilise ton adresse email <%= @user.email %> comme identifiant.
+<% end %>
+
 Voir les prochaines compétitions: https://www.somewherexpress.com/competitions
 
 Tu peux nous retrouver sur facebook: https://www.facebook.com/somewherexpress/

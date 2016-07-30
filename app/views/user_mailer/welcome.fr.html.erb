@@ -16,7 +16,11 @@
           <td class="message" bgcolor="#FFFFFF">
             <h3>Salut <%= @user.first_name %>,</h3>
             <p>Bienvenue sur <a href="https://www.somewherexpress.com">SomewherExpress</a>, nous sommes très heureux de t'avoir parmi nous.</p>
+            <% if @user.facebook_user? %>
+            <p>Pour te connecter, utilise le bouton “Connexion avec Facebook” sur la page <a href="https://www.somewherexpress.com/users/sign_in">Connexion</a></p>
+            <% else %>
             <p>Pour te connecter, utilise ton adresse email <strong><%= @user.email %></strong> comme identifiant.</p>
+            <% end %>
             <!-- button -->
             <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
               <tr>

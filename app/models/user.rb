@@ -97,6 +97,10 @@ class User < ActiveRecord::Base
     girl? ? "female" : "male"
   end
 
+  def facebook_user?
+    provider == "facebook" && uid.present?
+  end
+
   def finished_competitions
     competitions.finished
   end
