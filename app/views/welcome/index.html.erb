@@ -7,7 +7,7 @@
 <% end %>
 
 <div class="welcome">
-  <div class="red-bg">
+  <div class="bg-red">
 
     <%= render 'shared/home_navbar' %>
     <div class="container padded intro">
@@ -50,7 +50,7 @@
     </div>
   <% end %>
 
-  <div class="<%= (policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any?) ? 'red-bg' : '' %>">
+  <div class="<%= (policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any?) ? 'bg-red' : '' %>">
     <div class="container padded-mini">
       <h2 class="text-center"><%= t('.passed_title') %></h2>
       <div id="map" style="width: 100%; height: 550px; max-height: 90vh;"></div>
@@ -61,6 +61,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <% content_for(:after_js) do %>

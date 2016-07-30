@@ -18,7 +18,7 @@ h2,h3 {
 }
 
 .table {
-  background: white;
+  background: $white;
 }
 
 .trophies {
@@ -60,7 +60,7 @@ h2,h3 {
   margin: -60px auto 0;
 
   img {
-    border: 3px solid white;
+    border: 3px solid $white;
   }
 }
 
@@ -82,7 +82,7 @@ table tbody tr td {
 
   &-danger {
     @extend .corner;
-    color: white;
+    color: $white;
 
     &:before {
       content: "";
@@ -206,25 +206,25 @@ table tbody tr td {
 
 /* Welcome page */
 
-.red-bg {
+.bg-red {
   background: $red url(image_path("bg1.jpg")) no-repeat top center;
   background-size: cover;
 
   h2 {
-    color: white;
+    color: $white;
   }
 
   .table {
-    background: white;
+    background: $white;
   }
 }
 
 .intro .lead {
-  color: white;
+  color: $white;
 }
 
 .white-link {
-  color: white;
+  color: $white;
 
   &:hover, &:focus {
     outline: none;
@@ -256,21 +256,21 @@ table tbody tr td {
 
   .navbar-wagon-logo {
     font-size: 3em;
-    color: white;
+    color: $white;
   }
 
   .navbar-wagon-link {
-    color: white;
+    color: $white;
   }
 
   hr {
-    background-color: white;
+    background-color: $white;
   }
 
   .navbar-wagon-button {
-    background-color: white;
+    background-color: $white;
     color: $brand-color;
-    border: 2px solid white;
+    border: 2px solid $white;
 
     &:hover {
       color: $brand-color;
@@ -286,7 +286,7 @@ table tbody tr td {
 .tab-box {
   border: 1px solid #ddd;
   border-top: 0;
-  background: white;
+  background: $white;
 }
 
 .nav-tabs {
@@ -299,7 +299,7 @@ table tbody tr td {
 }
 
 .wrapper {
-  background-color: #ffffff;
+  background-color: $white;
 }
 
 .head-icon {
@@ -347,10 +347,10 @@ table tbody tr td {
 .list-group-item.myactive {
   background-color: $link-color;
   border-color: $link-color;
-  color: white;
+  color: $white;
 
   a {
-    color: white;
+    color: $white;
     &:hover, &:focus {
       color: $gray-lighter;
       outline: none;
@@ -379,18 +379,18 @@ table tbody tr td {
 }
 
 .error-page {
-  color: white;
+  color: $white;
 
   h1 {
-    color: white;
+    color: $white;
     font-size: 100px;
     font-weight: 700;
   }
 
   .btn {
-    background-color: white;
+    background-color: $white;
     color: $brand-color;
-    border: 2px solid white;
+    border: 2px solid $white;
 
     &:hover {
       color: $brand-color;
@@ -441,7 +441,7 @@ table tbody tr td {
     border: 1px solid darken($red, 10%);
   .panel-heading {
     background: $red;
-    color: white;
+    color: $white;
     border-bottom: 1px solid darken($red, 10%);
   }
 }
@@ -453,12 +453,12 @@ table tbody tr td {
   border-radius: 20em;
   line-height: 40px;
   background-color: #3b5998;
-  color: white;
+  color: $white;
   font-size: 14px;
   border: 2px solid #3b5998;
 
   &:hover {
-    color: white;
+    color: $white;
     background: #3b5998;
     border-color: darken(#3b5998, 10%);
   }
@@ -488,6 +488,7 @@ table tbody tr td {
   border-radius: 3px;
   overflow: hidden;
   position: relative;
+  background-color: $white;
 
   .card-body {
     position: relative;
@@ -505,7 +506,6 @@ table tbody tr td {
     display: block;
     flex-basis: 100%;
     margin-bottom: 1em;
-    background-color: #ffffff;
   }
 }
 

@@ -74,26 +74,43 @@
 .bg-black {
   background: #4a4a4a;
 }
+
 .bg-grey {
   background: #aeaeae;
 }
+
 .bg-light-grey {
   background: #fafafa;
   // color: #777;
 }
+
 .bg-blue {
   background: #00a3e1;
 }
+
 .bg-dark-blue {
   background: #3b5998;
 }
+
 .bg-dark-grey {
   background: $gray-dark;
   color: white;
 }
 
+.bg-dark {
+  background: $gray-darker url(image_path("bg2.png")) repeat top left;
+
+  h1, h2, h3 {
+    color: $white;
+  }
+
+  .table {
+    background: $white;
+  }
+}
+
 //Border
-.dashed-border {
+.border-dashed {
   border: 1px dashed $gray-dark;
 }
 
