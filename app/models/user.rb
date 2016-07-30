@@ -174,6 +174,6 @@ class User < ActiveRecord::Base
 
     def set_notifs_and_welcome
       NotificationSetting.create!(user: self, locale: I18n.locale || :fr)
-      UserMailer.welcome(self.id).deliver_later
+      UserMailer.welcome(id).deliver_later
     end
 end
