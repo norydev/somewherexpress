@@ -16,22 +16,19 @@
       </div>
 
       <% @competitions.open_for_registration.each do |competition| %>
-        <ul class="list-group">
-          <%= render 'card', competition: competition, status: "open" %>
-        </ul>
-      <% end %>
-
-      <% @competitions.not_open_for_registration.each do |competition| %>
-        <ul class="list-group">
-          <%= render 'card', competition: competition, status: "closed" %>
-        </ul>
-      <% end %>
-
-      <% @competitions.finished.each do |competition| %>
-        <ul class="list-group">
-          <%= render 'card', competition: competition, status: "finished" %>
-        </ul>
+        <%= render 'card', competition: competition, status: "open" %>
       <% end %>
     </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-deck">
+    <% @competitions.not_open_for_registration.each do |competition| %>
+      <%= render 'card', competition: competition, status: "closed" %>
+    <% end %>
+    <% @competitions.finished.each do |competition| %>
+      <%= render 'card', competition: competition, status: "finished" %>
+    <% end %>
   </div>
 </div>

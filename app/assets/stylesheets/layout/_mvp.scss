@@ -477,6 +477,74 @@ table tbody tr td {
 
 @media (min-width: $screen-xs-min) {
   .bg-image-competition {
-    height: 360px;
+    height: 260px;
   }
 }
+
+// cards
+.card {
+  border: 1px solid rgba(0,0,0,0.2);
+  background-clip: padding-box;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+
+  .card-body {
+    position: relative;
+    padding: 1em;
+  }
+}
+
+.card-deck {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-items: stretch;
+
+  .card {
+    display: block;
+    flex-basis: 100%;
+    margin-bottom: 1em;
+    background-color: #ffffff;
+  }
+}
+
+.list-group .card {
+  border: none;
+  border-radius: 0;
+}
+
+@media (min-width: $screen-xs-min) {
+  .card-deck .card {
+    flex-basis: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .row .card {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .card-deck .card {
+    flex-basis: 48%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .row .card {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .card-deck .card {
+    flex-basis: 32%;
+  }
+}
+// end cards
