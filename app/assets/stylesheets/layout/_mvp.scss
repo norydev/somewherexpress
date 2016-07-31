@@ -196,8 +196,8 @@ table tbody tr td {
 }
 
 .cover-image-mini {
-  background: $red url(image_path("bg1.jpg")) no-repeat top center;
-  background-size: cover;
+  background: #a91d1d url(image_path("bg_se_dark.png")) repeat center;
+  background-size: 150px 150px;
   height: 100px;
 
   border-radius: 4px 4px 0 0;
@@ -207,8 +207,8 @@ table tbody tr td {
 /* Welcome page */
 
 .bg-red {
-  background: $red url(image_path("bg1.jpg")) no-repeat top center;
-  background-size: cover;
+  background: #a91d1d url(image_path("bg_se_dark.png")) repeat center;
+  background-size: 150px 150px;
 
   h2 {
     color: $white;
