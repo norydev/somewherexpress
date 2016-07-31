@@ -6,6 +6,9 @@
   Toutes les compétitions de SomewherExpress. <%= t('welcome.index.intro') %>
 <% end %>
 
+
+<%= content_for(:og_image) { @competitions.last.end_city.picture } %>
+
 <div class="container padded-mini">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">

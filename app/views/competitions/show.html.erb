@@ -5,6 +5,9 @@
 <%= content_for(:description) do %>
   <%= @competition.route %>, Du <%= date_format(@competition.start_date) %> au <%= date_format(@competition.end_date) %>. <%= t('welcome.index.intro') %>
 <% end %>
+
+<%= content_for(:og_image) { @competition.end_city.picture } %>
+
 <div class="container padded-mini">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
