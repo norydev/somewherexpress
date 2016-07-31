@@ -1,7 +1,7 @@
 <!-- Open Graph data -->
 <meta property="og:title" content="<%= yield(:title) || 'SomewherExpress' %>" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.somewherexpress.com/" />
+<meta property="og:url" content="<%= request.original_url %>" />
 <meta property="og:image" content="<%= yield(:og_image) || '' %>" />
 <meta property="og:description" content="<%= (yield(:description) || '').squish %>" />
 <meta property="og:site_name" content="SomewherExpress" />
