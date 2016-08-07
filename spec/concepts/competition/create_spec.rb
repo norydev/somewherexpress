@@ -53,7 +53,7 @@ RSpec.describe Competition::Create do
     expect(competition.author).to eq user
     expect(competition.start_city.locality).to eq "Yverdon-Les-Bains"
     expect(competition.tracks.size).to eq 1
-    expect(competition.tracks.first.end_city.locality).to eq "Berne"
+    expect(competition.tracks.first.end_city.id).to eq existing_city.id
     expect(competition.end_city.id).to eq existing_city.id
   end
 end
