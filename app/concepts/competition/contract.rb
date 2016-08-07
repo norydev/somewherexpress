@@ -16,7 +16,8 @@ class Competition < ActiveRecord::Base
       property :video
 
       validates :name, presence: true
-      validates :start_registration, :start_city, :end_city, :start_date, :end_date, presence: { if: :published }
+      validates :start_registration, :start_city, :end_city,
+                :start_date, :end_date, presence: { if: :published? }
 
       property :start_city, populate_if_empty: :populate_city! do
         property :name
@@ -95,27 +96,33 @@ class Competition < ActiveRecord::Base
           end
       end
 
-      def prepopulate_tracks!(_options)
-        2.times do
-          track = Track.new
-          track.build_start_city
-          track.build_end_city
-          tracks << track
+      private
+
+        def published?
+          published && published != "0"
         end
-      end
 
-      def populate_city!(options)
-        return City.new unless options[:fragment] && options[:fragment][:locality] && options[:fragment][:name]
+        def prepopulate_tracks!(_options)
+          2.times do
+            track = Track.new
+            track.build_start_city
+            track.build_end_city
+            tracks << track
+          end
+        end
 
-        city = City.order(:created_at).find_by(locality: options[:fragment][:locality])
+        def populate_city!(options)
+          return City.new unless options[:fragment] && options[:fragment][:locality] && options[:fragment][:name]
 
-        return city if city
-        City.new(options[:fragment])
-      end
+          city = City.order(:created_at).find_by(locality: options[:fragment][:locality])
 
-      def populate_track!(options)
-        Track.new(start_time: options[:fragment][:start_time])
-      end
+          return city if city
+          City.new(options[:fragment])
+        end
+
+        def populate_track!(options)
+          Track.new(start_time: options[:fragment][:start_time])
+        end
     end
   end
 end

@@ -25,7 +25,7 @@ class Competition < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
   has_many :tracks, dependent: :destroy
-  accepts_nested_attributes_for :tracks, allow_destroy: true
+  # accepts_nested_attributes_for :tracks, allow_destroy: true
 
   has_many :ranks, as: :race, dependent: :destroy
 
@@ -35,13 +35,13 @@ class Competition < ActiveRecord::Base
   has_many :tracks_start_cities, through: :tracks, source: :start_city
   has_many :tracks_end_cities, through: :tracks, source: :end_city
 
-  accepts_nested_attributes_for :start_city
-  accepts_nested_attributes_for :end_city
+  # accepts_nested_attributes_for :start_city
+  # accepts_nested_attributes_for :end_city
 
   belongs_to :author, class_name: "User"
 
-  validates :name, presence: true
-  validates :start_registration, :start_city, :end_city, :start_date, :end_date, presence: { if: :published? }
+  # validates :name, presence: true
+  # validates :start_registration, :start_city, :end_city, :start_date, :end_date, presence: { if: :published? }
 
   # status can take: "pending" (default), "accepted", "refused"
 

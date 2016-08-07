@@ -69,7 +69,7 @@
       <strong class="text-capitalize"><%= t('activerecord.models.track', count: 2) %></strong>
     </div>
   </div>
-  <%= f.simple_fields_for :tracks, tracks do |t| %>
+  <%= f.simple_fields_for :tracks do |t| %>
     <%= t.error_notification %>
     <div class="row tracks_form">
       <div class="col-xs-10 col-sm-11">
@@ -212,14 +212,14 @@
   <%= f.button :submit, class: "btn btn-primary" %> <%= link_to t('cancel'), :back, class: "btn" %>
 <% end %>
 
-<% if policy(@competition).destroy? %>
+<% if policy(competition).destroy? %>
   <div class="panel panel-danger marged-mini">
     <div class="panel-heading">
       <strong><%= t('competitions.show.destroy.panel') %></strong>
     </div>
     <div class="panel-body">
       <p><strong><%= t('competitions.show.destroy.title') %></strong></p>
-      <%= link_to t('competitions.show.destroy.title'), competition_path(@competition), method: 'delete', class: "btn btn-danger pull-right" %>
+      <%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete', class: "btn btn-danger pull-right" %>
       <p><%= t('competitions.show.destroy.text') %></p>
     </div>
   </div>

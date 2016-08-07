@@ -4,7 +4,7 @@ require "rails_helper"
 RSpec.describe Competition::Create do
   it "creates an unpublished competition" do
     competition = Competition::Create
-                  .call(competition: { name: "new competition", published: false })
+                  .call(competition: { name: "new competition", published: "0" })
                   .model
 
     expect(competition).to be_persisted
@@ -14,7 +14,7 @@ RSpec.describe Competition::Create do
 
   it "does not create an unpublished competition without name" do
     expect {
-      Competition::Create.call(competition: { name: "", published: false })
+      Competition::Create.call(competition: { name: "", published: "0" })
     }.to raise_error Trailblazer::Operation::InvalidContract
   end
 
@@ -27,7 +27,7 @@ RSpec.describe Competition::Create do
     competition = Competition::Create
                   .call(competition: {
                           name: "new competition",
-                          published: true,
+                          published: "1",
                           start_date: 2.weeks.from_now.to_s,
                           end_date: 3.weeks.from_now.to_s,
                           start_registration: Time.current,
