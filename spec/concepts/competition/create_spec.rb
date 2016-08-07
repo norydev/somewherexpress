@@ -18,6 +18,8 @@ RSpec.describe Competition::Create do
     }.to raise_error Trailblazer::Operation::InvalidContract
   end
 
+  let!(:user) { FactoryGirl.create(:user) }
+
   it "creates a published competition" do
     competition = Competition::Create
                   .(competition: {
@@ -40,10 +42,12 @@ RSpec.describe Competition::Create do
                                  end_city: { name: "Berne, CH",
                                              locality: "Berne",
                                              country_short: "CH" } }]
-                    })
+                    },
+                    current_user: user)
                   .model
 
     expect(competition).to be_persisted
+    expect(competition.author).to eq user
     expect(competition.start_city.locality).to eq "Yverdon-Les-Bains"
     expect(competition.tracks.size).to eq 1
     expect(competition.tracks.first.end_city.locality).to eq "Berne"

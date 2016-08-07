@@ -105,5 +105,11 @@ class Competition < ActiveRecord::Base
     def process(params)
       validate(params[:competition], &:save)
     end
+
+    private
+
+      def setup_model!(params)
+        model.author = params[:current_user]
+      end
   end
 end

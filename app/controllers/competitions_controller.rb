@@ -71,7 +71,7 @@ class CompetitionsController < ApplicationController
   end
 
   def create
-    run Competition::Create do |op|
+    run Competition::Create, params: params.merge(current_user: current_user) do |op|
       return redirect_to op.model
     end
 
