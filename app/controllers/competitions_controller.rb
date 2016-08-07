@@ -47,16 +47,19 @@ class CompetitionsController < ApplicationController
   end
 
   def new
-    @competition = current_user.creations.new
-    authorize @competition, :create?
+    # @competition = present Comment::Create
+    @competition = form Competition::Create
 
-    @competition.build_start_city
-    @competition.build_end_city
+    # @competition = current_user.creations.new
+    # authorize @competition, :create?
 
-    @competition.tracks.build
-    @competition.tracks.last.build_start_city
-    @competition.tracks.last.build_end_city
-    @tracks = @competition.tracks
+    # @competition.build_start_city
+    # @competition.build_end_city
+
+    # @competition.tracks.build
+    # @competition.tracks.last.build_start_city
+    # @competition.tracks.last.build_end_city
+    # @tracks = @competition.tracks
   end
 
   # This method is soon going to be deprecated, edit will be in show page
