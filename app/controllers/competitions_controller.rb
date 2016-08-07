@@ -78,23 +78,23 @@ class CompetitionsController < ApplicationController
     render action: :new
 
     #############
-    @competition = current_user.creations.new
-    authorize @competition
+    # @competition = current_user.creations.new
+    # authorize @competition
 
-    updater = Competitions::Update.new(@competition, params).call
-    @competition = updater.competition
-    @tracks = updater.updated_tracks
+    # updater = Competitions::Update.new(@competition, params).call
+    # @competition = updater.competition
+    # @tracks = updater.updated_tracks
 
-    if @competition.valid? && @tracks.map(&:valid?).all?
-      send_new_competition_emails if @competition.published?
+    # if @competition.valid? && @tracks.map(&:valid?).all?
+    #   send_new_competition_emails if @competition.published?
 
-      redirect_to @competition
-    else
-      track = Track.new(end_city: City.new, start_city: City.new)
-      @tracks << track
+    #   redirect_to @competition
+    # else
+    #   track = Track.new(end_city: City.new, start_city: City.new)
+    #   @tracks << track
 
-      render :new
-    end
+    #   render :new
+    # end
   end
 
   def update

@@ -44,6 +44,8 @@ RSpec.describe Competition::Create do
                   .model
 
     expect(competition).to be_persisted
-    expect(competition.published).to be true
+    expect(competition.start_city.locality).to eq "Yverdon-Les-Bains"
+    expect(competition.tracks.size).to eq 1
+    expect(competition.tracks.first.end_city.locality).to eq "Berne"
   end
 end
