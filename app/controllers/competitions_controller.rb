@@ -71,6 +71,13 @@ class CompetitionsController < ApplicationController
   end
 
   def create
+    run Competition::Create do |op|
+      return redirect_to op.model
+    end
+
+    render action: :new
+
+    #############
     @competition = current_user.creations.new
     authorize @competition
 
