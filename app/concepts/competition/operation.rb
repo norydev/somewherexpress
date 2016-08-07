@@ -110,6 +110,18 @@ class Competition < ActiveRecord::Base
 
       def setup_model!(params)
         model.author = params[:current_user]
+
+        model.start_city = get_correct_city(params[:competition][:start_city])
+        model.end_city = get_correct_city(params[:competition][:end_city])
+      end
+
+      def get_correct_city(city_attributes)
+        return nil unless city_attributes && city_attributes[:name] && city_attributes[:locality]
+
+        city = City.order(:created_at).find_by(locality: city_attributes[:locality])
+
+        return city if city
+        return City.new(city_attributes)
       end
   end
 end

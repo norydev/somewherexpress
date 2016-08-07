@@ -19,6 +19,9 @@ RSpec.describe Competition::Create do
   end
 
   let!(:user) { FactoryGirl.create(:user) }
+  let!(:existing_city) do
+    FactoryGirl.create(:city, locality: "Berne", name: "Berne, CH")
+  end
 
   it "creates a published competition" do
     competition = Competition::Create
@@ -51,5 +54,6 @@ RSpec.describe Competition::Create do
     expect(competition.start_city.locality).to eq "Yverdon-Les-Bains"
     expect(competition.tracks.size).to eq 1
     expect(competition.tracks.first.end_city.locality).to eq "Berne"
+    expect(competition.end_city.id).to eq existing_city.id
   end
 end
