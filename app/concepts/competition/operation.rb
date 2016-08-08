@@ -7,9 +7,7 @@ class Competition < ActiveRecord::Base
     contract Contract::Create
 
     def process(params)
-      validate(params[:competition]) do |f|
-        f.save
-      end
+      validate(params[:competition], &:save)
     end
 
     private
@@ -17,5 +15,10 @@ class Competition < ActiveRecord::Base
       def setup_model!(params)
         model.author = params[:current_user]
       end
+  end
+
+  class Update < Create
+    action :update
+    contract Contract::Update
   end
 end

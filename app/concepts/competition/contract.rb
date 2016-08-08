@@ -124,5 +124,16 @@ class Competition < ActiveRecord::Base
           Track.new(start_time: options[:fragment][:start_time])
         end
     end
+
+    class Update < Create
+      private
+
+        def prepopulate_tracks!(_options)
+          track = Track.new
+          track.build_start_city
+          track.build_end_city
+          tracks << track
+        end
+    end
   end
 end

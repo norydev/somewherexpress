@@ -30,11 +30,13 @@ class CompetitionsController < ApplicationController
   def show
     authorize @competition
 
-    @tracks = @competition.tracks.order(:start_time, :created_at)
-    track = @competition.tracks.build
-    track.build_start_city
-    track.build_end_city
-    @tracks << track
+    @form = form Competition::Update
+
+    # @tracks = @competition.tracks.order(:start_time, :created_at)
+    # track = @competition.tracks.build
+    # track.build_start_city
+    # track.build_end_city
+    # @tracks << track
   end
 
   def event
@@ -65,6 +67,8 @@ class CompetitionsController < ApplicationController
   # This method is soon going to be deprecated, edit will be in show page
   def edit
     authorize @competition, :update?
+
+    @form = form Competition::Update
 
     @tracks = @competition.tracks.order(:start_time, :created_at)
     track = @competition.tracks.build

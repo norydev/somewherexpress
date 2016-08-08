@@ -24,7 +24,7 @@
 class Competition < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
-  has_many :tracks, dependent: :destroy
+  has_many :tracks, -> { order :start_time }, dependent: :destroy
   # accepts_nested_attributes_for :tracks, allow_destroy: true
 
   has_many :ranks, as: :race, dependent: :destroy
