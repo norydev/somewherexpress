@@ -1,4 +1,4 @@
-<%= simple_form_for competition do |f| %>
+<%= simple_form_for form do |f| %>
   <%= f.error_notification %>
 
   <!-- GENERAL INFORMATIONS -->
@@ -122,7 +122,7 @@
             <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
           <% end %>
         <% else %>
-          <%= link_to competition_track_path(competition, t.object), method: :delete, remote: true, data: { confirm: t('.delete.message') }, class: 'destroy_track' do %>
+          <%= link_to competition_track_path(form, t.object), method: :delete, remote: true, data: { confirm: t('.delete.message') }, class: 'destroy_track' do %>
             <i class="fa fa-minus-circle" data-toggle="tooltip" data-placement="bottom" title="<%= t('.tracks.remove_track') %>"></i>
           <% end %>
           <%= t.input :id, as: :hidden %>
