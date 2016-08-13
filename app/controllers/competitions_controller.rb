@@ -31,12 +31,6 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     @form = form Competition::Update
-
-    # @tracks = @competition.tracks.order(:start_time, :created_at)
-    # track = @competition.tracks.build
-    # track.build_start_city
-    # track.build_end_city
-    # @tracks << track
   end
 
   def event
@@ -51,17 +45,6 @@ class CompetitionsController < ApplicationController
   def new
     authorize Competition, :create?
     @form = form Competition::Create
-
-    # @competition = current_user.creations.new
-    # authorize @competition, :create?
-
-    # @competition.build_start_city
-    # @competition.build_end_city
-
-    # @competition.tracks.build
-    # @competition.tracks.last.build_start_city
-    # @competition.tracks.last.build_end_city
-    # @tracks = @competition.tracks
   end
 
   # This method is soon going to be deprecated, edit will be in show page
@@ -69,12 +52,6 @@ class CompetitionsController < ApplicationController
     authorize @competition, :update?
 
     @form = form Competition::Update
-
-    @tracks = @competition.tracks.order(:start_time, :created_at)
-    track = @competition.tracks.build
-    track.build_start_city
-    track.build_end_city
-    @tracks << track
   end
 
   def create
@@ -85,25 +62,6 @@ class CompetitionsController < ApplicationController
 
     @form = operation.contract
     render action: :new
-
-    #############
-    # @competition = current_user.creations.new
-    # authorize @competition
-
-    # updater = Competitions::Update.new(@competition, params).call
-    # @competition = updater.competition
-    # @tracks = updater.updated_tracks
-
-    # if @competition.valid? && @tracks.map(&:valid?).all?
-    #   send_new_competition_emails if @competition.published?
-
-    #   redirect_to @competition
-    # else
-    #   track = Track.new(end_city: City.new, start_city: City.new)
-    #   @tracks << track
-
-    #   render :new
-    # end
   end
 
   def update
@@ -121,25 +79,6 @@ class CompetitionsController < ApplicationController
 
     @form = operation.contract
     render action: :edit
-
-    # updater = Competitions::Update.new(@competition, params).call
-    # @competition = updater.competition
-    # @tracks = updater.updated_tracks
-
-    # if @competition.valid? && @tracks.map(&:valid?).all?
-    #   if @competition.just_published?
-    #     send_new_competition_emails
-    #   elsif @competition.published? && !@competition.finished? && @competition.enough_changes?
-    #     send_competition_edited_emails
-    #   end
-
-    #   redirect_to @competition
-    # else
-    #   track = Track.new(end_city: City.new, start_city: City.new)
-    #   @tracks << track
-
-    #   render :edit
-    # end
   end
 
   def destroy

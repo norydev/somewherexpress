@@ -2,7 +2,7 @@
 class Competition < ActiveRecord::Base
   module Contract
     class Create < Reform::Form
-      include Reform::Form::ActiveModel::ModelReflections
+      include ActiveModel::ModelReflections
       model :competition
 
       property :name
@@ -20,37 +20,13 @@ class Competition < ActiveRecord::Base
       validates :start_registration, :start_city, :end_city,
                 :start_date, :end_date, presence: { if: :published? }
 
-      property :start_city, prepopulator: :prepopulate_start_city!, populate_if_empty: :populate_city! do
-        property :name
-        property :street_number
-        property :route
-        property :locality
-        property :administrative_area_level_2
-        property :administrative_area_level_1
-        property :administrative_area_level_1_short
-        property :country
-        property :country_short
-        property :postal_code
-        property :picture
+      property :start_city, prepopulator: :prepopulate_start_city!,
+                            populate_if_empty: :populate_city!,
+                            form: City::Form
 
-        validates :name, :locality, :country_short, presence: true
-      end
-
-      property :end_city, prepopulator: :prepopulate_end_city!, populate_if_empty: :populate_city! do
-        property :name
-        property :street_number
-        property :route
-        property :locality
-        property :administrative_area_level_2
-        property :administrative_area_level_1
-        property :administrative_area_level_1_short
-        property :country
-        property :country_short
-        property :postal_code
-        property :picture
-
-        validates :name, :locality, :country_short, presence: true
-      end
+      property :end_city, prepopulator: :prepopulate_end_city!,
+                          populate_if_empty: :populate_city!,
+                          form: City::Form
 
       collection :tracks, prepopulator: :prepopulate_tracks!, populate_if_empty: :populate_track!, inherit: true do
         def new_record?
@@ -61,37 +37,11 @@ class Competition < ActiveRecord::Base
 
         validates :start_city, :end_city, :start_time, presence: true
 
-        property :start_city, populate_if_empty: :populate_city! do
-          property :name
-          property :street_number
-          property :route
-          property :locality
-          property :administrative_area_level_2
-          property :administrative_area_level_1
-          property :administrative_area_level_1_short
-          property :country
-          property :country_short
-          property :postal_code
-          property :picture
+        property :start_city, populate_if_empty: :populate_city!,
+                              form: City::Form
 
-          validates :name, :locality, :country_short, presence: true
-        end
-
-        property :end_city, populate_if_empty: :populate_city! do
-          property :name
-          property :street_number
-          property :route
-          property :locality
-          property :administrative_area_level_2
-          property :administrative_area_level_1
-          property :administrative_area_level_1_short
-          property :country
-          property :country_short
-          property :postal_code
-          property :picture
-
-          validates :name, :locality, :country_short, presence: true
-        end
+        property :end_city, populate_if_empty: :populate_city!,
+                            form: City::Form
 
         private
 
@@ -130,12 +80,12 @@ class Competition < ActiveRecord::Base
         end
 
         def prepopulate_start_city!(_options)
-          return if self.start_city
+          return if start_city
           self.start_city = City.new
         end
 
         def prepopulate_end_city!(_options)
-          return if self.end_city
+          return if end_city
           self.end_city = City.new
         end
 
