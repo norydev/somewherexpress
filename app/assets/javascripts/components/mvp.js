@@ -42,12 +42,15 @@ jQuery(function($) {
         initializeAutocomplete('competition_tracks_attributes_'+ i +'_end_city_attributes_name');
       }
 
+      // TODO: this is nasty... can we make it cleaner?
       nestedForm = $('.tracks_form').last().clone();
-
-      // remove empty-field if edit
-      if ($('.tracks_form').length > 1) {
-        $('.tracks_form').last().remove();
-      }
+      nestedForm.find("input").val("");
+      nestedForm.find(".has-error").removeClass("has-error");
+      nestedForm.find(".help-block").remove();
+      destroy_link = nestedForm.find(".destroy_track");
+      destroy_link.attr('data-confirm', '');
+      destroy_link.attr('data-method', '');
+      destroy_link.attr("href", "#");
 
       $(".destroy_track:first").remove();
       $('body').on('click', '.destroy_track', function(e) {

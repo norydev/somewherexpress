@@ -62,12 +62,10 @@ class Competition < ActiveRecord::Base
         end
 
         def prepopulate_tracks!(_options)
-          2.times do
-            track = Track.new
-            track.build_start_city
-            track.build_end_city
-            tracks << track
-          end
+          track = Track.new
+          track.build_start_city
+          track.build_end_city
+          tracks << track
         end
 
         def populate_city!(options)
@@ -98,10 +96,7 @@ class Competition < ActiveRecord::Base
       private
 
         def prepopulate_tracks!(_options)
-          track = Track.new
-          track.build_start_city
-          track.build_end_city
-          tracks << track
+          tracks = tracks
         end
     end
   end
