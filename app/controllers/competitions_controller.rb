@@ -68,12 +68,6 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     operation = run Competition::Update, params: params.merge(current_user: current_user) do |op|
-      if op.model.just_published?
-        send_new_competition_emails
-      elsif op.model.published? && !op.model.finished? && op.model.enough_changes?
-        send_competition_edited_emails
-      end
-
       return redirect_to op.model
     end
 
@@ -92,17 +86,5 @@ class CompetitionsController < ApplicationController
 
     def set_competition
       @competition = Competition.find(params[:id])
-    end
-
-    def send_new_competition_emails
-      User.want_email_for_new_competition.each do |user|
-        UserMailer.as_user_new_competition(user.id, @competition.id).deliver_later
-      end
-    end
-
-    def send_competition_edited_emails
-      User.want_email_for_competition_edited(@competition).each do |user|
-        UserMailer.as_user_competition_edited(user.id, @competition.id).deliver_later
-      end
     end
 end
