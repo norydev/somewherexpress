@@ -27,7 +27,6 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def destroy?
-    # record.id && user && record.author == user && record.users.none?
-    true
+    record.id && user && record.author == user && record.users.none?
   end
 end

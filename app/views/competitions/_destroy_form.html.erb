@@ -1,0 +1,12 @@
+<% if policy(competition).destroy? %>
+  <div class="panel panel-danger marged-mini">
+    <div class="panel-heading">
+      <strong><%= t('competitions.show.destroy.panel') %></strong>
+    </div>
+    <div class="panel-body">
+      <p><strong><%= t('competitions.show.destroy.title') %></strong></p>
+      <%= link_to t('competitions.show.destroy.title'), competition_path(competition), method: 'delete', class: "btn btn-danger pull-right" %>
+      <p><%= t('competitions.show.destroy.text') %></p>
+    </div>
+  </div>
+<% end %>
