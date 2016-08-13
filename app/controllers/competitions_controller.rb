@@ -49,7 +49,7 @@ class CompetitionsController < ApplicationController
   end
 
   def new
-    # @competition = present Comment::Create
+    authorize Competition, :create?
     @form = form Competition::Create
 
     # @competition = current_user.creations.new
@@ -78,6 +78,7 @@ class CompetitionsController < ApplicationController
   end
 
   def create
+    authorize Competition
     operation = run Competition::Create, params: params.merge(current_user: current_user) do |op|
       return redirect_to op.model
     end
