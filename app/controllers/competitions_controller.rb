@@ -109,24 +109,37 @@ class CompetitionsController < ApplicationController
   def update
     authorize @competition
 
-    updater = Competitions::Update.new(@competition, params).call
-    @competition = updater.competition
-    @tracks = updater.updated_tracks
-
-    if @competition.valid? && @tracks.map(&:valid?).all?
-      if @competition.just_published?
+    operation = run Competition::Update, params: params.merge(current_user: current_user) do |op|
+      if op.model.just_published?
         send_new_competition_emails
-      elsif @competition.published? && !@competition.finished? && @competition.enough_changes?
+      elsif op.model.published? && !op.model.finished? && op.model.enough_changes?
         send_competition_edited_emails
       end
 
-      redirect_to @competition
-    else
-      track = Track.new(end_city: City.new, start_city: City.new)
-      @tracks << track
-
-      render :edit
+      return redirect_to op.model
     end
+
+    @form = operation.contract
+    render action: :edit
+
+    # updater = Competitions::Update.new(@competition, params).call
+    # @competition = updater.competition
+    # @tracks = updater.updated_tracks
+
+    # if @competition.valid? && @tracks.map(&:valid?).all?
+    #   if @competition.just_published?
+    #     send_new_competition_emails
+    #   elsif @competition.published? && !@competition.finished? && @competition.enough_changes?
+    #     send_competition_edited_emails
+    #   end
+
+    #   redirect_to @competition
+    # else
+    #   track = Track.new(end_city: City.new, start_city: City.new)
+    #   @tracks << track
+
+    #   render :edit
+    # end
   end
 
   def destroy

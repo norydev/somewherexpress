@@ -5,15 +5,17 @@ module ApplicationHelper
   end
 
   def datetime_format(datetime)
+    return datetime if datetime.blank? || datetime.is_a?(String)
     case I18n.locale
     when :fr
-      l(datetime, format: "%d %B %Y à %H:%M") if datetime.present?
+      l(datetime, format: "%d %B %Y à %H:%M")
     else
-      l(datetime, format: "%d %B %Y at %H:%M") if datetime.present?
+      l(datetime, format: "%d %B %Y at %H:%M")
     end
   end
 
   def datetime_value(datetime)
-    datetime.strftime("%Y-%m-%d %H:%M") if datetime.present?
+    return datetime if datetime.blank? || datetime.is_a?(String)
+    l(datetime, format: "%Y-%m-%d %H:%M")
   end
 end
