@@ -7,10 +7,6 @@ class Competition < ActiveRecord::Base
     contract Contract::Create
 
     def process(params)
-      validate(params[:competition], &:save)
-    end
-
-    def process(params)
       validate(params[:competition]) do |f|
         f.save
 
