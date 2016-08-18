@@ -46,9 +46,11 @@ class Competition < ActiveRecord::Base
         private
 
           def populate_city!(options)
-            return City.new unless options[:fragment] && options[:fragment][:locality] && options[:fragment][:name]
+            return City.new unless options[:fragment] &&
+                                   options[:fragment][:locality] &&
+                                   options[:fragment][:name]
 
-            city = City.order(:created_at).find_by(locality: options[:fragment][:locality])
+            city = City.find_by(locality: options[:fragment][:locality])
 
             return city if city
             City.new(options[:fragment])
@@ -69,9 +71,11 @@ class Competition < ActiveRecord::Base
         end
 
         def populate_city!(options)
-          return City.new unless options[:fragment] && options[:fragment][:locality] && options[:fragment][:name]
+          return City.new unless options[:fragment] &&
+                                 options[:fragment][:locality] &&
+                                 options[:fragment][:name]
 
-          city = City.order(:created_at).find_by(locality: options[:fragment][:locality])
+          city = City.find_by(locality: options[:fragment][:locality])
 
           return city if city
           City.new(options[:fragment])
