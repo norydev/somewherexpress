@@ -56,7 +56,8 @@ class CompetitionsController < ApplicationController
 
   def create
     authorize Competition
-    operation = run Competition::Create, params: params.merge(current_user: current_user) do |op|
+    operation = run Competition::Create,
+                    params: params.merge(current_user: current_user) do |op|
       return redirect_to op.model
     end
 
@@ -67,7 +68,8 @@ class CompetitionsController < ApplicationController
   def update
     authorize @competition
 
-    operation = run Competition::Update, params: params.merge(current_user: current_user) do |op|
+    operation = run Competition::Update,
+                    params: params.merge(current_user: current_user) do |op|
       return redirect_to op.model
     end
 
