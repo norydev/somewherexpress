@@ -47,9 +47,8 @@ class Competition < ActiveRecord::Base
         private
 
           def populate_city!(options)
-            return City.new unless options[:fragment] &&
-                                   options[:fragment][:locality] &&
-                                   options[:fragment][:name]
+            return City.new unless options[:fragment].present? &&
+                                   options[:fragment][:name].present?
 
             city = City.find_by(locality: options[:fragment][:locality])
 
@@ -72,9 +71,8 @@ class Competition < ActiveRecord::Base
         end
 
         def populate_city!(options)
-          return City.new unless options[:fragment] &&
-                                 options[:fragment][:locality] &&
-                                 options[:fragment][:name]
+          return City.new unless options[:fragment].present? &&
+                                 options[:fragment][:name].present?
 
           city = City.find_by(locality: options[:fragment][:locality])
 
@@ -83,12 +81,10 @@ class Competition < ActiveRecord::Base
         end
 
         def prepopulate_start_city!(_options)
-          return if start_city
           self.start_city = City.new
         end
 
         def prepopulate_end_city!(_options)
-          return if end_city
           self.end_city = City.new
         end
 
@@ -101,7 +97,12 @@ class Competition < ActiveRecord::Base
       private
 
         def prepopulate_tracks!(_options)
-          tracks = tracks
+        end
+
+        def prepopulate_start_city!(_options)
+        end
+
+        def prepopulate_end_city!(_options)
         end
     end
   end
