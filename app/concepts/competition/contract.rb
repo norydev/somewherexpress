@@ -29,8 +29,7 @@ class Competition < ActiveRecord::Base
                           form: City::Form
 
       collection :tracks, prepopulator: :prepopulate_tracks!,
-                          populate_if_empty: :populate_track!,
-                          inherit: true do
+                          populate_if_empty: :populate_track! do
         def new_record?
           !model.persisted?
         end
