@@ -20,12 +20,7 @@ class Track < ActiveRecord::Base
   belongs_to :start_city, class_name: "City", foreign_key: "start_city_id"
   belongs_to :end_city, class_name: "City", foreign_key: "end_city_id"
 
-  accepts_nested_attributes_for :start_city
-  accepts_nested_attributes_for :end_city
-
   after_create :make_track_ranks
-
-  validates :start_city, :end_city, :start_time, presence: true
 
   def name
     "#{start_city.locality} (#{start_city.country_short}) – #{end_city.locality} (#{end_city.country_short})"

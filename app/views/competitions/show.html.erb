@@ -95,7 +95,8 @@
             <%= render 'users', competition: @competition %>
           </div>
           <div role="tabpanel" class="tab-pane" id="settings">
-            <%= render 'form', competition: @competition, tracks: @tracks %>
+            <%= render 'form', form: @form %>
+            <%= render 'destroy_form', competition: @competition %>
           </div>
         <% end %>
       </div>

@@ -11,7 +11,8 @@
     <div class="col-sm-8 col-sm-offset-2">
       <h3><%= t('.title') %></h3>
 
-      <%= render 'form', competition: @competition, tracks: @tracks %>
+      <%= render 'form', form: @form %>
+      <%= render 'destroy_form', competition: @competition %>
     </div>
   </div>
 </div>
