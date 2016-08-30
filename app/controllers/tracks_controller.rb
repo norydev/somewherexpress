@@ -17,16 +17,18 @@ class TracksController < ApplicationController
     authorize @track, :update?
 
     @competition = @track.competition
-    @form = Track::Form.new(@track)
+    @form = form Track::Update
   end
 
   def update
     authorize @track
-    if @track.update(track_params)
-      redirect_to @track.competition
-    else
-      render :edit
+
+    operation = run Track::Update do |op|
+      return redirect_to op.model.competition
     end
+
+    @form = operation.contract
+    render action: :edit
   end
 
   def destroy
