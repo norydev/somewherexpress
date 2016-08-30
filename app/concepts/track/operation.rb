@@ -7,9 +7,7 @@ class Track < ActiveRecord::Base
     contract Contract::Update
 
     def process(params)
-      validate(params[:track]) do |f|
-        f.save
-      end
+      validate(params[:track], &:save)
     end
   end
 end

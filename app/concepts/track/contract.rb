@@ -5,25 +5,15 @@ class Track < ActiveRecord::Base
       include ActiveModel::ModelReflections
       model :track
 
-      collection :ranks, populate_if_empty: :populate_rank! do
+      collection :ranks do
         property :points
         property :result
         property :dsq
 
-        def user
-          model.user
-        end
+        delegate :user, to: :model
       end
 
-      def to_s
-        model.to_s
-      end
-
-      private
-
-        def populate_rank!(options)
-          Rank.new(options[:fragment])
-        end
+      delegate :to_s, to: :model
     end
   end
 end
