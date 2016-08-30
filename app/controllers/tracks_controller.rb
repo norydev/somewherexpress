@@ -48,8 +48,4 @@ class TracksController < ApplicationController
     def set_track
       @track = Track.find(params[:id])
     end
-
-    def track_params
-      params.require(:track).permit(ranks_attributes: [:id, :points, :result, :dsq])
-    end
 end
