@@ -1,9 +1,9 @@
 <%= content_for(:title) do %>
-  <%= @track %> | Résultats
+  <%= @form %> | Résultats
 <% end %>
 
 <%= content_for(:description) do %>
-  Résultats de l'étape <%= @track %> faisant partie de la compétition <%= @track.competition %>. <%= t('welcome.index.intro') %>
+  Résultats de l'étape <%= @form %> faisant partie de la compétition <%= @competition %>. <%= t('welcome.index.intro') %>
 <% end %>
 
 <div class="container padded-mini">
@@ -16,12 +16,12 @@
         <table class="table text-muted race-infos">
           <tbody>
             <tr>
-              <td><i class="fa fa-map-signs fa-fw"></i> <%= @track %></td>
+              <td><i class="fa fa-map-signs fa-fw"></i> <%= @form %></td>
             </tr>
           </tbody>
         </table>
 
-        <%= simple_form_for([@track.competition, @track]) do |f| %>
+        <%= simple_form_for([@competition, @form]) do |f| %>
           <%= f.error_notification %>
 
           <table class="table edit_result_table bordered-top">

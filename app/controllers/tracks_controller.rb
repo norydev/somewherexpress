@@ -15,6 +15,9 @@ class TracksController < ApplicationController
 
   def edit
     authorize @track, :update?
+
+    @competition = @track.competition
+    @form = Track::Form.new(@track)
   end
 
   def update
