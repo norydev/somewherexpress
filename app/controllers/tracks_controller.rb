@@ -15,15 +15,20 @@ class TracksController < ApplicationController
 
   def edit
     authorize @track, :update?
+
+    @competition = @track.competition
+    @form = form Track::Update
   end
 
   def update
     authorize @track
-    if @track.update(track_params)
-      redirect_to @track.competition
-    else
-      render :edit
+
+    operation = run Track::Update do |op|
+      return redirect_to op.model.competition
     end
+
+    @form = operation.contract
+    render action: :edit
   end
 
   def destroy
@@ -42,9 +47,5 @@ class TracksController < ApplicationController
 
     def set_track
       @track = Track.find(params[:id])
-    end
-
-    def track_params
-      params.require(:track).permit(ranks_attributes: [:id, :points, :result, :dsq])
     end
 end
