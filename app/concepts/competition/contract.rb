@@ -57,40 +57,41 @@ class Competition < ActiveRecord::Base
           end
       end
 
-      private
+      # Rubocop says private is useless but I don't understand why
+      # private
 
-        def published?
-          published && published != "0"
-        end
+      def published?
+        published && published != "0"
+      end
 
-        def prepopulate_tracks!(_options)
-          track = Track.new
-          track.build_start_city
-          track.build_end_city
-          tracks << track
-        end
+      def prepopulate_tracks!(_options)
+        track = Track.new
+        track.build_start_city
+        track.build_end_city
+        tracks << track
+      end
 
-        def populate_city!(options)
-          return City.new unless options[:fragment].present? &&
-                                 options[:fragment][:name].present?
+      def populate_city!(options)
+        return City.new unless options[:fragment].present? &&
+                               options[:fragment][:name].present?
 
-          city = City.find_by(locality: options[:fragment][:locality])
+        city = City.find_by(locality: options[:fragment][:locality])
 
-          return city if city
-          City.new(options[:fragment])
-        end
+        return city if city
+        City.new(options[:fragment])
+      end
 
-        def prepopulate_start_city!(_options)
-          self.start_city = City.new
-        end
+      def prepopulate_start_city!(_options)
+        self.start_city = City.new
+      end
 
-        def prepopulate_end_city!(_options)
-          self.end_city = City.new
-        end
+      def prepopulate_end_city!(_options)
+        self.end_city = City.new
+      end
 
-        def populate_track!(options)
-          Track.new(start_time: options[:fragment][:start_time])
-        end
+      def populate_track!(options)
+        Track.new(start_time: options[:fragment][:start_time])
+      end
     end
 
     class Update < Create

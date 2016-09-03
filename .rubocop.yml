@@ -26,3 +26,5 @@ Lint/HandleExceptions:
   Exclude:
     - 'bin/rails'
     - 'bin/rake'
+Rails/OutputSafety:
+  Enabled: false
