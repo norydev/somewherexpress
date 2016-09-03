@@ -6,21 +6,18 @@ class Subscription < ActiveRecord::Base
       model :subscription
 
       properties :status, :rules
+      properties :user_id, :competition_id
 
       property :user, populate_if_empty: :populate_user! do
         properties :phone_number, :whatsapp, :telegram, :signal
       end
 
-      property :competition
-
-      properties :user_id, :competition_id
-
       validates :status, presence: true, inclusion: { in: ["pending", "accepted"] }
 
       validates :rules, acceptance: true, allow_nil: false
+      validates :user_id, :competition_id, presence: true
       validates_uniqueness_of :user_id, scope: :competition_id,
                                         message: "You already applied to this competition"
-      validates :user_id, :competition_id, presence: true
 
       def populate_user!(options)
         u = User.find_by(id: options[:fragment][:id])
@@ -34,7 +31,8 @@ class Subscription < ActiveRecord::Base
       model :subscription
 
       properties :status
-      validates :status, presence: true, inclusion: { in: ["pending", "accepted", "refused"] }
+      validates :status, presence: true,
+                         inclusion: { in: ["pending", "accepted", "refused"] }
     end
   end
 end

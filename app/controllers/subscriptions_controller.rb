@@ -30,8 +30,7 @@ class SubscriptionsController < ApplicationController
     authorize Subscription.new(competition: @competition)
 
     operation = run Subscription::Create,
-                    params: params.merge(current_user: current_user,
-                                         competition: @competition) do |op|
+                    params: params.merge(current_user: current_user) do |op|
       return respond_to do |format|
         @subscription = op.model
         format.html { redirect_to op.model.competition, notice: t("subscriptions.create.notice") }

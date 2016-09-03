@@ -25,9 +25,8 @@ class Subscription < ActiveRecord::Base
 
       def setup_params!(params)
         params[:subscription][:user_id] = params[:current_user][:id]
-        params[:subscription][:competition_id] = params[:competition][:id]
+        params[:subscription][:competition_id] = params[:competition_id]
         params[:subscription][:user][:id] = params[:current_user][:id]
-        params[:subscription][:competition] = Competition.find_by(id: params[:competition][:id])
       end
   end
 

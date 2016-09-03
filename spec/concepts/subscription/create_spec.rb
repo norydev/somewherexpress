@@ -40,7 +40,7 @@ RSpec.describe Subscription::Create do
                                            signal: "0"
                                          } },
                          current_user: user,
-                         competition: competition)
+                         competition_id: competition.id)
                    .model
 
     expect(subscription).to be_persisted
@@ -59,7 +59,7 @@ RSpec.describe Subscription::Create do
                                 signal: "0"
                               } },
               current_user: user,
-              competition: competition)
+              competition_id: competition.id)
     }.to raise_error Trailblazer::Operation::InvalidContract
   end
 
@@ -73,7 +73,7 @@ RSpec.describe Subscription::Create do
                                 signal: "0"
                               } },
               current_user: user,
-              competition: competition)
+              competition_id: competition.id)
         .model
     }.to raise_error Trailblazer::Operation::InvalidContract
   end
