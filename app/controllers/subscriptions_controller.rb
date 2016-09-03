@@ -32,50 +32,40 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    @subscription = current_user.subscriptions.new(subscription_params)
-    @subscription.competition = @competition
-    authorize @subscription
+    authorize Subscription.new(competition: @competition)
 
-    if @subscription.save
-      if current_user.notification_setting.as_user_new_subscription
-        UserMailer.as_user_new_subscription(current_user.id, @competition.id).deliver_later
-      end
-      if @competition.author.notification_setting.as_author_new_subscription
-        UserMailer.as_author_new_subscription(current_user.id, @competition.id, @competition.author.id).deliver_later
-      end
-
-      respond_to do |format|
-        format.html { redirect_to @subscription.competition, notice: t("subscriptions.create.notice") }
+    operation = run Subscription::Create,
+                    params: params.merge(current_user: current_user,
+                                         competition: @competition) do |op|
+      return respond_to do |format|
+        @subscription = op.model
+        format.html { redirect_to op.model.competition, notice: t("subscriptions.create.notice") }
         format.js
       end
-    else
-      respond_to do |format|
-        format.html { render :new }
-        format.js
-      end
+    end
+
+    respond_to do |format|
+      @subscription = operation.contract
+      format.html { render :new }
+      format.js
     end
   end
 
   def update
     authorize @subscription
 
-    if @subscription.update(subscription_params)
-      if @subscription.status != "pending" &&
-         @subscription.user.notification_setting.as_user_subscription_status_changed
-        UserMailer.as_user_subscription_status_changed(@subscription.user.id,
-                                                       @subscription.competition.id,
-                                                       @subscription.status).deliver_later
-      end
-
-      respond_to do |format|
+    operation = run Subscription::Update do |op|
+      return respond_to do |format|
+        @subscription = op.model
         format.html { redirect_to root_path }
         format.js
       end
-    else
-      respond_to do |format|
-        format.html { render :edit }
-        format.js
-      end
+    end
+
+    @subscription = operation.contract
+    respond_to do |format|
+      format.html { render :edit }
+      format.js
     end
   end
 
