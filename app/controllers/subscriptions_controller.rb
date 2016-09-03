@@ -17,14 +17,9 @@ class SubscriptionsController < ApplicationController
 
   # POST
   def new
-    last_sub = current_user.subscriptions.order(created_at: :desc).first
-    @subscription = Subscription.new(competition: @competition,
-                                     status: @competition.default_registration_status,
-                                     phone_number: last_sub.try(:phone_number) || nil,
-                                     whatsapp: last_sub.try(:whatsapp) || false,
-                                     telegram: last_sub.try(:telegram) || false,
-                                     signal: last_sub.try(:signal) || false)
-    authorize @subscription
+    authorize Subscription
+
+    @subscription = form Subscription::Create
   end
 
   def edit

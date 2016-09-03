@@ -5,7 +5,14 @@ class Subscription < ActiveRecord::Base
       include ActiveModel::ModelReflections
       model :subscription
 
-      properties :status, :rules, :phone_number, :whatsapp, :telegram, :signal
+      properties :status, :rules
+
+      property :user, populate_if_empty: :populate_user! do
+        properties :phone_number, :whatsapp, :telegram, :signal
+      end
+
+      property :competition
+
       properties :user_id, :competition_id
 
       validates :status, presence: true, inclusion: { in: ["pending", "accepted"] }
@@ -14,6 +21,12 @@ class Subscription < ActiveRecord::Base
       validates_uniqueness_of :user_id, scope: :competition_id,
                                         message: "You already applied to this competition"
       validates :user_id, :competition_id, presence: true
+
+      def populate_user!(options)
+        u = User.find_by(id: options[:fragment][:id])
+        u.assign_attributes(options[:fragment].except(:id))
+        u
+      end
     end
 
     class Update < Reform::Form
