@@ -19,7 +19,7 @@ class SubscriptionsController < ApplicationController
   def new
     authorize Subscription
 
-    @subscription = form Subscription::Create, user: current_user
+    form Subscription::Create, user: current_user
   end
 
   def edit
@@ -32,14 +32,14 @@ class SubscriptionsController < ApplicationController
     operation = run Subscription::Create,
                     params: params.merge(current_user: current_user) do |op|
       return respond_to do |format|
-        @subscription = op.model
+        @form = op.contract
         format.html { redirect_to op.model.competition, notice: t("subscriptions.create.notice") }
         format.js
       end
     end
 
     respond_to do |format|
-      @subscription = operation.contract
+      @form = operation.contract
       format.html { render :new }
       format.js
     end
