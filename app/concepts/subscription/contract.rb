@@ -8,7 +8,8 @@ class Subscription < ActiveRecord::Base
       properties :status, :rules
       properties :user_id, :competition_id
 
-      property :user, populate_if_empty: :populate_user! do
+      property :user, populate_if_empty: :populate_user!,
+                      prepopulator: :prepopulate_user! do
         properties :phone_number, :whatsapp, :telegram, :signal
       end
 
@@ -20,9 +21,11 @@ class Subscription < ActiveRecord::Base
                                         message: "You already applied to this competition"
 
       def populate_user!(options)
-        u = User.find_by(id: options[:fragment][:id])
-        u.assign_attributes(options[:fragment].except(:id))
-        u
+        User.find_by(id: options[:fragment][:id])
+      end
+
+      def prepopulate_user!(options)
+        self.user = options[:user]
       end
     end
 

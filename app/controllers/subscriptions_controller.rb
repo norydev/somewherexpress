@@ -19,7 +19,7 @@ class SubscriptionsController < ApplicationController
   def new
     authorize Subscription
 
-    @subscription = form Subscription::Create
+    @subscription = form Subscription::Create, user: current_user
   end
 
   def edit
