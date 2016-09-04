@@ -16,6 +16,7 @@
           <%= render 'users/avatar_small', user: user %>
         <% end %>
       </p>
+
       <%= render 'subscriptions/new', competition: competition %>
 
       <% if policy(competition).will_participate? %>

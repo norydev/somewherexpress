@@ -23,12 +23,10 @@
           <div class="modal-dialog" role="document">
             <div id="modal-content-<%= competition.id %>" class="modal-content">
               <% last_sub = current_user.subscriptions.order(created_at: :desc).first %>
-              <%= render 'subscriptions/form', competition: competition, subscription: Subscription.new(competition: competition,
-                                 status: competition.default_registration_status,
-                                 phone_number: last_sub.try(:phone_number) || nil,
-                                 whatsapp: last_sub.try(:whatsapp) || false,
-                                 telegram: last_sub.try(:telegram) || false,
-                                 signal: last_sub.try(:signal) || false) %>
+
+              <% subscription = Subscription::Contract::Create.new(Subscription.new)
+                 subscription.prepopulate!(user: current_user) %>
+              <%= render 'subscriptions/form', competition: competition, subscription: subscription %>
             </div>
           </div>
         </div>

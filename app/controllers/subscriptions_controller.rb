@@ -17,65 +17,51 @@ class SubscriptionsController < ApplicationController
 
   # POST
   def new
-    last_sub = current_user.subscriptions.order(created_at: :desc).first
-    @subscription = Subscription.new(competition: @competition,
-                                     status: @competition.default_registration_status,
-                                     phone_number: last_sub.try(:phone_number) || nil,
-                                     whatsapp: last_sub.try(:whatsapp) || false,
-                                     telegram: last_sub.try(:telegram) || false,
-                                     signal: last_sub.try(:signal) || false)
-    authorize @subscription
+    authorize Subscription
+
+    form Subscription::Create, user: current_user
   end
 
   def edit
     authorize @subscription, :update?
+
+    form Subscription::Update
   end
 
   def create
-    @subscription = current_user.subscriptions.new(subscription_params)
-    @subscription.competition = @competition
-    authorize @subscription
+    authorize Subscription.new(competition: @competition)
 
-    if @subscription.save
-      if current_user.notification_setting.as_user_new_subscription
-        UserMailer.as_user_new_subscription(current_user.id, @competition.id).deliver_later
-      end
-      if @competition.author.notification_setting.as_author_new_subscription
-        UserMailer.as_author_new_subscription(current_user.id, @competition.id, @competition.author.id).deliver_later
-      end
-
-      respond_to do |format|
-        format.html { redirect_to @subscription.competition, notice: t("subscriptions.create.notice") }
+    operation = run Subscription::Create,
+                    params: params.merge(current_user: current_user) do |op|
+      return respond_to do |format|
+        @form = op.contract
+        format.html { redirect_to op.model.competition, notice: t("subscriptions.create.notice") }
         format.js
       end
-    else
-      respond_to do |format|
-        format.html { render :new }
-        format.js
-      end
+    end
+
+    respond_to do |format|
+      @form = operation.contract
+      format.html { render :new }
+      format.js
     end
   end
 
   def update
     authorize @subscription
 
-    if @subscription.update(subscription_params)
-      if @subscription.status != "pending" &&
-         @subscription.user.notification_setting.as_user_subscription_status_changed
-        UserMailer.as_user_subscription_status_changed(@subscription.user.id,
-                                                       @subscription.competition.id,
-                                                       @subscription.status).deliver_later
-      end
-
-      respond_to do |format|
+    operation = run Subscription::Update do |op|
+      return respond_to do |format|
+        @form = op.contract
         format.html { redirect_to root_path }
         format.js
       end
-    else
-      respond_to do |format|
-        format.html { render :edit }
-        format.js
-      end
+    end
+
+    @form = operation.contract
+    respond_to do |format|
+      format.html { render :edit }
+      format.js
     end
   end
 
