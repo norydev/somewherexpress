@@ -24,6 +24,8 @@ class SubscriptionsController < ApplicationController
 
   def edit
     authorize @subscription, :update?
+
+    form Subscription::Update
   end
 
   def create
@@ -50,13 +52,13 @@ class SubscriptionsController < ApplicationController
 
     operation = run Subscription::Update do |op|
       return respond_to do |format|
-        @subscription = op.model
+        @form = op.contract
         format.html { redirect_to root_path }
         format.js
       end
     end
 
-    @subscription = operation.contract
+    @form = operation.contract
     respond_to do |format|
       format.html { render :edit }
       format.js

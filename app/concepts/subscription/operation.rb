@@ -28,9 +28,9 @@ class Subscription < ActiveRecord::Base
           params[:subscription][:user_id] = params[:current_user][:id]
           params[:subscription][:user][:id] = params[:current_user][:id]
         end
-        if params[:competition_id]
-          params[:subscription][:competition_id] = params[:competition_id]
-        end
+
+        return unless params[:competition_id]
+        params[:subscription][:competition_id] = params[:competition_id]
       end
   end
 

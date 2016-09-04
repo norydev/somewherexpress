@@ -34,6 +34,7 @@ class Subscription < ActiveRecord::Base
       model :subscription
 
       properties :status
+      property :user
       validates :status, presence: true,
                          inclusion: { in: ["pending", "accepted", "refused"] }
     end
