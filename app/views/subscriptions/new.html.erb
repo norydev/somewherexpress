@@ -1,16 +1,16 @@
 <%= content_for(:title) do %>
-  <%= @subscription.competition %> | Inscription
+  <%= @competition %> | Inscription
 <% end %>
 
 <%= content_for(:description) do %>
-  Inscription à <%= @subscription.competition %>. <%= t('welcome.index.intro') %>
+  Inscription à <%= @competition %>. <%= t('welcome.index.intro') %>
 <% end %>
 
 <div class="container padded-mini">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
       <div class="panel panel-default">
-        <%= render 'subscriptions/form', competition: @subscription.competition, subscription: @subscription %>
+        <%= render 'subscriptions/form', competition: @competition, subscription: @form %>
       </div>
     </div>
   </div>

@@ -24,8 +24,13 @@ class Subscription < ActiveRecord::Base
     private
 
       def setup_params!(params)
-        params[:subscription][:user_id] = params[:current_user][:id]
-        params[:subscription][:competition_id] = params[:competition][:id]
+        if params[:current_user]
+          params[:subscription][:user_id] = params[:current_user][:id]
+          params[:subscription][:user][:id] = params[:current_user][:id]
+        end
+
+        return unless params[:competition_id]
+        params[:subscription][:competition_id] = params[:competition_id]
       end
   end
 

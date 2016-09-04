@@ -17,35 +17,31 @@ class SubscriptionsController < ApplicationController
 
   # POST
   def new
-    last_sub = current_user.subscriptions.order(created_at: :desc).first
-    @subscription = Subscription.new(competition: @competition,
-                                     status: @competition.default_registration_status,
-                                     phone_number: last_sub.try(:phone_number) || nil,
-                                     whatsapp: last_sub.try(:whatsapp) || false,
-                                     telegram: last_sub.try(:telegram) || false,
-                                     signal: last_sub.try(:signal) || false)
-    authorize @subscription
+    authorize Subscription
+
+    form Subscription::Create, user: current_user
   end
 
   def edit
     authorize @subscription, :update?
+
+    form Subscription::Update
   end
 
   def create
     authorize Subscription.new(competition: @competition)
 
     operation = run Subscription::Create,
-                    params: params.merge(current_user: current_user,
-                                         competition: @competition) do |op|
+                    params: params.merge(current_user: current_user) do |op|
       return respond_to do |format|
-        @subscription = op.model
+        @form = op.contract
         format.html { redirect_to op.model.competition, notice: t("subscriptions.create.notice") }
         format.js
       end
     end
 
     respond_to do |format|
-      @subscription = operation.contract
+      @form = operation.contract
       format.html { render :new }
       format.js
     end
@@ -56,13 +52,13 @@ class SubscriptionsController < ApplicationController
 
     operation = run Subscription::Update do |op|
       return respond_to do |format|
-        @subscription = op.model
+        @form = op.contract
         format.html { redirect_to root_path }
         format.js
       end
     end
 
-    @subscription = operation.contract
+    @form = operation.contract
     respond_to do |format|
       format.html { render :edit }
       format.js

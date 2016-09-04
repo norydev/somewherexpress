@@ -34,7 +34,7 @@ RSpec.describe Subscription::Update do
     subscription = Subscription::Create
                    .call(subscription: { rules: "1", status: "accepted" },
                          current_user: user,
-                         competition: competition)
+                         competition_id: competition.id)
                    .model
 
     Subscription::Update.call(id: subscription.id,
@@ -47,7 +47,7 @@ RSpec.describe Subscription::Update do
     subscription = Subscription::Create
                    .call(subscription: { rules: "1", status: "accepted" },
                          current_user: user,
-                         competition: competition)
+                         competition_id: competition.id)
                    .model
 
     expect {

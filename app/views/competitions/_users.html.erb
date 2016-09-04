@@ -6,7 +6,7 @@
     <ul class="list-group">
       <% competition.pending_users.each do |user| %>
         <li id="competition-<%= competition.id %>-user-<%= user.id %>" class="list-group-item flex-container">
-          <%= render 'subscriptions/user_registred', competition: competition, user: user, subscription: competition.subscriptions.find_by(user: user) %>
+          <%= render 'subscriptions/user_registred', competition: competition, user: user %>
           <div class="edit-form flex-item marged-micro-sides">
             <%= render 'subscriptions/edit', subscription: competition.subscriptions.find_by(user: user), competition: competition, user: user %>
           </div>
@@ -27,7 +27,7 @@
     <ul class="list-group">
       <% competition.accepted_users.each do |user| %>
         <li class="list-group-item flex-container">
-          <%= render 'subscriptions/user_registred', competition: competition, user: user, subscription: competition.subscriptions.find_by(user: user) %>
+          <%= render 'subscriptions/user_registred', competition: competition, user: user %>
           <div class="flex-item">
             <i class="fa fa-check text-success cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.accepted_short') %>"></i>
           </div>
@@ -45,7 +45,7 @@
     <ul class="list-group">
       <% competition.refused_users.each do |user| %>
         <li class="list-group-item flex-container">
-          <%= render 'subscriptions/user_registred', competition: competition, user: user, subscription: competition.subscriptions.find_by(user: user) %>
+          <%= render 'subscriptions/user_registred', competition: competition, user: user %>
           <div class="flex-item">
             <i class="fa fa-times text-danger cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.refused_short') %>"></i>
           </div>
