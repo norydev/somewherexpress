@@ -13,7 +13,8 @@ class Subscription < ActiveRecord::Base
         properties :phone_number, :whatsapp, :telegram, :signal
       end
 
-      validates :status, presence: true, inclusion: { in: ["pending", "accepted"] }
+      validates :status, presence: true,
+                         inclusion: { in: ["pending", "accepted"] }
 
       validates :rules, acceptance: true, allow_nil: false
       validates :user_id, :competition_id, presence: true
