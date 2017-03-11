@@ -56,6 +56,9 @@ class Subscription < ApplicationRecord
 
     private
 
+      def setup_params!(params)
+      end
+
       def send_emails!
         if model.status != "pending" &&
            model.user.notification_setting.as_user_subscription_status_changed

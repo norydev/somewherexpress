@@ -32,7 +32,13 @@ RSpec.describe Subscription::Update do
 
   it "updates a subscription" do
     subscription = Subscription::Create
-                   .call(subscription: { rules: "1", status: "accepted" },
+                   .call(subscription: { rules: "1", status: "pending",
+                                         user: {
+                                           phone_number: "+41791234455",
+                                           whatsapp: "0",
+                                           telegram: "0",
+                                           signal: "0"
+                                         } },
                          current_user: user,
                          competition_id: competition.id)
                    .model
@@ -40,12 +46,18 @@ RSpec.describe Subscription::Update do
     Subscription::Update.call(id: subscription.id,
                               subscription: { status: "accepted" })
 
-    expect(subscription.status).to eq "accepted"
+    expect(subscription.reload.status).to eq "accepted"
   end
 
   it "does not update if invalid status" do
     subscription = Subscription::Create
-                   .call(subscription: { rules: "1", status: "accepted" },
+                   .call(subscription: { rules: "1", status: "pending",
+                                         user: {
+                                           phone_number: "+41791234455",
+                                           whatsapp: "0",
+                                           telegram: "0",
+                                           signal: "0"
+                                         } },
                          current_user: user,
                          competition_id: competition.id)
                    .model
