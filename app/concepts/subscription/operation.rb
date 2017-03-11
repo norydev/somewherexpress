@@ -56,8 +56,7 @@ class Subscription < ApplicationRecord
 
     private
 
-      def setup_params!(params)
-      end
+      def setup_params!(params); end
 
       def send_emails!
         if model.status != "pending" &&

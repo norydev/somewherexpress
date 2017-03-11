@@ -28,3 +28,5 @@ Lint/HandleExceptions:
     - 'bin/rake'
 Rails/OutputSafety:
   Enabled: false
+Style/Documentation:
+  Enabled: false

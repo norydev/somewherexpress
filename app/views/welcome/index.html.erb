@@ -19,7 +19,7 @@
             <%= t('.intro') %>
           </div>
           <div class="users">
-            <% policy_scope(User).sort_by{ |u| u.founder_badge ? 0 : 1 }.each do |user| %>
+            <% policy_scope(User).sort_by{ |u| -u.badges.count }.each do |user| %>
               <%= link_to user do %>
                 <div class="marged-micro-bottom" style="display: inline-block;"><%= render 'users/avatar_medium', user: user %></div>
               <% end %>

@@ -97,14 +97,11 @@ class Competition < ApplicationRecord
     class Update < Create
       private
 
-        def prepopulate_tracks!(_options)
-        end
+        def prepopulate_tracks!(_options); end
 
-        def prepopulate_start_city!(_options)
-        end
+        def prepopulate_start_city!(_options); end
 
-        def prepopulate_end_city!(_options)
-        end
+        def prepopulate_end_city!(_options); end
     end
   end
 end

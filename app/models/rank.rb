@@ -25,28 +25,28 @@ class Rank < ApplicationRecord
   private
 
     def set_competition_ranks
-      if race.is_a?(Track)
-        c = race.competition
-        c_r = Rank.where(race: c, user: user).first_or_create
-        c_r.points = c.t_ranks.where(user: user).map(&:points).reduce(&:+)
-        c_r.save
+      return unless race.is_a?(Track)
 
-        if c.multiple_tracks?
-          # multi track competition: result according to nb of points
-          results = Rank.where(race: c).order(points: :desc)
-          a = results.map(&:points)
-          ranks = a.map { |e| a.index(e) + 1 } # ranks with ex-aequo
+      c = race.competition
+      c_r = Rank.where(race: c, user: user).first_or_create
+      c_r.points = c.t_ranks.where(user: user).map(&:points).reduce(&:+)
+      c_r.save
 
-          results.each_with_index do |r, i|
-            r.result = ranks[i]
-            r.save
-          end
-        else
-          # mono track competition: result = track result, dsq if dsq in track
-          c_r.result = result
-          c_r.dsq = dsq
-          c_r.save
+      if c.multiple_tracks?
+        # multi track competition: result according to nb of points
+        results = Rank.where(race: c).order(points: :desc)
+        a = results.map(&:points)
+        ranks = a.map { |e| a.index(e) + 1 } # ranks with ex-aequo
+
+        results.each_with_index do |r, i|
+          r.result = ranks[i]
+          r.save
         end
+      else
+        # mono track competition: result = track result, dsq if dsq in track
+        c_r.result = result
+        c_r.dsq = dsq
+        c_r.save
       end
     end
 end

@@ -58,8 +58,8 @@ class User < ApplicationRecord
 
   has_many :competitions, through: :subscriptions
   has_many :finished_competitions, -> { finished },
-                                   through: :subscriptions,
-                                   source: :competition
+           through: :subscriptions,
+           source: :competition
 
   has_many :competition_victories, lambda { |object|
     finished.joins(:ranks).where(ranks: { result: 1, user_id: object.id })
