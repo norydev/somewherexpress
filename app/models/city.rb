@@ -55,7 +55,7 @@ class City < ApplicationRecord
           .where(competitions: { finished: true })
           .ids
 
-    where.(id: fc1 | fc2 | fc3 | fc4)
+    where(id: fc1 | fc2 | fc3 | fc4)
   end
 
   def self.nowhere
