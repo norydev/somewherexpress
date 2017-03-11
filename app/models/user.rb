@@ -71,7 +71,8 @@ class User < ApplicationRecord
 
   has_many :ranks, dependent: :nullify
 
-  has_many :creations, foreign_key: "author_id", class_name: "Competition", dependent: :nullify
+  has_many :creations, foreign_key: "author_id", class_name: "Competition",
+                       dependent: :nullify
 
   has_many :badges, dependent: :destroy
 

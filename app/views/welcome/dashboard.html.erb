@@ -118,7 +118,7 @@
 
         <% if current_user.creations.not_finished.any? %>
           <div role="tabpanel" class="tab-pane" id="mines">
-            <% current_user.creations.not_finished.includes(:subscriptions, :users).each do |competition| %>
+            <% current_user.creations.not_finished.preload(:subscriptions, :users).each do |competition| %>
               <div class="panel panel-default marged-mini">
                 <div class="panel-heading">
                   <strong><i class="fa fa-map-signs"></i> <%= competition %></strong>
