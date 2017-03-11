@@ -33,7 +33,7 @@
 #  use_gravatar           :boolean          default(FALSE), not null
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   scope :want_email_for_new_competition, lambda {
     joins(:notification_setting)
       .where(deleted_at: nil)

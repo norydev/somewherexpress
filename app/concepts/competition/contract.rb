@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   module Contract
     class Create < Reform::Form
       include ActiveModel::ModelReflections

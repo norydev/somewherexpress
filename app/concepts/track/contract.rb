@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Track < ActiveRecord::Base
+class Track < ApplicationRecord
   module Contract
     class Update < Reform::Form
       include ActiveModel::ModelReflections

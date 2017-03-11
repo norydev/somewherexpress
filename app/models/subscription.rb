@@ -15,12 +15,10 @@
 #  signal         :boolean          default(FALSE), not null
 #
 
-class Subscription < ActiveRecord::Base
+class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :competition
 
-  validates :user_id, uniqueness: { scope: :competition_id, message: "You already applied to this competition" }
-  validates :user, :competition, presence: true
   validates :rules, acceptance: { on: :create, allow_nil: false }
 
   after_update :status_changed

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.2'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -40,7 +40,6 @@ gem 'modernizr-rails'
 gem 'premailer-rails'
 gem 'omniauth-facebook'
 gem 'icalendar'
-gem 'activerecord_any_of'
 gem 'raygun4ruby'
 
 # For manual updates on cities
@@ -48,8 +47,6 @@ gem 'google_places'
 
 # Background-jobs
 gem 'sidekiq'
-gem 'sinatra'  # Dependency of sidekiq
-gem 'sidekiq-failures'
 
 # Trailblazer
 gem "trailblazer-rails"
@@ -77,7 +74,6 @@ group :development, :test do
   gem 'annotate'
   gem 'binding_of_caller'
   gem 'better_errors'
-  gem 'quiet_assets'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'letter_opener'

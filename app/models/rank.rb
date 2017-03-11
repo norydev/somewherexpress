@@ -14,7 +14,7 @@
 #  dsq        :boolean          default(FALSE), not null
 #
 
-class Rank < ActiveRecord::Base
+class Rank < ApplicationRecord
   belongs_to :race, polymorphic: true
   belongs_to :user
 

@@ -21,7 +21,7 @@
 #  end_city_id                 :integer
 #
 
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
   has_many :tracks, -> { order :start_time }, dependent: :destroy

@@ -12,6 +12,6 @@
 #  updated_at  :datetime         not null
 #
 
-class Badge < ActiveRecord::Base
+class Badge < ApplicationRecord
   belongs_to :user
 end
