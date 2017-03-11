@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class City < ActiveRecord::Base
+class City < ApplicationRecord
   class Form < Reform::Form
     property :name
     property :street_number

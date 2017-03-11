@@ -21,7 +21,7 @@
 #  picture                           :string
 #
 
-class City < ActiveRecord::Base
+class City < ApplicationRecord
   has_many :start_of_competitions, class_name: "Competition", foreign_key: "start_city_id"
   has_many :end_of_competitions, class_name: "Competition", foreign_key: "end_city_id"
 
@@ -39,31 +39,31 @@ class City < ActiveRecord::Base
   end
 
   def self.on_map
-    fc1 = includes(:start_of_competitions)
+    fc1 = joins(:start_of_competitions)
           .where(competitions: { finished: true })
-          .distinct
+          .ids
 
-    fc2 = includes(:end_of_competitions)
-          .where(end_of_competitions_cities: { finished: true })
-          .distinct
+    fc2 = joins(:end_of_competitions)
+          .where(competitions: { finished: true })
+          .ids
 
-    fc3 = includes(:start_of_track_competitions)
-          .where(start_of_track_competitions_cities: { finished: true })
-          .distinct
+    fc3 = joins(:start_of_track_competitions)
+          .where(competitions: { finished: true })
+          .ids
 
-    fc4 = includes(:end_of_track_competitions)
-          .where(end_of_track_competitions_cities: { finished: true })
-          .distinct
+    fc4 = joins(:end_of_track_competitions)
+          .where(competitions: { finished: true })
+          .ids
 
-    where.any_of(fc1, fc2, fc3, fc4)
+    where.(id: fc1 | fc2 | fc3 | fc4)
   end
 
   def self.nowhere
-    c1 = joins(:start_of_competitions)
-    c2 = joins(:end_of_competitions)
-    c3 = joins(:start_of_tracks)
-    c4 = joins(:end_of_tracks)
+    c1 = joins(:start_of_competitions).ids
+    c2 = joins(:end_of_competitions).ids
+    c3 = joins(:start_of_tracks).ids
+    c4 = joins(:end_of_tracks).ids
 
-    City.all - c1 - c2 - c3 - c4
+    City.where.not(id: c1 | c2 | c3 | c4)
   end
 end

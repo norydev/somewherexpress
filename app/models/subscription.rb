@@ -15,7 +15,7 @@
 #  signal         :boolean          default(FALSE), not null
 #
 
-class Subscription < ActiveRecord::Base
+class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :competition
 

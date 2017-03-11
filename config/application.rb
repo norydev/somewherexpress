@@ -44,9 +44,6 @@ module Somewherexpress
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = :fr
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
     # Devise Layout
     config.to_prepare do
       Devise::Mailer.layout 'mailer' # email.haml or email.erb

@@ -16,6 +16,6 @@
 #  locale                              :string           default("fr"), not null
 #
 
-class NotificationSetting < ActiveRecord::Base
+class NotificationSetting < ApplicationRecord
   belongs_to :user
 end

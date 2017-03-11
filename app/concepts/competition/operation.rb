@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   class Create < Trailblazer::Operation
     include Model
     model Competition, :create

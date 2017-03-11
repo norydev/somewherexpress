@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Subscription < ActiveRecord::Base
+class Subscription < ApplicationRecord
   class Create < Trailblazer::Operation
     include Model
     model Subscription, :create

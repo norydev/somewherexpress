@@ -12,7 +12,7 @@
 #  end_city_id    :integer
 #
 
-class Track < ActiveRecord::Base
+class Track < ApplicationRecord
   belongs_to :competition
   has_many :ranks, as: :race, dependent: :destroy
 

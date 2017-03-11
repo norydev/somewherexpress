@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Track < ActiveRecord::Base
+class Track < ApplicationRecord
   class Update < Trailblazer::Operation
     include Model
     model Track, :update
