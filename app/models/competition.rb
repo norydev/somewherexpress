@@ -22,11 +22,25 @@
 #
 
 class Competition < ApplicationRecord
+  scope :finished, -> { where(finished: true).order(start_date: :desc) }
+  scope :not_finished, -> { where(finished: false).order(:start_date) }
+
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
+  has_many :accepted_users, -> { where(subscriptions: { status: "accepted" }) },
+                            through: :subscriptions,
+                            source: :user
+  has_many :pending_users, -> { where(subscriptions: { status: "pending" }) },
+                           through: :subscriptions,
+                           source: :user
+  has_many :refused_users, -> { where(subscriptions: { status: "refused" }) },
+                           through: :subscriptions,
+                           source: :user
+
   has_many :tracks, -> { order :start_time }, dependent: :destroy
 
   has_many :ranks, as: :race, dependent: :destroy
+  has_many :t_ranks, through: :tracks, source: :ranks
 
   belongs_to :start_city, class_name: "City", foreign_key: "start_city_id"
   belongs_to :end_city, class_name: "City", foreign_key: "end_city_id"
@@ -71,14 +85,10 @@ class Competition < ApplicationRecord
                             "default_registration_status").present?
   end
 
-  def t_ranks
-    Rank.where(race_id: tracks.pluck(:id), race_type: "Track")
-  end
-
   def registrations_open?
     if !finished && start_registration && end_registration
       Time.current.between?(start_registration, end_registration)
-    elsif !finished && start_registration
+    elsif !finished && start_registration && start_date
       Time.current.between?(start_registration, start_date - 1)
     else
       false
@@ -101,32 +111,12 @@ class Competition < ApplicationRecord
     end
   end
 
-  def accepted_users
-    users.includes(:subscriptions).where("subscriptions.status = 'accepted'")
-  end
-
-  def pending_users
-    users.includes(:subscriptions).where("subscriptions.status = 'pending'")
-  end
-
-  def refused_users
-    users.includes(:subscriptions).where("subscriptions.status = 'refused'")
-  end
-
   def self.open_for_registration
-    where(finished: false).order(:start_date).select(&:registrations_open?)
+    not_finished.select(&:registrations_open?)
   end
 
   def self.not_open_for_registration
-    where(finished: false).order(:start_date).reject(&:registrations_open?)
-  end
-
-  def self.finished
-    where(finished: true).order(start_date: :desc)
-  end
-
-  def self.not_finished
-    where(finished: false).order(:start_date)
+    not_finished.reject(&:registrations_open?)
   end
 
   def ical_event

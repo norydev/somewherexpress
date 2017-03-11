@@ -55,7 +55,12 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   has_many :subscriptions, dependent: :destroy
+
   has_many :competitions, through: :subscriptions
+  has_many :finished_competitions, -> { finished },
+                                   through: :subscriptions,
+                                   source: :competition
+
   has_many :ranks, dependent: :nullify
 
   has_many :creations, foreign_key: "author_id", class_name: "Competition", dependent: :nullify
@@ -101,10 +106,6 @@ class User < ApplicationRecord
     provider == "facebook" && uid.present?
   end
 
-  def finished_competitions
-    competitions.finished
-  end
-
   # instead of deleting, indicate the user requested a delete & timestamp it
   def soft_delete
     update_attributes(deleted_at: Time.current, old_email: email,
@@ -132,7 +133,9 @@ class User < ApplicationRecord
   end
 
   def pending_registrations_for_creations
-    creations.not_finished.map { |c| c.subscriptions.where(status: "pending") }.flatten.size
+    Subscription.where(status: "pending")
+                .where(competition: creations.not_finished)
+                .count
   end
 
   def self.find_for_facebook_oauth(auth)

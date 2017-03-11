@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
 
   def index
     @markers = Gmaps4rails.build_markers(
-      City.includes(end_of_tracks: [:competition, ranks: [:user]])
+      City.preload(end_of_tracks: [:competition, ranks: [:user]])
           .on_map.uniq { |m| "#{m[:lat]}-#{m[:lng]}" }
     ) do |city, marker|
       marker.lat city.lat
