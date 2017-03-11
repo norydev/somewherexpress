@@ -62,10 +62,9 @@ class Competition < ApplicationRecord
 
   def route
     rte = "#{start_city.locality} (#{start_city.country_short}) – "
-    tracks.includes(:end_city).order(:start_time).each do |t|
-      unless t.end_city.name == end_city.name
-        rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
-      end
+    tracks.joins(:end_city).order(:start_time).each do |t|
+      next if t.end_city.locality == end_city.locality
+      rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
     end
     rte += "#{end_city.locality} (#{end_city.country_short})"
   end

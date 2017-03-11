@@ -16,31 +16,29 @@
       <div class="panel panel-default">
         <table class="table">
           <tbody>
-            <% @users.sort_by{ |u| [-Competition.includes(:ranks).where(finished: true).where('ranks.result = ? AND ranks.user_id = ?', 1, u.id).references(:ranks).count, -u.ranks.where(race_type: "Track", result: 1).count, u.founder_badge ? 0 : 1] }.each_with_index do |user, index| %>
+            <% @users.sort_by{ |u| [-u.competition_victories.count, -u.track_victories.count, -u.badges.count] }.each do |user| %>
               <tr>
                 <td>
                   <%= render 'users/avatar_medium', user: user %>
                 </td>
                 <td class="text-uppercase"><%= link_to user, user %></td>
                 <td>
-                  <% user.subscriptions.each do |s| %>
-                    <% if s.result == 1 && s.competition.finished %>
-                      <%= link_to s.competition do %>
-                        <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
-                      <% end %>
+                  <% user.competition_victories.each do |competition| %>
+                    <%= link_to competition do %>
+                      <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= competition %>"></i></span>
                     <% end %>
                   <% end %>
                 </td>
                 <td>
-                  <% user.ranks.where(race_type: "Track", result: 1).each do |r| %>
-                    <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-                      <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
+                  <% user.track_victories.each do |track| %>
+                    <%= link_to competition_path(track.competition, anchor: "track-#{track.id}-result") do %>
+                      <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
                     <% end %>
                   <% end %>
                 </td>
                 <td>
-                  <% if user.founder_badge %>
-                    <%= image_tag user.founder_badge.picture, class: "award", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{user.founder_badge.description}" %>
+                  <% user.badges.each do |badge| %>
+                    <%= image_tag badge.picture, class: "award", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{badge.description}" %>
                   <% end %>
                 </td>
               </tr>

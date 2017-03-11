@@ -2,7 +2,7 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.joins(:competitions).uniq.all
+      scope.joins(:competitions).group("users.id").all
     end
   end
 
