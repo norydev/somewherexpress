@@ -58,12 +58,21 @@ class User < ApplicationRecord
 
   has_many :competitions, through: :subscriptions
   has_many :finished_competitions, -> { finished },
-                                   through: :subscriptions,
-                                   source: :competition
+           through: :subscriptions,
+           source: :competition
+
+  has_many :competition_victories, lambda { |object|
+    finished.joins(:ranks).where(ranks: { result: 1, user_id: object.id })
+  }, through: :subscriptions, source: :competition
+
+  has_many :track_victories, lambda { |object|
+    joins(:ranks).where(ranks: { result: 1, user_id: object.id })
+  }, through: :competitions, source: :tracks
 
   has_many :ranks, dependent: :nullify
 
-  has_many :creations, foreign_key: "author_id", class_name: "Competition", dependent: :nullify
+  has_many :creations, foreign_key: "author_id", class_name: "Competition",
+                       dependent: :nullify
 
   has_many :badges, dependent: :destroy
 

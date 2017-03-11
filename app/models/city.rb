@@ -40,19 +40,19 @@ class City < ApplicationRecord
 
   def self.on_map
     fc1 = joins(:start_of_competitions)
-          .where(competitions: { finished: true })
+          .merge(Competition.finished)
           .ids
 
     fc2 = joins(:end_of_competitions)
-          .where(competitions: { finished: true })
+          .merge(Competition.finished)
           .ids
 
     fc3 = joins(:start_of_track_competitions)
-          .where(competitions: { finished: true })
+          .merge(Competition.finished)
           .ids
 
     fc4 = joins(:end_of_track_competitions)
-          .where(competitions: { finished: true })
+          .merge(Competition.finished)
           .ids
 
     where(id: fc1 | fc2 | fc3 | fc4)

@@ -28,14 +28,14 @@ class Competition < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
   has_many :accepted_users, -> { where(subscriptions: { status: "accepted" }) },
-                            through: :subscriptions,
-                            source: :user
+           through: :subscriptions,
+           source: :user
   has_many :pending_users, -> { where(subscriptions: { status: "pending" }) },
-                           through: :subscriptions,
-                           source: :user
+           through: :subscriptions,
+           source: :user
   has_many :refused_users, -> { where(subscriptions: { status: "refused" }) },
-                           through: :subscriptions,
-                           source: :user
+           through: :subscriptions,
+           source: :user
 
   has_many :tracks, -> { order :start_time }, dependent: :destroy
 
@@ -62,10 +62,9 @@ class Competition < ApplicationRecord
 
   def route
     rte = "#{start_city.locality} (#{start_city.country_short}) – "
-    tracks.includes(:end_city).order(:start_time).each do |t|
-      unless t.end_city.name == end_city.name
-        rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
-      end
+    tracks.joins(:end_city).order(:start_time).each do |t|
+      next if t.end_city.locality == end_city.locality
+      rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
     end
     rte += "#{end_city.locality} (#{end_city.country_short})"
   end
@@ -86,10 +85,12 @@ class Competition < ApplicationRecord
   end
 
   def registrations_open?
-    if !finished && start_registration && end_registration
+    return false if finished || start_registration.blank?
+
+    if end_registration
       Time.current.between?(start_registration, end_registration)
-    elsif !finished && start_registration && start_date
-      Time.current.between?(start_registration, start_date - 1)
+    elsif start_date
+      Time.current.between?(start_registration, start_date - 1.day)
     else
       false
     end
