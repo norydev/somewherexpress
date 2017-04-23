@@ -219,6 +219,15 @@ table tbody tr td {
   }
 }
 
+.bg-welcome {
+  &:nth-child(odd) {
+    @extend .bg-red
+  }
+  &:nth-child(even) {
+    background-color: #ffffff;
+  }
+}
+
 .intro .lead {
   color: $white;
 }

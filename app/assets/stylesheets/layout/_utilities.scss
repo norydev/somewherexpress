@@ -8,6 +8,12 @@
 .padded {
   padding-top: 5em;
   padding-bottom: 5em;
+  &-top {
+    padding-top: 5em;
+  }
+  &-bottom {
+    padding-bottom: 5em;
+  }
   &-medium {
   padding-top: 2.5em;
   padding-bottom: 2.5em;
