@@ -9,6 +9,7 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
     - 'vendor/**/*'
+    - 'Gemfile'
     - !ruby/regexp /old_and_unused\.rb$/
 Rails:
   Enabled: true
@@ -20,6 +21,8 @@ Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
 Style/WordArray:
   EnforcedStyle: brackets
+Style/SymbolArray:
+  EnforcedStyle: brackets
 Metrics/LineLength:
   Max: 120
 Lint/HandleExceptions:
@@ -29,4 +32,10 @@ Lint/HandleExceptions:
 Rails/OutputSafety:
   Enabled: false
 Style/Documentation:
+  Enabled: false
+Style/EmptyLineAfterMagicComment:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+Lint/AmbiguousBlockAssociation:
   Enabled: false

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 namespace :users do
   desc "merge one user in another one"
-  task :merge, [:target_id, :from_id] => [:environment] do |task, args|
+  task :merge, [:target_id, :from_id] => [:environment] do |_task, args|
     target_user = User.find(args[:target_id])
     from_user = User.find(args[:from_id])
 

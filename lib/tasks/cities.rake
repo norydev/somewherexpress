@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :cities do
   desc "fetch picture for existing cities"
   task fetch_picture: :environment do
@@ -9,6 +10,7 @@ namespace :cities do
         city.update!(picture: picture)
         p "new city picture: #{city.picture}"
       rescue
+        p "Something went wrong with Google API"
       end
     end
   end
