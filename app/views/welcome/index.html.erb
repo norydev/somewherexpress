@@ -9,8 +9,7 @@
 <%= content_for(:og_image) { "https://www.somewherexpress.com/master_og_image.jpg" } %>
 
 <div class="welcome">
-  <div class="bg-red">
-
+  <div class="bg-welcome">
     <%= render 'shared/home_navbar' %>
     <div class="container padded intro">
       <div class="row">
@@ -31,7 +30,8 @@
   </div>
 
   <% if policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any? %>
-    <div class="container padded-mini">
+  <div class="bg-welcome">
+    <div class="container padded-bottom padded-mini-top">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
           <% if policy_scope(Competition).open_for_registration.any? %>
@@ -50,20 +50,66 @@
         </div>
       </div>
     </div>
+  </div>
   <% end %>
 
-  <div class="<%= (policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any?) ? 'bg-red' : '' %>">
-    <div class="container padded-mini">
+  <div class="bg-welcome">
+    <div class="container padded-bottom padded-mini-top">
       <h2 class="text-center"><%= t('.passed_title') %></h2>
       <div id="map" style="width: 100%; height: 550px; max-height: 90vh;"></div>
-      <div class="card-deck marged-mini-top">
-        <% policy_scope(Competition).finished.each do |competition| %>
-          <%= render 'competitions/card', competition: competition, status: "finished" %>
-        <% end %>
-      </div>
     </div>
   </div>
 
+  <div class="bg-welcome">
+    <div class="container padded-bottom padded-mini-top">
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+          <h2 class="text-center">Hall of Fame</h2>
+          <!-- Panel becomes useless... -->
+          <div class="panel panel-default">
+          <table class="table">
+            <tbody>
+              <% policy_scope(User).sort_by{ |u| [-u.competition_victories.count, -u.track_victories.count, -u.badges.count] }.first(5).each do |user| %>
+                  <tr>
+                    <td>
+                      <%= render 'users/avatar_medium', user: user %>
+                    </td>
+                    <td class="text-uppercase"><%= link_to user, user %></td>
+                    <td>
+                      <% user.competition_victories.each do |competition| %>
+                        <%= link_to competition do %>
+                          <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= competition %>"></i></span>
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% user.track_victories.each do |track| %>
+                        <%= link_to competition_path(track.competition, anchor: "track-#{track.id}-result") do %>
+                          <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% user.badges.each do |badge| %>
+                        <%= image_tag badge.picture, class: "award", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{badge.description}" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td colspan="5" class="bg-light-grey">
+                    <%= link_to users_path do %>
+                    <div class="text-center"><i class="fa fa-plus marged-micro-sides"></i> <%= t('.link_hall_of_fame') %></div>
+                    <% end %>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% content_for(:after_js) do %>

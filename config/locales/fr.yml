@@ -12,6 +12,7 @@ fr:
       open_title: "Inscriptions ouvertes"
       closed_title: "Inscriptions closes"
       passed_title: "Compétitions terminées"
+      link_hall_of_fame: "Voir classement complet"
     dashboard:
       creations_title: "Compétitions que j'organise"
   user_mailer:

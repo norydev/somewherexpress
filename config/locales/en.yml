@@ -12,6 +12,7 @@ en:
       open_title: "Registrations open"
       closed_title: "Registrations closed"
       passed_title: "Passed competitions"
+      link_hall_of_fame: "See full score board"
     dashboard:
       creations_title: "Competitions I organize"
   user_mailer:
