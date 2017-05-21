@@ -55,7 +55,7 @@ gem "trailblazer-loader"
 gem "trailblazer-rails"
 
 # admin panel
-gem "activeadmin", github: "activeadmin"
+gem "activeadmin"
 
 source "https://rails-assets.org" do
   gem "rails-assets-underscore"
