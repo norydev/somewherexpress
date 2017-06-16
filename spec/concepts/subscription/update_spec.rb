@@ -33,7 +33,7 @@ RSpec.describe Subscription::Update do
   it "updates a subscription" do
     subscription = Subscription::Create
                    .call(subscription: { rules: "1", status: "pending",
-                                         user: {
+                                         user_attributes: {
                                            phone_number: "+41791234455",
                                            whatsapp: "0",
                                            telegram: "0",
@@ -52,7 +52,7 @@ RSpec.describe Subscription::Update do
   it "does not update if invalid status" do
     subscription = Subscription::Create
                    .call(subscription: { rules: "1", status: "pending",
-                                         user: {
+                                         user_attributes: {
                                            phone_number: "+41791234455",
                                            whatsapp: "0",
                                            telegram: "0",

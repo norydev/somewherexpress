@@ -18,7 +18,7 @@ class Subscription < ApplicationRecord
       def setup_params!(params)
         if params[:current_user]
           params[:subscription][:user_id] = params[:current_user][:id]
-          params[:subscription][:user][:id] = params[:current_user][:id]
+          params[:subscription][:user_attributes][:id] = params[:current_user][:id]
         end
 
         return unless params[:competition_id]
