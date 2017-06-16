@@ -24,7 +24,7 @@ module Users
 
       # PUT /resource
       def update_resource(resource, params)
-        params.permit(:email, :password, :current_password)
+        params.slice(:email, :password, :current_password)
         if resource.provider == "facebook"
           resource.update_without_password(params)
         else
