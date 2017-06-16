@@ -33,7 +33,7 @@ RSpec.describe Subscription::Create do
   it "creates a subscription" do
     subscription = Subscription::Create
                    .call(subscription: { rules: "1", status: "pending",
-                                         user: {
+                                         user_attributes: {
                                            phone_number: "+41791234455",
                                            whatsapp: "0",
                                            telegram: "0",
@@ -53,7 +53,7 @@ RSpec.describe Subscription::Create do
     expect {
       Subscription::Create
         .call(subscription: { rules: "1", status: "hacked",
-                              user: {
+                              user_attributes: {
                                 whatsapp: "0",
                                 telegram: "0",
                                 signal: "0"
@@ -66,7 +66,7 @@ RSpec.describe Subscription::Create do
   it "does not create if rules not accepted" do
     subscription = Subscription::Create
                    .call(subscription: { rules: "0", status: "pending",
-                                         user: {
+                                         user_attributes: {
                                            whatsapp: "0",
                                            telegram: "0",
                                            signal: "0"
