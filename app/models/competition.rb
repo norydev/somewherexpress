@@ -26,6 +26,8 @@ class Competition < ApplicationRecord
   scope :not_finished, -> { where(finished: false).order(:start_date) }
 
   has_many :subscriptions, dependent: :destroy
+  has_many :pending_subscriptions, -> { where(status: "pending").order(:created_at) },
+           class_name: "Subscription"
   has_many :users, through: :subscriptions
   has_many :accepted_users, -> { where(subscriptions: { status: "accepted" }) },
            through: :subscriptions,
