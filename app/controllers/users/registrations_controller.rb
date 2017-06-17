@@ -24,9 +24,8 @@ module Users
 
       # PUT /resource
       def update_resource(resource, params)
-        params.slice(:email, :password, :current_password)
         if resource.provider == "facebook"
-          resource.update_without_password(params)
+          resource.update_without_password(params.slice(:email, :password, :current_password))
         else
           super
         end

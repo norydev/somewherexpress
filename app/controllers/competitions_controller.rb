@@ -30,7 +30,7 @@ class CompetitionsController < ApplicationController
   def show
     authorize @competition
 
-    form Competition::Update
+    @form = Competition::Contract::Update.new(@competition)
   end
 
   def event
@@ -45,14 +45,14 @@ class CompetitionsController < ApplicationController
   def new
     authorize Competition, :create?
 
-    form Competition::Create
+    @form = Competition::Contract::Create.new(Competition.new)
   end
 
   # This method is soon going to be deprecated, edit will be in show page
   def edit
     authorize @competition, :update?
 
-    form Competition::Update
+    @form = Competition::Contract::Update.new(@competition)
   end
 
   def create

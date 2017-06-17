@@ -19,16 +19,14 @@ class SubscriptionsController < ApplicationController
   def new
     authorize Subscription
 
-    # form Subscription::Create, user: current_user
-    form = Subscription::Contract::Create.new(Subscription.new)
-    form.prepopulate_user!(user: current_user)
-    form
+    @form = Subscription::Contract::Create.new(Subscription.new)
+    @form.prepopulate_user!(user: current_user)
   end
 
   def edit
     authorize @subscription, :update?
 
-    form Subscription::Update
+    @form = Subscription::Contract::Update.new(@subscription)
   end
 
   def create

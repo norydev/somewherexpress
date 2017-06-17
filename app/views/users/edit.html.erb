@@ -30,7 +30,7 @@
 
             <div class="text-center">
               <%= f.collection_radio_buttons :use_gravatar, [[false, 'false'] ,[true, 'true']], :first, :last do |b|
-                b.label(class: "marged-mini-sides") { b.value ? "<div>Gravatar</div>#{image_tag @user.gravatar_url, class: 'avatar-large', alt: @user.initials}".html_safe + "<div>#{ b.radio_button }</div>".html_safe  : "<div>#{t('.default')}</div>#{image_tag @user.picture, class: 'avatar-large', alt: @user.initials}".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
+                b.label(class: "marged-mini-sides") { b.value ? "<div>Gravatar</div>#{image_tag @user.gravatar_url, class: 'avatar-large', alt: @user.initials}".html_safe + "<div>#{ b.radio_button }</div>".html_safe  : "<div>#{t('.default')}</div>#{image_tag @user.image, class: 'avatar-large', alt: @user.initials}".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
                 end %>
             </div>
             <div class="marged-mini">
