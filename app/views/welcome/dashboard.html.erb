@@ -17,22 +17,20 @@
             <%= image_tag current_user.avatar, class: "avatar-ultra", alt: current_user.initials %>
           <% end %>
           <% if current_user.founder_badge %>
-            <%= image_tag current_user.founder_badge.picture, class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{current_user.founder_badge.description}", style: "margin-top: 3px;" %>
+            <%= image_tag current_user.founder_badge.picture, class: "avatar-badge", alt: "", data: { toggle: "tooltip", placement: "bottom" }, title: "#{current_user.founder_badge.description}", style: "margin-top: 3px;" %>
           <% end %>
         </div>
         <div class="padded-mini text-center">
           <h4><%= link_to current_user, current_user %></h4>
           <div>
-            <% current_user.subscriptions.each do |s| %>
-              <% if s.result == 1 && s.competition.finished %>
-                <%= link_to s.competition do %>
-                  <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
-                <% end %>
+            <% current_user.competition_victories.each do |competition| %>
+              <%= link_to competition do %>
+                <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= competition %>"></i></span>
               <% end %>
             <% end %>
-            <% current_user.ranks.where(race_type: "Track", result: 1).each do |r| %>
-              <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-                <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
+            <% current_user.track_victories.each do |track| %>
+              <%= link_to competition_path(track.competition, anchor: "track-#{track.id}-result") do %>
+                <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
               <% end %>
             <% end %>
           </div>

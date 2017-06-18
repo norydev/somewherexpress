@@ -22,18 +22,16 @@
 
           <h1><%= @user %></h1>
           <div class="text-center">
-            <% @user.subscriptions.each do |s| %>
-              <% if s.result == 1 && s.competition.finished %>
-                <%= link_to s.competition do %>
-                  <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= s.competition %>"></i></span>
-                <% end %>
+            <% @user.competition_victories.each do |competition| %>
+              <%= link_to competition do %>
+                <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= competition %>"></i></span>
               <% end %>
             <% end %>
           </div>
           <div class="text-center">
-            <% @user.ranks.where(race_type: "Track", result: 1).each do |r| %>
-              <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-                <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
+            <% @user.track_victories.each do |track| %>
+              <%= link_to competition_path(track.competition, anchor: "track-#{track.id}-result") do %>
+                <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
               <% end %>
             <% end %>
           </div>
