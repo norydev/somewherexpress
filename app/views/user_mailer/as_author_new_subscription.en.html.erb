@@ -39,7 +39,7 @@
         </tr>
         <tr>
           <td class="message" bgcolor="#FFFFFF">
-            <% if @competition.default_registration_status == "pending" %>
+            <% if @competition.default_pending? %>
 
             <p>The registration is waiting for approval, as you selected this option when creating the competition. You are encouraged to process the registration as soon as possible:</p>
 

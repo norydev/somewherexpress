@@ -146,7 +146,7 @@ class User < ApplicationRecord
   end
 
   def pending_registrations_for_creations
-    Subscription.where(status: "pending")
+    Subscription.pending
                 .where(competition: creations.not_finished)
                 .count
   end

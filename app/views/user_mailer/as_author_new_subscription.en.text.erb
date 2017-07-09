@@ -14,7 +14,7 @@ Profile: https://www.somewherexpress.com/en/users/<%= @participant.id %>
 
 --------------------------------------
 
-<% if @competition.default_registration_status == "pending" %>
+<% if @competition.default_pending? %>
 
 The registration is waiting for approval, as you selected this option when creating the competition. You are encouraged to process the registration as soon as possible:
 

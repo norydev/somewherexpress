@@ -14,7 +14,7 @@ Profil: https://www.somewherexpress.com/users/<%= @participant.id %>
 
 --------------------------------------
 
-<% if @competition.default_registration_status == "pending" %>
+<% if @competition.default_pending? %>
 
 Son inscription est en attente de ton approbation puisque tu as sélectionné cette option lors de la création de la compétition. Je t'encourage à traiter son inscription au plus vite:
 
