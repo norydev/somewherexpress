@@ -23,19 +23,10 @@
         <p class="text-uppercase text-muted small"><%= date_format(@competition.start_date) %> – <%= date_format(@competition.end_date) %>
         </p>
 
-        <p class="users-area">
-          <% @competition.accepted_users.each do |user| %>
-            <%= render 'users/avatar_small', user: user %>
-          <% end %>
-        </p>
-
-        <%= render 'subscriptions/new', competition: @competition %>
-
-        <% if policy(@competition).will_participate? %>
-          <%= render 'competitions/rules_calendar', competition: @competition %>
-        <% end %>
-
-        <%= render 'competitions/registrations', competition: @competition %>
+        <%# this div is refreshed on subscriptions create/update: %>
+        <div id="competition-<%= @competition.id %>-dynamic">
+          <%= render "competitions/dynamic", competition: @competition %>
+        </div>
       </div>
       <!-- END DESCRIPTION -->
     </div>
@@ -69,7 +60,7 @@
       <div class="tab-content">
         <!-- VIEW OF THE COMPETITION -->
         <div role="tabpanel" class="tab-pane active" id="view">
-          <div id="panel-<%= @competition.id %>" class="panel panel-default">
+          <div class="panel panel-default">
             <div id="map" style="width: 100%; height: 400px; max-height: 90vh;"></div>
 
             <% if @competition.video? %>
@@ -92,7 +83,7 @@
 
         <% if policy(@competition).update? %>
           <div role="tabpanel" class="tab-pane" id="users">
-            <%= render 'users', competition: @competition %>
+            <%= render "participants", competition: @competition %>
           </div>
           <div role="tabpanel" class="tab-pane" id="settings">
             <%= render 'form', form: @form %>

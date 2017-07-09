@@ -19,9 +19,7 @@
           </div>
           <div class="users">
             <% policy_scope(User).left_outer_joins(:badges).order("count(badges) desc").each do |user| %>
-              <%= link_to user do %>
-                <div class="marged-micro-bottom" style="display: inline-block;"><%= render 'users/avatar_medium', user: user %></div>
-              <% end %>
+              <div class="marged-micro-bottom" style="display: inline-block;"><%= render 'users/avatar_medium', user: user %></div>
             <% end %>
           </div>
         </div>
@@ -37,14 +35,14 @@
           <% if policy_scope(Competition).open_for_registration.any? %>
             <h2 class="text-center"><%= t('.open_title') %></h2>
             <% policy_scope(Competition).open_for_registration.each do |competition| %>
-              <%= render 'competitions/card', competition: competition, status: "open" %>
+              <%= render 'competitions/card', competition: competition %>
             <% end %>
           <% end %>
 
           <% if policy_scope(Competition).not_open_for_registration.any? %>
             <h2 class="text-center"><%= t('.closed_title') %></h2>
             <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
-              <%= render 'competitions/card', competition: competition, status: "closed" %>
+              <%= render 'competitions/card', competition: competition %>
             <% end %>
           <% end %>
         </div>
@@ -56,7 +54,7 @@
   <div class="bg-welcome">
     <div class="container padded-bottom padded-mini-top">
       <h2 class="text-center"><%= t('.passed_title') %></h2>
-      <div id="map" style="width: 100%; height: 550px; max-height: 90vh;"></div>
+      <%= render 'competitions/map', markers: @markers %>
     </div>
   </div>
 
@@ -111,22 +109,3 @@
     </div>
   </div>
 </div>
-
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).on('ready', function() {
-      handler = Gmaps.build('Google', { markers: { clusterer: undefined }});
-      handler.buildMap({
-      provider: {
-        disableDefaultUI: true,
-        zoomControl: true,
-        scrollwheel: false
-      },
-        internal: { id: 'map' } }, function(){
-        markers = handler.addMarkers(<%= raw @markers.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      });
-    })
-  <% end %>
-<% end %>

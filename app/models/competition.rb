@@ -114,6 +114,12 @@ class Competition < ApplicationRecord
     end
   end
 
+  def status
+    return :finished if finished
+    return :open if registrations_open?
+    :closed
+  end
+
   def self.open_for_registration
     not_finished.select(&:registrations_open?)
   end

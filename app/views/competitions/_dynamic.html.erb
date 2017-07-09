@@ -1,0 +1,15 @@
+<p class="users-area text-center">
+  <% competition.accepted_users.each do |user| %>
+    <%= render 'users/avatar_medium', user: user, tooltip: true %>
+  <% end %>
+</p>
+
+<%= render 'subscriptions/new', competition: competition %>
+
+<% if policy(competition).will_participate? %>
+  <%= render 'competitions/rules_calendar', competition: competition %>
+<% end %>
+
+<div class="text-center">
+  <%= render 'competitions/registrations', competition: competition %>
+</div>

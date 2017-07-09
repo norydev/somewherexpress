@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong><%= t('subscriptions.pending_long') %></strong>
+  </div>
+  <ul id="competition-<%= competition.id%>-pending" class="list-group">
+    <% competition.pending_subscriptions.preload(:user).each do |subscription| %>
+      <%= render 'competitions/pending_subscription', subscription: subscription %>
+    <% end %>
+  </ul>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong><%= t('subscriptions.accepted_long') %></strong>
+  </div>
+  <ul id="competition-<%= competition.id%>-accepted" class="list-group">
+    <% competition.accepted_users.each do |user| %>
+      <%= render 'competitions/accepted_user', user: user %>
+    <% end %>
+  </ul>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong><%= t('subscriptions.refused_long') %></strong>
+  </div>
+  <ul id="competition-<%= competition.id%>-refused" class="list-group">
+    <% competition.refused_users.each do |user| %>
+      <%= render 'competitions/refused_user', user: user %>
+    <% end %>
+  </ul>
+</div>
