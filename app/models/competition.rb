@@ -15,10 +15,10 @@
 #  end_registration            :datetime
 #  author_id                   :integer
 #  description                 :text
-#  default_registration_status :string           default("pending"), not null
 #  video                       :string
 #  start_city_id               :integer
 #  end_city_id                 :integer
+#  default_registration_status :integer          default("pending"), not null
 #
 
 class Competition < ApplicationRecord
@@ -52,7 +52,8 @@ class Competition < ApplicationRecord
 
   belongs_to :author, class_name: "User"
 
-  # status can take: "pending" (default), "accepted", "refused"
+  enum default_registration_status: { pending: 0, accepted: 1 },
+                                    _prefix: :default
 
   def to_s
     name

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903152803) do
+ActiveRecord::Schema.define(version: 20170709140547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20160903152803) do
     t.text     "body"
     t.string   "resource_id",   null: false
     t.string   "resource_type", null: false
-    t.string   "author_type"
     t.integer  "author_id"
+    t.string   "author_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
@@ -61,18 +61,18 @@ ActiveRecord::Schema.define(version: 20160903152803) do
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.boolean  "finished",                    default: false,     null: false
-    t.boolean  "published",                   default: false,     null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "finished",                    default: false, null: false
+    t.boolean  "published",                   default: false, null: false
     t.datetime "start_registration"
     t.datetime "end_registration"
     t.integer  "author_id"
     t.text     "description"
-    t.string   "default_registration_status", default: "pending", null: false
     t.string   "video"
     t.integer  "start_city_id"
     t.integer  "end_city_id"
+    t.integer  "default_registration_status", default: 0,     null: false
     t.index ["start_city_id", "end_city_id"], name: "index_competitions_on_start_city_id_and_end_city_id", using: :btree
   end
 
@@ -96,19 +96,19 @@ ActiveRecord::Schema.define(version: 20160903152803) do
     t.integer  "points",     default: 0
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.string   "race_type"
     t.integer  "race_id"
+    t.string   "race_type"
     t.boolean  "dsq",        default: false, null: false
     t.index ["race_type", "race_id"], name: "index_ranks_on_race_type_and_race_id", using: :btree
     t.index ["user_id"], name: "index_ranks_on_user_id", using: :btree
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer  "user_id",                            null: false
-    t.integer  "competition_id",                     null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.string   "status",         default: "pending", null: false
+    t.integer  "user_id",                    null: false
+    t.integer  "competition_id",             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "status",         default: 0, null: false
     t.index ["competition_id"], name: "index_subscriptions_on_competition_id", using: :btree
     t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end

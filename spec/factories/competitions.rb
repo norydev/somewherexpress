@@ -15,10 +15,10 @@
 #  end_registration            :datetime
 #  author_id                   :integer
 #  description                 :text
-#  default_registration_status :string           default("pending"), not null
 #  video                       :string
 #  start_city_id               :integer
 #  end_city_id                 :integer
+#  default_registration_status :integer          default("pending"), not null
 #
 
 FactoryGirl.define do
