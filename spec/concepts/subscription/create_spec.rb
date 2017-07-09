@@ -64,18 +64,16 @@ RSpec.describe Subscription::Create do
   end
 
   it "does not create if rules not accepted" do
-    subscription = Subscription::Create
-                   .call(subscription: { rules: "0", status: "pending",
-                                         user_attributes: {
-                                           whatsapp: "0",
-                                           telegram: "0",
-                                           signal: "0"
-                                         } },
-                         current_user: user,
-                         competition_id: competition.id)
-                   .model
-
-    expect(subscription).not_to be_persisted
-    expect(subscription.errors.details).to include(rules: [{ error: :accepted }])
+    expect {
+      Subscription::Create.call(subscription: { rules: "0", status: "pending",
+                                                user_attributes: {
+                                                  whatsapp: "0",
+                                                  telegram: "0",
+                                                  signal: "0"
+                                                } },
+                                current_user: user,
+                                competition_id: competition.id)
+                          .model
+    }.to raise_error Trailblazer::Operation::InvalidContract
   end
 end

@@ -5,13 +5,15 @@ class Subscription < ApplicationRecord
       include ActiveModel::ModelReflections
       model :subscription
 
-      properties :status, :rules
-      properties :user_id, :competition_id
+      properties :user_id, :competition_id, :status
+      property :rules, virtual: true
 
       property :user, populate_if_empty: :populate_user!,
                       prepopulator: :prepopulate_user! do
         properties :phone_number, :whatsapp, :telegram, :signal
       end
+
+      validates :rules, inclusion: { in: ["1"], message: :accepted }
 
       validates :status, presence: true,
                          inclusion: { in: ["pending", "accepted"] }

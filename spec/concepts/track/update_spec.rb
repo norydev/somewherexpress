@@ -32,8 +32,7 @@ RSpec.describe Track::Update do
 
     4.times do
       u = FactoryGirl.create(:user)
-      FactoryGirl.create(:subscription, user: u, competition: competition,
-                                        rules: "1")
+      FactoryGirl.create(:subscription, user: u, competition: competition)
     end
 
     track = competition.tracks.first

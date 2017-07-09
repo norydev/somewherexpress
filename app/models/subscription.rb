@@ -19,8 +19,6 @@ class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :competition
 
-  validates :rules, acceptance: { on: :create, allow_nil: false }
-
   after_update :status_changed
   after_create :make_track_ranks, if: :accepted
   before_destroy :destroy_ranks
