@@ -11,6 +11,17 @@
 #  start_city_id  :integer
 #  end_city_id    :integer
 #
+# Indexes
+#
+#  index_tracks_on_competition_id                 (competition_id)
+#  index_tracks_on_start_city_id_and_end_city_id  (start_city_id,end_city_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (competition_id => competitions.id)
+#  fk_rails_...  (end_city_id => cities.id)
+#  fk_rails_...  (start_city_id => cities.id)
+#
 
 FactoryGirl.define do
   factory :track do

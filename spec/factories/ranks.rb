@@ -13,6 +13,15 @@
 #  race_type  :string
 #  dsq        :boolean          default(FALSE), not null
 #
+# Indexes
+#
+#  index_ranks_on_race_type_and_race_id  (race_type,race_id)
+#  index_ranks_on_user_id                (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 
 FactoryGirl.define do
   factory :rank do

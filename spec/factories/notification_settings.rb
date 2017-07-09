@@ -15,6 +15,14 @@
 #  updated_at                          :datetime         not null
 #  locale                              :string           default("fr"), not null
 #
+# Indexes
+#
+#  index_notification_settings_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 
 FactoryGirl.define do
   factory :notification_setting do
