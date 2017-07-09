@@ -81,7 +81,7 @@
             <% if policy_scope(Competition).open_for_registration.any? %>
               <ul class="list-group">
                 <% policy_scope(Competition).open_for_registration.each do |competition| %>
-                  <%= render 'competitions/card', competition: competition, status: "open" %>
+                  <%= render 'competitions/card', competition: competition %>
                 <% end %>
               </ul>
             <% else %>
@@ -95,7 +95,7 @@
             <% if policy_scope(Competition).not_open_for_registration.any? %>
               <ul class="list-group">
                 <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
-                  <%= render 'competitions/card', competition: competition, status: "closed" %>
+                  <%= render 'competitions/card', competition: competition %>
                 <% end %>
               </ul>
             <% else %>

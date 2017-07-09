@@ -35,14 +35,14 @@
           <% if policy_scope(Competition).open_for_registration.any? %>
             <h2 class="text-center"><%= t('.open_title') %></h2>
             <% policy_scope(Competition).open_for_registration.each do |competition| %>
-              <%= render 'competitions/card', competition: competition, status: "open" %>
+              <%= render 'competitions/card', competition: competition %>
             <% end %>
           <% end %>
 
           <% if policy_scope(Competition).not_open_for_registration.any? %>
             <h2 class="text-center"><%= t('.closed_title') %></h2>
             <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
-              <%= render 'competitions/card', competition: competition, status: "closed" %>
+              <%= render 'competitions/card', competition: competition %>
             <% end %>
           <% end %>
         </div>

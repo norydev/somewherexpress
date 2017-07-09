@@ -19,7 +19,7 @@
       </div>
 
       <% @competitions.open_for_registration.each do |competition| %>
-        <%= render 'card', competition: competition, status: "open" %>
+        <%= render 'card', competition: competition %>
       <% end %>
     </div>
   </div>
@@ -28,10 +28,10 @@
 <div class="container">
   <div class="card-deck">
     <% @competitions.not_open_for_registration.each do |competition| %>
-      <%= render 'card', competition: competition, status: "closed" %>
+      <%= render 'card', competition: competition %>
     <% end %>
     <% @competitions.finished.each do |competition| %>
-      <%= render 'card', competition: competition, status: "finished" %>
+      <%= render 'card', competition: competition %>
     <% end %>
   </div>
 </div>

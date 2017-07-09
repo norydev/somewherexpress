@@ -4,13 +4,8 @@
 <% else %>
   $("#modal-<%= @competition.id %>").modal('hide');
 
-  <% if @competition.default_registration_status == "accepted" %>
-    $("#registration-area-<%= @competition.id %>").html('<i class="fa fa-check text-success"></i> <%= t("subscriptions.accepted") %>');
-    $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: current_user %>")
-    $('[data-toggle="tooltip"]').tooltip();
-  <% else %>
-    $("#registration-area-<%= @competition.id %>").html('<i class="fa fa-refresh text-warning"></i> <%= t("subscriptions.pending") %>&nbsp;&nbsp;<%= link_to t("competitions.cancel"), competition_subscription_path(@competition, @form), method: :delete, data: { confirm: t("competitions.form.delete.message") } %>');
-  <% end %>
+  $("#competition-<%= @competition.id %>-dynamic").html("<%= j render 'competitions/dynamic', competition: @competition %>")
+  $('[data-toggle="tooltip"]').tooltip();
 
   $("#alerts-bar").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= t("subscriptions.create.notice") %></div>').hide();
   $("#alerts-bar").slideDown();

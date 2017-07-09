@@ -12,8 +12,7 @@
   <% end %>
 
   <% if @form.status == "accepted" %>
-    <%# Add avatar to card: reload card? %>
-    $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @form.user %>")
+    $("#competition-<%= @competition.id %>-dynamic").html("<%= j render 'competitions/dynamic', competition: @competition %>")
 
     $("#subscription-<%= @form.id%>-pending").remove();
     $("#competition-<%= @competition.id%>-accepted").append("<%= j render 'competitions/accepted_user', competition: @competition, user: @form.user %>")
@@ -21,8 +20,7 @@
     <%# reload tooltip because bootstrap %>
     $('[data-toggle="tooltip"]').tooltip();
   <% elsif @form.status == "refused" %>
-    <%# Add avatar to card: reload card? %>
-    $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @form.user %>")
+    $("#competition-<%= @competition.id %>-dynamic").html("<%= j render 'competitions/dynamic', competition: @competition %>")
 
     $("#subscription-<%= @form.id%>-pending").remove();
     $("#competition-<%= @competition.id%>-refused").append("<%= j render 'competitions/refused_user', competition: @competition, user: @form.user %>")
