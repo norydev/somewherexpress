@@ -19,9 +19,7 @@
           </div>
           <div class="users">
             <% policy_scope(User).left_outer_joins(:badges).order("count(badges) desc").each do |user| %>
-              <%= link_to user do %>
-                <div class="marged-micro-bottom" style="display: inline-block;"><%= render 'users/avatar_medium', user: user %></div>
-              <% end %>
+              <div class="marged-micro-bottom" style="display: inline-block;"><%= render 'users/avatar_medium', user: user %></div>
             <% end %>
           </div>
         </div>

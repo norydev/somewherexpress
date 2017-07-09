@@ -13,7 +13,7 @@
       </div>
       <p class="users-area text-center">
         <% competition.accepted_users.each do |user| %>
-          <%= render 'users/avatar_small', user: user %>
+          <%= render 'users/avatar_medium', user: user, tooltip: true %>
         <% end %>
       </p>
 

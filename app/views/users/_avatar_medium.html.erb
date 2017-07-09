@@ -1,3 +1,9 @@
+<% tooltip = local_assigns.fetch(:tooltip, false) %>
+
 <%= link_to user do %>
-  <%= image_tag user.avatar, class: "img-circle avatar-medium", alt: user.initials %>
+  <%= image_tag user.avatar,
+                class: "img-circle avatar-medium",
+                alt: user.initials,
+                title: ("#{user}" if tooltip),
+                data: ({ toggle: "tooltip", placement: "bottom" } if tooltip) %>
 <% end %>
