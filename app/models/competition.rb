@@ -20,6 +20,16 @@
 #  end_city_id                 :integer
 #  default_registration_status :integer          default("pending"), not null
 #
+# Indexes
+#
+#  index_competitions_on_start_city_id_and_end_city_id  (start_city_id,end_city_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (author_id => users.id)
+#  fk_rails_...  (end_city_id => cities.id)
+#  fk_rails_...  (start_city_id => cities.id)
+#
 
 class Competition < ApplicationRecord
   scope :finished, -> { where(finished: true).order(start_date: :desc) }

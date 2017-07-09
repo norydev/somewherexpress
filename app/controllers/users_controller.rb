@@ -31,6 +31,15 @@
 #  token                  :string
 #  token_expiry           :datetime
 #  use_gravatar           :boolean          default(FALSE), not null
+#  phone_number           :string
+#  whatsapp               :boolean          default(FALSE), not null
+#  telegram               :boolean          default(FALSE), not null
+#  signal                 :boolean          default(FALSE), not null
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class UsersController < ApplicationController

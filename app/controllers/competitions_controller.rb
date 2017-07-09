@@ -15,8 +15,20 @@
 #  end_registration            :datetime
 #  author_id                   :integer
 #  description                 :text
-#  default_registration_status :string           default("pending"), not null
 #  video                       :string
+#  start_city_id               :integer
+#  end_city_id                 :integer
+#  default_registration_status :integer          default("pending"), not null
+#
+# Indexes
+#
+#  index_competitions_on_start_city_id_and_end_city_id  (start_city_id,end_city_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (author_id => users.id)
+#  fk_rails_...  (end_city_id => cities.id)
+#  fk_rails_...  (start_city_id => cities.id)
 #
 
 class CompetitionsController < ApplicationController

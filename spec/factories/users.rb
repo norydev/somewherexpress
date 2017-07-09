@@ -36,6 +36,11 @@
 #  telegram               :boolean          default(FALSE), not null
 #  signal                 :boolean          default(FALSE), not null
 #
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 FactoryGirl.define do
   factory :user do

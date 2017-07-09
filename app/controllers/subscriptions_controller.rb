@@ -8,7 +8,17 @@
 #  competition_id :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  status         :string           default("pending"), not null
+#  status         :integer          default("pending"), not null
+#
+# Indexes
+#
+#  index_subscriptions_on_competition_id  (competition_id)
+#  index_subscriptions_on_user_id         (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (competition_id => competitions.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
 class SubscriptionsController < ApplicationController

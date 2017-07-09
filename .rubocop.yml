@@ -13,7 +13,7 @@ AllCops:
     - !ruby/regexp /old_and_unused\.rb$/
 Rails:
   Enabled: true
-Style/IndentationConsistency:
+Layout/IndentationConsistency:
   EnforcedStyle: rails
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -33,7 +33,7 @@ Rails/OutputSafety:
   Enabled: false
 Style/Documentation:
   Enabled: false
-Style/EmptyLineAfterMagicComment:
+Layout/EmptyLineAfterMagicComment:
   Enabled: false
 Rails/SkipsModelValidations:
   Enabled: false
