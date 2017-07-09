@@ -1,0 +1,9 @@
+<div id="map" style="width: 100%; height: 550px; max-height: 90vh;"></div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).on('ready', function() {
+      gmapize(<%= raw markers.to_json %>)
+    })
+  <% end %>
+<% end %>
