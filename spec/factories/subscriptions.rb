@@ -8,11 +8,7 @@
 #  competition_id :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  status         :string           default("pending"), not null
-#  phone_number   :string
-#  whatsapp       :boolean          default(FALSE), not null
-#  telegram       :boolean          default(FALSE), not null
-#  signal         :boolean          default(FALSE), not null
+#  status         :integer          default("pending"), not null
 #
 
 FactoryGirl.define do

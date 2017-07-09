@@ -8,11 +8,7 @@
 #  competition_id :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  status         :string           default("pending"), not null
-#  phone_number   :string
-#  whatsapp       :boolean          default(FALSE), not null
-#  telegram       :boolean          default(FALSE), not null
-#  signal         :boolean          default(FALSE), not null
+#  status         :integer          default("pending"), not null
 #
 
 class Subscription < ApplicationRecord
@@ -20,8 +16,10 @@ class Subscription < ApplicationRecord
   belongs_to :competition
 
   after_update :status_changed
-  after_create :make_track_ranks, if: :accepted
+  after_create :make_track_ranks, if: :accepted?
   before_destroy :destroy_ranks
+
+  enum status: { pending: 0, accepted: 1, refused: 2 }
 
   def name
     "#{user.name} => #{competition.name}"
@@ -40,10 +38,6 @@ class Subscription < ApplicationRecord
   end
 
   private
-
-    def accepted
-      status == "accepted"
-    end
 
     def status_changed
       if changes["status"].try(:any?) && changes["status"].last == "accepted"

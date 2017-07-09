@@ -31,6 +31,10 @@
 #  token                  :string
 #  token_expiry           :datetime
 #  use_gravatar           :boolean          default(FALSE), not null
+#  phone_number           :string
+#  whatsapp               :boolean          default(FALSE), not null
+#  telegram               :boolean          default(FALSE), not null
+#  signal                 :boolean          default(FALSE), not null
 #
 
 class User < ApplicationRecord
@@ -142,7 +146,7 @@ class User < ApplicationRecord
   end
 
   def pending_registrations_for_creations
-    Subscription.where(status: "pending")
+    Subscription.pending
                 .where(competition: creations.not_finished)
                 .count
   end

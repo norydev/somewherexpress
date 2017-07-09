@@ -15,10 +15,10 @@
 #  end_registration            :datetime
 #  author_id                   :integer
 #  description                 :text
-#  default_registration_status :string           default("pending"), not null
 #  video                       :string
 #  start_city_id               :integer
 #  end_city_id                 :integer
+#  default_registration_status :integer          default("pending"), not null
 #
 
 class Competition < ApplicationRecord
@@ -26,16 +26,16 @@ class Competition < ApplicationRecord
   scope :not_finished, -> { where(finished: false).order(:start_date) }
 
   has_many :subscriptions, dependent: :destroy
-  has_many :pending_subscriptions, -> { where(status: "pending").order(:created_at) },
+  has_many :pending_subscriptions, -> { pending.order(:created_at) },
            class_name: "Subscription"
   has_many :users, through: :subscriptions
-  has_many :accepted_users, -> { where(subscriptions: { status: "accepted" }) },
+  has_many :accepted_users, -> { merge(Subscription.accepted) },
            through: :subscriptions,
            source: :user
-  has_many :pending_users, -> { where(subscriptions: { status: "pending" }) },
+  has_many :pending_users, -> { merge(Subscription.pending) },
            through: :subscriptions,
            source: :user
-  has_many :refused_users, -> { where(subscriptions: { status: "refused" }) },
+  has_many :refused_users, -> { merge(Subscription.refused) },
            through: :subscriptions,
            source: :user
 
@@ -52,7 +52,8 @@ class Competition < ApplicationRecord
 
   belongs_to :author, class_name: "User"
 
-  # status can take: "pending" (default), "accepted", "refused"
+  enum default_registration_status: { pending: 0, accepted: 1 },
+       _prefix: :default
 
   def to_s
     name
