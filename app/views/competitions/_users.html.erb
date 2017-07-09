@@ -1,57 +1,32 @@
-<% if competition.pending_subscriptions.any? %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <strong><%= t('subscriptions.pending_long') %></strong>
-    </div>
-    <ul class="list-group">
-      <% competition.pending_subscriptions.preload(:user).each do |subscription| %>
-        <li id="competition-<%= competition.id %>-user-<%= subscription.user.id %>" class="list-group-item flex-container">
-          <%= render 'subscriptions/user_registred', competition: competition, user: subscription.user %>
-          <div class="edit-form flex-item marged-micro-sides">
-            <% form = Subscription::Contract::Update.new(subscription) %>
-            <%= render 'subscriptions/edit', subscription: form, competition: competition, user: subscription.user %>
-          </div>
-          <div class="flex-item status">
-            <i class="fa fa-refresh text-warning cursor-default" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.pending_short') %>"></i>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong><%= t('subscriptions.pending_long') %></strong>
   </div>
-<% end %>
+  <ul id="competition-<%= competition.id%>-pending" class="list-group">
+    <% competition.pending_subscriptions.preload(:user).each do |subscription| %>
+      <%= render 'competitions/pending_subscription', subscription: subscription %>
+    <% end %>
+  </ul>
+</div>
 
-<% if competition.accepted_users.any? %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <strong><%= t('subscriptions.accepted_long') %></strong>
-    </div>
-    <ul class="list-group">
-      <% competition.accepted_users.each do |user| %>
-        <li class="list-group-item flex-container">
-          <%= render 'subscriptions/user_registred', competition: competition, user: user %>
-          <div class="flex-item">
-            <i class="fa fa-check text-success cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.accepted_short') %>"></i>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong><%= t('subscriptions.accepted_long') %></strong>
   </div>
-<% end %>
+  <ul id="competition-<%= competition.id%>-accepted" class="list-group">
+    <% competition.accepted_users.each do |user| %>
+      <%= render 'competitions/accepted_user', user: user, competition: competition %>
+    <% end %>
+  </ul>
+</div>
 
-<% if competition.refused_users.any? %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <strong><%= t('subscriptions.refused_long') %></strong>
-    </div>
-    <ul class="list-group">
-      <% competition.refused_users.each do |user| %>
-        <li class="list-group-item flex-container">
-          <%= render 'subscriptions/user_registred', competition: competition, user: user %>
-          <div class="flex-item">
-            <i class="fa fa-times text-danger cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t('subscriptions.refused_short') %>"></i>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong><%= t('subscriptions.refused_long') %></strong>
   </div>
-<% end %>
+  <ul id="competition-<%= competition.id%>-refused" class="list-group">
+    <% competition.refused_users.each do |user| %>
+      <%= render 'competitions/refused_user', user: user, competition: competition %>
+    <% end %>
+  </ul>
+</div>

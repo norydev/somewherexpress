@@ -4,6 +4,7 @@
 <% else %>
   $("#modal-sub-<%= @form.id %>").modal('hide');
 
+  <%# Dashboard of creator: update number of pending %>
   <% if current_user.pending_registrations_for_creations > 0 %>
     $('.registrations-alert').html("<%= current_user.pending_registrations_for_creations %>");
   <% else %>
@@ -11,16 +12,22 @@
   <% end %>
 
   <% if @form.status == "accepted" %>
+    <%# Add avatar to card: reload card? %>
     $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @form.user %>")
 
-    $("#competition-<%= @competition.id %>-user-<%= @form.user.id %> .edit-form").remove();
-    $("#competition-<%= @competition.id %>-user-<%= @form.user.id %> .status").html('<i class="fa fa-check text-success cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t("subscriptions.accepted_short") %>"></i>');
+    $("#subscription-<%= @form.id%>-pending").remove();
+    $("#competition-<%= @competition.id%>-accepted").append("<%= j render 'competitions/accepted_user', competition: @competition, user: @form.user %>")
+
+    <%# reload tooltip because bootstrap %>
     $('[data-toggle="tooltip"]').tooltip();
   <% elsif @form.status == "refused" %>
+    <%# Add avatar to card: reload card? %>
     $("#panel-<%= @competition.id %> .users-area").append("<%= j render 'users/avatar_small', user: @form.user %>")
 
-    $("#competition-<%= @competition.id %>-user-<%= @form.user.id %> .edit-form").remove();
-    $("#competition-<%= @competition.id %>-user-<%= @form.user.id %> .status").html('<i class="fa fa-times text-danger cursor-default flex-item" data-toggle="tooltip" data-placement="bottom" title="<%= t("subscriptions.refused_short") %>"></i>');
+    $("#subscription-<%= @form.id%>-pending").remove();
+    $("#competition-<%= @competition.id%>-refused").append("<%= j render 'competitions/refused_user', competition: @competition, user: @form.user %>")
+
+    <%# reload tooltip because bootstrap %>
     $('[data-toggle="tooltip"]').tooltip();
   <% end %>
 <% end %>
