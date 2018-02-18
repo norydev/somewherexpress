@@ -28,17 +28,17 @@ RSpec.describe Subscription, type: :model do
   it { should belong_to(:competition) }
 
   it "returns the correct nb of points" do
-    u = FactoryGirl.create :user, email: "u1@yopmail.com"
-    c = FactoryGirl.create :competition, start_city: FactoryGirl.create(:city),
-                                         end_city: FactoryGirl.create(:city)
+    u = FactoryBot.create :user, email: "u1@yopmail.com"
+    c = FactoryBot.create :competition, start_city: FactoryBot.create(:city),
+                                        end_city: FactoryBot.create(:city)
 
     ts = []
     5.times do |n|
-      ts[n] = FactoryGirl.create :track, competition: c, start_city: FactoryGirl.create(:city),
-                                         end_city: FactoryGirl.create(:city)
+      ts[n] = FactoryBot.create :track, competition: c, start_city: FactoryBot.create(:city),
+                                        end_city: FactoryBot.create(:city)
     end
 
-    s = FactoryGirl.create :subscription, user: u, competition: c
+    s = FactoryBot.create :subscription, user: u, competition: c
 
     ts.each do |t|
       r = t.ranks.find_by(user: u)
@@ -50,16 +50,16 @@ RSpec.describe Subscription, type: :model do
   end
 
   it "returns the correct result" do
-    u1 = FactoryGirl.create :user, email: "u1@yopmail.com"
-    u2 = FactoryGirl.create :user, email: "u2@yopmail.com"
-    u3 = FactoryGirl.create :user, email: "u3@yopmail.com"
-    c = FactoryGirl.create :competition, start_city: FactoryGirl.create(:city),
-                                         end_city: FactoryGirl.create(:city)
-    t = FactoryGirl.create :track, competition: c, start_city: FactoryGirl.create(:city),
-                                   end_city: FactoryGirl.create(:city)
-    FactoryGirl.create :subscription, user: u1, competition: c
-    s2 = FactoryGirl.create :subscription, user: u2, competition: c
-    FactoryGirl.create :subscription, user: u3, competition: c
+    u1 = FactoryBot.create :user, email: "u1@yopmail.com"
+    u2 = FactoryBot.create :user, email: "u2@yopmail.com"
+    u3 = FactoryBot.create :user, email: "u3@yopmail.com"
+    c = FactoryBot.create :competition, start_city: FactoryBot.create(:city),
+                                        end_city: FactoryBot.create(:city)
+    t = FactoryBot.create :track, competition: c, start_city: FactoryBot.create(:city),
+                                  end_city: FactoryBot.create(:city)
+    FactoryBot.create :subscription, user: u1, competition: c
+    s2 = FactoryBot.create :subscription, user: u2, competition: c
+    FactoryBot.create :subscription, user: u3, competition: c
 
     r = t.ranks.find_by(user: u1)
     r.result = 1

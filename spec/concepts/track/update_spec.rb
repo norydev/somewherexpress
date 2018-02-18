@@ -2,7 +2,7 @@
 require "rails_helper"
 
 RSpec.describe Track::Update do
-  let!(:user) { FactoryGirl.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
 
   it "updates a competition" do
     competition = Competition::Create
@@ -31,8 +31,8 @@ RSpec.describe Track::Update do
                   .model
 
     4.times do
-      u = FactoryGirl.create(:user)
-      FactoryGirl.create(:subscription, user: u, competition: competition)
+      u = FactoryBot.create(:user)
+      FactoryBot.create(:subscription, user: u, competition: competition)
     end
 
     track = competition.tracks.first

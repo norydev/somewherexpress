@@ -24,7 +24,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :notification_setting do
     as_user_new_competition true
     as_user_competition_edited true

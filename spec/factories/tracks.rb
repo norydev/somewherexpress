@@ -23,7 +23,7 @@
 #  fk_rails_...  (start_city_id => cities.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :track do
     association     :competition
     start_time      DateTime.parse("10 april 2015 14:00").in_time_zone

@@ -31,7 +31,7 @@
 #  fk_rails_...  (start_city_id => cities.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition do
     name            "Paris express 15"
     start_date      Date.parse("10 april 2015")

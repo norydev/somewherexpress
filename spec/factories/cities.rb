@@ -21,7 +21,7 @@
 #  picture                           :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :city do
     name          "Yverdon-les-Bains, Suisse"
     lat           46.7784736

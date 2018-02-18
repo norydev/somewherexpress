@@ -57,7 +57,7 @@ group :development, :test do
   gem "annotate"
   gem "better_errors"
   gem "binding_of_caller"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "faker"
   gem "letter_opener"
   gem "pry-byebug"
