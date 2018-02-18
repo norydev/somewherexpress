@@ -37,7 +37,7 @@ class Competition < ApplicationRecord
 
   has_many :subscriptions, dependent: :destroy
   has_many :pending_subscriptions, -> { pending.order(:created_at) },
-           class_name: "Subscription"
+           class_name: "Subscription", inverse_of: :competition
   has_many :users, through: :subscriptions
   has_many :accepted_users, -> { merge(Subscription.accepted) },
            through: :subscriptions,
@@ -49,18 +49,21 @@ class Competition < ApplicationRecord
            through: :subscriptions,
            source: :user
 
-  has_many :tracks, -> { order :start_time }, dependent: :destroy
+  has_many :tracks, -> { order :start_time }, dependent: :destroy,
+                                              inverse_of: :competition
 
-  has_many :ranks, as: :race, dependent: :destroy
+  has_many :ranks, as: :race, dependent: :destroy, inverse_of: :race
   has_many :t_ranks, through: :tracks, source: :ranks
 
-  belongs_to :start_city, class_name: "City", foreign_key: "start_city_id"
-  belongs_to :end_city, class_name: "City", foreign_key: "end_city_id"
+  belongs_to :start_city, class_name: "City", foreign_key: "start_city_id",
+                          inverse_of: :start_of_competitions
+  belongs_to :end_city, class_name: "City", foreign_key: "end_city_id",
+                        inverse_of: :end_of_competitions
 
   has_many :tracks_start_cities, through: :tracks, source: :start_city
   has_many :tracks_end_cities, through: :tracks, source: :end_city
 
-  belongs_to :author, class_name: "User"
+  belongs_to :author, class_name: "User", inverse_of: :creations
 
   enum default_registration_status: { pending: 0, accepted: 1 },
        _prefix: :default
@@ -88,7 +91,7 @@ class Competition < ApplicationRecord
   end
 
   def just_published?
-    previous_changes["published"] && previous_changes["published"].last
+    previous_changes["published"]&.last
   end
 
   def enough_changes?

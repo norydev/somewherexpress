@@ -26,17 +26,17 @@ require "rails_helper"
 RSpec.describe City, type: :model do
   describe "scopes" do
     before(:each) do
-      paris = FactoryGirl.create(:city, name: "Paris")
-      belgrade = FactoryGirl.create(:city, name: "Belgrade")
-      istanbul = FactoryGirl.create(:city, name: "Istanbul")
-      sofia = FactoryGirl.create(:city, name: "Sofia")
-      berlin = FactoryGirl.create(:city, name: "Berlin")
-      bucharest = FactoryGirl.create(:city, name: "Bucharest")
+      paris = FactoryBot.create(:city, name: "Paris")
+      belgrade = FactoryBot.create(:city, name: "Belgrade")
+      istanbul = FactoryBot.create(:city, name: "Istanbul")
+      sofia = FactoryBot.create(:city, name: "Sofia")
+      berlin = FactoryBot.create(:city, name: "Berlin")
+      bucharest = FactoryBot.create(:city, name: "Bucharest")
 
       # finished
-      FactoryGirl.create(
+      FactoryBot.create(
         :competition, published: true, start_city: paris, end_city: istanbul,
-                      author: FactoryGirl.create(:user),
+                      author: FactoryBot.create(:user),
                       tracks: [
                         Track.new(start_city: paris, end_city: belgrade),
                         Track.new(start_city: belgrade, end_city: sofia)
@@ -44,9 +44,9 @@ RSpec.describe City, type: :model do
       )
 
       # unfinished
-      FactoryGirl.create(
+      FactoryBot.create(
         :competition, finished: false, start_city: berlin, end_city: bucharest,
-                      author: FactoryGirl.create(:user),
+                      author: FactoryBot.create(:user),
                       tracks: [
                         Track.new(start_city: berlin, end_city: bucharest)
                       ]

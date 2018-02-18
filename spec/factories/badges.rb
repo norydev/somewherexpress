@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :badge do
     identification  "Merit"
     picture         "https://unsplash.it/100/100"

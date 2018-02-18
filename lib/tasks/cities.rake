@@ -9,7 +9,7 @@ namespace :cities do
         picture = spot.photos.first.fetch_url(1200)
         city.update!(picture: picture)
         p "new city picture: #{city.picture}"
-      rescue
+      rescue StandardError
         p "Something went wrong with Google API"
       end
     end

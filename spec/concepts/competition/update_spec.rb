@@ -2,7 +2,7 @@
 require "rails_helper"
 
 RSpec.describe Competition::Update do
-  let!(:user) { FactoryGirl.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
 
   it "updates a competition" do
     competition = Competition::Create

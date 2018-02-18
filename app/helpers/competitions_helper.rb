@@ -39,7 +39,7 @@ module CompetitionsHelper
   end
 
   def place(rank)
-    if rank && rank.dsq
+    if rank&.dsq
       "DSQ"
     elsif rank
       case I18n.locale

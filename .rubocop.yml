@@ -9,6 +9,7 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
     - 'vendor/**/*'
+    - 'bin/*'
     - 'Gemfile'
     - !ruby/regexp /old_and_unused\.rb$/
 Rails:

@@ -18,9 +18,9 @@ RSpec.describe Competition::Create do
     }.to raise_error Trailblazer::Operation::InvalidContract
   end
 
-  let!(:user) { FactoryGirl.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
   let!(:existing_city) do
-    FactoryGirl.create(:city, locality: "Berne", name: "Berne, CH")
+    FactoryBot.create(:city, locality: "Berne", name: "Berne, CH")
   end
 
   it "creates a published competition" do

@@ -2,7 +2,7 @@
 require "rails_helper"
 
 RSpec.describe Subscription::Update do
-  let!(:user) { FactoryGirl.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
   let!(:competition) do
     Competition::Create
       .call(competition: {

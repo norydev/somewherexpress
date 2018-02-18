@@ -31,15 +31,15 @@
 #  fk_rails_...  (start_city_id => cities.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition do
     name            "Paris express 15"
     start_date      Date.parse("10 april 2015")
     end_date        Date.parse("15 april 2015")
     finished        true
     published       false
-    start_registration    DateTime.parse("10 november 2014").in_time_zone
-    end_registration      DateTime.parse("1 april 2015").in_time_zone
+    start_registration    "10 november 2014 00:00:00".in_time_zone
+    end_registration      "1 april 2015 00:00:00".in_time_zone
     association           :author, factory: :user, email: "ramirez@yopmail.com"
     description           "This race is great"
     default_registration_status "accepted"
