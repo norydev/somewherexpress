@@ -147,9 +147,6 @@ GEM
       has_scope (~> 0.6)
       railties (>= 3.2, < 5.2.x)
       responders
-    jbuilder (2.7.0)
-      activesupport (>= 4.2.0)
-      multi_json (>= 1.2)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -281,7 +278,6 @@ GEM
       httparty (> 0.13.7)
       json
       rack
-    rdoc (4.3.0)
     redis (3.3.3)
     reform (2.1.0)
       disposable (>= 0.2.2, < 0.3.0)
@@ -326,9 +322,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sdoc (0.4.2)
-      json (~> 1.7, >= 1.7.7)
-      rdoc (~> 4.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     sidekiq (5.0.4)
@@ -360,9 +353,6 @@ GEM
     trailblazer-rails (0.2.4)
       trailblazer (>= 1.0.4)
       trailblazer-loader (>= 0.0.7)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.3)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.0.15)
@@ -384,7 +374,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
-  coffee-rails
   devise
   devise-i18n
   devise-i18n-views
@@ -396,7 +385,6 @@ DEPENDENCIES
   gmaps4rails
   google_places
   icalendar
-  jbuilder (~> 2.0)
   jquery-rails
   letter_opener
   modernizr-rails
@@ -416,14 +404,12 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails (~> 5.0)
-  sdoc (~> 0.4.0)
   shoulda-matchers
   sidekiq
   simple_form
   spring
   trailblazer-loader
   trailblazer-rails
-  turbolinks
   uglifier (>= 1.3.0)
 
 RUBY VERSION
