@@ -16,7 +16,7 @@
       <div class="panel panel-default">
         <table class="table">
           <tbody>
-            <% @users.sort_by{ |u| [-u.competition_victories.count, -u.track_victories.count, -u.badges.count] }.each do |user| %>
+            <% @users.each do |user| %>
               <tr>
                 <td>
                   <%= render 'users/avatar_medium', user: user %>
@@ -31,14 +31,14 @@
                 </td>
                 <td>
                   <% user.track_victories.each do |track| %>
-                    <%= link_to competition_path(track.competition, anchor: "track-#{track.id}-result") do %>
+                    <%= link_to competition_path(id: track.competition_id, anchor: "track-#{track.id}-result") do %>
                       <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
                     <% end %>
                   <% end %>
                 </td>
                 <td>
                   <% user.badges.each do |badge| %>
-                    <%= image_tag badge.picture, class: "award", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{badge.description}" %>
+                    <%= image_tag badge.picture, class: "award", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{ badge.description }" %>
                   <% end %>
                 </td>
               </tr>

@@ -47,7 +47,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def index
-    @users = policy_scope(User)
+    @users = policy_scope(User).hall_of_fame
+                               .preload(:competition_victories, :badges,
+                                        track_victories: [:start_city, :end_city])
   end
 
   def show
