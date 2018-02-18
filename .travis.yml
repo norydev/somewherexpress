@@ -1,0 +1,30 @@
+language: ruby
+
+cache: bundler
+
+rvm:
+  - 2.4.0
+
+services: postgresql
+
+before_script:
+  - psql -c 'create database somewherexpress_test;' -U postgres
+  - bundle exec rake db:schema:load RAILS_ENV=test
+  - bundle exec rake db:migrate RAILS_ENV=test
+
+script:
+  - bundle exec rake
+
+notifications:
+  email: false
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: X+hzT283aI4hNTnWmp6eKiS6t7bAbd5vJgMgAKhJ8KtELS26VnxJVtLCC7z+aenn/UCKaDHBRkLu0QxXfZOsUBJWcRm7B0Cj8uiDCsKpqZII5kJYQ4cvhQajuxKVYmGfLw6fw7YNYLhERu064Mna+B1wHwelf+n/B8wZiIZJl8tvIDhPbtlsW8dVS2GiEkKOx+r7ASGWuc9HtG3KsUCZiPXS/0pJH+7xJubckcjYeWJswIETtfWZI5E2oHMjy3ZWYUNI3+rbHz8bGB1IoqZO1jXa3haHLrFggRJNhcciEFPALz1OewJDKIzRhjIWL2EYZWR20CVZYrggMsnZp25QlJU6qx6/XuZ/bgVM+VgBGGkApByDP4Q46jMDphMpVcjPqNTSKDnve0ePkGI626qy6LFLZ3SkSLNCGSTLpxFwPCj9jzfwt7pJonZwvnnnpbsO1vcSJ8Pqfs+d50VETH1aBVLzD6iEwOQJ2E2reKCWT0o9NCUMzTtkQFTjmSvK3rDZUj3gdf+JWcjioygXgHZI/4HSH8lXhwaVXIcCf02tI/Vq4cMfsQ1L/g4QfQ+Bwu39s+WSc2vSTEcT/62sNzJS4mSX1n4SM7ydXHZlxkxjBWkgrqpc79ELplm6sYNFw+ouJXCgtkUXMgy/v6thxUfLjJgR7bKKTvPbwbNIs2nBqSY=
+  app: somewherexpress
+  on:
+    repo: NoryDev/somewherexpress
+  run:
+    - "rake db:migrate"
+    - restart
