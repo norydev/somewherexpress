@@ -65,6 +65,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "rubocop", require: false
   gem "spring"
+  gem "webmock"
 end
 
 group :test do
