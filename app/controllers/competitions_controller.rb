@@ -57,7 +57,7 @@ class CompetitionsController < ApplicationController
   def new
     authorize Competition, :create?
 
-    @form = Competition::Contract::Create.new(Competition.new)
+    @form = Competition::Contract::Create.new(Competition.new).prepopulate!
   end
 
   # This method is soon going to be deprecated, edit will be in show page
