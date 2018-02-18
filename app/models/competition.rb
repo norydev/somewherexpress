@@ -32,6 +32,7 @@
 #
 
 class Competition < ApplicationRecord
+  scope :published, -> { where(published: true) }
   scope :finished, -> { where(finished: true).order(start_date: :desc) }
   scope :not_finished, -> { where(finished: false).order(:start_date) }
 
@@ -78,7 +79,7 @@ class Competition < ApplicationRecord
 
   def route
     rte = "#{start_city.locality} (#{start_city.country_short}) – "
-    tracks.joins(:end_city).order(:start_time).each do |t|
+    tracks.sort_by(&:start_time).each do |t|
       next if t.end_city.locality == end_city.locality
       rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
     end
@@ -86,8 +87,7 @@ class Competition < ApplicationRecord
   end
 
   def multiple_tracks?
-    # order to eliminate tracks with no id (used for competition form)
-    tracks.order(:start_time).size > 1
+    tracks.size > 1
   end
 
   def just_published?
@@ -135,11 +135,11 @@ class Competition < ApplicationRecord
   end
 
   def self.open_for_registration
-    not_finished.select(&:registrations_open?)
+    all.select(&:registrations_open?)
   end
 
   def self.not_open_for_registration
-    not_finished.reject(&:registrations_open?)
+    all.reject(&:registrations_open?)
   end
 
   def ical_event

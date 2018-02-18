@@ -27,21 +27,21 @@
     </div>
   </div>
 
-  <% if policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any? %>
+  <% if @open_competitions.any? || @closed_competitions.any? %>
   <div class="bg-welcome">
     <div class="container padded-bottom padded-mini-top">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-          <% if policy_scope(Competition).open_for_registration.any? %>
+          <% if @open_competitions.any? %>
             <h2 class="text-center"><%= t('.open_title') %></h2>
-            <% policy_scope(Competition).open_for_registration.each do |competition| %>
+            <% @open_competitions.each do |competition| %>
               <%= render 'competitions/card', competition: competition %>
             <% end %>
           <% end %>
 
-          <% if policy_scope(Competition).not_open_for_registration.any? %>
+          <% if @closed_competitions.any? %>
             <h2 class="text-center"><%= t('.closed_title') %></h2>
-            <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
+            <% @closed_competitions.each do |competition| %>
               <%= render 'competitions/card', competition: competition %>
             <% end %>
           <% end %>

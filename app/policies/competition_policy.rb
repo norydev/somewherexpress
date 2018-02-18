@@ -2,7 +2,7 @@
 class CompetitionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(published: true)
+      scope
     end
   end
 
