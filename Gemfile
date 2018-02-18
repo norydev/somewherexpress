@@ -18,7 +18,7 @@ gem "jquery-rails"
 
 # Front-end
 gem "bootstrap-sass"
-gem "font-awesome-sass"
+gem "font-awesome-sass", "< 5.0"
 gem "simple_form"
 
 # other
@@ -43,8 +43,8 @@ gem "sidekiq"
 
 # Trailblazer
 gem "reform", "~> 2.1.0"
-gem "trailblazer-loader"
-gem "trailblazer-rails"
+gem "trailblazer-loader", "0.1.2"
+gem "trailblazer-rails", "0.2.4"
 
 # admin panel
 gem "activeadmin"
@@ -52,15 +52,6 @@ gem "activeadmin"
 source "https://rails-assets.org" do
   gem "rails-assets-underscore"
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 group :development, :test do
   gem "annotate"
