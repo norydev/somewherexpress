@@ -25,10 +25,12 @@
 
 class Track < ApplicationRecord
   belongs_to :competition
-  has_many :ranks, as: :race, dependent: :destroy
+  has_many :ranks, as: :race, dependent: :destroy, inverse_of: :race
 
-  belongs_to :start_city, class_name: "City", foreign_key: "start_city_id"
-  belongs_to :end_city, class_name: "City", foreign_key: "end_city_id"
+  belongs_to :start_city, class_name: "City", foreign_key: "start_city_id",
+                          inverse_of: :start_of_tracks
+  belongs_to :end_city, class_name: "City", foreign_key: "end_city_id",
+                        inverse_of: :end_of_tracks
 
   after_create :make_track_ranks
 

@@ -32,11 +32,23 @@ class City < ApplicationRecord
     ))
   }
 
-  has_many :start_of_competitions, class_name: "Competition", foreign_key: "start_city_id"
-  has_many :end_of_competitions, class_name: "Competition", foreign_key: "end_city_id"
+  has_many :start_of_competitions, class_name: "Competition",
+                                   foreign_key: "start_city_id",
+                                   dependent: :restrict_with_error,
+                                   inverse_of: :start_city
+  has_many :end_of_competitions, class_name: "Competition",
+                                 foreign_key: "end_city_id",
+                                 dependent: :restrict_with_error,
+                                 inverse_of: :end_city
 
-  has_many :start_of_tracks, class_name: "Track", foreign_key: "start_city_id"
-  has_many :end_of_tracks, class_name: "Track", foreign_key: "end_city_id"
+  has_many :start_of_tracks, class_name: "Track",
+                             foreign_key: "start_city_id",
+                             dependent: :restrict_with_error,
+                             inverse_of: :start_city
+  has_many :end_of_tracks, class_name: "Track",
+                           foreign_key: "end_city_id",
+                           dependent: :restrict_with_error,
+                           inverse_of: :end_city
 
   has_many :start_of_track_competitions, through: :start_of_tracks, source: :competition
   has_many :end_of_track_competitions, through: :end_of_tracks, source: :competition
