@@ -1,8 +1,7 @@
+# frozen_string_literal: true
 class Marker
   def self.for_all_relevant_cities
-    on_cities(City.preload(end_of_tracks: [:competition, ranks: [:user]])
-                  .on_map
-                  .distinct(:locality))
+    on_cities(City.on_map.preload(end_of_tracks: [:competition, ranks: [:user]]))
   end
 
   def self.on_cities(cities)

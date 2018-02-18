@@ -22,6 +22,16 @@
 #
 
 class City < ApplicationRecord
+  scope :on_map, lambda {
+    where(_exists(
+            Competition.finished.joins(:tracks)
+                       .where("competitions.start_city_id = cities.id OR "\
+                              "competitions.end_city_id = cities.id OR "\
+                              "tracks.start_city_id = cities.id OR "\
+                              "tracks.end_city_id = cities.id")
+    ))
+  }
+
   has_many :start_of_competitions, class_name: "Competition", foreign_key: "start_city_id"
   has_many :end_of_competitions, class_name: "Competition", foreign_key: "end_city_id"
 
@@ -36,34 +46,5 @@ class City < ApplicationRecord
 
   def competition
     start_of_competitions.first
-  end
-
-  def self.on_map
-    fc1 = joins(:start_of_competitions)
-          .merge(Competition.finished)
-          .ids
-
-    fc2 = joins(:end_of_competitions)
-          .merge(Competition.finished)
-          .ids
-
-    fc3 = joins(:start_of_track_competitions)
-          .merge(Competition.finished)
-          .ids
-
-    fc4 = joins(:end_of_track_competitions)
-          .merge(Competition.finished)
-          .ids
-
-    where(id: fc1 | fc2 | fc3 | fc4)
-  end
-
-  def self.nowhere
-    c1 = joins(:start_of_competitions).ids
-    c2 = joins(:end_of_competitions).ids
-    c3 = joins(:start_of_tracks).ids
-    c4 = joins(:end_of_tracks).ids
-
-    City.where.not(id: c1 | c2 | c3 | c4)
   end
 end
