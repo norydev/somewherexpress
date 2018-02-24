@@ -54,6 +54,14 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
+
+    @badge = @user.founder_badge
+    @competition_victories = @user.competition_victories
+    @track_victories = @user.track_victories.preload(:start_city, :end_city)
+    @finished_competitions = @user.finished_competitions
+                                  .order(start_date: :desc)
+                                  .preload(:ranks, tracks: [:ranks, :start_city,
+                                                            :end_city])
   end
 
   def edit
