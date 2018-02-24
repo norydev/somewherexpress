@@ -38,6 +38,7 @@ class CompetitionsController < ApplicationController
   def index
     @competitions = policy_scope(Competition)
                     .published
+                    .most_recent_first
                     .preload(:start_city, :end_city, :accepted_users,
                              :pending_users, :refused_users,
                              tracks: [:start_city, :end_city],

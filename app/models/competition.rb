@@ -33,8 +33,10 @@
 
 class Competition < ApplicationRecord
   scope :published, -> { where(published: true) }
-  scope :finished, -> { where(finished: true).order(start_date: :desc) }
-  scope :not_finished, -> { where(finished: false).order(:start_date) }
+  scope :finished, -> { where(finished: true).most_recent_first }
+  scope :not_finished, -> { where(finished: false).most_recent_last }
+  scope :most_recent_first, -> { order(start_date: :desc) }
+  scope :most_recent_last, -> { order(:start_date) }
 
   has_many :subscriptions, dependent: :destroy
   has_many :pending_subscriptions, -> { pending.order(:created_at) },
