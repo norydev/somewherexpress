@@ -35,14 +35,14 @@
           <% if @open_competitions.any? %>
             <h2 class="text-center"><%= t('.open_title') %></h2>
             <% @open_competitions.each do |competition| %>
-              <%= render 'competitions/card', competition: competition %>
+              <div class="marged-mini-bottom"><%= render 'competitions/card', competition: competition %></div>
             <% end %>
           <% end %>
 
           <% if @closed_competitions.any? %>
             <h2 class="text-center"><%= t('.closed_title') %></h2>
             <% @closed_competitions.each do |competition| %>
-              <%= render 'competitions/card', competition: competition %>
+              <div class="marged-mini-bottom"><%= render 'competitions/card', competition: competition %></div>
             <% end %>
           <% end %>
         </div>

@@ -22,8 +22,6 @@
         <div class="modal" id="modal-<%= competition.id %>" tabindex="-1" role="dialog" aria-labelledby="new_registration">
           <div class="modal-dialog" role="document">
             <div id="modal-content-<%= competition.id %>" class="modal-content">
-              <% last_sub = current_user.subscriptions.order(created_at: :desc).first %>
-
               <% subscription = Subscription::Contract::Create.new(Subscription.new)
                  subscription.prepopulate!(user: current_user) %>
               <%= render 'subscriptions/form', competition: competition, subscription: subscription %>

@@ -14,25 +14,11 @@
     <hr>
     <%= link_to users_path, class: "navbar-wagon-item navbar-wagon-link text-center" do %>
       <span class="visible-xs-block"><i class="icomoon icon-laurel"></i></span>
-      Hall of fame
+      Hall of Fame
     <% end %>
     <hr>
 
-    <!-- <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
-      <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
-      <button type="submit" class="navbar-wagon-search-btn">
-        <i class="fa fa-search"></i>
-      </button>
-    </form> -->
-    <!-- <hr class="hidden-xs hidden-sm"> -->
     <% if user_signed_in? %>
-      <%#= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
-        <!-- <div class="icon-badge-container">
-          <i class="fa fa-envelope-o"></i>
-          <div class="icon-badge icon-badge-blue">3</div>
-        </div> -->
-      <%# end %>
-      <!-- <hr> -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <div class="dropdown-toggle" data-toggle="dropdown">

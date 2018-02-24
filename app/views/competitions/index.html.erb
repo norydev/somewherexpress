@@ -19,7 +19,7 @@
       </div>
 
       <% @competitions.select { |c| c.status == :open }.each do |competition| %>
-        <%= render 'card', competition: competition %>
+        <div class="marged-mini-bottom"><%= render 'card', competition: competition %></div>
       <% end %>
     </div>
   </div>
