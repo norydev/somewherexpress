@@ -47,11 +47,21 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def index
-    @users = policy_scope(User)
+    @users = policy_scope(User).hall_of_fame
+                               .preload(:competition_victories, :badges,
+                                        track_victories: [:start_city, :end_city])
   end
 
   def show
     authorize @user
+
+    @badge = @user.founder_badge
+    @competition_victories = @user.competition_victories
+    @track_victories = @user.track_victories.preload(:start_city, :end_city)
+    @finished_competitions = @user.finished_competitions
+                                  .order(start_date: :desc)
+                                  .preload(:ranks, tracks: [:ranks, :start_city,
+                                                            :end_city])
   end
 
   def edit

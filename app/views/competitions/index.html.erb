@@ -7,7 +7,7 @@
 <% end %>
 
 
-<%= content_for(:og_image) { @competitions.last.end_city.picture } %>
+<%= content_for(:og_image) { @competitions.last&.end_city&.picture } %>
 
 <div class="container padded-mini">
   <div class="row">
@@ -18,8 +18,8 @@
         <%= link_to t('.new.title'), new_competition_path, class: "navbar-wagon-button btn", style: "margin-left: 0" if policy(Competition).create? %>
       </div>
 
-      <% @competitions.open_for_registration.each do |competition| %>
-        <%= render 'card', competition: competition %>
+      <% @competitions.select { |c| c.status == :open }.each do |competition| %>
+        <div class="marged-mini-bottom"><%= render 'card', competition: competition %></div>
       <% end %>
     </div>
   </div>
@@ -27,10 +27,10 @@
 
 <div class="container">
   <div class="card-deck">
-    <% @competitions.not_open_for_registration.each do |competition| %>
+    <% @competitions.select { |c| c.status == :closed }.each do |competition| %>
       <%= render 'card', competition: competition %>
     <% end %>
-    <% @competitions.finished.each do |competition| %>
+    <% @competitions.select { |c| c.status == :finished }.each do |competition| %>
       <%= render 'card', competition: competition %>
     <% end %>
   </div>

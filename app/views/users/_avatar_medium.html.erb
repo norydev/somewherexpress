@@ -4,6 +4,6 @@
   <%= image_tag user.avatar,
                 class: "img-circle avatar-medium",
                 alt: user.initials,
-                title: ("#{user}" if tooltip),
+                title: ("#{ user }" if tooltip),
                 data: ({ toggle: "tooltip", placement: "bottom" } if tooltip) %>
 <% end %>

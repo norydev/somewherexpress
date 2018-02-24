@@ -15,22 +15,22 @@
         <div class="padded-mini-bottom">
           <div class="profile-pic">
             <%= image_tag @user.avatar, class: "avatar-ultra", alt: @user.initials %>
-            <% if @user.founder_badge %>
-              <%= image_tag @user.founder_badge.picture, class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{@user.founder_badge.description}", style: "margin-top: 3px;" %>
+            <% if @badge %>
+              <%= image_tag @badge.picture, class: "avatar-badge", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{@badge.description}", style: "margin-top: 3px;" %>
             <% end %>
           </div>
 
           <h1><%= @user %></h1>
           <div class="text-center">
-            <% @user.competition_victories.each do |competition| %>
+            <% @competition_victories.each do |competition| %>
               <%= link_to competition do %>
                 <span class="trophies"><i class="fa fa-trophy" data-toggle="tooltip" data-placement="bottom" title="<%= competition %>"></i></span>
               <% end %>
             <% end %>
           </div>
           <div class="text-center">
-            <% @user.track_victories.each do |track| %>
-              <%= link_to competition_path(track.competition, anchor: "track-#{track.id}-result") do %>
+            <% @track_victories.each do |track| %>
+              <%= link_to competition_path(id: track.competition_id, anchor: "track-#{track.id}-result") do %>
                 <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
               <% end %>
             <% end %>
@@ -39,20 +39,22 @@
 
         <table class="table bordered">
           <tbody>
-            <% @user.finished_competitions.order(start_date: :desc).each do |competition| %>
+            <% @finished_competitions.each do |competition| %>
               <tr>
                 <td><%= link_to competition, competition %></td>
                 <td><%= date_format(competition.start_date) %> – <%= date_format(competition.end_date) %></td>
-                <td><%= place(competition.ranks.find_by(user: @user)) %></td>
+                <td><%= place(competition.ranks.find { |r| r.user_id == @user.id }) %></td>
                 <td>
-                  <% if competition.ranks.find_by(user: @user).try(:result) == 1 && competition.finished %>
+                  <% if competition.ranks.find { |r| r.user_id == @user.id && r.result == 1 }.present? && competition.finished %>
                     <span class="trophies-small"><i class="fa fa-trophy"></i></span>
                   <% end %>
                 </td>
                 <td>
-                  <% competition.t_ranks.where(user: @user, result: 1).each do |r| %>
-                    <%= link_to competition_path(r.race.competition, anchor: "track-#{r.race.id}-result") do %>
-                      <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= r.race %>"></i></span>
+                  <% competition.tracks.each do |track| %>
+                    <% if track.ranks.find { |r| r.user_id == @user.id && r.result == 1 }.present? %>
+                      <%= link_to competition_path(competition, anchor: "track-#{track.id}-result") do %>
+                        <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </td>

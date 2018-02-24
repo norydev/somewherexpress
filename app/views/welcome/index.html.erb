@@ -18,7 +18,7 @@
             <%= t('.intro') %>
           </div>
           <div class="users">
-            <% policy_scope(User).left_outer_joins(:badges).order("count(badges) desc").each do |user| %>
+            <% @members.each do |user| %>
               <div class="marged-micro-bottom" style="display: inline-block;"><%= render 'users/avatar_medium', user: user %></div>
             <% end %>
           </div>
@@ -27,22 +27,22 @@
     </div>
   </div>
 
-  <% if policy_scope(Competition).open_for_registration.any? || policy_scope(Competition).not_open_for_registration.any? %>
+  <% if @open_competitions.any? || @closed_competitions.any? %>
   <div class="bg-welcome">
     <div class="container padded-bottom padded-mini-top">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-          <% if policy_scope(Competition).open_for_registration.any? %>
+          <% if @open_competitions.any? %>
             <h2 class="text-center"><%= t('.open_title') %></h2>
-            <% policy_scope(Competition).open_for_registration.each do |competition| %>
-              <%= render 'competitions/card', competition: competition %>
+            <% @open_competitions.each do |competition| %>
+              <div class="marged-mini-bottom"><%= render 'competitions/card', competition: competition %></div>
             <% end %>
           <% end %>
 
-          <% if policy_scope(Competition).not_open_for_registration.any? %>
+          <% if @closed_competitions.any? %>
             <h2 class="text-center"><%= t('.closed_title') %></h2>
-            <% policy_scope(Competition).not_open_for_registration.each do |competition| %>
-              <%= render 'competitions/card', competition: competition %>
+            <% @closed_competitions.each do |competition| %>
+              <div class="marged-mini-bottom"><%= render 'competitions/card', competition: competition %></div>
             <% end %>
           <% end %>
         </div>
@@ -67,7 +67,7 @@
           <div class="panel panel-default">
           <table class="table">
             <tbody>
-              <% policy_scope(User).sort_by{ |u| [-u.competition_victories.count, -u.track_victories.count, -u.badges.count] }.first(5).each do |user| %>
+              <% @hof_users.each do |user| %>
                   <tr>
                     <td>
                       <%= render 'users/avatar_medium', user: user %>
@@ -82,14 +82,14 @@
                     </td>
                     <td>
                       <% user.track_victories.each do |track| %>
-                        <%= link_to competition_path(track.competition, anchor: "track-#{track.id}-result") do %>
+                        <%= link_to competition_path(id: track.competition_id, anchor: "track-#{track.id}-result") do %>
                           <span class="medals"><i class="icomoon icon-medal" data-toggle="tooltip" data-placement="bottom" title="<%= track %>"></i></span>
                         <% end %>
                       <% end %>
                     </td>
                     <td>
                       <% user.badges.each do |badge| %>
-                        <%= image_tag badge.picture, class: "award", alt: "", data: {toggle: "tooltip", placement: "bottom"}, title: "#{badge.description}" %>
+                        <%= image_tag badge.picture, class: "award", alt: "", data: { toggle: "tooltip", placement: "bottom"}, title: "#{ badge.description }" %>
                       <% end %>
                     </td>
                   </tr>

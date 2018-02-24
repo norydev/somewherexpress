@@ -56,6 +56,17 @@ class User < ApplicationRecord
       .where(notification_settings: { as_user_competition_edited: true })
   }
 
+  scope :with_competitions, lambda {
+    where(_exists(Subscription.where("users.id = subscriptions.user_id")))
+  }
+
+  scope :hall_of_fame, lambda {
+    with_competitions
+      .left_outer_joins(:competition_victories, :track_victories, :badges)
+      .order("count(competitions) desc, count(tracks) desc, count(badges) desc")
+      .group("users.id")
+  }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -70,13 +81,13 @@ class User < ApplicationRecord
            through: :subscriptions,
            source: :competition
 
-  has_many :competition_victories, lambda { |object|
-    finished.joins(:ranks).where(ranks: { result: 1, user_id: object.id })
-  }, through: :subscriptions, source: :competition
+  has_many :first_ranks, -> { where(result: 1) }, class_name: "Rank",
+                                                  inverse_of: :user
 
-  has_many :track_victories, lambda { |object|
-    joins(:ranks).where(ranks: { result: 1, user_id: object.id })
-  }, through: :competitions, source: :tracks
+  has_many :competition_victories, -> { finished },
+           through: :first_ranks, source: :race, source_type: "Competition"
+  has_many :track_victories, through: :first_ranks, source: :race,
+                             source_type: "Track"
 
   has_many :ranks, dependent: :nullify
 

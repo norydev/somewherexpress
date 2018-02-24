@@ -37,6 +37,11 @@ class CompetitionsController < ApplicationController
 
   def index
     @competitions = policy_scope(Competition)
+                    .published
+                    .preload(:start_city, :end_city, :accepted_users,
+                             :pending_users, :refused_users,
+                             tracks: [:start_city, :end_city],
+                             subscriptions: :user)
   end
 
   def show
