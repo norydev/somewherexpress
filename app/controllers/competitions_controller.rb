@@ -43,6 +43,8 @@ class CompetitionsController < ApplicationController
                              :pending_users, :refused_users,
                              tracks: [:start_city, :end_city],
                              subscriptions: :user)
+
+    @markers = Marker.for_all_relevant_cities
   end
 
   def show

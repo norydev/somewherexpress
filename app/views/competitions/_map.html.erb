@@ -3,7 +3,7 @@
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
     $(document).on('ready', function() {
-      gmapize(<%= raw markers.to_json %>)
+      mapWithDirectionsAndMarkers(<%= raw competitions.to_json %>, <%= raw markers.to_json %>)
     })
   <% end %>
 <% end %>

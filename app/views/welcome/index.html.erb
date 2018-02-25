@@ -54,7 +54,7 @@
   <div class="bg-welcome">
     <div class="container padded-bottom padded-mini-top">
       <h2 class="text-center"><%= t('.passed_title') %></h2>
-      <%= render 'competitions/map', markers: @markers %>
+      <%= render 'competitions/map', markers: @markers, competitions: @past_competitions %>
     </div>
   </div>
 

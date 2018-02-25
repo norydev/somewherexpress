@@ -8,10 +8,11 @@ class WelcomeController < ApplicationController
     @markers = Marker.for_all_relevant_cities
     @open_competitions = Competition.published.not_finished.open_for_registration
     @closed_competitions = Competition.published.not_finished.not_open_for_registration
+    @past_competitions = Competition.published.finished
+                                    .preload(:start_city, :end_city,
+                                             tracks: :end_city)
 
     if user_signed_in?
-      @past_competitions = Competition.published.finished
-
       render "dashboard"
     else
       @members = User.with_competitions.left_outer_joins(:badges)
