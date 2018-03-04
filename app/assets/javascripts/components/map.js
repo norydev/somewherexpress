@@ -18,7 +18,8 @@ function mapWithDirectionsAndMarkers(routes, markers) {
   var directionsService = new google.maps.DirectionsService();
 
   _.each(routes, function(route) {
-    var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+    var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true,
+                                                                 preserveViewport: true });
 
     var waypts = [];
     _.each(route.tracks, function(track) {
