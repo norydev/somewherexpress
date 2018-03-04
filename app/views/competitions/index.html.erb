@@ -35,3 +35,7 @@
     <% end %>
   </div>
 </div>
+
+<div class="container padded-bottom padded-mini-top">
+  <%= render 'competitions/map', markers: @markers, competitions: @competitions.select { |c| c.status == :finished } %>
+</div>
