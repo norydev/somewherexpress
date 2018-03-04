@@ -145,12 +145,12 @@ class Competition < ApplicationRecord
   end
 
   # To render directions on maps
-  def as_json(*args)
+  def as_json(*_args)
     slice(:id, :name).merge(start_city: start_city.slice(:lat, :lng, :name),
                             end_city: end_city.slice(:lat, :lng, :name),
-                            tracks: tracks.map { |t|
+                            tracks: tracks.map do |t|
                               { end_city: t.end_city.slice(:name) }
-                            })
+                            end)
   end
 
   def ical_event
