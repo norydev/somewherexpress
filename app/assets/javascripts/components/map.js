@@ -51,7 +51,7 @@ function mapWithDirectionsAndMarkers(routes, markers) {
   });
 
 
-  handler = Gmaps.build('Google', { markers: { clusterer: undefined  }});
+  handler = Gmaps.build('Google', { markers: { clusterer: undefined }});
   handler.buildMap({
   provider: {
     disableDefaultUI: true,
