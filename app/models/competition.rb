@@ -79,11 +79,9 @@ class Competition < ApplicationRecord
     "#{start_city.locality} (#{start_city.country_short}) – #{end_city.locality} (#{end_city.country_short})"
   end
 
-  def route(preload: false)
-    prepared_tracks = preload ? tracks.preload(:start_city, :end_city) : tracks
-
+  def route
     rte = "#{start_city.locality} (#{start_city.country_short}) – "
-    prepared_tracks.each do |t|
+    tracks.each do |t|
       next if t.end_city.locality == end_city.locality
       rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
     end
@@ -147,12 +145,10 @@ class Competition < ApplicationRecord
   end
 
   # To render directions on maps
-  def as_json(preload: false)
-    prepared_tracks = preload ? tracks.preload(:end_city) : tracks
-
+  def as_json(*_args)
     slice(:id, :name).merge(start_city: start_city.slice(:lat, :lng, :name),
                             end_city: end_city.slice(:lat, :lng, :name),
-                            tracks: prepared_tracks.map do |t|
+                            tracks: tracks.map do |t|
                               { end_city: t.end_city.slice(:name) }
                             end)
   end

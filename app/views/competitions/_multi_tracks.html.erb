@@ -19,21 +19,21 @@
         <table class="table text-muted race-infos">
           <tbody>
             <tr>
-              <td><i class="fa fa-map-signs fa-fw"></i> <%= competition.route(preload: true) %></td>
+              <td><i class="fa fa-map-signs fa-fw"></i> <%= competition.route %></td>
             </tr>
           </tbody>
         </table>
       </div>
       <table class="table">
         <tbody>
-          <%= render 'final_ranks', ranks: competition_ranks %>
+          <%= render 'final_ranks', ranks: competition.ranks %>
         </tbody>
       </table>
     </div>
     <!-- END FINAL RANKING -->
 
     <!-- START STAGE RANKING -->
-    <% competition.tracks.preload(:start_city, :end_city, ranks: :user).each_with_index do |track, i| %>
+    <% competition.tracks.each_with_index do |track, i| %>
       <div role="tabpanel" class="tab-pane" id="track-<%= track.id %>-result">
         <div class="padded-mini-sides">
           <table class="table text-muted race-infos">

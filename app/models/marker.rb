@@ -5,9 +5,7 @@ class Marker
   end
 
   def self.for_route(competition)
-    tracks = competition.tracks.preload(:start_city, :end_city)
-
-    tracks_cities = tracks.flat_map { |t| [t.start_city, t.end_city] }
+    tracks_cities = competition.tracks.flat_map { |t| [t.start_city, t.end_city] }
 
     route_cities = [competition.start_city, competition.end_city, tracks_cities].flatten.uniq(&:name)
 

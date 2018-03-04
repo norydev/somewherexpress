@@ -33,7 +33,8 @@
 
 class CompetitionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_competition, only: [:show, :edit, :update, :destroy]
+  before_action :set_competition, only: [:edit, :update, :destroy]
+  before_action :set_preloaded_competition, only: [:show]
 
   def index
     @competitions = policy_scope(Competition)
@@ -49,8 +50,6 @@ class CompetitionsController < ApplicationController
 
   def show
     authorize @competition
-
-    @competition_ranks = @competition.ranks.preload(:user)
 
     @form = Competition::Contract::Update.new(@competition) if policy(@competition).update?
   end
@@ -70,7 +69,7 @@ class CompetitionsController < ApplicationController
     @form = Competition::Contract::Create.new(Competition.new).prepopulate!
   end
 
-  # This method is soon going to be deprecated, edit will be in show page
+  # This endpoint is only used on update errors
   def edit
     authorize @competition, :update?
 
@@ -111,5 +110,13 @@ class CompetitionsController < ApplicationController
 
     def set_competition
       @competition = Competition.find(params[:id])
+    end
+
+    def set_preloaded_competition
+      @competition = Competition.preload(:start_city, :end_city,
+                                         tracks: [:start_city, :end_city,
+                                                  ranks: :user],
+                                         ranks: :user)
+                                .find(params[:id])
     end
 end

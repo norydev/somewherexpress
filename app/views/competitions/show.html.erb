@@ -3,7 +3,7 @@
 <% end %>
 
 <%= content_for(:description) do %>
-  <%= @competition.route(preload: true) %>, Du <%= date_format(@competition.start_date) %> au <%= date_format(@competition.end_date) %>. <%= t('welcome.index.intro') %>
+  <%= @competition.route %>, Du <%= date_format(@competition.start_date) %> au <%= date_format(@competition.end_date) %>. <%= t('welcome.index.intro') %>
 <% end %>
 
 <%= content_for(:og_image) { @competition.end_city.picture } %>
@@ -74,9 +74,9 @@
             <% end %>
           </div>
           <% if @competition.multiple_tracks? %>
-            <%= render 'multi_tracks', competition: @competition, competition_ranks: @competition_ranks %>
+            <%= render 'multi_tracks', competition: @competition %>
           <% else %>
-            <%= render 'mono_track', competition: @competition, competition_ranks: @competition_ranks %>
+            <%= render 'mono_track', competition: @competition %>
           <% end %>
         </div>
         <!-- END VIEW OF THE COMPETITION -->
@@ -98,7 +98,7 @@
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
     $(document).on( 'ready', function() {
-      mapWithDirections(<%= raw @competition.to_json(preload: true) %>, <%= raw Marker.for_route(@competition).to_json %>);
+      mapWithDirections(<%= raw @competition.to_json %>, <%= raw Marker.for_route(@competition).to_json %>);
     });
   <% end %>
 <% end %>
