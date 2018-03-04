@@ -5,7 +5,7 @@
     <ul class="nav nav-tabs" style="margin-bottom: -1px;" role="tablist">
       <li role="presentation" class="active"><a href="#finals" aria-controls="finals" role="tab" data-toggle="tab"><%= t('competitions.show.final_ranking') %></a></li>
 
-      <% competition.tracks.order(:start_time).each_with_index do |track, i| %>
+      <% competition.tracks.each_with_index do |track, i| %>
         <li role="presentation"><a href="#track-<%= track.id %>-result" aria-controls="track-<%= track.id %>-result" role="tab" data-toggle="tab"><%= t('activerecord.models.track', count: 1).capitalize %> <%= i + 1 %></a></li>
       <% end %>
     </ul>
@@ -19,21 +19,21 @@
         <table class="table text-muted race-infos">
           <tbody>
             <tr>
-              <td><i class="fa fa-map-signs fa-fw"></i> <%= competition.route %></td>
+              <td><i class="fa fa-map-signs fa-fw"></i> <%= competition.route(preload: true) %></td>
             </tr>
           </tbody>
         </table>
       </div>
       <table class="table">
         <tbody>
-          <%= render 'final_ranks', competition: competition %>
+          <%= render 'final_ranks', ranks: competition_ranks %>
         </tbody>
       </table>
     </div>
     <!-- END FINAL RANKING -->
 
     <!-- START STAGE RANKING -->
-    <% competition.tracks.order(:start_time).each_with_index do |track, i| %>
+    <% competition.tracks.preload(:start_city, :end_city, ranks: :user).each_with_index do |track, i| %>
       <div role="tabpanel" class="tab-pane" id="track-<%= track.id %>-result">
         <div class="padded-mini-sides">
           <table class="table text-muted race-infos">
@@ -56,7 +56,7 @@
 
         <table class="table">
           <tbody>
-            <% (track.ranks.where.not(result: 0).order(:dsq, :result) + track.ranks.where(result: 0)).each do |rank| %>
+            <% (track.ranks.reject { |r| r.result == 0 }.sort_by { |r| [r.dsq, r.result] } + track.ranks.select { |r| r.result == 0 }).each do |rank| %>
               <tr>
                 <td class="text-center"><%= track_result(rank) %></td>
                 <td class="text-center">

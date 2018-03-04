@@ -48,7 +48,7 @@ RSpec.describe Marker, type: :model do
                                           end_city: { name: "Berne, CH",
                                                       locality: "Berne",
                                                       country_short: "CH" } },
-                                         { start_time: 16.days.from_now.to_s,
+                                        { start_time: 16.days.from_now.to_s,
                                           start_city: { name: "Berne, CH",
                                                         locality: "Zurich",
                                                         country_short: "CH" },

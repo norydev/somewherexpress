@@ -13,8 +13,8 @@
 
   <table class="table">
     <tbody>
-      <% if competition.ranks.where.not(result: 0).any? %>
-        <% (competition.ranks.where.not(result: 0).order(:dsq, :result) + competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>
+      <% if competition_ranks.reject { |r| r.result == 0 }.any? %>
+        <% (competition_ranks.reject { |r| r.result == 0 }.sort_by { |r| [r.dsq, r.result] } + competition_ranks.select { |r| r.result == 0 }).each_slice(2).to_a.each do |rank1, rank2| %>
           <tr>
             <td>
               <%= render 'users/avatar_small', user: rank1.user %>
@@ -33,7 +33,7 @@
           </tr>
         <% end %>
       <% else %>
-        <%= render 'final_ranks', competition: competition %>
+        <%= render 'final_ranks', ranks: competition_ranks %>
       <% end %>
     </tbody>
   </table>

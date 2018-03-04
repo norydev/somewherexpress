@@ -40,3 +40,7 @@ Rails/SkipsModelValidations:
   Enabled: false
 Lint/AmbiguousBlockAssociation:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*

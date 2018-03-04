@@ -50,7 +50,9 @@ class CompetitionsController < ApplicationController
   def show
     authorize @competition
 
-    @form = Competition::Contract::Update.new(@competition)
+    @competition_ranks = @competition.ranks.preload(:user)
+
+    @form = Competition::Contract::Update.new(@competition) if policy(@competition).update?
   end
 
   def event
