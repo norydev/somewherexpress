@@ -32,7 +32,7 @@ $(document).ready(function(){
 // as found on http://davidlesches.com/blog/rails-nested-forms-using-jquery-and-simpleform
 // with a few customisations
 jQuery(function($) {
-  return $(document).ready(function() {
+  $(document).ready(function() {
     var nestedForm;
     if ($('.tracks_form').length) {
 
@@ -54,9 +54,9 @@ jQuery(function($) {
 
       $(".destroy_track:first").remove();
       $('body').on('click', '.destroy_track', function(e) {
-        return $(this).closest('.tracks_form').slideUp().remove();
+        $(this).closest('.tracks_form').slideUp().remove();
       });
-      return $('.add_track').click(function(e) {
+      $('.add_track').click(function(e) {
         var formsOnPage, lastNestedForm, newNestedForm;
         e.preventDefault();
         lastNestedForm = $('.tracks_form').last();
@@ -69,8 +69,9 @@ jQuery(function($) {
           var newLabel, oldLabel;
           oldLabel = $(this).attr('for');
           newLabel = oldLabel.replace(new RegExp(/_[0-9]+_/), "_" + formsOnPage + "_");
-          return $(this).attr('for', newLabel);
+          $(this).attr('for', newLabel);
         });
+
         $(newNestedForm).find('select, input').each(function() {
           var newId, newName, oldId, oldName;
           oldId = $(this).attr('id');
@@ -78,13 +79,14 @@ jQuery(function($) {
           $(this).attr('id', newId);
           oldName = $(this).attr('name');
           newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + formsOnPage + "]");
-          return $(this).attr('name', newName);
+          $(this).attr('name', newName);
         });
+
         $(newNestedForm).insertAfter(lastNestedForm);
         $('[data-toggle="tooltip"]').tooltip();
         datetime_picker();
         initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_start_city_attributes_name');
-        return initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_end_city_attributes_name');
+        initializeAutocomplete('competition_tracks_attributes_'+ formsOnPage +'_end_city_attributes_name');
       });
     }
   });

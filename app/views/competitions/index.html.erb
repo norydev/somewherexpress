@@ -36,6 +36,9 @@
   </div>
 </div>
 
-<div class="container padded-bottom padded-mini-top">
-  <%= render 'competitions/map', markers: @markers, competitions: @competitions.select { |c| c.status == :finished } %>
+<div class="bg-red">
+  <div class="container padded-bottom padded-mini-top">
+    <h2 class="text-center"><%= t('welcome.index.passed_title') %></h2>
+    <%= render 'competitions/map', markers: @markers, competitions: @competitions.select { |c| c.status == :finished } %>
+  </div>
 </div>

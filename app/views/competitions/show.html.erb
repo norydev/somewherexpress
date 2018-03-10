@@ -94,3 +94,11 @@
     </div>
   </div>
 </div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).on( 'ready', function() {
+      mapWithDirections(<%= raw @competition.to_json %>, <%= raw Marker.for_route(@competition).to_json %>);
+    });
+  <% end %>
+<% end %>

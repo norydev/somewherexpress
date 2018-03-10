@@ -4,10 +4,10 @@
   </div>
   <strong><%= city.locality %></strong><br>
 
-  <% city.end_of_tracks.joins(:competition).merge(Competition.finished).each do |track| %>
+  <% city.end_of_tracks.select { |tr| tr.competition.finished }.each do |track| %>
     <%= link_to track.competition, track.competition %>
     <div>
-      <span class="medals-small"><i class="icomoon icon-medal"></i></span> <%= track.ranks.select { |r| r.result == 1 }.map{ |r| r.user.first_name if r }.join(' & ') %>
+      <span class="medals-small"><i class="icomoon icon-medal"></i></span> <%= track.ranks.select { |r| r.result == 1 }.map { |r| r.user.first_name if r }.join(' & ') %>
     </div>
   <% end %>
 

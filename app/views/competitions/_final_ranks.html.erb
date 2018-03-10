@@ -1,4 +1,5 @@
-<% (competition.ranks.where.not(result: 0).order(:dsq, :result) + competition.ranks.where(result: 0)).each do |rank| %>
+<%- (ranks.reject { |r| r.result == 0 }.sort_by { |r| [r.dsq, r.result] } +
+     ranks.select { |r| r.result == 0 }).each do |rank| -%>
   <tr>
     <td class="text-center"><%= result(rank) %></td>
     <td class="text-center">
@@ -7,4 +8,4 @@
     <td class="text-uppercase"><%= link_to rank.user, rank.user %></td>
     <td class="text-right text-uppercase"><%= rank.points %> <%= t('ranks.params.points') %></td>
   </tr>
-<% end %>
+<%- end -%>

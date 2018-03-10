@@ -13,8 +13,8 @@
 
   <table class="table">
     <tbody>
-      <% if competition.ranks.where.not(result: 0).any? %>
-        <% (competition.ranks.where.not(result: 0).order(:dsq, :result) + competition.ranks.where(result: 0)).each_slice(2).to_a.each do |rank1, rank2| %>
+      <% if competition.ranks.reject { |r| r.result == 0 }.any? %>
+        <% (competition.ranks.reject { |r| r.result == 0 }.sort_by { |r| [r.dsq, r.result] } + competition.ranks.select { |r| r.result == 0 }).each_slice(2).to_a.each do |rank1, rank2| %>
           <tr>
             <td>
               <%= render 'users/avatar_small', user: rank1.user %>
@@ -33,63 +33,9 @@
           </tr>
         <% end %>
       <% else %>
-        <%= render 'final_ranks', competition: competition %>
+        <%= render 'final_ranks', ranks: competition.ranks %>
       <% end %>
     </tbody>
   </table>
 </div>
 <!-- END FINAL RANKING -->
-
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).on( 'ready', function() {
-
-      var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
-      var directionsService = new google.maps.DirectionsService();
-
-      function calcRoute() {
-        var origin      = new google.maps.LatLng(<%= competition.start_city.lat %>, <%= competition.start_city.lng %>);
-        var destination = new google.maps.LatLng(<%= competition.end_city.lat %>, <%= competition.end_city.lng %>);
-        var request = {
-            origin:      origin,
-            destination: destination,
-            travelMode:  google.maps.TravelMode.DRIVING
-        };
-        directionsService.route(request, function(response, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-          }
-        });
-      }
-      calcRoute();
-
-      handler = Gmaps.build('Google');
-      handler.buildMap({
-      provider: {
-        disableDefaultUI: true,
-        zoomControl: true,
-        scrollwheel: false,
-        styles: [{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]}]
-      },
-      internal: { id: 'map' } }, function(){
-      markers = handler.addMarkers([{
-        "lat": <%= competition.start_city.lat %>,
-        "lng": <%= competition.start_city.lng %>,
-        "picture": {
-          "url": "<%= image_url("marker.svg") %>",
-          "width":  32,
-          "height": 32}
-      },
-      {
-        "lat": <%= competition.end_city.lat %>,
-        "lng": <%= competition.end_city.lng %>,
-        "picture": {
-          "url": "<%= image_url("marker.svg") %>",
-          "width":  32,
-          "height": 32}
-      }]);
-        directionsDisplay.setMap(handler.getMap());
-      });
-    });
-  <% end %>
-<% end %>

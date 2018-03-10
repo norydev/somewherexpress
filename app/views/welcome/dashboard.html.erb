@@ -48,7 +48,6 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#open" aria-controls="open" role="tab" data-toggle="tab"><i class="fa fa-bullhorn fa-fw"></i> <%= t('welcome.index.future_title') %></a></li>
-        <li role="presentation"><a href="#finished" aria-controls="finished" role="tab" data-toggle="tab" onclick="showMap();"><i class="fa fa-list fa-fw"></i> <%= t('welcome.index.passed_title') %></a></li>
 
         <% if current_user.creations.not_finished.any? %>
           <li role="presentation">
@@ -103,16 +102,6 @@
             <% end %>
           </div>
         </div>
-        <div role="tabpanel" class="tab-pane panel panel-default panel-outside" id="finished">
-          <% if @past_competitions.any? %>
-            <div id="map" style="width: 100%; height: 550px; max-height: 90vh;"></div>
-            <ul class="list-group">
-              <% @past_competitions.each do |competition| %>
-                <%= render 'competition_summary', competition: competition %>
-              <% end %>
-            </ul>
-          <% end %>
-        </div>
 
         <% if current_user.creations.not_finished.any? %>
           <div role="tabpanel" class="tab-pane" id="mines">
@@ -150,16 +139,4 @@
       </div>
     </div>
   </div>
-
-  <% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    var mapized = false;
-    var showMap = function() {
-      if (mapized == false) {
-        gmapize(<%= raw @markers.to_json %>);
-        mapized = true;
-      }
-    }
-  <% end %>
-<% end %>
 </div>
