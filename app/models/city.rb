@@ -3,22 +3,15 @@
 #
 # Table name: cities
 #
-#  id                                :integer          not null, primary key
-#  name                              :string
-#  street_number                     :string
-#  route                             :string
-#  locality                          :string
-#  administrative_area_level_2       :string
-#  administrative_area_level_1       :string
-#  administrative_area_level_1_short :string
-#  country                           :string
-#  country_short                     :string
-#  postal_code                       :string
-#  lat                               :float
-#  lng                               :float
-#  created_at                        :datetime         not null
-#  updated_at                        :datetime         not null
-#  picture                           :string
+#  id            :integer          not null, primary key
+#  name          :string
+#  locality      :string
+#  country_short :string
+#  lat           :float
+#  lng           :float
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  picture       :string
 #
 
 class City < ApplicationRecord
