@@ -42,7 +42,8 @@ gem "google_places"
 gem "sidekiq"
 
 # Trailblazer
-gem "reform", "~> 2.1.0"
+gem "reform", "~> 2.2.0"
+gem "reform-rails", "~> 0.1.7"
 gem "trailblazer-loader", "0.1.2"
 gem "trailblazer-rails", "0.2.4"
 
