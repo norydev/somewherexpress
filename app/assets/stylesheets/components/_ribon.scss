@@ -27,17 +27,17 @@
 
   &-green {
     @extend .ribbon;
-    background-color: #BFDC7A;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
-    background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
-    background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45);
-    background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45);
-    background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45);
-    color: #6a6340;
+    background-color: lighten($green, 15%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($green, 15%)), to($green));
+    background-image: -webkit-linear-gradient(top, lighten($green, 15%), $green);
+    background-image:    -moz-linear-gradient(top, lighten($green, 15%), $green);
+    background-image:     -ms-linear-gradient(top, lighten($green, 15%), $green);
+    background-image:      -o-linear-gradient(top, lighten($green, 15%), $green);
+    color: darken($green, 15%);
 
     &:before, &:after {
       content: "";
-      border-top:   3px solid #6e8900;
+      border-top:   3px solid darken($green, 15%);
       border-left:  3px solid transparent;
       border-right: 3px solid transparent;
       position:absolute;
