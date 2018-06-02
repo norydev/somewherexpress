@@ -135,7 +135,6 @@ en:
     params:
       first_name: "First name"
       last_name: "Last name"
-      girl: "Are you a girl or a boy?"
       picture: "Picture"
     new:
       no_fb: I am not on facebook

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 ActiveAdmin.register User do
-  permit_params :email, :password, :first_name, :last_name, :girl, :picture,
+  permit_params :email, :password, :first_name, :last_name, :picture,
                 :admin, :organizer, :old_first_name, :old_last_name, :old_email,
                 :provider, :uid, :token, :token_expiry,
                 notification_setting_attributes: [:id, :locale,
@@ -23,7 +23,6 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     column :email
-    column :girl
     column :admin
     column :organizer
     column :uid
@@ -36,7 +35,6 @@ ActiveAdmin.register User do
       f.input :email
       f.input :first_name
       f.input :last_name
-      f.input :girl
       f.input :picture
     end
     f.inputs "Admin" do

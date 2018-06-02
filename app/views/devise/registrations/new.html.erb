@@ -30,13 +30,6 @@
               </div>
             </div>
 
-            <%= f.label t('users.params.girl'), required: true%>
-            <div class="text-center">
-              <%= f.collection_radio_buttons :girl, [[true, 'female'] ,[false, 'male']], :first, :last, checked: true do |b|
-                b.label(class: "marged-micro-sides") { "<i class='fa fa-#{ b.text }'></i>".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
-                end %>
-            </div>
-
             <%= f.input :email, required: true %>
             <%= f.input :password, required: true, hint: (t('.validatable.hint', count: @minimum_password_length)) %>
             <%= f.button :submit, t('.sign_up', default: "Sign up"), class: "btn btn-primary" %>

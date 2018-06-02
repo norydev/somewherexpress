@@ -9,11 +9,6 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  first_name             :string
@@ -21,7 +16,6 @@
 #  picture                :string
 #  admin                  :boolean          default(FALSE), not null
 #  organizer              :boolean          default(FALSE), not null
-#  girl                   :boolean          default(FALSE), not null
 #  deleted_at             :datetime
 #  old_first_name         :string
 #  old_last_name          :string
@@ -67,10 +61,8 @@ class User < ApplicationRecord
       .group("users.id")
   }
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+         :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   attr_accessor :current_password
 
@@ -125,10 +117,6 @@ class User < ApplicationRecord
 
   def avatar
     use_gravatar ? gravatar_url : image
-  end
-
-  def sex
-    girl? ? "female" : "male"
   end
 
   def facebook_user?
@@ -197,7 +185,6 @@ class User < ApplicationRecord
       self.first_name = auth.info.first_name
       self.last_name = auth.info.last_name
       self.picture = auth.info.image.gsub(/https?/, "https")
-      self.girl = auth.extra.raw_info.gender == "female"
       self.token = auth.credentials.token
       self.token_expiry = Time.zone.at(auth.credentials.expires_at)
       save!
