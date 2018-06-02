@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "rails_helper"
 
-RSpec.describe Track::Update do
+RSpec.describe Track::Contract::Update do
   let!(:user) { FactoryBot.create(:user) }
 
   it "updates a competition" do
@@ -37,23 +37,34 @@ RSpec.describe Track::Update do
 
     track = competition.tracks.first
 
-    Track::Update.call(id: track.id,
-                       track: { ranks: [{ id: track.ranks[0].id,
-                                          points: 2,
-                                          result: 1,
-                                          dsq: "0" },
-                                        { id: track.ranks[1].id,
-                                          points: 2,
-                                          result: 1,
-                                          dsq: "0" },
-                                        { id: track.ranks[2].id,
-                                          points: 1,
-                                          result: 2,
-                                          dsq: "0" },
-                                        { id: track.ranks[3].id,
-                                          points: 0,
-                                          result: 0,
-                                          dsq: "1" }] })
+    form = Track::Contract::Update.new(track)
+
+    form.save if form.validate(ranks: [
+                                 {
+                                   id: track.ranks[0].id,
+                                   points: 2,
+                                   result: 1,
+                                   dsq: "0"
+                                 },
+                                 {
+                                   id: track.ranks[1].id,
+                                   points: 2,
+                                   result: 1,
+                                   dsq: "0"
+                                 },
+                                 {
+                                   id: track.ranks[2].id,
+                                   points: 1,
+                                   result: 2,
+                                   dsq: "0"
+                                 },
+                                 {
+                                   id: track.ranks[3].id,
+                                   points: 0,
+                                   result: 0,
+                                   dsq: "1"
+                                 }
+                               ])
 
     track.reload
     expect(track.ranks.where(result: 1).size).to eq 2

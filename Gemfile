@@ -41,11 +41,9 @@ gem "google_places"
 # Background-jobs
 gem "sidekiq"
 
-# Trailblazer
+# Reform
 gem "reform", "~> 2.2.0"
 gem "reform-rails", "~> 0.1.7"
-gem "trailblazer-loader", "0.1.2"
-gem "trailblazer-rails", "0.2.4"
 
 # admin panel
 gem "activeadmin"

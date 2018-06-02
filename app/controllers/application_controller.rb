@@ -8,10 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
   include Pundit
-
-  after_action :verify_authorized, except: :index, unless: :unverified_controller?
-  after_action :verify_policy_scoped, only: :index, unless: :unverified_controller?
-
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def unverified_controller?
