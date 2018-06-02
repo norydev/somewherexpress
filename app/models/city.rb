@@ -22,7 +22,7 @@ class City < ApplicationRecord
                               "competitions.end_city_id = cities.id OR "\
                               "tracks.start_city_id = cities.id OR "\
                               "tracks.end_city_id = cities.id")
-    ))
+          ))
   }
 
   has_many :start_of_competitions, class_name: "Competition",

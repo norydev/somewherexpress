@@ -60,7 +60,7 @@ RSpec.describe Subscription::Create do
                               } },
               current_user: user,
               competition_id: competition.id)
-    }.to raise_error Trailblazer::Operation::InvalidContract
+    }.to change(Subscription, :count).by(0)
   end
 
   it "does not create if rules not accepted" do
@@ -74,6 +74,6 @@ RSpec.describe Subscription::Create do
                                 current_user: user,
                                 competition_id: competition.id)
                           .model
-    }.to raise_error Trailblazer::Operation::InvalidContract
+    }.to change(Subscription, :count).by(0)
   end
 end

@@ -30,18 +30,20 @@ class TracksController < ApplicationController
     authorize @track, :update?
 
     @competition = @track.competition
-    form Track::Update
+    @form = Track::Contract::Update.new(@track)
   end
 
   def update
     authorize @track
 
-    operation = run Track::Update do |op|
-      return redirect_to op.model.competition
-    end
+    @form = Track::Contract::Update.new(@track)
 
-    @form = operation.contract
-    render action: :edit
+    if @form.validate(params[:track])
+      @form.save
+      redirect_to @form.model.competition
+    else
+      render action: :edit
+    end
   end
 
   def destroy

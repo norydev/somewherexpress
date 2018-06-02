@@ -2,9 +2,15 @@
 require "rails_helper"
 
 RSpec.describe Competition::Create do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:existing_city) do
+    FactoryBot.create(:city, locality: "Berne", name: "Berne, CH")
+  end
+
   it "creates an unpublished competition" do
     competition = Competition::Create
-                  .call(competition: { name: "new competition", published: "0" })
+                  .call(competition: { name: "new competition", published: "0" },
+                        current_user: user)
                   .model
 
     expect(competition).to be_persisted
@@ -14,13 +20,9 @@ RSpec.describe Competition::Create do
 
   it "does not create an unpublished competition without name" do
     expect {
-      Competition::Create.call(competition: { name: "", published: "0" })
-    }.to raise_error Trailblazer::Operation::InvalidContract
-  end
-
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:existing_city) do
-    FactoryBot.create(:city, locality: "Berne", name: "Berne, CH")
+      Competition::Create.call(competition: { name: "", published: "0" },
+                               current_user: user)
+    }.to change(Competition, :count).by(0)
   end
 
   it "creates a published competition" do

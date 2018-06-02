@@ -77,26 +77,28 @@ class CompetitionsController < ApplicationController
   end
 
   def create
-    authorize Competition
-    operation = run Competition::Create,
-                    params: params.merge(current_user: current_user) do |op|
-      return redirect_to op.model
-    end
+    operation = Competition::Create.call(params.merge(current_user: current_user))
 
-    @form = operation.contract
-    render action: :new
+    @form = operation.form
+
+    if @form.valid?
+      redirect_to operation.model
+    else
+      @form.prepopulate!
+      render action: :new
+    end
   end
 
   def update
-    authorize @competition
+    operation = Competition::Update.call(params.merge(current_user: current_user))
 
-    operation = run Competition::Update,
-                    params: params.merge(current_user: current_user) do |op|
-      return redirect_to op.model
+    @form = operation.form
+
+    if @form.valid?
+      redirect_to operation.model
+    else
+      render action: :edit
     end
-
-    @form = operation.contract
-    render action: :edit
   end
 
   def destroy

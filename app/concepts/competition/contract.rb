@@ -65,6 +65,8 @@ class Competition < ApplicationRecord
       end
 
       def prepopulate_tracks!(_options)
+        return tracks if tracks.present?
+
         track = Track.new
         track.build_start_city
         track.build_end_city
@@ -82,11 +84,11 @@ class Competition < ApplicationRecord
       end
 
       def prepopulate_start_city!(_options)
-        self.start_city = City.new
+        self.start_city ||= City.new
       end
 
       def prepopulate_end_city!(_options)
-        self.end_city = City.new
+        self.end_city ||= City.new
       end
 
       def populate_track!(options)

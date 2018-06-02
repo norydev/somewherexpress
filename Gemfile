@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 source "https://rubygems.org"
-ruby "2.4.0"
+ruby "2.5.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "< 5.1"
@@ -41,10 +41,9 @@ gem "google_places"
 # Background-jobs
 gem "sidekiq"
 
-# Trailblazer
-gem "reform", "~> 2.1.0"
-gem "trailblazer-loader", "0.1.2"
-gem "trailblazer-rails", "0.2.4"
+# Reform
+gem "reform", "~> 2.2.0"
+gem "reform-rails", "~> 0.1.7"
 
 # admin panel
 gem "activeadmin"

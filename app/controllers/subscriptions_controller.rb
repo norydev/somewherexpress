@@ -40,39 +40,38 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    authorize Subscription.new(competition: @competition)
+    operation = Subscription::Create.call(params.merge(current_user: current_user))
 
-    operation = run Subscription::Create,
-                    params: params.merge(current_user: current_user) do |op|
-      return respond_to do |format|
-        @form = op.contract
-        format.html { redirect_to op.model.competition, notice: t("subscriptions.create.notice") }
+    @form = operation.form
+
+    if @form.valid?
+      respond_to do |format|
+        format.html { redirect_to operation.model.competition, notice: t("subscriptions.create.notice") }
         format.js
       end
-    end
-
-    respond_to do |format|
-      @form = operation.contract
-      format.html { render :new }
-      format.js
+    else
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
     end
   end
 
   def update
-    authorize @subscription
+    operation = Subscription::Update.call(params.merge(current_user: current_user))
 
-    operation = run Subscription::Update do |op|
-      return respond_to do |format|
-        @form = op.contract
+    @form = operation.form
+
+    if @form.valid?
+      respond_to do |format|
         format.html { redirect_to root_path }
         format.js
       end
-    end
-
-    @form = operation.contract
-    respond_to do |format|
-      format.html { render :edit }
-      format.js
+    else
+      respond_to do |format|
+        format.html { render :edit }
+        format.js
+      end
     end
   end
 

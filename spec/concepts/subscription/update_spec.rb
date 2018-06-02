@@ -44,7 +44,8 @@ RSpec.describe Subscription::Update do
                    .model
 
     Subscription::Update.call(id: subscription.id,
-                              subscription: { status: "accepted" })
+                              subscription: { status: "accepted" },
+                              current_user: user)
 
     expect(subscription.reload.status).to eq "accepted"
   end
@@ -64,7 +65,8 @@ RSpec.describe Subscription::Update do
 
     expect {
       Subscription::Update.call(id: subscription.id,
-                                subscription: { status: "undecided" })
-    }.to raise_error Trailblazer::Operation::InvalidContract
+                                subscription: { status: "undecided" },
+                                current_user: user)
+    }.to change(Subscription, :count).by(0)
   end
 end
