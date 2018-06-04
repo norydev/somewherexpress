@@ -39,7 +39,7 @@
         </div>
         <div class="media-body">
           <%= f.simple_fields_for :user do |u| %>
-            <p><i class="fa fa-<%= current_user.sex %> fa-fw"></i><%= current_user.name %></p>
+            <p><i class="fa fa-user fa-fw"></i><%= current_user.name %></p>
             <p><i class="fa fa-envelope-o fa-fw"></i><%= current_user.email %></p>
             <p class="form-inline">
               <i class="fa fa-phone fa-fw"></i><%= t('subscriptions.new.phone_number') %>: <%= u.input_field :phone_number, as: :string, class: "form-control input-sm" %>

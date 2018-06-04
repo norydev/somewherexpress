@@ -27,7 +27,11 @@ gem "devise-i18n"
 gem "devise-i18n-views"
 gem "figaro"
 gem "geocoder"
+
+# for maps
 gem "gmaps4rails"
+gem "lodash-rails"
+
 gem "icalendar"
 gem "modernizr-rails"
 gem "omniauth-facebook"
@@ -47,10 +51,6 @@ gem "reform-rails", "~> 0.1.7"
 
 # admin panel
 gem "activeadmin"
-
-source "https://rails-assets.org" do
-  gem "rails-assets-underscore"
-end
 
 group :development, :test do
   gem "annotate"

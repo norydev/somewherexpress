@@ -9,11 +9,6 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  first_name             :string
@@ -21,7 +16,6 @@
 #  picture                :string
 #  admin                  :boolean          default(FALSE), not null
 #  organizer              :boolean          default(FALSE), not null
-#  girl                   :boolean          default(FALSE), not null
 #  deleted_at             :datetime
 #  old_first_name         :string
 #  old_last_name          :string
@@ -85,6 +79,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :picture, :girl, :use_gravatar)
+      params.require(:user).permit(:first_name, :last_name, :picture, :use_gravatar)
     end
 end

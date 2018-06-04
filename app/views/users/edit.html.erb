@@ -36,13 +36,6 @@
             <div class="marged-mini">
               <%= t('.image_html', href: link_to(t('.image_text'), 'https://www.gravatar.com/', target: "_blank")) %>
             </div>
-
-            <%= f.label t('users.params.girl'), required: true %>
-            <div class="text-center">
-              <%= f.collection_radio_buttons :girl, [[true, 'female'] ,[false, 'male']], :first, :last do |b|
-                b.label(class: "marged-micro-sides") { "<i class='fa fa-#{ b.text }'></i>".html_safe + "<div>#{ b.radio_button }</div>".html_safe }
-                end %>
-            </div>
           </div><!-- END PANEL BODY -->
         </div><!-- END PANEL -->
 

@@ -45,3 +45,4 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - spec/**/*
+    - app/admin/*

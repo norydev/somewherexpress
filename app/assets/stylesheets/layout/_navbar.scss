@@ -60,10 +60,10 @@
     }
   }
   &-link {
-    color: #616668;
+    color: #666666;
     font-size: 14px;
     &:hover {
-      color: #da552f;
+      color: $link-color;
       text-decoration: none;
     }
   }
