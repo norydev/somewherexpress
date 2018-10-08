@@ -140,8 +140,6 @@ fr:
       first_name: "Prénom"
       last_name: "Nom de famille"
       picture: "Photo"
-    new:
-      no_fb: Je ne suis pas sur facebook
     show:
       profile:
         title: Mon profil

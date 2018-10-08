@@ -443,24 +443,6 @@ table tbody tr td {
   }
 }
 
-// facebook blue/purlple
-.btn-darkblue {
-  margin: 5px 0 5px 0;
-  padding: 0 20px;
-  border-radius: 20em;
-  line-height: 40px;
-  background-color: #3b5998;
-  color: $white;
-  font-size: 14px;
-  border: 2px solid #3b5998;
-
-  &:hover {
-    color: $white;
-    background: #3b5998;
-    border-color: darken(#3b5998, 10%);
-  }
-}
-
 .bg-light-orange {
   background-color: lighten($orange, 30%);
 }

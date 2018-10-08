@@ -20,10 +20,6 @@
 #  old_first_name         :string
 #  old_last_name          :string
 #  old_email              :string
-#  provider               :string
-#  uid                    :string
-#  token                  :string
-#  token_expiry           :datetime
 #  use_gravatar           :boolean          default(FALSE), not null
 #  phone_number           :string
 #  whatsapp               :boolean          default(FALSE), not null

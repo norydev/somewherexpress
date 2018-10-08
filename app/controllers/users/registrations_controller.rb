@@ -1,16 +1,6 @@
 # frozen_string_literal: true
 module Users
   class RegistrationsController < Devise::RegistrationsController
-    # POST /resource
-    # def create
-    #   super do
-    #     if resource.save
-    #       NotificationSetting.create!(user: resource, locale: params[:locale] || :fr)
-    #       UserMailer.welcome(resource.id).deliver_later
-    #     end
-    #   end
-    # end
-
     # DELETE /resource
     def destroy
       resource.soft_delete
@@ -19,16 +9,5 @@ module Users
       yield resource if block_given?
       respond_with_navigational(resource) { redirect_to after_sign_out_path_for(resource_name) }
     end
-
-    protected
-
-      # PUT /resource
-      def update_resource(resource, params)
-        if resource.provider == "facebook"
-          resource.update_without_password(params.slice(:email, :password, :current_password))
-        else
-          super
-        end
-      end
   end
 end

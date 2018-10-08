@@ -2,11 +2,7 @@ Hi <%= @user.first_name %>,
 
 Welcome to SomewherExpress, we are very excited to have you among us.
 
-<% if @user.facebook_user? %>
-To log in, use the “Sign in with Facebook” button on the 'Log in' page.
-<% else %>
 To log in, use your email address <%= @user.email %> as identifier.
-<% end %>
 
 Have a look at the next competitions: https://www.somewherexpress.com/en/competitions
 

@@ -1,18 +1,7 @@
 <div class="container profile padded-medium">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <div class="text-center padded-medium">
-        <%= link_to omniauth_authorize_path(resource_name, "facebook"), class: "btn btn-darkblue" do %>
-          <i class="fa fa-facebook-official fa-fw"></i> <%= t('devise.shared.links.sign_in_with_provider', provider: "Facebook", default: "Log in with Facebook") %>
-        <% end %>
-      </div>
-      <div class="text-center padded-mini">
-        <%= link_to "#no-fb-panel", role: "button", data: { toggle: "collapse" }, aria: { expanded: false, controls: "no-fb-panel" }, class: "large" do %>
-          <%= t('users.new.no_fb') %> <i class="fa fa-caret-down"></i>
-        <% end %>
-      </div>
-
-      <div id="no-fb-panel" class="collapse panel panel-default">
+      <div id="no-fb-panel" class="panel panel-default">
         <div class="panel-heading">
           <span class="pull-right"><%= link_to t("devise.sessions.new.sign_in"), new_session_path(resource_name) %></span>
           <strong><%= t('.sign_up', default: "Sign up") %></strong>
@@ -36,8 +25,6 @@
           <% end %>
         </div>
       </div>
-
-      <%#= render "devise/shared/links" %>
     </div>
   </div>
 </div>
