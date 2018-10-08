@@ -2,7 +2,6 @@
 ActiveAdmin.register User do
   permit_params :email, :password, :first_name, :last_name, :picture,
                 :admin, :organizer, :old_first_name, :old_last_name, :old_email,
-                :provider, :uid, :token, :token_expiry,
                 notification_setting_attributes: [:id, :locale,
                                                   :as_user_new_competition,
                                                   :as_user_competition_edited,
@@ -25,7 +24,6 @@ ActiveAdmin.register User do
     column :email
     column :admin
     column :organizer
-    column :uid
     column :sign_in_count
     actions
   end
@@ -45,12 +43,6 @@ ActiveAdmin.register User do
       f.input :old_first_name
       f.input :old_last_name
       f.input :old_email
-    end
-    f.inputs "Facebook" do
-      f.input :provider
-      f.input :uid
-      f.input :token
-      f.input :token_expiry
     end
 
     f.inputs "Notifications", for: [:notification_setting, f.object.notification_setting] do |item|

@@ -20,10 +20,6 @@
 #  old_first_name         :string
 #  old_last_name          :string
 #  old_email              :string
-#  provider               :string
-#  uid                    :string
-#  token                  :string
-#  token_expiry           :datetime
 #  use_gravatar           :boolean          default(FALSE), not null
 #  phone_number           :string
 #  whatsapp               :boolean          default(FALSE), not null
@@ -62,8 +58,7 @@ class User < ApplicationRecord
   }
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook]
+         :recoverable, :rememberable, :validatable
   attr_accessor :current_password
 
   has_many :subscriptions, dependent: :destroy
@@ -119,10 +114,6 @@ class User < ApplicationRecord
     use_gravatar ? gravatar_url : image
   end
 
-  def facebook_user?
-    provider == "facebook" && uid.present?
-  end
-
   # instead of deleting, indicate the user requested a delete & timestamp it
   def soft_delete
     update(deleted_at: Time.current, old_email: email,
@@ -155,41 +146,7 @@ class User < ApplicationRecord
                 .count
   end
 
-  def self.find_for_facebook_oauth(auth)
-    if find_by(provider: auth.provider, uid: auth.uid)
-      find_by(provider: auth.provider, uid: auth.uid)
-    elsif find_by(email: auth.info.email)
-      find_by(email: auth.info.email).send(:update_from_fb, auth)
-    else
-      User.new.send(:create_from_fb, auth)
-    end
-  end
-
   private
-
-    def update_from_fb(auth)
-      self.provider = auth.provider
-      self.uid = auth.uid
-      self.token = auth.credentials.token
-      self.token_expiry = Time.zone.at(auth.credentials.expires_at)
-      self.picture = auth.info.image.gsub(/https?/, "https")
-      save!
-      self
-    end
-
-    def create_from_fb(auth)
-      self.provider = auth.provider
-      self.uid = auth.uid
-      self.email = auth.info.email
-      self.password = Devise.friendly_token[0, 20] # Fake password for validation
-      self.first_name = auth.info.first_name
-      self.last_name = auth.info.last_name
-      self.picture = auth.info.image.gsub(/https?/, "https")
-      self.token = auth.credentials.token
-      self.token_expiry = Time.zone.at(auth.credentials.expires_at)
-      save!
-      self
-    end
 
     def set_notifs_and_welcome
       NotificationSetting.create!(user: self, locale: I18n.locale || :fr)

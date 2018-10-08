@@ -34,7 +34,6 @@ gem "lodash-rails"
 
 gem "icalendar"
 gem "modernizr-rails"
-gem "omniauth-facebook"
 gem "premailer-rails"
 gem "pundit"
 gem "raygun4ruby"
