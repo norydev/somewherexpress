@@ -30,9 +30,9 @@ RSpec.describe Competition::Update do
                         current_user: user)
                   .model
 
-    Competition::Update.call(id: competition.id,
-                             competition: { name: "updated name" },
-                             current_user: user)
+    described_class.call(id: competition.id,
+                         competition: { name: "updated name" },
+                         current_user: user)
 
     competition.reload
     expect(competition.name).to eq("updated name")

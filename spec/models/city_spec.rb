@@ -18,7 +18,7 @@ require "rails_helper"
 
 RSpec.describe City, type: :model do
   describe "scopes" do
-    before(:each) do
+    before do
       paris = FactoryBot.create(:city, name: "Paris")
       belgrade = FactoryBot.create(:city, name: "Belgrade")
       istanbul = FactoryBot.create(:city, name: "Istanbul")

@@ -16,10 +16,10 @@
 
 FactoryBot.define do
   factory :city do
-    name          "Yverdon-les-Bains, Suisse"
-    lat           46.7784736
-    lng           6.641183
-    locality      "Yverdon-les-Bains"
-    country_short "CH"
+    name          { "Yverdon-les-Bains, Suisse" }
+    lat           { 46.7784736 }
+    lng           { 6.641183 }
+    locality      { "Yverdon-les-Bains" }
+    country_short { "CH" }
   end
 end

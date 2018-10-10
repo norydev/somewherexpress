@@ -8,7 +8,7 @@ RSpec.describe Competition::Create do
   end
 
   it "creates an unpublished competition" do
-    competition = Competition::Create
+    competition = described_class
                   .call(competition: { name: "new competition", published: "0" },
                         current_user: user)
                   .model
@@ -20,13 +20,13 @@ RSpec.describe Competition::Create do
 
   it "does not create an unpublished competition without name" do
     expect {
-      Competition::Create.call(competition: { name: "", published: "0" },
-                               current_user: user)
+      described_class.call(competition: { name: "", published: "0" },
+                           current_user: user)
     }.to change(Competition, :count).by(0)
   end
 
   it "creates a published competition" do
-    competition = Competition::Create
+    competition = described_class
                   .call(competition: {
                           name: "new competition",
                           published: "1",

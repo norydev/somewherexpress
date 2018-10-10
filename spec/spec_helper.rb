@@ -46,8 +46,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.before(:each) do
-    stub_request(:get, %r{http\:\/\/maps\.googleapis\.com\/maps\/api\/geocode\/json*})
+  config.before do
+    stub_request(:get, %r{https\:\/\/maps\.googleapis\.com\/maps\/api\/geocode\/json*})
       .to_return(status: 200, body: { coordinates: [40.7143528, -74.0059731] }.to_json, headers: {})
   end
   # The settings below are suggested to provide a good initial experience

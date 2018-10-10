@@ -6,6 +6,7 @@ module ApplicationHelper
 
   def datetime_format(datetime)
     return datetime if datetime.blank? || datetime.is_a?(String)
+
     case I18n.locale
     when :fr
       l(datetime, format: "%d %B %Y à %H:%M")
@@ -16,6 +17,7 @@ module ApplicationHelper
 
   def datetime_value(datetime)
     return datetime if datetime.blank? || datetime.is_a?(String)
+
     l(datetime, format: "%Y-%m-%d %H:%M")
   end
 end

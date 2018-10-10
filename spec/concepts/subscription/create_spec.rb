@@ -31,7 +31,7 @@ RSpec.describe Subscription::Create do
   end
 
   it "creates a subscription" do
-    subscription = Subscription::Create
+    subscription = described_class
                    .call(subscription: { rules: "1", status: "pending",
                                          user_attributes: {
                                            phone_number: "+41791234455",
@@ -51,7 +51,7 @@ RSpec.describe Subscription::Create do
 
   it "does not create if status invalid" do
     expect {
-      Subscription::Create
+      described_class
         .call(subscription: { rules: "1", status: "hacked",
                               user_attributes: {
                                 whatsapp: "0",
@@ -65,15 +65,15 @@ RSpec.describe Subscription::Create do
 
   it "does not create if rules not accepted" do
     expect {
-      Subscription::Create.call(subscription: { rules: "0", status: "pending",
-                                                user_attributes: {
-                                                  whatsapp: "0",
-                                                  telegram: "0",
-                                                  signal: "0"
-                                                } },
-                                current_user: user,
-                                competition_id: competition.id)
-                          .model
+      described_class.call(subscription: { rules: "0", status: "pending",
+                                           user_attributes: {
+                                             whatsapp: "0",
+                                             telegram: "0",
+                                             signal: "0"
+                                           } },
+                           current_user: user,
+                           competition_id: competition.id)
+                     .model
     }.to change(Subscription, :count).by(0)
   end
 end

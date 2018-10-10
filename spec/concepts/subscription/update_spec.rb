@@ -43,9 +43,9 @@ RSpec.describe Subscription::Update do
                          competition_id: competition.id)
                    .model
 
-    Subscription::Update.call(id: subscription.id,
-                              subscription: { status: "accepted" },
-                              current_user: user)
+    described_class.call(id: subscription.id,
+                         subscription: { status: "accepted" },
+                         current_user: user)
 
     expect(subscription.reload.status).to eq "accepted"
   end
@@ -64,9 +64,9 @@ RSpec.describe Subscription::Update do
                    .model
 
     expect {
-      Subscription::Update.call(id: subscription.id,
-                                subscription: { status: "undecided" },
-                                current_user: user)
+      described_class.call(id: subscription.id,
+                           subscription: { status: "undecided" },
+                           current_user: user)
     }.to change(Subscription, :count).by(0)
   end
 end

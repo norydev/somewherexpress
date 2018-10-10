@@ -83,6 +83,7 @@ class Competition < ApplicationRecord
     rte = "#{start_city.locality} (#{start_city.country_short}) – "
     tracks.each do |t|
       next if t.end_city.locality == end_city.locality
+
       rte += "#{t.end_city.locality} (#{t.end_city.country_short}) – "
     end
     rte += "#{end_city.locality} (#{end_city.country_short})"
@@ -133,6 +134,7 @@ class Competition < ApplicationRecord
   def status
     return :finished if finished
     return :open if registrations_open?
+
     :closed
   end
 

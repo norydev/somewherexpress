@@ -26,6 +26,6 @@
 FactoryBot.define do
   factory :track do
     association     :competition
-    start_time      "10 april 2015 14:00:00".in_time_zone
+    start_time      { "10 april 2015 14:00:00".in_time_zone }
   end
 end

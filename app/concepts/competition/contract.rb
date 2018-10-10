@@ -53,6 +53,7 @@ class Competition < ApplicationRecord
             city = City.find_by(locality: options[:fragment][:locality])
 
             return city if city
+
             City.new(options[:fragment].as_json)
           end
       end
@@ -80,6 +81,7 @@ class Competition < ApplicationRecord
         city = City.find_by(locality: options[:fragment][:locality])
 
         return city if city
+
         City.new(options[:fragment].as_json)
       end
 
