@@ -37,7 +37,7 @@ RSpec.describe Track::Contract::Update do
 
     track = competition.tracks.first
 
-    form = Track::Contract::Update.new(track)
+    form = described_class.new(track)
 
     form.save if form.validate(ranks: [
                                  {

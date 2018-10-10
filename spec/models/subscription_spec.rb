@@ -24,8 +24,8 @@
 require "rails_helper"
 
 RSpec.describe Subscription, type: :model do
-  it { should belong_to(:user) }
-  it { should belong_to(:competition) }
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:competition) }
 
   it "returns the correct nb of points" do
     u = FactoryBot.create :user, email: "u1@yopmail.com"
